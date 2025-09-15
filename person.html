@@ -1,0 +1,1025 @@
+        <!DOCTYPE html>
+        <html lang="pt-BR">
+            <!-- Adicione no <head>, logo antes do </head> -->
+              <link
+                rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+              />
+
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <title>AJJM - Assistência Jurídica</title>
+
+            <!-- Google Fonts Montserrat -->
+            <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+
+            <style>
+                /* Equipe */
+                  #equipe {
+                    padding: 4rem 0;
+                    background-color: #fff;
+                    color: #2c3e50;
+                  }
+
+                  #equipe h2 {
+                    font-weight: 700;
+                    font-size: 2.5rem;
+                    border-left: 5px solid #2c3e50;
+                    padding-left: 1rem;
+                    margin-bottom: 1.5rem;
+                  }
+
+                  #equipe p.important {
+                    font-style: italic;
+                    font-weight: 600;
+                    font-size: 1.25rem;
+                    margin-bottom: 3rem;
+                    max-width: 600px;
+                    color: #444;
+                  }
+
+                  .team-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                    gap: 2.5rem;
+                  }
+
+                  .team-member {
+                    position: relative;
+                    background-color: #f9f9f9;
+                    border-left: 4px solid #2c3e50;
+                    border-bottom: 2px solid transparent;
+                    border-radius: 8px;
+                    padding: 2rem 2rem 3.5rem 2rem;
+                    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.1);
+                    text-align: center;
+                    transition:
+                      background-color 0.3s ease,
+                      box-shadow 0.3s ease,
+                      transform 0.3s ease,
+                      border-bottom-color 2s ease;
+                    outline-offset: 4px;
+                    cursor: default;
+                    opacity: 0;
+                    transform: translateY(20px);
+                    animation: fadeInUp 0.6s forwards;
+                  }
+                  .team-member:focus,
+                  .team-member:hover {
+                    background-color: #fdfdfd;
+                    box-shadow: 0 8px 20px rgba(44, 62, 80, 0.15);
+                    transform: scale(1.02);
+                    border-bottom-color: #2c3e50;
+                    outline: none;
+                  }
+
+                  /* Linha inferior animada */
+                  .team-member::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    height: 2px;
+                    width: 100%;
+                    background: linear-gradient(90deg, #2c3e50 0%, #2c3e50 50%, transparent 100%);
+                    animation: lineGrow 4s linear infinite;
+                    border-radius: 0 0 8px 8px;
+                  }
+
+                  @keyframes lineGrow {
+                    0% {
+                      background-position: 0 0;
+                    }
+                    100% {
+                      background-position: 200% 0;
+                    }
+                  }
+
+                  @keyframes fadeInUp {
+                    to {
+                      opacity: 1;
+                      transform: translateY(0);
+                    }
+                  }
+
+                  /* QR code styled as circular photo */
+                /* QR code ou foto redonda */
+                .qr-code {
+                    width: 120px;
+                    height: 120px;
+                    object-fit: cover;
+                    border-radius: 50%; /* garante círculo perfeito */
+                    margin-bottom: 1rem;
+                    border: 3px solid #2c3e50;
+                    transition: border-color 0.6s ease;
+                }
+
+                .team-member:hover .qr-code,
+                .team-member:focus .qr-code {
+                    border-color: #1a1a1a;
+                }
+
+                /* Responsividade para imagens */
+                @media (max-width: 600px) {
+                    .qr-code {
+                        width: 90px;
+                        height: 90px;
+                    }
+                }
+
+                /* Layout responsivo da grid */
+                .team-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                    gap: 2.5rem;
+                }
+
+                /* Ajustes gerais para mobile */
+                @media (max-width: 600px) {
+                    #equipe {
+                        padding: 3rem 1rem;
+                    }
+
+                    #equipe h2 {
+                        font-size: 2rem;
+                    }
+
+                    .team-member {
+                        padding-bottom: 4.5rem;
+                    }
+                }
+
+
+
+
+                
+                  .team-member:hover .qr-code,
+                  .team-member:focus .qr-code {
+                    border-color: #1a1a1a;
+                  }
+
+                  .team-member h3 {
+                    font-size: 1.5rem;
+                    margin-bottom: 0.25rem;
+                    color: #2c3e50;
+                  }
+
+                  .team-member .role {
+                    font-weight: 600;
+                    font-size: 1rem;
+                    color: #555;
+                    margin-bottom: 1rem;
+                  }
+
+                  .team-member .quote {
+                    font-style: italic;
+                    font-weight: 600;
+                    color: #666;
+                    margin-bottom: 1rem;
+                    font-size: 1.1rem;
+                    position: relative;
+                    padding-left: 1.5rem;
+                    text-align: left;
+                    max-width: 260px;
+                    margin-left: auto;
+                    margin-right: auto;
+                  }
+                  .team-member .quote::before {
+                    content: "“";
+                    font-size: 2.5rem;
+                    color: #2c3e50;
+                    position: absolute;
+                    left: 0;
+                    top: -0.5rem;
+                    font-weight: 700;
+                    line-height: 1;
+                  }
+
+                  .team-member p {
+                    font-size: 1rem;
+                    color: #444;
+                    line-height: 1.5;
+                    margin-bottom: 1rem;
+                  }
+
+                  .team-member .experience {
+                    font-weight: 700;
+                    color: #2c3e50;
+                  }
+
+                  .tags {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 0.5rem;
+                    margin-bottom: 2rem;
+                  }
+
+                  .tags span {
+                    background-color: #e6ecf0;
+                    color: #2c3e50;
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                    padding: 0.25rem 0.75rem;
+                    border-radius: 12px;
+                    user-select: none;
+                  }
+
+                  .contact-icons {
+                    position: absolute;
+                    bottom: 1.25rem;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    display: flex;
+                    gap: 1rem;
+                  }
+
+                  .contact-icons a {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 30px;
+                    height: 30px;
+                    background-color: #ccc;
+                    color: #555;
+                    border-radius: 50%;
+                    font-size: 1rem;
+                    text-decoration: none;
+                    transition: background-color 0.3s, color 0.3s;
+                  }
+                  .contact-icons a:hover,
+                  .contact-icons a:focus {
+                    background-color: #2c3e50;
+                    color: #fff;
+                    outline: none;
+                  }
+
+                  /* Responsividade */
+                  @media (max-width: 600px) {
+                    #equipe {
+                      padding: 3rem 1rem;
+                    }
+
+                    #equipe h2 {
+                      font-size: 2rem;
+                    }
+
+                    .team-member {
+                      padding-bottom: 4.5rem;
+                    }
+                  }
+
+                /* Reset e configurações básicas */
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+
+                body {
+                    font-family: 'Montserrat', sans-serif;
+                    line-height: 1.6;
+                    color: #333;
+                    background-color: #fff;
+                    font-weight: 400;
+                    font-size: 1rem;
+                }
+
+                /* Tipografia */
+                h1,
+                h2,
+                h3 {
+                    font-weight: 600;
+                    margin-bottom: 1rem;
+                    color: #2c3e50;
+                }
+
+                h1 {
+                    font-size: 2.5rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                h2 {
+                    font-size: 2rem;
+                    margin-top: 2.5rem;
+                }
+
+                h3 {
+                    font-size: 1.5rem;
+                    margin-top: 2rem;
+                }
+
+                p {
+                    margin-bottom: 1rem;
+                    font-size: 1rem;
+                    color: #444;
+                }
+
+                /* Container e estrutura */
+                .container {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 0 2rem;
+                }
+
+                  /* =======================
+                     Timeline
+                     ======================= */
+                /* Títulos com borda lateral igual ao da equipe */
+                #timeline h2,
+                #testimonials h2,
+                #stats h2,
+                #faq h2 {
+                  font-weight: 700;
+                  font-size: 2.5rem;
+                  border-left: 5px solid #2c3e50;
+                  padding-left: 1rem;
+                  margin-bottom: 2rem;
+                  color: #2c3e50;
+                }
+
+                /* Timeline */
+                #timeline {
+                  background: #f5f7fa;
+                  padding: 4rem 0;
+                  color: #2c3e50;
+                }
+                .timeline-container {
+                  max-width: 900px;
+                  margin: 0 auto;
+                  position: relative;
+                  padding: 0 1rem;
+                }
+                .timeline-container::before {
+                  content: "";
+                  position: absolute;
+                  top: 0;
+                  bottom: 0;
+                  left: 50%;
+                  width: 4px;
+                  background: #2c3e50;
+                  transform: translateX(-50%);
+                  border-radius: 2px;
+                }
+                .timeline-item {
+                  width: 50%;
+                  padding: 1.5rem 2rem;
+                  position: relative;
+                  opacity: 0;
+                  transition: opacity 0.6s ease, transform 0.6s ease;
+                }
+                .timeline-item.visible {
+                  opacity: 1;
+                  transform: translateX(0);
+                }
+                .timeline-item.left {
+                  left: 0;
+                  text-align: right;
+                  transform: translateX(-50px);
+                }
+                .timeline-item.right {
+                  left: 50%;
+                  text-align: left;
+                  transform: translateX(50px);
+                }
+                .timeline-item.left.visible,
+                .timeline-item.right.visible {
+                  transform: translateX(0);
+                }
+                .timeline-item::before {
+                  content: "";
+                  position: absolute;
+                  top: 1.5rem;
+                  width: 20px;
+                  height: 20px;
+                  background: #2c3e50;
+                  border-radius: 50%;
+                  border: 4px solid #f5f7fa;
+                  box-shadow: 0 0 8px rgba(44, 62, 80, 0.3);
+                }
+                .timeline-item.left::before {
+                  right: -12px;
+                }
+                .timeline-item.right::before {
+                  left: -12px;
+                }
+                @media (max-width: 768px) {
+                  .timeline-container::before {
+                    left: 10px;
+                  }
+                  .timeline-item {
+                    width: 100%;
+                    text-align: left !important;
+                    padding-left: 3rem;
+                    transform: translateX(0) !important;
+                  }
+                  .timeline-item::before {
+                    left: 0 !important;
+                  }
+                }
+
+                /* Testimonials */
+                #testimonials {
+                  background: #fff;
+                  padding: 4rem 0;
+                  color: #2c3e50;
+                }
+                .testimonial-carousel {
+                  max-width: 800px;
+                  margin: 0 auto;
+                  overflow: hidden;
+                  position: relative;
+                }
+                .testimonial-track {
+                  display: flex;
+                  transition: transform 0.5s ease;
+                }
+                .testimonial-item {
+                  flex: 0 0 100%;
+                  padding: 2rem 3rem;
+                  text-align: center;
+                  opacity: 0;
+                  transform: scale(0.95);
+                  transition: opacity 0.6s ease, transform 0.6s ease;
+                  color: #444;
+                  font-size: 1.1rem;
+                  font-style: italic;
+                  font-weight: 600;
+                }
+                .testimonial-item.active {
+                  opacity: 1;
+                  transform: scale(1);
+                }
+                .testimonial-quote {
+                  position: relative;
+                  padding-left: 2.5rem;
+                  margin-bottom: 1.5rem;
+                  color: #555;
+                }
+                .testimonial-quote::before {
+                  content: "“";
+                  font-size: 3rem;
+                  position: absolute;
+                  left: 0;
+                  top: -0.5rem;
+                  color: #2c3e50;
+                  font-weight: 700;
+                  line-height: 1;
+                }
+                .testimonial-author {
+                  font-weight: 700;
+                  color: #2c3e50;
+                  font-size: 1.2rem;
+                }
+                .testimonial-controls {
+                  margin-top: 1.5rem;
+                  text-align: center;
+                }
+                .testimonial-controls button {
+                  background: #2c3e50;
+                  color: #fff;
+                  border: none;
+                  padding: 0.6rem 1.2rem;
+                  margin: 0 0.5rem;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  font-weight: 600;
+                  transition: background-color 0.3s ease;
+                }
+                .testimonial-controls button:hover,
+                .testimonial-controls button:focus {
+                  background-color: #1a2733;
+                  outline: none;
+                }
+
+                /* Stats */
+                #stats {
+                  background: #f5f7fa;
+                  padding: 4rem 0;
+                  color: #2c3e50;
+                }
+                .stats-grid {
+                  display: flex;
+                  justify-content: center;
+                  flex-wrap: wrap;
+                  gap: 4rem;
+                  max-width: 900px;
+                  margin: 0 auto;
+                }
+                .stat-item {
+                  font-size: 3rem;
+                  font-weight: 700;
+                  opacity: 0;
+                  transform: scale(0.9);
+                  transition: opacity 0.6s ease, transform 0.6s ease;
+                  color: #2c3e50;
+                  position: relative;
+                  min-width: 120px;
+                }
+                .stat-item.visible {
+                  opacity: 1;
+                  transform: scale(1);
+                }
+                .stat-item span.stat-label {
+                  display: block;
+                  font-size: 1.1rem;
+                  font-weight: 600;
+                  margin-top: 0.5rem;
+                  color: #444;
+                }
+                .stat-item[data-suffix="%"]::after {
+                  content: "%";
+                  position: absolute;
+                  top: 0;
+                  right: -1.2rem;
+                  font-size: 3rem;
+                  font-weight: 700;
+                  color: #2c3e50;
+                }
+
+                /* FAQ */
+                #faq {
+                  
+                  padding: 4rem 0;
+                  color: #2c3e50;
+                }
+                .faq-container {
+                  max-width: 800px;
+                  margin: 0 auto;
+                }
+                .faq-item {
+                  border-bottom: 1px solid #ddd;
+                }
+                .faq-question {
+                  width: 100%;
+                  text-align: left;
+                  padding: 1rem 1.25rem;
+                  background: #f9f9f9;
+                  border: none;
+                  font-weight: 700;
+                  font-size: 1.1rem;
+                  cursor: pointer;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  color: #2c3e50;
+                  transition: background-color 0.3s ease;
+                  border-radius: 6px;
+                  margin-bottom: 0.25rem;
+                }
+                .faq-question:hover,
+                .faq-question:focus {
+                  background-color: #e6ecf0;
+                  outline: none;
+                }
+                .faq-answer {
+                  max-height: 0;
+                  overflow: hidden;
+                  transition: max-height 0.35s ease, padding 0.35s ease;
+                  padding: 0 1.25rem;
+                  color: #444;
+                  font-weight: 400;
+                  font-size: 1rem;
+                }
+                .faq-item.active .faq-answer {
+                  max-height: 300px;
+                  padding: 1rem 1.25rem 1.5rem;
+                }
+                .faq-question span {
+                  font-size: 1.5rem;
+                  font-weight: 700;
+                  color: #2c3e50;
+                  user-select: none;
+                  transition: transform 0.3s ease;
+                }
+                .faq-item.active .faq-question span {
+                  transform: rotate(45deg);
+                }
+
+                /* Responsividade */
+                @media (max-width: 768px) {
+                  #timeline, #testimonials, #stats, #faq {
+                    padding: 3rem 1rem;
+                  }
+                  .stats-grid {
+                    gap: 2.5rem;
+                  }
+                  .stat-item {
+                    font-size: 2.5rem;
+                    min-width: 100px;
+                  }
+                  .testimonial-item {
+                    padding: 1.5rem 1rem;
+                    font-size: 1rem;
+                  }
+                }
+
+                /* Navegação */
+                nav {
+                    background-color: #fff;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    position: sticky;
+                    top: 0;
+                    z-index: 100;
+                }
+
+                .nav-container {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 1rem 2rem;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                }
+
+                .logo {
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    color: #2c3e50;
+                    text-decoration: none;
+                }
+
+                .nav-links {
+                    display: flex;
+                    list-style: none;
+                }
+
+                .nav-links li {
+                    margin-left: 2rem;
+                }
+
+                .nav-links a {
+                    text-decoration: none;
+                    color: #333;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                    transition: color 0.3s;
+                    position: relative;
+                    padding: 0.5rem 0;
+                }
+
+                .nav-links a:hover,
+                .nav-links a.active {
+                    color: #2c3e50;
+                }
+
+                .nav-links a::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 0;
+                    height: 2px;
+                    background-color: #2c3e50;
+                    transition: width 0.3s;
+                }
+
+                .nav-links a:hover::after,
+                .nav-links a.active::after {
+                    width: 100%;
+                }
+
+
+
+
+
+                /* Footer */
+                footer {
+                    background-color: #1a1a1a;
+                    color: #ccc;
+                    padding: 3rem 0;
+                    text-align: center;
+                    font-size: 0.9rem;
+                }
+
+                .footer-content {
+                    max-width: 800px;
+                    margin: 0 auto;
+                }
+
+                /* Responsividade */
+                @media (max-width: 768px) {
+                    .nav-container {
+                        flex-direction: column;
+                        padding: 1rem;
+                    }
+
+                    .nav-links {
+                        margin-top: 1rem;
+                    }
+
+                    .nav-links li {
+                        margin: 0 1rem;
+                    }
+
+                    h1 {
+                        font-size: 2rem;
+                    }
+
+                    h2 {
+                        font-size: 1.75rem;
+                    }
+
+                    section {
+                        padding: 3rem 0;
+                    }
+
+                    .hero {
+                        padding: 4rem 0;
+                    }
+                }
+            </style>
+        </head>
+
+        <body>
+            <!-- Navegação -->
+            <nav>
+                <div class="nav-container">
+                    <a href="#" class="logo">AJJM</a>
+                    <ul class="nav-links">
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="person.html">Atuação</a></li>
+                        <li><a href="#parcerias">Parcerias</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+          <!-- Equipe -->
+            <section id="equipe">
+              <div class="container">
+                <h2>Conheça a Equipe</h2>
+                <p class="important">Profissionais dedicados a garantir justiça e apoio para você.</p>
+
+                <div class="team-grid">
+                  <article class="team-member" tabindex="0" style="animation-delay: 0s;">
+                    <!-- QR code substitui a foto -->
+                    <img class="qr-code" src="qrcode1.png" alt="QR Code perfil João Silva" />
+                    <h3>João Silva</h3>
+                    <p class="role">Advogado Chefe</p>
+                    <p class="quote">“Justiça é a base da dignidade humana.”</p>
+                    <p>Especialista em direito civil com mais de <span class="experience">10+ anos</span> de experiência em assistência jurídica.</p>
+                    <div class="tags">
+                      <span>Direito Civil</span>
+                      <span>Família</span>
+                      <span>Consumidor</span>
+                    </div>
+                    <div class="contact-icons">
+                      <a href="https://linkedin.com/in/joaosilva" aria-label="LinkedIn João Silva" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                      <a href="https://wa.me/5511999999999" aria-label="WhatsApp João Silva" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+                      <a href="mailto:joao.silva@email.com" aria-label="Email João Silva"><i class="fas fa-envelope"></i></a>
+                    </div>
+                  </article>
+
+                  <article class="team-member" tabindex="0" style="animation-delay: 0.15s;">
+                    <img class="qr-code" src="qrcode2.png" alt="QR Code perfil Maria Oliveira" />
+                    <h3>Maria Oliveira</h3>
+                    <p class="role">Assistente Jurídica</p>
+                    <p class="quote">“Empatia e eficiência caminham juntas.”</p>
+                    <p>Responsável pelo atendimento e suporte aos nossos clientes com <span class="experience">7+ anos</span> de experiência.</p>
+                    <div class="tags">
+                      <span>Atendimento</span>
+                      <span>Suporte Jurídico</span>
+                    </div>
+                    <div class="contact-icons">
+                      <a href="https://linkedin.com/in/mariaoliveira" aria-label="LinkedIn Maria Oliveira" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                      <a href="https://wa.me/5511988888888" aria-label="WhatsApp Maria Oliveira" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+                      <a href="mailto:maria.oliveira@email.com" aria-label="Email Maria Oliveira"><i class="fas fa-envelope"></i></a>
+                    </div>
+                  </article>
+
+                  <article class="team-member" tabindex="0" style="animation-delay: 0.3s;">
+                    <img class="qr-code" src="qrcode3.png" alt="QR Code perfil Carlos Pereira" />
+                    <h3>Carlos Pereira</h3>
+                    <p class="role">Coordenador de Projetos</p>
+                    <p class="quote">“Parcerias que transformam vidas.”</p>
+                    <p>Gerencia as parcerias e iniciativas sociais com <span class="experience">12+ anos</span> de experiência.</p>
+                    <div class="tags">
+                      <span>Gestão de Projetos</span>
+                      <span>Parcerias Sociais</span>
+                    </div>
+                    <div class="contact-icons">
+                      <a href="https://linkedin.com/in/carlospereira" aria-label="LinkedIn Carlos Pereira" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                      <a href="https://wa.me/5511977777777" aria-label="WhatsApp Carlos Pereira" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+                      <a href="mailto:carlos.pereira@email.com" aria-label="Email Carlos Pereira"><i class="fas fa-envelope"></i></a>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </section>
+
+           
+
+          
+
+
+
+
+            <!-- Linha do Tempo -->
+            <section id="timeline">
+              <div class="container">
+                <h2>Nossa História</h2>
+                <div class="timeline-container">
+                  <div class="timeline-item left">
+                    <h3>2008</h3>
+                    <p>Fundação da AJJM para apoiar juridicamente pessoas de baixa renda.</p>
+                  </div>
+                  <div class="timeline-item right">
+                    <h3>2014</h3>
+                    <p>Primeira parceria com universidades de Direito.</p>
+                  </div>
+                  <div class="timeline-item left">
+                    <h3>2020</h3>
+                    <p>Mais de 5.000 atendimentos realizados.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Depoimentos -->
+            <!-- Avaliações -->
+            <section id="avaliacoes" class="container" style="padding: 4rem 0; color: #2c3e50;">
+              <h2 style="font-weight: 700; font-size: 2.5rem; border-left: 5px solid #2c3e50; padding-left: 1rem; margin-bottom: 1rem;">
+                Avaliações
+              </h2>
+              <p style="font-style: italic; font-weight: 600; font-size: 1.1rem; margin-bottom: 3rem; max-width: 600px; color: #444;">
+                Veja o que nossos clientes estão dizendo.
+              </p>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                <article style="background-color: #f9f9f9; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(44, 62, 80, 0.1);">
+                  <div style="color: #f1c40f; font-size: 1.25rem; margin-bottom: 1rem;">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <p style="color: #444; font-size: 1rem; font-style: italic; font-weight: 600; margin-bottom: 1.5rem; line-height: 1.5;">
+                    A AJJM me ajudou em um momento difícil. A equipe é muito competente e realmente se importa com as pessoas de baixa renda. Recomendo a todos que precisam.
+                  </p>
+                  <div style="display: flex; align-items: center; gap: 1rem;">
+                    <img alt="Foto de João Souza" src="https://storage.googleapis.com/a1aa/image/c19f2d5a-b49f-4c9d-aa6a-d43338ace184.jpg" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;" />
+                    <div>
+                      <p style="font-weight: 700; color: #2c3e50; font-size: 1rem; margin: 0;">João Souza</p>
+                      <p style="color: #666; font-size: 0.85rem; margin: 0;">Rio de Janeiro</p>
+                    </div>
+                  </div>
+                </article>
+
+                <article style="background-color: #f9f9f9; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(44, 62, 80, 0.1);">
+                  <div style="color: #f1c40f; font-size: 1.25rem; margin-bottom: 1rem;">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <p style="color: #444; font-size: 1rem; font-style: italic; font-weight: 600; margin-bottom: 1.5rem; line-height: 1.5;">
+                    A assistência da AJJM foi fundamental para resolver meu problema legal. A equipe é atenciosa e dedicada, sempre pronta para ajudar quem mais precisa.
+                  </p>
+                  <div style="display: flex; align-items: center; gap: 1rem;">
+                    <img alt="Foto de Maria Silva" src="https://storage.googleapis.com/a1aa/image/c6bc4518-456e-4a35-70ea-ef5fb8bf6d3b.jpg" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;" />
+                    <div>
+                      <p style="font-weight: 700; color: #2c3e50; font-size: 1rem; margin: 0;">Maria Silva</p>
+                      <p style="color: #666; font-size: 0.85rem; margin: 0;">São Paulo</p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+             
+
+            <!-- Estatísticas -->
+            <section id="stats">
+              <div class="container">
+
+                  <!-- FAQ -->
+                  <section id="faq">
+                    <div class="container">
+                      <h2>Perguntas Frequentes</h2>
+                      <div class="faq-container">
+                        <div class="faq-item">
+                          <button class="faq-question" aria-expanded="false" aria-controls="faq1" id="faq1-btn">
+                            Quem pode ser atendido? <span aria-hidden="true">+</span>
+                          </button>
+                          <div class="faq-answer" id="faq1" role="region" aria-labelledby="faq1-btn">
+                            <p>Pessoas de baixa renda que não têm condições de contratar advogado.</p>
+                          </div>
+                        </div>
+                        <div class="faq-item">
+                          <button class="faq-question" aria-expanded="false" aria-controls="faq2" id="faq2-btn">
+                            O atendimento é realmente gratuito? <span aria-hidden="true">+</span>
+                          </button>
+                          <div class="faq-answer" id="faq2" role="region" aria-labelledby="faq2-btn">
+                            <p>Sim, todos os serviços prestados pela AJJM são gratuitos.</p>
+                          </div>
+                        </div>
+                        <div class="faq-item">
+                          <button class="faq-question" aria-expanded="false" aria-controls="faq3" id="faq3-btn">
+                            Como faço para agendar? <span aria-hidden="true">+</span>
+                          </button>
+                          <div class="faq-answer" id="faq3" role="region" aria-labelledby="faq3-btn">
+                            <p>Basta entrar em contato conosco pelo site ou telefone disponível no rodapé.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  
+              </div>
+            </section>
+
+           
+
+
+
+
+
+
+
+
+
+            <!-- Footer -->
+            <footer>
+                <div class="footer-content">
+                    <p>AJJM - Assistência Jurídica para Pessoas de Baixa Renda</p>
+                    <p>CNPJ: XX.XXX.XXX/XXXX-XX</p>
+                    <p>© 2023 Todos os direitos reservados</p>
+                </div>
+            </footer>
+
+            <script>
+                // Timeline animação
+                  const timelineItems = document.querySelectorAll(".timeline-item");
+                  const observer = new IntersectionObserver(
+                    (entries) => {
+                      entries.forEach((entry) => {
+                        if (entry.isIntersecting) entry.target.classList.add("visible");
+                      });
+                    },
+                    { threshold: 0.2 }
+                  );
+                  timelineItems.forEach((item) => observer.observe(item));
+
+                  // Testimonials
+                  const track = document.querySelector(".testimonial-track");
+                  const items = document.querySelectorAll(".testimonial-item");
+                  let index = 0;
+                  function showTestimonial(i) {
+                    items.forEach((item, idx) => {
+                      item.classList.remove("active");
+                      if (idx === i) item.classList.add("active");
+                    });
+                    track.style.transform = `translateX(-${i * 100}%)`;
+                  }
+                  document.getElementById("prevTestimonial").onclick = () => {
+                    index = (index - 1 + items.length) % items.length;
+                    showTestimonial(index);
+                  };
+                  document.getElementById("nextTestimonial").onclick = () => {
+                    index = (index + 1) % items.length;
+                    showTestimonial(index);
+                  };
+
+                  // Stats count-up
+                  const stats = document.querySelectorAll(".stat-item");
+                  const statObserver = new IntersectionObserver(
+                    (entries) => {
+                      entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                          const el = entry.target;
+                          const target = +el.dataset.target;
+                          let count = 0;
+                          const step = Math.ceil(target / 100);
+                          const interval = setInterval(() => {
+                            count += step;
+                            if (count >= target) {
+                              count = target;
+                              clearInterval(interval);
+                            }
+                            el.childNodes[0].textContent = count;
+                          }, 20);
+                          el.classList.add("visible");
+                          statObserver.unobserve(el);
+                        }
+                      });
+                    },
+                    { threshold: 0.3 }
+                  );
+                  stats.forEach((s) => statObserver.observe(s));
+
+                  // FAQ toggle
+                  document.querySelectorAll(".faq-question").forEach((btn) => {
+                    btn.addEventListener("click", () => {
+                      const item = btn.parentElement;
+                      item.classList.toggle("active");
+                      btn.querySelector("span").textContent = item.classList.contains("active") ? "-" : "+";
+                    });
+                  });
+            </script>
+        </body>
+
+        </html>

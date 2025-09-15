@@ -1,0 +1,776 @@
+<html class="scroll-smooth" lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Advogados Voluntários
+  </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: "Inter", sans-serif;
+    }
+   /* Links principais - linha vermelha no topo da navbar */
+nav > div > div > div > a,
+nav > div > div > div > div > button {
+  position: relative;
+  padding-top: 0.25rem; /* espaço para linha no topo */
+}
+/* Linha vermelha no topo para links principais */
+nav > div > div > div > a::before,
+nav > div > div > div > div > button::before {
+    margin-top: -15px;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: #b84141;
+  transition: width 0.3s ease;
+  z-index: 10;
+}
+/* Expande linha no topo ao hover */
+nav > div > div > div > a:hover::before,
+nav > div > div > div > div > button:hover::before {
+  width: 100%;
+}
+/* Links dos submenus - linha vermelha animada embaixo do texto */
+nav div[role="menu"] a {
+  position: relative;
+  padding-bottom: 0.25rem; /* espaço para linha embaixo */
+}
+/* Linha vermelha embaixo para submenu */
+nav div[role="menu"] a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: #b84141;
+ }
+
+/* Estilo menu mobile */
+.mobile-menu {
+  transition: max-height 0.3s ease-in-out;
+  overflow: hidden;
+}
+.hamburger {
+  width: 24px;
+  height: 18px;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hamburger .line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #d40818;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+}
+
+/* Posições iniciais das linhas */
+.hamburger .line1 {
+  top: 0;
+}
+.hamburger .line2 {
+  top: 7.5px;
+}
+.hamburger .line3 {
+  bottom: 0;
+}
+
+/* Estado ativo - transforma em X */
+.hamburger.active .line1 {
+  transform: rotate(45deg);
+  top: 7.5px;
+}
+.hamburger.active .line2 {
+  opacity: 0;
+}
+.hamburger.active .line3 {
+  transform: rotate(-45deg);
+  bottom: 7.5px;
+}
+
+  #sobre {
+            color: #111;
+            /* Preto intenso para contraste */
+            background-color: #fff;
+            padding: 4rem 2rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        #sobre h2 {
+            font-weight: 800;
+            font-size: 2.75rem;
+            /* maior para hierarquia */
+            color: #000;
+            margin-bottom: 2.5rem;
+            border-left: 5px solid #000;
+            padding-left: 1.25rem;
+            line-height: 1.1;
+        }
+
+        #sobre p {
+            font-size: 1.125rem;
+            line-height: 1.9;
+            /* mais espaçamento entre linhas */
+            margin-bottom: 1.75rem;
+            color: #333;
+            /* cinza escuro para corpo do texto */
+            text-align: left;
+        }
+
+        #sobre p strong {
+            font-weight: 600;
+            color: #000;
+        }
+
+        #sobre p.important {
+            font-style: italic;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 3rem;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        #sobre h3 {
+            font-weight: 700;
+            font-size: 1.75rem;
+            /* subtítulo maior que antes */
+            margin-top: 4rem;
+            /* mais espaço acima para respiro */
+            margin-bottom: 1rem;
+            color: #000;
+            border-bottom: 2px solid #ccc;
+            /* linha mais sutil e espaçada */
+            padding-bottom: 0.5rem;
+            max-width: 320px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #sobre h3 .icon {
+            font-size: 1.5rem;
+            color: #666;
+            /* cinza médio para ícones */
+            flex-shrink: 0;
+        }
+
+        #sobre p em {
+            font-style: italic;
+            font-weight: 500;
+            color: #444;
+        }
+
+        /* Espaçamento modular para seções */
+        #sobre .container>*+* {
+            margin-top: 1.5rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            #sobre {
+                padding: 3rem 1rem;
+                max-width: 100%;
+            }
+
+            #sobre h2 {
+                font-size: 2rem;
+            }
+
+            #sobre h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+
+
+
+.partners {
+  background-color: #f0f0f0; /* cinza claro */
+  padding: 5rem 1rem 6rem;
+  color: #111;
+  font-family: "Inter", sans-serif;
+}
+
+.partners-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: #000;
+  border-left: 6px solid #b84141;
+  padding-left: 1rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.1;
+}
+
+.partners-subtitle {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.btn-partners {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 2.5rem 0.75rem 2rem;
+  background-color: #b84141;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.125rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  overflow: hidden;
+  margin-bottom: 4rem;
+  box-shadow: 0 4px 12px rgb(184 65 65 / 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.btn-partners .btn-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background-color: #fff;
+  border-radius: 30px 0 0 30px;
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: fillLine 1.5s forwards ease-in-out;
+}
+
+.btn-partners:hover {
+  background-color: #8a2c2c;
+  box-shadow: 0 6px 20px rgb(138 44 44 / 0.6);
+  color: #fff;
+}
+
+.carousel-wrapper {
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  height: 120px;
+  position: relative;
+}
+
+.carousel {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  will-change: transform;
+}
+
+.partner-card {
+  flex: 0 0 auto;
+  width: 160px;
+  height: 110px;
+
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.partner-card img {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-1 * var(--scroll-width))); }
+}
+
+
+
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .partners-title {
+    font-size: 2.25rem;
+  }
+
+  .partners-subtitle {
+    font-size: 1.1rem;
+    max-width: 90%;
+  }
+
+  .partner-card {
+    width: 140px;
+    height: 90px;
+  }
+}
+
+@media (max-width: 640px) {
+  .partners {
+    padding: 3rem 1rem 4rem;
+  }
+
+  .partners-title {
+    font-size: 1.75rem;
+    max-width: 100%;
+  }
+
+  .partners-subtitle {
+    font-size: 1rem;
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .btn-partners {
+    font-size: 1rem;
+    padding: 0.6rem 2rem 0.6rem 1.5rem;
+  }
+
+  .carousel {
+    gap: 1.5rem;
+  }
+
+  .partner-card {
+    width: 110px;
+    height: 70px;
+  }
+}
+
+  </style>
+ </head>
+ <body class="bg-white text-gray-700">
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full bg-transparent z-50 transition-colors duration-500">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+     <div class="flex-shrink-0">
+      <img alt="Logo com as letras A J T em branco e vermelho em fundo branco com borda vermelha" class="h-10 w-10" height="40" src="logo.png" width="40"/>
+     </div>
+     <!-- Menu desktop -->
+     <div class="hidden md:flex space-x-6 text-white text-sm font-normal">
+      <a class="hover:underline" href="#">
+       Home
+      </a>
+      <div class="relative group">
+       <button aria-expanded="false" aria-haspopup="true" class="inline-flex items-center hover:underline focus:outline-none">
+        Quem Somos
+        <svg class="ml-1 h-3 w-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+         <path d="M5.516 7.548l4.484 4.484 4.484-4.484z"></path>
+        </svg>
+       </button>
+       <div class="absolute left-0 mt-1 w-40 bg-white text-black rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity" role="menu">
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         História
+        </a>
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         Equipe
+        </a>
+       </div>
+      </div>
+      <div class="relative group">
+       <button aria-expanded="false" aria-haspopup="true" class="inline-flex items-center hover:underline focus:outline-none">
+        Parceiros
+        <svg class="ml-1 h-3 w-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+         <path d="M5.516 7.548l4.484 4.484 4.484-4.484z"></path>
+        </svg>
+       </button>
+       <div class="absolute left-0 mt-1 w-40 bg-white text-black rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity" role="menu">
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         Empresas
+        </a>
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         Instituições
+        </a>
+       </div>
+      </div>
+      <div class="relative group">
+       <button aria-expanded="false" aria-haspopup="true" class="inline-flex items-center hover:underline focus:outline-none">
+        Faça Parte
+        <svg class="ml-1 h-3 w-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+         <path d="M5.516 7.548l4.484 4.484 4.484-4.484z"></path>
+        </svg>
+       </button>
+       <div class="absolute left-0 mt-1 w-40 bg-white text-black rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity" role="menu">
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         Voluntário
+        </a>
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         Doações
+        </a>
+       </div>
+      </div>
+      <div class="relative group">
+       <button aria-expanded="false" aria-haspopup="true" class="inline-flex items-center hover:underline focus:outline-none">
+        Transparência
+        <svg class="ml-1 h-3 w-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+         <path d="M5.516 7.548l4.484 4.484 4.484-4.484z"></path>
+        </svg>
+       </button>
+       <div class="absolute left-0 mt-1 w-40 bg-white text-black rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity" role="menu">
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         Relatórios
+        </a>
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         Prestação de Contas
+        </a>
+       </div>
+      </div>
+      <a class="hover:underline" href="#">
+       Contato
+      </a>
+     </div>
+
+     <!-- Botão hamburguer mobile -->
+     <div class="md:hidden">
+     <button id="mobile-menu-button" aria-label="Abrir menu" aria-expanded="false" class="hamburger focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#b84141]">
+  <span class="line line1"></span>
+  <span class="line line2"></span>
+  <span class="line line3"></span>
+</button>
+     </div>
+    </div>
+   </div>
+
+   <!-- Menu mobile oculto inicialmente -->
+   <div id="mobile-menu" class="md:hidden bg-white text-black shadow-md max-h-0 mobile-menu overflow-hidden">
+    <div class="px-4 pt-2 pb-4 space-y-1">
+      <a href="#" class="block px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold">Home</a>
+
+      <!-- Quem Somos com submenu -->
+      <div>
+        <button aria-expanded="false" aria-controls="submenu-quem-somos" class="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold focus:outline-none focus:ring-2 focus:ring-[#b84141]" id="btn-quem-somos">
+          Quem Somos
+          <i class="fas fa-chevron-down ml-2 transition-transform duration-300"></i>
+        </button>
+        <div id="submenu-quem-somos" class="max-h-0 overflow-hidden transition-max-height duration-300">
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">História</a>
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Equipe</a>
+        </div>
+      </div>
+
+      <!-- Parceiros com submenu -->
+      <div>
+        <button aria-expanded="false" aria-controls="submenu-parceiros" class="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold focus:outline-none focus:ring-2 focus:ring-[#b84141]" id="btn-parceiros">
+          Parceiros
+          <i class="fas fa-chevron-down ml-2 transition-transform duration-300"></i>
+        </button>
+        <div id="submenu-parceiros" class="max-h-0 overflow-hidden transition-max-height duration-300">
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Empresas</a>
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Instituições</a>
+        </div>
+      </div>
+
+      <!-- Faça Parte com submenu -->
+      <div>
+        <button aria-expanded="false" aria-controls="submenu-faca-parte" class="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold focus:outline-none focus:ring-2 focus:ring-[#b84141]" id="btn-faca-parte">
+          Faça Parte
+          <i class="fas fa-chevron-down ml-2 transition-transform duration-300"></i>
+        </button>
+        <div id="submenu-faca-parte" class="max-h-0 overflow-hidden transition-max-height duration-300">
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Voluntário</a>
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Doações</a>
+        </div>
+      </div>
+
+      <!-- Transparência com submenu -->
+      <div>
+        <button aria-expanded="false" aria-controls="submenu-transparencia" class="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold focus:outline-none focus:ring-2 focus:ring-[#b84141]" id="btn-transparencia">
+          Transparência
+          <i class="fas fa-chevron-down ml-2 transition-transform duration-300"></i>
+        </button>
+        <div id="submenu-transparencia" class="max-h-0 overflow-hidden transition-max-height duration-300">
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Relatórios</a>
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Prestação de Contas</a>
+        </div>
+      </div>
+
+      <a href="#" class="block px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold">Contato</a>
+    </div>
+   </div>
+  </nav>
+
+  <!-- Resto do seu conteúdo permanece igual -->
+
+  <section class="relative pt-16">
+   <!-- Área vazia com altura fixa para substituir a imagem -->
+   <div class="w-full h-[600px] bg-gray-100"></div>
+   <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center px-4 pointer-events-none">
+    <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl leading-tight max-w-4xl">
+     Advogados Voluntários
+    </h1>
+    <p class="text-white max-w-3xl mt-4 text-sm sm:text-base md:text-lg">
+     Podem ser advogados colaboradores voluntários apenas advogados,
+        regularmente inscritos na Ordem dos Advogados do Brasil, graduados
+        pela Faculdade de Direito da Universidade Presbiteriana Mackenzie ou
+        por meio de seleção prévia, caso formado em outra Universidade.
+    </p>
+    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+     <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100 transition" href="#">
+      FALE COM A GENTE
+      <i class="fas fa-external-link-alt ml-2"></i>
+     </a>
+     <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535] transition" href="#">
+      SOBRE NÓS
+     </a>
+    </div>
+    <div class="absolute bottom-4 flex space-x-3 justify-center w-full">
+     <button aria-label="Slide 1" class="w-2.5 h-2.5 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100"></button>
+     <button aria-label="Slide 2" class="w-2.5 h-2.5 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100"></button>
+     <button aria-label="Slide 3" class="w-2.5 h-2.5 rounded-full bg-white bg-opacity-100"></button>
+     <button aria-label="Slide 4" class="w-2.5 h-2.5 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100"></button>
+    </div>
+   </div>
+  </section>
+
+  <!-- Side Contact Button -->
+  <a aria-label="Solicite um Contato" class="fixed right-0 top-[40%] bg-[#3a6a91] text-white text-xs sm:text-sm font-normal px-3 py-2 rounded-l-md flex items-center space-x-2 rotate-90 origin-top-right hover:bg-[#2e5270] transition z-50" href="#">
+   <i class="fas fa-mobile-alt"></i>
+   <span>
+    Solicite um Contato
+   </span>
+  </a>
+   <!-- Sobre -->
+    <section id="sobre">
+        <div class="container">
+            <h2>Sobre a AJJM</h2>
+            <p class="important">Acreditamos que justiça é um direito universal, não um privilégio.</p>
+
+            <p>Oferecemos assistência jurídica qualificada para quem mais precisa, com <strong>ética</strong> e
+                compromisso social.</p>
+            <p>Nosso time atua com dedicação para garantir <strong>dignidade</strong> e acesso à
+                <strong>justiça</strong> para pessoas em situação vulnerável.
+            </p>
+
+            <h3><span class="icon"></span> Nossa Missão</h3>
+            <p>Democratizar o acesso à justiça, promovendo suporte jurídico humano e eficiente para todos.</p>
+
+            <h3><span class="icon"></span> Nossos Valores</h3>
+            <p><em>Ética</em>, <em>excelência</em>, <em>respeito</em> e <em>justiça social</em> guiam cada passo do
+                nosso trabalho.</p>
+        </div>
+    </section>
+
+
+<hr>
+
+     <section class="max-w-7xl mx-auto px-6 pt-40 text-center">
+    <h1 class="text-gray-600 font-light text-2xl sm:text-3xl">
+      Estudantes da Faculdade de Direito do Mackenzie e Defensoria Pública juntos
+    </h1>
+    <p class="text-gray-500 text-sm sm:text-base mt-2 max-w-xl mx-auto leading-relaxed">
+      A AJ João Mendes é gerida por alunos e antigos alunos da Faculdade de Direito do Mackenzie, possuindo convênio com a Defensoria Pública do Estado de São Paulo para recebimento e atendimento gratuito da população.
+    </p>
+  </section>
+
+  <section class="bg-gray-50 mt-16 py-16">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 border border-transparent sm:border-t sm:border-b border-gray-200 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+      <div class="text-center px-6 pb-10 sm:pb-0">
+        <i class="fas fa-history text-4xl text-red-600 mb-4"></i>
+        <h2 class="font-extrabold text-gray-900 text-lg mb-2">60 anos</h2>
+        <p class="text-xs text-gray-400 max-w-xs mx-auto leading-relaxed">
+          Fundada em 1959 e refundada em 2017, a AJ João Mendes integra alunos, antigos alunos e profissionais de diversas áreas, além auxiliar projetos autônomos como o Cursinho Popular dos estudantes do Mackenzie
+        </p>
+      </div>
+      <div class="text-center px-6 py-10 sm:py-0">
+        <i class="far fa-heart text-4xl text-red-600 mb-4"></i>
+        <h2 class="font-extrabold text-gray-900 text-lg mb-2">Integração</h2>
+        <p class="text-xs text-gray-400 max-w-xs mx-auto leading-relaxed">
+          A AJ João Mendes tem o apoio institucional de todas as entidades que formam a Faculdade de Direito da Universidade Presbiteriana Mackenzie, da Associação Atlética ao Centro Acadêmico
+        </p>
+      </div>
+      <div class="text-center px-6 pt-10 sm:pt-0">
+        <i class="fas fa-users text-4xl text-red-600 mb-4"></i>
+        <h2 class="font-extrabold text-gray-900 text-lg mb-2">Protagonismo Estudantil</h2>
+        <p class="text-xs text-gray-400 max-w-xs mx-auto leading-relaxed">
+          A AJ João Mendes é uma entidade gerida majoritariamente pelos estudantes, de forma independente e autônoma, constituindo um instrumento de aprendizado e crescimento profissional. Antigos alunos participam e orientam estagiários e diretores
+        </p>
+      </div>
+    </div>
+  </section>
+  <hr>
+
+
+
+
+
+    <section id="parcerias" class="partners">
+  <div class="container mx-auto px-6 max-w-7xl text-center">
+    <h2 class="partners-title">Parcerias</h2>
+    <p class="partners-subtitle mx-auto">Nossas alianças fortalecem o acesso à justiça.</p>
+
+    <button class="btn-partners" aria-label="Conheça Nossas Parcerias">
+      <span class="btn-line"></span>
+      Conheça Nossas Parcerias
+    </button>
+
+    <div class="carousel-wrapper" aria-label="Logos dos parceiros">
+      <div class="carousel" role="list">
+        <div class="partner-card" role="listitem"><img src="P1.png" alt="Parceiro 1"></div>
+        <div class="partner-card" role="listitem"><img src="logo2.png" alt="Parceiro 2"></div>
+        <div class="partner-card" role="listitem"><img src="logo3.png" alt="Parceiro 3"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+  <script>
+(function initInfiniteCarousel() {
+  const carousel = document.querySelector('.carousel');
+  const wrapper = document.querySelector('.carousel-wrapper');
+  if (!carousel || !wrapper) return;
+
+  if (!carousel.dataset.baseHtml) {
+    carousel.dataset.baseHtml = carousel.innerHTML.trim();
+  }
+  const baseHtml = carousel.dataset.baseHtml;
+
+  function measureHtmlWidth(html) {
+    const temp = document.createElement('div');
+    temp.style.display = 'flex';
+    temp.style.position = 'absolute';
+    temp.style.left = '-9999px';
+    temp.style.gap = getComputedStyle(carousel).gap || '0px';
+    temp.innerHTML = html;
+    document.body.appendChild(temp);
+    const w = temp.offsetWidth;
+    document.body.removeChild(temp);
+    return w;
+  }
+
+  function rebuild() {
+    let singleHtml = baseHtml;
+    let singleWidth = measureHtmlWidth(singleHtml);
+    const wrapperWidth = wrapper.offsetWidth;
+
+    // repete o bloco somente até cobrir a largura da tela
+    while (singleWidth < wrapperWidth) {
+      singleHtml += baseHtml;
+      singleWidth = measureHtmlWidth(singleHtml);
+    }
+
+    // só duplica uma vez para fazer o looping
+    carousel.innerHTML = singleHtml + singleHtml;
+
+    carousel.style.setProperty('--scroll-width', singleWidth + 'px');
+
+    const pxPerSecond = 100; // velocidade
+    const duration = Math.max(8, singleWidth / pxPerSecond);
+    carousel.style.animation = `scroll ${duration}s linear infinite`;
+  }
+
+  rebuild();
+  let t;
+  window.addEventListener('resize', () => {
+    clearTimeout(t);
+    t = setTimeout(rebuild, 120);
+  });
+})();
+
+
+
+
+
+
+
+
+
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+
+mobileMenuButton.addEventListener('click', () => {
+  const expanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+  mobileMenuButton.setAttribute('aria-expanded', !expanded);
+
+  if (!expanded) {
+    mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
+    mobileMenuButton.classList.add('active'); // ativa animação do X
+  } else {
+    mobileMenu.style.maxHeight = null;
+    mobileMenuButton.classList.remove('active'); // volta para hamburguer
+  }
+});
+
+
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        navbar.classList.add('bg-white', 'shadow-md');
+        navbar.classList.remove('bg-transparent');
+        // Ajusta texto para escuro quando navbar branca
+        navbar.querySelectorAll('a, button').forEach(el => {
+          el.classList.remove('text-white');
+          el.classList.add('text-gray-900');
+        });
+      } else {
+        navbar.classList.remove('bg-white', 'shadow-md');
+        navbar.classList.add('bg-transparent');
+        // Ajusta texto para branco quando navbar transparente
+        navbar.querySelectorAll('a, button').forEach(el => {
+          el.classList.remove('text-gray-900');
+          el.classList.add('text-white');
+        });
+      }
+    });
+
+   
+    // Função para abrir/fechar submenus no mobile
+    function toggleSubmenu(buttonId, submenuId) {
+      const btn = document.getElementById(buttonId);
+      const submenu = document.getElementById(submenuId);
+
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true' || false;
+        btn.setAttribute('aria-expanded', !expanded);
+        if (!expanded) {
+          submenu.style.maxHeight = submenu.scrollHeight + "px";
+          btn.querySelector('i').classList.add('rotate-180');
+        } else {
+          submenu.style.maxHeight = null;
+          btn.querySelector('i').classList.remove('rotate-180');
+        }
+      });
+    }
+
+    toggleSubmenu('btn-quem-somos', 'submenu-quem-somos');
+    toggleSubmenu('btn-parceiros', 'submenu-parceiros');
+    toggleSubmenu('btn-faca-parte', 'submenu-faca-parte');
+    toggleSubmenu('btn-transparencia', 'submenu-transparencia');
+  </script>
+ </body>
+</html>

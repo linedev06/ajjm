@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <!-- Adicione no <head>, logo antes do </head> -->
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      />
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AJJM - Assistência Jurídica</title>
+
+    <!-- Google Fonts Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+
+        /* Reset e configurações básicas */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            font-weight: 400;
+            font-size: 1rem;
+        }
+
+        /* Tipografia */
+        h1,
+        h2,
+        h3 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: #444;
+        }
+
+        /* Container e estrutura */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Navegação */
+nav {
+    background-color: #111; /* preto elegante que mescla com a logo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+.logo {
+    width: 60px;
+    height: 60px;
+    background-color: #e6ecf0;
+    border-radius: 100%; /* deixa redondo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 160px;   /* mesmo tamanho da largura/altura */
+    font-weight: bold;
+    color: black;
+}
+
+/* Logo */
+.logo img {
+ width: 160px;
+   
+    
+}
+
+/* Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff; /* branco pra contraste */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+/* Hover vermelho */
+.nav-links a:hover,
+.nav-links a.active {
+    color: #e63946; /* vermelho da logo */
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #e63946;
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 0;
+            /* gradiente suave */
+            background: linear-gradient(135deg, #f9f9f9 0%, #e6ecf0 100%);
+            position: relative;
+        }
+
+        /* Exemplo de faixa lateral */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background-color: #2c3e50;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .hero h1 {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        /* Botão */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: #000;
+            color: #d40818;
+            text-decoration: none;
+            border: none;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #d40818;
+            color: #000;
+        }
+
+        /* Serviços */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-item {
+            padding: 2rem;
+            background-color: #f9f9f9;
+            border-left: 4px solid #2c3e50;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s;
+        }
+
+        .service-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        
+
+        opacity: 0.15;
+        border-radius: 2px;
+        }
+
+        #sobre {
+            color: #111;
+            /* Preto intenso para contraste */
+            background-color: #fff;
+            padding: 4rem 2rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        #sobre h2 {
+            font-weight: 800;
+            font-size: 2.75rem;
+            /* maior para hierarquia */
+            color: #000;
+            margin-bottom: 2.5rem;
+            border-left: 5px solid #000;
+            padding-left: 1.25rem;
+            line-height: 1.1;
+        }
+
+        #sobre p {
+            font-size: 1.125rem;
+            line-height: 1.9;
+            /* mais espaçamento entre linhas */
+            margin-bottom: 1.75rem;
+            color: #333;
+            /* cinza escuro para corpo do texto */
+            text-align: left;
+        }
+
+        #sobre p strong {
+            font-weight: 600;
+            color: #000;
+        }
+
+        #sobre p.important {
+            font-style: italic;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 3rem;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        #sobre h3 {
+            font-weight: 700;
+            font-size: 1.75rem;
+            /* subtítulo maior que antes */
+            margin-top: 4rem;
+            /* mais espaço acima para respiro */
+            margin-bottom: 1rem;
+            color: #000;
+            border-bottom: 2px solid #ccc;
+            /* linha mais sutil e espaçada */
+            padding-bottom: 0.5rem;
+            max-width: 320px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #sobre h3 .icon {
+            font-size: 1.5rem;
+            color: #666;
+            /* cinza médio para ícones */
+            flex-shrink: 0;
+        }
+
+        #sobre p em {
+            font-style: italic;
+            font-weight: 500;
+            color: #444;
+        }
+
+        /* Espaçamento modular para seções */
+        #sobre .container>*+* {
+            margin-top: 1.5rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            #sobre {
+                padding: 3rem 1rem;
+                max-width: 100%;
+            }
+
+            #sobre h2 {
+                font-size: 2rem;
+            }
+
+            #sobre h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+
+
+
+
+        /* Parcerias */
+        /* Parcerias */
+        .partners {
+            background-color: #f9f9f9;
+            padding: 4rem 0;
+        }
+
+        .partners-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #000;
+            border-left: 6px solid #000;
+            padding-left: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .partners-subtitle {
+            font-size: 1.25rem;
+            color: #000;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        /* Botão minimalista com linha vertical */
+        .btn-partners {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 2rem 0.75rem 1.5rem;
+            background-color: #000;
+            color: #d40818;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            user-select: none;
+        }
+
+        .btn-partners .btn-line {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #fff;
+            border-radius: 4px 0 0 4px;
+            transform-origin: left;
+            transform: scaleX(0);
+            animation: fillLine 1.5s forwards ease-in-out;
+        }
+        .btn-partners:hover {
+            background-color: #d40818;
+            color: #000;
+             transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        @keyframes fillLine {
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        .carousel-wrapper {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .carousel-wrapper {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 2rem;
+            /* mantém o espaçamento entre cards */
+            width: max-content;
+            /* conteúdo define largura */
+            --scroll-width: 0px;
+            /* será atualizado pelo JS */
+            animation: scroll 20s linear infinite;
+            will-change: transform;
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(calc(var(--scroll-width) * -1));
+            }
+        }
+
+
+
+
+
+
+        /* Cards dos logos */
+        .partner-card {
+            flex: 0 0 auto;
+            width: 150px;
+            height: 100px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .partner-card a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .partner-card img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+            display: block;
+            pointer-events: none;
+        }
+
+        /* Zoom suave ao passar o mouse */
+        .partner-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .partners-title {
+                font-size: 2rem;
+            }
+
+            .partners-subtitle {
+                font-size: 1.1rem;
+                max-width: 100%;
+            }
+
+            .partner-card {
+                width: 120px;
+                height: 80px;
+            }
+        }
+
+        /* Contato */
+        /* Contato Section */
+        .contato-section {
+          padding: 4rem 2rem;
+          background-color: #fff;
+          color: #2c3e50;
+        }
+
+        .contato-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: flex;
+          gap: 3rem;
+          flex-wrap: wrap;
+        }
+
+        .contato-info,
+        .contato-form {
+          background-color: #f9f9f9;
+          border: 1.5px solid #2c3e50;
+          border-radius: 12px;
+          padding: 2rem;
+          box-shadow: 0 4px 12px rgba(44, 62, 80, 0.1);
+          flex: 1 1 350px;
+          min-width: 300px;
+        }
+
+        .contato-info h2 {
+          font-size: 2rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          border-left: 5px solid #2c3e50;
+          padding-left: 1rem;
+        }
+
+        .contato-info p,
+        .contato-info address {
+          font-size: 1rem;
+          margin-bottom: 1rem;
+          color: #444;
+        }
+
+        .contato-info address p {
+          margin-bottom: 0.5rem;
+        }
+
+        .contato-info a {
+          color: #2c3e50;
+          text-decoration: underline;
+        }
+
+        .social-icons {
+          display: flex;
+          gap: 1.5rem;
+          font-size: 1.5rem;
+          margin-top: 1rem;
+        }
+
+        .social-icons a {
+          color: #2c3e50;
+          transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+          color: #1a252f;
+        }
+
+        /* Formulário */
+        .contato-form .form-intro {
+          font-style: italic;
+          font-size: 1.125rem;
+          border-left: 4px solid #2c3e50;
+          padding-left: 1rem;
+          margin-bottom: 2rem;
+          color: #2c3e50;
+        }
+
+        .contato-form form {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .contato-form input,
+        .contato-form textarea {
+          padding: 0.75rem 1rem;
+          border: 1.5px solid #ccc;
+          border-radius: 6px;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 1rem;
+          transition: border-color 0.3s;
+          resize: vertical;
+          color: #333;
+        }
+
+        .contato-form input:focus,
+        .contato-form textarea:focus {
+          border-color: #2c3e50;
+          outline: none;
+          box-shadow: 0 0 5px rgba(44, 62, 80, 0.4);
+        }
+
+        .contato-form button {
+          background-color: #2c3e50;
+          color: #fff;
+          border: none;
+          padding: 0.85rem 1.5rem;
+          font-weight: 700;
+          font-size: 1rem;
+          border-radius: 6px;
+          cursor: pointer;
+          align-self: flex-start;
+          transition: background-color 0.3s;
+        }
+
+        .contato-form button:hover {
+          background-color: #1a252f;
+        }
+
+        /* Podcasts */
+        .podcasts {
+          margin-top: 3rem;
+        }
+
+        .podcasts h3 {
+          font-size: 1.75rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          color: #2c3e50;
+          border-bottom: 2px solid #ccc;
+          padding-bottom: 0.5rem;
+          max-width: 320px;
+        }
+
+        .podcast-links {
+          display: flex;
+          gap: 2rem;
+          flex-wrap: wrap;
+        }
+
+        .podcast-links a {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          background-color: #000;
+          border: 1.5px solid #2c3e50;
+          border-radius: 12px;
+          padding: 1rem 1.5rem;
+          box-shadow: 0 2px 6px rgba(44, 62, 80, 0.1);
+          color: #d40818;
+          text-decoration: none;
+          flex: 1 1 200px;
+          transition: box-shadow 0.3s, background-color 0.3s;
+        }
+
+        .podcast-links a:hover {
+          box-shadow: 0 6px 16px rgba(44, 62, 80, 0.15);
+          background-color: #f0f4f8;
+        }
+
+        .podcast-links i {
+          font-size: 2.5rem;
+          flex-shrink: 0;
+        }
+
+        .podcast-links h4 {
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin-bottom: 0.25rem;
+        }
+
+        .podcast-links p {
+          font-size: 0.9rem;
+          color: #d40818;
+          margin: 0;
+        }
+
+        @media (max-width: 768px) {
+          .contato-container {
+            flex-direction: column;
+            padding: 0 1rem;
+          }
+
+          .contato-info,
+          .contato-form {
+            min-width: auto;
+            width: 100%;
+            padding: 1.5rem 1.5rem;
+          }
+
+          .podcast-links {
+            flex-direction: column;
+            gap: 1.5rem;
+          }
+        }
+
+
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #d40818;
+            padding: 3rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                margin-top: 1rem;
+            }
+
+            .nav-links li {
+                margin: 0 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            .hero {
+                padding: 4rem 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navegação -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo"><img src="logo.png" alt=""></a>
+            <ul class="nav-links">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="person.html">Atuação</a></li>
+                <li><a href="#parcerias">Parcerias</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Assistência Jurídica Acessível para Todos</h1>
+            <p>A AJJM oferece suporte jurídico especializado para pessoas de baixa renda, garantindo acesso à justiça
+                com dignidade e respeito.</p>
+            <a href="#contato" class="btn">Entre em Contato</a>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre">
+        <div class="container">
+            <h2>Sobre a AJJM</h2>
+            <p class="important">Acreditamos que justiça é um direito universal, não um privilégio.</p>
+
+            <p>Oferecemos assistência jurídica qualificada para quem mais precisa, com <strong>ética</strong> e
+                compromisso social.</p>
+            <p>Nosso time atua com dedicação para garantir <strong>dignidade</strong> e acesso à
+                <strong>justiça</strong> para pessoas em situação vulnerável.
+            </p>
+
+            <h3><span class="icon"></span> Nossa Missão</h3>
+            <p>Democratizar o acesso à justiça, promovendo suporte jurídico humano e eficiente para todos.</p>
+
+            <h3><span class="icon"></span> Nossos Valores</h3>
+            <p><em>Ética</em>, <em>excelência</em>, <em>respeito</em> e <em>justiça social</em> guiam cada passo do
+                nosso trabalho.</p>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Contato -->
+    <!-- Contato -->
+    <section id="contato" class="contato-section">
+      <div class="container contato-container">
+        <!-- Coluna esquerda: informações -->
+        <div class="contato-info">
+          <h2>Contate-Nos</h2>
+          <p>Nosso endereço de correspondência é:</p>
+          <address>
+            <p>152A Charlotte Street,</p>
+            <p>Peterborough ON</p>
+            <p>Telefone: <a href="tel:7057423221">705-742-3221</a></p>
+          </address>
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Google Plus"><i class="fab fa-google-plus-g"></i></a>
+          </div>
+        </div>
+
+        <!-- Coluna direita: formulário -->
+        <div class="contato-form">
+          <p class="form-intro">
+            Grande visão sem ótimas pessoas é irrelevante.<br />
+            Vamos trabalhar juntos.
+          </p>
+          <form novalidate>
+            <input type="text" placeholder="Seu nome" required />
+            <input type="email" placeholder="Seu e-mail" required />
+            <textarea rows="5" placeholder="Sua mensagem" required></textarea>
+            <button type="submit">Enviar</button>
+          </form>
+
+          <!-- Podcasts -->
+          <div class="podcasts">
+            <h3>Ver Podcasts</h3>
+            <div class="podcast-links">
+              <a href="https://www.youtube.com/yourchannel" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <i class="fab fa-youtube"></i>
+                <div>
+                  <h4>YouTube</h4>
+                  <p>Assista aos nossos podcasts no YouTube</p>
+                </div>
+              </a>
+              <a href="https://open.spotify.com/show/yourpodcast" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+                <i class="fab fa-spotify"></i>
+                <div>
+                  <h4>Spotify</h4>
+                  <p>Ouça nossos podcasts no Spotify</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>AJJM - Assistência Jurídica para Pessoas de Baixa Renda</p>
+            <p>CNPJ: XX.XXX.XXX/XXXX-XX</p>
+            <p>© 2023 Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        (function initInfiniteCarousel() {
+            const carousel = document.querySelector('.carousel');
+            const wrapper = document.querySelector('.carousel-wrapper');
+            if (!carousel || !wrapper) return;
+
+            // Salva o HTML base (um único conjunto de logos). 
+            // *Deixe APENAS a primeira lista no HTML (não duplique manualmente)*.
+            if (!carousel.dataset.baseHtml) {
+                carousel.dataset.baseHtml = carousel.innerHTML.trim();
+            }
+            const baseHtml = carousel.dataset.baseHtml;
+
+            // Mede a largura (px) de um HTML qualquer criado temporariamente
+            function measureHtmlWidth(html) {
+                const temp = document.createElement('div');
+                temp.style.display = 'flex';
+                temp.style.position = 'absolute';
+                temp.style.left = '-9999px';
+                temp.style.top = '0';
+                temp.style.gap = getComputedStyle(carousel).gap || '0px';
+                temp.innerHTML = html;
+                document.body.appendChild(temp);
+                const w = temp.offsetWidth;
+                document.body.removeChild(temp);
+                return w;
+            }
+
+            function rebuild() {
+                // Garante que o "single sequence" seja ao menos tão largo quanto o wrapper
+                let singleHtml = baseHtml;
+                let singleWidth = measureHtmlWidth(singleHtml);
+                const wrapperWidth = wrapper.offsetWidth;
+
+                // se muito estreito, repete o bloco base até cobrir o wrapper
+                let repeats = 1;
+                while (singleWidth < wrapperWidth) {
+                    repeats++;
+                    singleHtml += baseHtml;
+                    singleWidth = measureHtmlWidth(singleHtml);
+                    if (repeats > 10) break; // segurança para evitar loop infinito
+                }
+
+                // Define o conteúdo como: [single sequence] + [single sequence] para loop contínuo
+                carousel.innerHTML = singleHtml + singleHtml;
+
+                // Atualiza a variável CSS com a largura (px) do bloco único que vamos deslocar
+                carousel.style.setProperty('--scroll-width', singleWidth + 'px');
+
+                // Opcional: ajusta duração da animação para manter velocidade agradável
+                const pxPerSecond = 120; // ajuste a velocidade aqui (px / s)
+                const duration = Math.max(6, singleWidth / pxPerSecond); // tempo mínimo 6s
+                carousel.style.animation = `scroll ${duration}s linear infinite`;
+            }
+
+            // Inicializa e recalcula ao redimensionar
+            rebuild();
+            let t;
+            window.addEventListener('resize', () => {
+                clearTimeout(t);
+                t = setTimeout(rebuild, 120);
+            });
+        })();
+
+
+
+
+
+
+
+        // Smooth scrolling para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Ajuste para a navbar fixa
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Destacar link ativo na navegação durante a rolagem
+        window.addEventListener('scroll', function () {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
