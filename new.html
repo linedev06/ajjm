@@ -840,6 +840,153 @@ nav div[role="menu"] a::after {
 
 
 
+<section id="aj-play" class="bg-white text-gray-900 min-h-screen flex flex-col justify-start py-20 px-6 sm:px-12 lg:px-24">
+  <div class="max-w-7xl mx-auto w-full flex flex-col items-center">
+    <!-- Título -->
+    <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 mb-4 w-full max-w-4xl border-l-8 border-[#b84141] pl-6">
+      AJ Play
+    </h2>
+    <p class="text-lg sm:text-xl text-gray-600 mb-16 max-w-3xl text-center font-medium leading-relaxed">
+      Conheça nossos vídeos e podcasts selecionados com curadoria especial
+    </p>
+
+    <!-- Carrossel -->
+    <div class="relative w-full max-w-5xl">
+      <!-- Botão seta esquerda -->
+      <button id="carousel-prev" aria-label="Anterior" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full p-3 text-gray-600 hover:text-[#b84141] hover:shadow-xl transition z-30 focus:outline-none focus:ring-2 focus:ring-[#b84141]">
+        <i class="fas fa-chevron-left text-2xl"></i>
+      </button>
+
+      <!-- Container do carrossel -->
+      <div id="carousel" class="flex gap-10 overflow-x-auto scroll-smooth snap-x snap-mandatory px-12 py-4 no-scrollbar scrollbar-hide">
+        <!-- Card 1 -->
+        <article tabindex="0" class="snap-start flex-shrink-0 w-72 sm:w-80 rounded-2xl shadow-2xl overflow-hidden cursor-pointer group bg-gradient-to-b from-white to-gray-50 border border-gray-200 transition-transform transform hover:scale-[1.07] hover:shadow-3xl focus:scale-[1.07] focus:shadow-3xl focus:outline-none">
+          <div class="relative h-44 sm:h-52 overflow-hidden rounded-t-2xl">
+            <img src="https://img.youtube.com/vi/VIDEO_ID_1/hqdefault.jpg" alt="Thumbnail Vídeo 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-focus:scale-110"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity flex items-center justify-center">
+              <div class="bg-[#b84141] rounded-full p-5 shadow-lg">
+                <i class="fas fa-play text-white text-4xl"></i>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 text-left">
+            <h3 class="text-lg sm:text-xl font-semibold text-gray-900 truncate leading-tight">Podcast #12 – Acesso à Justiça</h3>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article tabindex="0" class="snap-start flex-shrink-0 w-72 sm:w-80 rounded-2xl shadow-2xl overflow-hidden cursor-pointer group bg-gradient-to-b from-white to-gray-50 border border-gray-200 transition-transform transform hover:scale-[1.07] hover:shadow-3xl focus:scale-[1.07] focus:shadow-3xl focus:outline-none">
+          <div class="relative h-44 sm:h-52 overflow-hidden rounded-t-2xl">
+            <img src="https://img.youtube.com/vi/VIDEO_ID_2/hqdefault.jpg" alt="Thumbnail Vídeo 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-focus:scale-110"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity flex items-center justify-center">
+              <div class="bg-[#b84141] rounded-full p-5 shadow-lg">
+                <i class="fas fa-play text-white text-4xl"></i>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 text-left">
+            <h3 class="text-lg sm:text-xl font-semibold text-gray-900 truncate leading-tight">Vídeo Institucional</h3>
+          </div>
+        </article>
+
+        <!-- Card 3 - Podcast Spotify -->
+        <article tabindex="0" class="snap-start flex-shrink-0 w-72 sm:w-80 rounded-2xl shadow-2xl overflow-hidden cursor-pointer group bg-gradient-to-b from-white to-gray-50 border border-gray-200 transition-transform transform hover:scale-[1.07] hover:shadow-3xl focus:scale-[1.07] focus:shadow-3xl focus:outline-none">
+          <div class="relative h-44 sm:h-52 bg-gradient-to-tr from-green-700 via-green-600 to-green-500 flex items-center justify-center text-white text-7xl font-extrabold overflow-hidden rounded-t-2xl shadow-inner">
+            <i class="fab fa-spotify"></i>
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity flex items-center justify-center rounded-t-2xl">
+              <div class="bg-[#1DB954] rounded-full p-6 shadow-xl">
+                <i class="fas fa-play text-white text-4xl"></i>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 text-left">
+            <h3 class="text-lg sm:text-xl font-semibold text-gray-900 truncate leading-tight">Podcast #15 – Direitos Humanos</h3>
+          </div>
+        </article>
+
+        <!-- Card 4 - Podcast Spotify -->
+        <article tabindex="0" class="snap-start flex-shrink-0 w-72 sm:w-80 rounded-2xl shadow-2xl overflow-hidden cursor-pointer group bg-gradient-to-b from-white to-gray-50 border border-gray-200 transition-transform transform hover:scale-[1.07] hover:shadow-3xl focus:scale-[1.07] focus:shadow-3xl focus:outline-none">
+          <div class="relative h-44 sm:h-52 bg-gradient-to-tr from-green-700 via-green-600 to-green-500 flex items-center justify-center text-white text-7xl font-extrabold overflow-hidden rounded-t-2xl shadow-inner">
+            <i class="fab fa-spotify"></i>
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity flex items-center justify-center rounded-t-2xl">
+              <div class="bg-[#1DB954] rounded-full p-6 shadow-xl">
+                <i class="fas fa-play text-white text-4xl"></i>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 text-left">
+            <h3 class="text-lg sm:text-xl font-semibold text-gray-900 truncate leading-tight">Podcast #20 – Justiça Social</h3>
+          </div>
+        </article>
+      </div>
+
+      <!-- Botão seta direita -->
+      <button id="carousel-next" aria-label="Próximo" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full p-3 text-gray-600 hover:text-[#b84141] hover:shadow-xl transition z-30 focus:outline-none focus:ring-2 focus:ring-[#b84141]">
+        <i class="fas fa-chevron-right text-2xl"></i>
+      </button>
+    </div>
+
+
+
+    <!-- Botões finais -->
+    <div class="mt-20 flex flex-col sm:flex-row justify-center gap-8 sm:gap-12 w-full max-w-3xl">
+      <a href="https://www.youtube.com/playlist?list=YOUR_YOUTUBE_PLAYLIST_ID" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-4 px-12 py-4 bg-[#b84141] text-white font-extrabold rounded-full shadow-2xl hover:bg-[#8a2c2c] transition focus:outline-none focus:ring-4 focus:ring-[#b84141]/50">
+        <i class="fab fa-youtube text-3xl"></i> Ver Todos no YouTube
+      </a>
+      <a href="https://open.spotify.com/playlist/YOUR_SPOTIFY_PLAYLIST_ID" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-4 px-12 py-4 bg-[#1DB954] text-white font-extrabold rounded-full shadow-2xl hover:bg-[#17a44c] transition focus:outline-none focus:ring-4 focus:ring-[#1DB954]/50">
+        <i class="fab fa-spotify text-3xl"></i> Ouça no Spotify
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Scroll snap e scrollbar oculto */
+  #carousel {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  #carousel::-webkit-scrollbar {
+    display: none;
+  }
+  #carousel {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  /* Remove outline padrão para foco e aplica sombra */
+  article:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #b84141aa;
+  }
+  /* Remove scrollbar para todos navegadores */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<script>
+  // Navegação do carrossel por botões
+  const carousel = document.getElementById('carousel');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+
+  const cardWidth = 288 + 40; // largura do card (w-72=288px) + gap (gap-10=40px)
+
+  prevBtn.addEventListener('click', () => {
+    carousel.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+  });
+
+  nextBtn.addEventListener('click', () => {
+    carousel.scrollBy({ left: cardWidth, behavior: 'smooth' });
+  });
+</script>
+
+
+
   <script>
 (function initInfiniteCarousel() {
   const carousel = document.querySelector('.carousel');
