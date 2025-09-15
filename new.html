@@ -3,7 +3,7 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <title>
-   Advogados Voluntários
+   AJJM — Assistencia Judiciária João Mendes
   </title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
@@ -12,6 +12,20 @@
    body {
       font-family: "Inter", sans-serif;
     }
+
+nav > div > div > .flex-shrink-0 {
+  height: 128px;   /* aumenta mais o container */
+  overflow: visible;
+}
+
+nav > div > div > .flex-shrink-0 > img {
+  height: 128px;   /* aumenta bastante a logo */
+  width: 128px;
+  object-fit: contain;
+}
+
+
+    
    /* Links principais - linha vermelha no topo da navbar */
 nav > div > div > div > a,
 nav > div > div > div > div > button {
@@ -37,6 +51,10 @@ nav > div > div > div > a:hover::before,
 nav > div > div > div > div > button:hover::before {
   width: 100%;
 }
+
+
+
+
 /* Links dos submenus - linha vermelha animada embaixo do texto */
 nav div[role="menu"] a {
   position: relative;
@@ -101,103 +119,67 @@ nav div[role="menu"] a::after {
   bottom: 7.5px;
 }
 
+  #sobre h2 {
+  /* Linha lateral mais fina e cor institucional */
+  border-left-width: 4px;
+  border-left-color: #b84141;
+  padding-left: 1rem;
+  font-weight: 800;
+  font-size: 2.75rem;
+  margin-bottom: 2.5rem;
+  color: #111;
+}
+
+#sobre .fa-gavel,
+#sobre .fa-bullseye,
+#sobre .fa-balance-scale {
+  color: #b84141;
+}
+
+#sobre p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+#sobre p strong {
+  font-weight: 600;
+  color: #000;
+}
+
+#sobre p.italic {
+  font-style: italic;
+  color: #b84141;
+}
+
+#sobre h3 {
+  font-weight: 700;
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: #111;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.5rem;
+}
+
+#sobre .bg-gray-50 {
+  background-color: #f9f9f9;
+}
+
+#sobre .shadow-sm {
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+}
+
+@media (max-width: 640px) {
   #sobre {
-            color: #111;
-            /* Preto intenso para contraste */
-            background-color: #fff;
-            padding: 4rem 2rem;
-            font-weight: 400;
-            letter-spacing: 0.02em;
-            max-width: 720px;
-            margin: 0 auto;
-        }
-
-        #sobre h2 {
-            font-weight: 800;
-            font-size: 2.75rem;
-            /* maior para hierarquia */
-            color: #000;
-            margin-bottom: 2.5rem;
-            border-left: 5px solid #000;
-            padding-left: 1.25rem;
-            line-height: 1.1;
-        }
-
-        #sobre p {
-            font-size: 1.125rem;
-            line-height: 1.9;
-            /* mais espaçamento entre linhas */
-            margin-bottom: 1.75rem;
-            color: #333;
-            /* cinza escuro para corpo do texto */
-            text-align: left;
-        }
-
-        #sobre p strong {
-            font-weight: 600;
-            color: #000;
-        }
-
-        #sobre p.important {
-            font-style: italic;
-            font-weight: 600;
-            color: #000;
-            margin-bottom: 3rem;
-            font-size: 1.25rem;
-            line-height: 1.6;
-            max-width: 600px;
-        }
-
-        #sobre h3 {
-            font-weight: 700;
-            font-size: 1.75rem;
-            /* subtítulo maior que antes */
-            margin-top: 4rem;
-            /* mais espaço acima para respiro */
-            margin-bottom: 1rem;
-            color: #000;
-            border-bottom: 2px solid #ccc;
-            /* linha mais sutil e espaçada */
-            padding-bottom: 0.5rem;
-            max-width: 320px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        #sobre h3 .icon {
-            font-size: 1.5rem;
-            color: #666;
-            /* cinza médio para ícones */
-            flex-shrink: 0;
-        }
-
-        #sobre p em {
-            font-style: italic;
-            font-weight: 500;
-            color: #444;
-        }
-
-        /* Espaçamento modular para seções */
-        #sobre .container>*+* {
-            margin-top: 1.5rem;
-        }
-
-        /* Responsividade */
-        @media (max-width: 600px) {
-            #sobre {
-                padding: 3rem 1rem;
-                max-width: 100%;
-            }
-
-            #sobre h2 {
-                font-size: 2rem;
-            }
-
-            #sobre h3 {
-                font-size: 1.5rem;
-            }
-        }
+    padding: 3rem 1.5rem;
+  }
+  #sobre h2 {
+    font-size: 2rem;
+  }
+  #sobre h3 {
+    font-size: 1.5rem;
+  }
+}
 
 
 
@@ -249,7 +231,6 @@ nav div[role="menu"] a::after {
   cursor: pointer;
   overflow: hidden;
   margin-bottom: 4rem;
-  box-shadow: 0 4px 12px rgb(184 65 65 / 0.4);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   user-select: none;
 }
@@ -269,7 +250,6 @@ nav div[role="menu"] a::after {
 
 .btn-partners:hover {
   background-color: #8a2c2c;
-  box-shadow: 0 6px 20px rgb(138 44 44 / 0.6);
   color: #fff;
 }
 
@@ -368,7 +348,133 @@ nav div[role="menu"] a::after {
   }
 }
 
+@media (max-width: 640px) {
+  .responsive-bg {
+    background-position: center top !important;
+  }
+}
+
+
+/* Botão lateral fixo - estado clicado */
+.side-button-clicked {
+  transform-origin: top right;
+  animation: sideButtonClick 60ms forwards;
+}
+
+@keyframes sideButtonClick {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  100% {
+    transform: rotate(-6deg) scale(0.98);
+  }
+}
+
+/* Animação overshoot do painel */
+@keyframes panelSlideIn {
+  0% {
+    transform: translateX(24px) scale(0.995);
+    opacity: 0;
+  }
+  70% {
+    transform: translateX(-8px) scale(1.005);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Animação reversa */
+@keyframes panelSlideOut {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) scale(0.995);
+    opacity: 0;
+  }
+}
+
+/* Botões internos - slide up + fade */
+.button-appear {
+  opacity: 0;
+  transform: translateY(8px);
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+.button-appear:nth-child(1) {
+  animation-name: buttonSlideUp;
+  animation-duration: 180ms;
+  animation-delay: 0ms;
+}
+
+.button-appear:nth-child(2) {
+  animation-name: buttonSlideUp;
+  animation-duration: 180ms;
+  animation-delay: 80ms;
+}
+
+.button-appear:nth-child(3) {
+  animation-name: buttonSlideUp;
+  animation-duration: 180ms;
+  animation-delay: 160ms;
+}
+
+@keyframes buttonSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover e foco nos botões */
+#contact-panel button:hover,
+#contact-panel button:focus {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 8px 20px rgba(15, 15, 15, 0.15);
+  outline: none;
+  transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+}
+
+#contact-panel button:active {
+  transform: scale(0.98);
+  transition-duration: 100ms;
+}
+
+/* Toast */
+#toast {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: #333;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 60;
+}
+
+#toast.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
   </style>
+  <link rel="icon" type="image/png" sizes="32x32" href="logo3.png">
+
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
  </head>
  <body class="bg-white text-gray-700">
   <!-- Navbar -->
@@ -523,64 +629,149 @@ nav div[role="menu"] a::after {
 
   <!-- Resto do seu conteúdo permanece igual -->
 
-  <section class="relative pt-16">
-   <!-- Área vazia com altura fixa para substituir a imagem -->
-   <div class="w-full h-[600px] bg-gray-100"></div>
-   <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center px-4 pointer-events-none">
+<section class="relative pt-16 h-[750px] sm:h-[650px] overflow-hidden">
+  <!-- Imagens de fundo para os slides -->
+  <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out" style="background-image: url('download (1).jpg'); z-index: 0; opacity: 1;" data-slide="0"></div>
+  <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out" style="background-image: url('download (2).jpg'); z-index: 0; opacity: 0;" data-slide="1"></div>
+  <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out" style="background-image: url('download (3).jpg'); z-index: 0; opacity: 0;" data-slide="2"></div>
+  <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out" style="background-image: url('download4.jpg'); z-index: 0; opacity: 0;" data-slide="3"></div>
+  
+  <!-- Overlay escuro e conteúdo -->
+  <div class="absolute inset-0 bg-black bg-opacity-50 z-10 flex flex-col justify-center items-center text-center px-4 pointer-events-none">
     <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl leading-tight max-w-4xl">
-     Advogados Voluntários
+      Advogados Voluntários
     </h1>
     <p class="text-white max-w-3xl mt-4 text-sm sm:text-base md:text-lg">
-     Podem ser advogados colaboradores voluntários apenas advogados,
-        regularmente inscritos na Ordem dos Advogados do Brasil, graduados
-        pela Faculdade de Direito da Universidade Presbiteriana Mackenzie ou
-        por meio de seleção prévia, caso formado em outra Universidade.
+      Podem ser advogados colaboradores voluntários apenas advogados,
+      regularmente inscritos na Ordem dos Advogados do Brasil, graduados
+      pela Faculdade de Direito da Universidade Presbiteriana Mackenzie ou
+      por meio de seleção prévia, caso formado em outra Universidade.
     </p>
-    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-     <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100 transition" href="#">
-      FALE COM A GENTE
-      <i class="fas fa-external-link-alt ml-2"></i>
-     </a>
-     <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535] transition" href="#">
-      SOBRE NÓS
-     </a>
+    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center pointer-events-auto">
+      <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100 transition" href="#">
+        FALE COM A GENTE
+        <i class="fas fa-external-link-alt ml-2"></i>
+      </a>
+      <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535] transition" href="#">
+        SOBRE NÓS
+      </a>
     </div>
-    <div class="absolute bottom-4 flex space-x-3 justify-center w-full">
-     <button aria-label="Slide 1" class="w-2.5 h-2.5 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100"></button>
-     <button aria-label="Slide 2" class="w-2.5 h-2.5 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100"></button>
-     <button aria-label="Slide 3" class="w-2.5 h-2.5 rounded-full bg-white bg-opacity-100"></button>
-     <button aria-label="Slide 4" class="w-2.5 h-2.5 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100"></button>
+    <div class="absolute bottom-4 flex space-x-3 justify-center w-full pointer-events-auto">
+      <button aria-label="Slide 1" class="w-2.5 h-2.5 rounded-full bg-white bg-opacity-100" data-slide="0"></button>
+      <button aria-label="Slide 2" class="w-2.5 h-2.5 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100" data-slide="1"></button>
+      <button aria-label="Slide 3" class="w-2.5 h-2.5 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100" data-slide="2"></button>
+      <button aria-label="Slide 4" class="w-2.5 h-2.5 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100" data-slide="3"></button>
     </div>
-   </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- Side Contact Button -->
-  <a aria-label="Solicite um Contato" class="fixed right-0 top-[40%] bg-[#3a6a91] text-white text-xs sm:text-sm font-normal px-3 py-2 rounded-l-md flex items-center space-x-2 rotate-90 origin-top-right hover:bg-[#2e5270] transition z-50" href="#">
-   <i class="fas fa-mobile-alt"></i>
-   <span>
-    Solicite um Contato
-   </span>
-  </a>
+<a id="side-contact-button" role="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="contact-panel" aria-label="Solicite um Contato" class="fixed right-0 top-[40%] bg-[#3a6a91] text-white text-xs sm:text-sm font-normal px-3 py-2 rounded-l-md flex items-center space-x-2 rotate-90 origin-top-right hover:bg-[#2e5270] transition z-50 cursor-pointer select-none">
+  <i class="fas fa-mobile-alt"></i>
+  <span>Solicite um Contato</span>
+</a>
+
+
+<!-- Overlay -->
+<div id="contact-overlay" class="fixed inset-0 bg-black bg-opacity-0 backdrop-blur-sm pointer-events-none opacity-0 transition-opacity duration-180 ease-out z-40" aria-hidden="true"></div>
+
+<!-- Painel lateral -->
+<aside id="contact-panel" class="fixed top-0 right-0 h-full w-80 max-w-full bg-white rounded-l-2xl shadow-lg transform translate-x-full opacity-0 scale-95 transition-all duration-350 ease-[cubic-bezier(.2,.9,.25,1)] z-50" role="dialog" aria-modal="true" aria-labelledby="contact-title" aria-describedby="contact-desc" tabindex="-1" >
+  <header class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+    <div>
+      <h2 id="contact-title" class="text-lg font-semibold text-gray-900">Fale conosco</h2>
+      <p id="contact-desc" class="text-sm text-gray-600">Atendimento jurídico — orientações rápidas</p>
+    </div>
+    <button id="contact-close" aria-label="Fechar painel de contato" class="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#b84141] rounded">
+      <i class="fas fa-times fa-lg"></i>
+    </button>
+  </header>
+  <main class="px-6 py-4 flex flex-col space-y-4">
+    <p class="text-gray-700 text-sm">Escolha a forma mais prática para falar conosco.</p>
+    <button id="btn-whatsapp" class="flex items-center space-x-3 bg-white border border-gray-300 rounded-full px-4 py-3 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#b84141] transition transform" type="button">
+      <i class="fab fa-whatsapp text-green-600 text-xl"></i>
+      <div class="text-left">
+        <p class="text-gray-900 font-semibold text-base">WhatsApp</p>
+        <p class="text-gray-500 text-xs">Mensagem rápida</p>
+      </div>
+    </button>
+    <button id="btn-email" class="flex items-center space-x-3 bg-white border border-gray-300 rounded-full px-4 py-3 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#b84141] transition transform" type="button">
+      <i class="fas fa-envelope text-gray-700 text-xl"></i>
+      <div class="text-left">
+        <p class="text-gray-900 font-semibold text-base">E-mail</p>
+        <p class="text-gray-500 text-xs">Envie detalhes por escrito</p>
+      </div>
+    </button>
+    <button id="btn-agendar" class="flex items-center space-x-3 bg-[#b84141] text-white rounded-full px-4 py-3 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#8a2c2c] transition transform" type="button">
+      <i class="fas fa-calendar-alt text-white text-xl"></i>
+      <div class="text-left">
+        <p class="font-semibold text-base">Agendar</p>
+        <p class="text-sm opacity-80">Marque uma conversa</p>
+      </div>
+    </button>
+  </main>
+  <footer class="px-6 py-3 border-t border-gray-200 text-xs text-gray-500 text-center">
+    <a href="#" class="underline hover:text-[#b84141]">Política de Privacidade</a> &nbsp;|&nbsp; Atendimento: seg.–sex. 9h–17h
+  </footer>
+</aside>
+
+
+
+
+
    <!-- Sobre -->
-    <section id="sobre">
-        <div class="container">
-            <h2>Sobre a AJJM</h2>
-            <p class="important">Acreditamos que justiça é um direito universal, não um privilégio.</p>
+<section id="sobre" class="max-w-4xl mx-auto px-6 py-16 bg-white text-gray-900">
+  <h2 class="text-4xl font-extrabold mb-10 border-l-4 border-[#b84141] pl-4">
+    Sobre a AJJM
+  </h2>
 
-            <p>Oferecemos assistência jurídica qualificada para quem mais precisa, com <strong>ética</strong> e
-                compromisso social.</p>
-            <p>Nosso time atua com dedicação para garantir <strong>dignidade</strong> e acesso à
-                <strong>justiça</strong> para pessoas em situação vulnerável.
-            </p>
+  <!-- Bloco de destaque -->
+  <div class="flex items-center bg-[#f9f5f5] rounded-lg p-6 mb-12 shadow-sm gap-4">
+    <i class="fas fa-gavel text-[#b84141] text-4xl flex-shrink-0"></i>
+    <p class="italic font-semibold text-[#b84141] text-xl md:text-2xl max-w-3xl">
+      Acreditamos que justiça é um direito universal, não um privilégio.
+    </p>
+  </div>
 
-            <h3><span class="icon"></span> Nossa Missão</h3>
-            <p>Democratizar o acesso à justiça, promovendo suporte jurídico humano e eficiente para todos.</p>
+  <!-- Cards grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            <h3><span class="icon"></span> Nossos Valores</h3>
-            <p><em>Ética</em>, <em>excelência</em>, <em>respeito</em> e <em>justiça social</em> guiam cada passo do
-                nosso trabalho.</p>
-        </div>
-    </section>
+    <!-- Nossa Missão -->
+    <div class="bg-gray-50 rounded-lg p-6 shadow-sm flex flex-col items-start">
+      <i class="fas fa-bullseye text-[#b84141] text-3xl mb-4"></i>
+      <h3 class="text-2xl font-bold mb-3 flex items-center gap-2 border-b border-gray-300 pb-2">
+        Nossa Missão
+      </h3>
+      <p class="text-gray-700 leading-relaxed">
+        Democratizar o acesso à justiça, promovendo suporte jurídico humano e eficiente para todos.
+      </p>
+    </div>
+
+    <!-- Nossos Valores -->
+    <div class="bg-gray-50 rounded-lg p-6 shadow-sm flex flex-col items-start">
+      <i class="fas fa-balance-scale text-[#b84141] text-3xl mb-4"></i>
+      <h3 class="text-2xl font-bold mb-3 flex items-center gap-2 border-b border-gray-300 pb-2">
+        Nossos Valores
+      </h3>
+      <p class="italic text-gray-700 leading-relaxed">
+        <em>Ética</em>, <em>excelência</em>, <em>respeito</em> e <em>justiça social</em> guiam cada passo do nosso trabalho.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Texto adicional -->
+  <div class="mt-12 space-y-6 text-gray-800 text-lg leading-relaxed">
+    <p>
+      Oferecemos assistência jurídica qualificada para quem mais precisa, com <strong>ética</strong> e compromisso social.
+    </p>
+    <p>
+      Nosso time atua com dedicação para garantir <strong>dignidade</strong> e acesso à <strong>justiça</strong> para pessoas em situação vulnerável.
+    </p>
+  </div>
+</section>
+
 
 
 <hr>
@@ -707,6 +898,43 @@ nav div[role="menu"] a::after {
 
 
 
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('section.relative > div[data-slide]');
+    const buttons = document.querySelectorAll('section.relative button[data-slide]');
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.style.opacity = (i === index) ? '1' : '0';
+      });
+      buttons.forEach((btn, i) => {
+        if(i === index) {
+          btn.classList.remove('bg-opacity-50');
+          btn.classList.add('bg-opacity-100');
+        } else {
+          btn.classList.remove('bg-opacity-100');
+          btn.classList.add('bg-opacity-50');
+        }
+      });
+      currentSlide = index;
+    }
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const index = parseInt(btn.getAttribute('data-slide'));
+        showSlide(index);
+      });
+    });
+    // Opcional: troca automática a cada 7 segundos
+    setInterval(() => {
+      let nextSlide = (currentSlide + 1) % totalSlides;
+      showSlide(nextSlide);
+    }, 7000);
+  });
+
+
+
+
+
 
 
 
@@ -771,6 +999,207 @@ mobileMenuButton.addEventListener('click', () => {
     toggleSubmenu('btn-parceiros', 'submenu-parceiros');
     toggleSubmenu('btn-faca-parte', 'submenu-faca-parte');
     toggleSubmenu('btn-transparencia', 'submenu-transparencia');
+
+
+
+
+
+
+  (() => {
+    const sideButton = document.getElementById('side-contact-button');
+    const panel = document.getElementById('contact-panel');
+    const overlay = document.getElementById('contact-overlay');
+    const closeBtn = document.getElementById('contact-close');
+    const toast = document.getElementById('toast');
+    const toastIcon = document.getElementById('toast-icon');
+    const toastMessage = document.getElementById('toast-message');
+
+    const btnWhatsapp = document.getElementById('btn-whatsapp');
+    const btnEmail = document.getElementById('btn-email');
+    const btnAgendar = document.getElementById('btn-agendar');
+
+    // Botões internos para animação stagger
+    const buttons = [btnWhatsapp, btnEmail, btnAgendar];
+
+    // Estado aberto/fechado
+    let isOpen = false;
+
+    // Função para mostrar toast
+    function showToast(iconClass, message, duration = 2000) {
+      toastIcon.className = iconClass;
+      toastMessage.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, duration);
+    }
+
+    // Função para abrir painel
+    function openPanel() {
+      if (isOpen) return;
+      isOpen = true;
+
+      // Botão: animação clique (micro-rotacao e scale)
+      sideButton.classList.add('side-button-clicked');
+      setTimeout(() => {
+        sideButton.classList.remove('side-button-clicked');
+        // Trocar ícone para fechar
+        sideButton.innerHTML = '<i class="fas fa-times"></i>';
+        sideButton.setAttribute('aria-label', 'Fechar painel de contato');
+        sideButton.setAttribute('aria-expanded', 'true');
+      }, 60);
+
+      // Mostrar overlay
+      overlay.style.pointerEvents = 'auto';
+      overlay.classList.remove('opacity-0');
+      overlay.classList.add('opacity-30');
+      overlay.style.backgroundColor = 'rgba(0,0,0,0.3)';
+      overlay.style.backdropFilter = 'blur(4px)';
+
+      // Mostrar painel com animação overshoot
+      panel.style.transition = 'none';
+      panel.style.transform = 'translateX(24px) scale(0.995)';
+      panel.style.opacity = '0';
+      panel.classList.remove('opacity-0');
+      panel.classList.remove('translate-x-full');
+      panel.style.pointerEvents = 'auto';
+
+      // Forçar reflow para aplicar animação
+      void panel.offsetWidth;
+
+      panel.style.transition = 'transform 360ms cubic-bezier(.2,.9,.25,1), opacity 360ms cubic-bezier(.2,.9,.25,1)';
+      panel.style.transform = 'translateX(-8px) scale(1.005)';
+      panel.style.opacity = '1';
+
+      setTimeout(() => {
+        panel.style.transform = 'translateX(0) scale(1)';
+      }, 250);
+
+      // Animação stagger dos botões
+      buttons.forEach((btn, i) => {
+        btn.classList.add('button-appear');
+        btn.style.animationDelay = `${i * 80}ms`;
+      });
+
+      // Focus trap: foco no primeiro botão
+      btnWhatsapp.focus();
+
+      // Esc para fechar
+      document.addEventListener('keydown', escListener);
+    }
+
+    // Função para fechar painel
+    function closePanel() {
+      if (!isOpen) return;
+      isOpen = false;
+
+      // Reverter botão lateral para original
+      sideButton.innerHTML = '<i class="fas fa-mobile-alt"></i><span>Solicite um Contato</span>';
+      sideButton.setAttribute('aria-label', 'Solicite um Contato');
+      sideButton.setAttribute('aria-expanded', 'false');
+
+      // Ocultar overlay
+      overlay.classList.remove('opacity-30');
+      overlay.classList.add('opacity-0');
+      overlay.style.pointerEvents = 'none';
+
+      // Animação slide out painel
+      panel.style.transition = 'transform 160ms ease-out, opacity 160ms ease-out';
+      panel.style.transform = 'translateX(100%) scale(0.995)';
+      panel.style.opacity = '0';
+      panel.style.pointerEvents = 'none';
+
+      // Remover animações dos botões
+      buttons.forEach(btn => {
+        btn.classList.remove('button-appear');
+        btn.style.animationDelay = '';
+      });
+
+      // Retornar foco ao botão lateral
+      sideButton.focus();
+
+      // Remover listener ESC
+      document.removeEventListener('keydown', escListener);
+    }
+
+    // Listener ESC
+    function escListener(e) {
+      if (e.key === 'Escape') {
+        closePanel();
+      }
+    }
+
+    // Toggle painel
+    sideButton.addEventListener('click', () => {
+      if (isOpen) {
+        closePanel();
+      } else {
+        openPanel();
+      }
+    });
+
+    // Fechar ao clicar no overlay
+    overlay.addEventListener('click', closePanel);
+
+    // Fechar ao clicar no botão fechar
+    closeBtn.addEventListener('click', closePanel);
+
+    // Microinterações botões
+
+    // Função para simular abertura de app com toast e delay
+    function openAppSimulated(appName, url) {
+      showToast('fas fa-spinner fa-spin', `Abrindo ${appName}...`, 3000);
+      setTimeout(() => {
+        window.open(url, '_blank');
+        showToast('fas fa-check', 'Ação iniciada', 2000);
+      }, 1500);
+    }
+
+    btnWhatsapp.addEventListener('click', () => {
+      const message = encodeURIComponent('Olá, gostaria de agendar/obter orientação — [breve motivo]');
+      const url = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+        ? `whatsapp://send?text=${message}`
+        : `https://web.whatsapp.com/send?text=${message}`;
+      openAppSimulated('WhatsApp', url);
+    });
+
+    btnEmail.addEventListener('click', () => {
+      // Exemplo mailto simples
+      const mailto = 'mailto:contato@exemplo.com?subject=Solicitação&body=Olá,%20gostaria%20de%20obter%20orientação.';
+      openAppSimulated('E-mail', mailto);
+    });
+
+    btnAgendar.addEventListener('click', () => {
+      // Aqui você pode abrir modal ou redirecionar para sistema de agendamento
+      showToast('fas fa-check', 'Abrindo agendamento...', 2000);
+      // Exemplo: abrir Calendly
+      window.open('https://calendly.com/seu-agendamento', '_blank');
+    });
+
+    // Accessibility: trap focus inside panel when open
+    panel.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        const focusable = panel.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+    });
+
+  })();
+</script>
+
   </script>
  </body>
 </html>
