@@ -256,6 +256,7 @@
           src="https://dummyimage.com/160x80/000/fff&text=Alpha"
           alt="Logotipo da Empresa Alpha"
           class="parceiro-logo"
+          data-text="Descubra as inovações tecnológicas da Empresa Alpha, líder em soluções digitais."
           loading="lazy"
           decoding="async"
         />
@@ -282,6 +283,7 @@
           src="https://dummyimage.com/160x80/000/fff&text=Beta"
           alt="Logotipo da Empresa Beta"
           class="parceiro-logo"
+          data-text="Explore os serviços premium oferecidos pela Empresa Beta, focada em excelência."
           loading="lazy"
           decoding="async"
         />
@@ -308,6 +310,7 @@
           src="https://dummyimage.com/160x80/000/fff&text=Gamma"
           alt="Logotipo da Empresa Gamma"
           class="parceiro-logo"
+          data-text="Conheça as soluções sustentáveis da Empresa Gamma, comprometida com o futuro."
           loading="lazy"
           decoding="async"
         />
@@ -334,6 +337,7 @@
           src="https://dummyimage.com/160x80/000/fff&text=Delta"
           alt="Logotipo da Empresa Delta"
           class="parceiro-logo"
+          data-text="Descubra a expertise da Empresa Delta em consultoria e desenvolvimento."
           loading="lazy"
           decoding="async"
         />
@@ -360,6 +364,7 @@
           src="https://dummyimage.com/160x80/000/fff&text=Epsilon"
           alt="Logotipo da Empresa Epsilon"
           class="parceiro-logo"
+          data-text="Saiba mais sobre as inovações da Empresa Epsilon, pioneira em novas tecnologias."
           loading="lazy"
           decoding="async"
         />
@@ -398,7 +403,7 @@
   <div id="parceiroModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <p class="modal-text">Descubra mais sobre este parceiro incrível e suas soluções inovadoras!</p>
+      <p class="modal-text"></p>
       <button class="modal-btn">Venha conhecer o site</button>
     </div>
   </div>
@@ -408,11 +413,13 @@
     const modal = document.getElementById('parceiroModal');
     const closeBtn = document.querySelector('.close');
     const modalBtn = document.querySelector('.modal-btn');
+    const modalText = document.querySelector('.modal-text');
     const logos = document.querySelectorAll('.parceiro-logo');
 
-    // Open modal on logo click
+    // Open modal on logo click and set custom text
     logos.forEach(logo => {
       logo.addEventListener('click', () => {
+        modalText.textContent = logo.getAttribute('data-text');
         modal.style.display = 'flex';
       });
     });

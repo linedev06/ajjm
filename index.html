@@ -641,6 +641,17 @@ nav div[role="menu"] a::after {
             color: #002c66;
         }
 
+
+
+          /* Transições suaves para os slides */
+        .background-slide, .content-slide {
+            transition: opacity 1s ease-in-out;
+        }
+        /* Transições para indicadores */
+        .indicator {
+            transition: opacity 0.3s ease;
+        }
+
   </style>
   <link rel="icon" type="image/png" sizes="32x32" href="logo6.jpg">
 
@@ -806,101 +817,119 @@ nav div[role="menu"] a::after {
    </div>
   </nav>
 
-  <!-- Resto do seu conteúdo permanece igual -->
+  
+    <section class="relative pt-16 h-[750px] sm:h-[650px] overflow-hidden">
+        <!-- Slides de fundo -->
+        <div class="background-slide absolute inset-0 bg-cover bg-center opacity-100" style="background-image: url('download (1).jpg');" data-slide="0"></div>
+        <div class="background-slide absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('download (2).jpg');" data-slide="1"></div>
+        <div class="background-slide absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('download (3).jpg');" data-slide="2"></div>
+        <div class="background-slide absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('download4.jpg');" data-slide="3"></div>
 
-<section class="relative pt-16 h-[750px] sm:h-[650px] overflow-hidden">
-  <!-- Imagens de fundo para os slides (com classes para melhor controle) -->
-  <div class="background-slide absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-100 scale-100" style="background-image: url('download (1).jpg'); z-index: 0;" data-slide="0"></div>
-  <div class="background-slide absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-0 scale-105" style="background-image: url('download (2).jpg'); z-index: 0;" data-slide="1"></div>
-  <div class="background-slide absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-0 scale-105" style="background-image: url('download (3).jpg'); z-index: 0;" data-slide="2"></div>
-  <div class="background-slide absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-0 scale-105" style="background-image: url('download4.jpg'); z-index: 0;" data-slide="3"></div>
+        <!-- Filtro preto fixo -->
+        <div class="absolute inset-0 bg-black bg-opacity-50 z-10 pointer-events-none"></div>
 
-  <!-- Conteúdos deslizantes (um para cada slide, com textos distintos e animações fluidas) -->
-  <!-- Slide 0: Foco em quem pode participar -->
-  <div class="content-slide absolute inset-0 bg-black bg-opacity-50 z-10 flex flex-col justify-center items-center text-center px-4 transition-all duration-1000 ease-in-out opacity-100 scale-100 translate-y-0" data-slide="0">
-    <div class="pointer-events-none">
-      <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl leading-tight max-w-4xl animate-fade-in-up">Advogados Voluntários</h1>
-      <p class="text-white max-w-3xl mt-4 text-sm sm:text-base md:text-lg animate-fade-in-up delay-200">Podem ser advogados colaboradores voluntários apenas advogados, regularmente inscritos na Ordem dos Advogados do Brasil, graduados pela Faculdade de Direito da Universidade Presbiteriana Mackenzie ou por meio de seleção prévia, caso formado em outra Universidade.</p>
-    </div>
-    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center pointer-events-auto">
-      <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100 transition transform hover:scale-105 duration-300" href="#">FALE COM A GENTE <i class="fas fa-external-link-alt ml-2"></i></a>
-      <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535] transition transform hover:scale-105 duration-300" href="#">SOBRE NÓS</a>
-    </div>
-  </div>
+        <!-- Conteúdo dos slides -->
+        <div class="content-slide absolute inset-0 z-20 flex flex-col justify-center items-center text-center px-4 opacity-100" data-slide="0">
+            <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl max-w-4xl">Advogados Voluntários</h1>
+            <p class="text-white max-w-3xl mt-4 text-sm sm:text-base md:text-lg">
+                Podem ser advogados colaboradores voluntários apenas advogados, regularmente inscritos na Ordem dos Advogados do Brasil, graduados pela Faculdade de Direito da Universidade Presbiteriana Mackenzie ou por meio de seleção prévia, caso formado em outra Universidade.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100" href="#">FALE COM A GENTE</a>
+                <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535]" href="#">SOBRE NÓS</a>
+            </div>
+        </div>
 
-  <!-- Slide 1: Foco em serviços oferecidos -->
-  <div class="content-slide absolute inset-0 bg-black bg-opacity-50 z-10 flex flex-col justify-center items-center text-center px-4 transition-all duration-1000 ease-in-out opacity-0 scale-95 translate-y-8" data-slide="1">
-    <div class="pointer-events-none">
-      <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl leading-tight max-w-4xl animate-fade-in-up">Serviços Jurídicos Gratuitos</h1>
-      <p class="text-white max-w-3xl mt-4 text-sm sm:text-base md:text-lg animate-fade-in-up delay-200">Atuamos em áreas como direito civil, trabalhista e familiar, oferecendo orientação e representação gratuita para famílias de baixa renda e vítimas de injustiças sociais.</p>
-    </div>
-    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center pointer-events-auto">
-      <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100 transition transform hover:scale-105 duration-300" href="#">FALE COM A GENTE <i class="fas fa-external-link-alt ml-2"></i></a>
-      <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535] transition transform hover:scale-105 duration-300" href="#">SOBRE NÓS</a>
-    </div>
-  </div>
+        <div class="content-slide absolute inset-0 z-20 flex flex-col justify-center items-center text-center px-4 opacity-0" data-slide="1">
+            <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl max-w-4xl">Serviços Jurídicos Gratuitos</h1>
+            <p class="text-white max-w-3xl mt-4 text-sm sm:text-base md:text-lg">
+                Atuamos em áreas como direito civil, trabalhista e familiar, oferecendo orientação e representação gratuita para famílias de baixa renda e vítimas de injustiças sociais.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100" href="#">FALE COM A GENTE</a>
+                <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535]" href="#">SOBRE NÓS</a>
+            </div>
+        </div>
 
-  <!-- Slide 2: Foco na missão e impacto -->
-  <div class="content-slide absolute inset-0 bg-black bg-opacity-50 z-10 flex flex-col justify-center items-center text-center px-4 transition-all duration-1000 ease-in-out opacity-0 scale-95 translate-y-8" data-slide="2">
-    <div class="pointer-events-none">
-      <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl leading-tight max-w-4xl animate-fade-in-up">Nossa Missão e Impacto</h1>
-      <p class="text-white max-w-3xl mt-4 text-sm sm:text-base md:text-lg animate-fade-in-up delay-200">Com mais de 10 anos de atuação, já auxiliamos milhares de pessoas, promovendo a equidade social e fortalecendo o acesso à justiça em comunidades vulneráveis do Brasil.</p>
-    </div>
-    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center pointer-events-auto">
-      <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100 transition transform hover:scale-105 duration-300" href="#">FALE COM A GENTE <i class="fas fa-external-link-alt ml-2"></i></a>
-      <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535] transition transform hover:scale-105 duration-300" href="#">SOBRE NÓS</a>
-    </div>
-  </div>
+        <div class="content-slide absolute inset-0 z-20 flex flex-col justify-center items-center text-center px-4 opacity-0" data-slide="2">
+            <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl max-w-4xl">Nossa Missão e Impacto</h1>
+            <p class="text-white max-w-3xl mt-4 text-sm sm:text-base md:text-lg">
+                Com mais de 10 anos de atuação, já auxiliamos milhares de pessoas, promovendo a equidade social e fortalecendo o acesso à justiça em comunidades vulneráveis do Brasil.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100" href="#">FALE COM A GENTE</a>
+                <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535]" href="#">SOBRE NÓS</a>
+            </div>
+        </div>
 
-  <!-- Slide 3: Foco em chamada para voluntários e contato -->
-  <div class="content-slide absolute inset-0 bg-black bg-opacity-50 z-10 flex flex-col justify-center items-center text-center px-4 transition-all duration-1000 ease-in-out opacity-0 scale-95 translate-y-8" data-slide="3">
-    <div class="pointer-events-none">
-      <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl leading-tight max-w-4xl animate-fade-in-up">Junte-se à Nossa Equipe</h1>
-      <p class="text-white max-w-3xl mt-4 text-sm sm:text-base md:text-lg animate-fade-in-up delay-200">Se você é um profissional do direito apaixonado por causas nobres, candidate-se como voluntário e ajude a transformar realidades. Inscreva-se agora!</p>
-    </div>
-    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center pointer-events-auto">
-      <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100 transition transform hover:scale-105 duration-300" href="#">FALE COM A GENTE <i class="fas fa-external-link-alt ml-2"></i></a>
-      <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535] transition transform hover:scale-105 duration-300" href="#">SOBRE NÓS</a>
-    </div>
-  </div>
+        <div class="content-slide absolute inset-0 z-20 flex flex-col justify-center items-center text-center px-4 opacity-0" data-slide="3">
+            <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl max-w-4xl">Junte-se à Nossa Equipe</h1>
+            <p class="text-white max-w-3xl mt-4 text-sm sm:text-base md:text-lg">
+                Se você é um profissional do direito apaixonado por causas nobres, candidate-se como voluntário e ajude a transformar realidades. Inscreva-se agora!
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100" href="#">FALE COM A GENTE</a>
+                <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535]" href="#">SOBRE NÓS</a>
+            </div>
+        </div>
 
-  <!-- Indicadores de slides (sempre visíveis e funcionais) -->
-  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 justify-center z-20 pointer-events-auto">
-    <button aria-label="Slide 1" class="w-2.5 h-2.5 rounded-full bg-white opacity-100 transition-all duration-300 ease-in-out hover:opacity-100 hover:scale-110" data-slide="0"></button>
-    <button aria-label="Slide 2" class="w-2.5 h-2.5 rounded-full bg-white opacity-50 transition-all duration-300 ease-in-out hover:opacity-100 hover:scale-110" data-slide="1"></button>
-    <button aria-label="Slide 3" class="w-2.5 h-2.5 rounded-full bg-white opacity-50 transition-all duration-300 ease-in-out hover:opacity-100 hover:scale-110" data-slide="2"></button>
-    <button aria-label="Slide 4" class="w-2.5 h-2.5 rounded-full bg-white opacity-50 transition-all duration-300 ease-in-out hover:opacity-100 hover:scale-110" data-slide="3"></button>
-  </div>
-</section>
+        <!-- Indicadores -->
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 justify-center z-30">
+            <button aria-label="Slide 1" class="indicator w-2.5 h-2.5 rounded-full bg-white opacity-100 hover:opacity-100" data-slide="0"></button>
+            <button aria-label="Slide 2" class="indicator w-2.5 h-2.5 rounded-full bg-white opacity-50 hover:opacity-100" data-slide="1"></button>
+            <button aria-label="Slide 3" class="indicator w-2.5 h-2.5 rounded-full bg-white opacity-50 hover:opacity-100" data-slide="2"></button>
+            <button aria-label="Slide 4" class="indicator w-2.5 h-2.5 rounded-full bg-white opacity-50 hover:opacity-100" data-slide="3"></button>
+        </div>
+    </section>
 
-<style>
-  /* Animações personalizadas para fluidez profissional */
-  @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(30px) scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-  .animate-fade-in-up {
-    animation: fade-in-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Curva de easing mais suave */
-  }
-  .animate-fade-in-up.delay-200 {
-    animation-delay: 0.3s; /* Aumentei o delay para melhor sequência */
-  }
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.background-slide, .content-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const totalSlides = 4;
 
-  /* Garantir que animações sejam reiniciadas corretamente */
-  .content-slide h1, .content-slide p {
-    animation-play-state: paused; /* Pausado inicialmente para JS controlar */
-  }
-</style>
+        // Função para mostrar o slide atual
+        function showSlide(index) {
+            // Esconder todos os slides
+            slides.forEach(slide => {
+                slide.style.opacity = '0';
+            });
+            indicators.forEach(ind => {
+                ind.style.opacity = '0.5';
+            });
 
-<script>
+            // Mostrar o slide atual
+            document.querySelectorAll(`[data-slide="${index}"]`).forEach(slide => {
+                slide.style.opacity = '1';
+            });
+            indicators[index].style.opacity = '1';
 
-</script>
+            currentSlide = index;
+        }
+
+        // Função para próximo slide
+        function nextSlide() {
+            const next = (currentSlide + 1) % totalSlides;
+            showSlide(next);
+        }
+
+        // Auto-play a cada 5 segundos
+        setInterval(nextSlide, 5000);
+
+        // Adicionar eventos de clique aos indicadores
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+
+        // Inicializar com o primeiro slide
+        showSlide(0);
+    </script>
+
+
+
+
 
 
 
