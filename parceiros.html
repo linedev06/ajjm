@@ -87,7 +87,7 @@
       object-fit: contain;
       filter: none;
       margin-bottom: 16px;
-      /* For logos that are color, we keep them as is */
+      cursor: pointer; /* Adicionado para indicar que é clicável */
     }
     /* Ícone vermelho discreto abaixo do logo */
     .parceiro-icon {
@@ -145,6 +145,8 @@
       transition: all 0.3s ease;
       user-select: none;
       outline-offset: 2px;
+      text-decoration: none; /* Para remover sublinhado do link */
+      display: inline-block; /* Para comportar-se como botão */
     }
     .btn-parceiro:hover,
     .btn-parceiro:focus {
@@ -157,6 +159,63 @@
       stroke-width: 1.5;
       stroke-linecap: round;
       stroke-linejoin: round;
+    }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fff;
+      padding: 32px;
+      border-radius: 8px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .modal-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.125rem;
+      color: #333;
+      margin-bottom: 24px;
+    }
+    .modal-btn {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      background: #c8102e;
+      border: none;
+      border-radius: 4px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .modal-btn:hover {
+      background: #a00d25;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: #aaa;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
     }
     /* Responsive tweaks */
     @media (max-width: 480px) {
@@ -175,6 +234,9 @@
       .parceiro-logo {
         max-height: 80px;
         margin-bottom: 12px;
+      }
+      .modal-content {
+        padding: 24px;
       }
     }
   </style>
@@ -326,16 +388,51 @@
     </div>
 
     <footer class="parceiros-footer">
-      <button class="btn-parceiro" type="button" aria-label="Seja um Parceiro">
+      <a href="mailto:parcerias@ajjoaomendes.com" class="btn-parceiro" aria-label="Seja um Parceiro">
         Seja um Parceiro
-      </button>
+      </a>
     </footer>
   </section>
 
+  <!-- Modal -->
+  <div id="parceiroModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p class="modal-text">Descubra mais sobre este parceiro incrível e suas soluções inovadoras!</p>
+      <button class="modal-btn">Venha conhecer o site</button>
+    </div>
+  </div>
+
   <script>
-    // Exemplo simples: botão "Seja um Parceiro" abre um alerta (pode ser substituído por ação real)
-    document.querySelector('.btn-parceiro').addEventListener('click', () => {
-      alert('Obrigado pelo interesse! Em breve entraremos em contato.');
+    // Modal functionality
+    const modal = document.getElementById('parceiroModal');
+    const closeBtn = document.querySelector('.close');
+    const modalBtn = document.querySelector('.modal-btn');
+    const logos = document.querySelectorAll('.parceiro-logo');
+
+    // Open modal on logo click
+    logos.forEach(logo => {
+      logo.addEventListener('click', () => {
+        modal.style.display = 'flex';
+      });
+    });
+
+    // Close modal on close button click
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Close modal on modal button click (placeholder action)
+    modalBtn.addEventListener('click', () => {
+      alert('Redirecionando para o site do parceiro...'); // Placeholder; replace with actual URL if available
+      modal.style.display = 'none';
+    });
+
+    // Close modal on outside click
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
     });
   </script>
 </body>
