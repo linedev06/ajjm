@@ -1,0 +1,1751 @@
+<html class="scroll-smooth" lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   AJJM — Assistencia Judiciária João Mendes
+  </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+   <!-- Tailwind (opcional se quiser manter utilitários) -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome (ícone da seta) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+   body {
+      font-family: "Inter", sans-serif;
+    }
+
+nav > div > div > .flex-shrink-0 {
+  height: 128px;   /* aumenta mais o container */
+  overflow: visible;
+}
+
+nav > div > div > .flex-shrink-0 > img {
+  height: 128px;   /* aumenta bastante a logo */
+  width: 128px;
+  object-fit: contain;
+}
+
+
+    
+   /* Links principais - linha vermelha no topo da navbar */
+nav > div > div > div > a,
+nav > div > div > div > div > button {
+  position: relative;
+  padding-top: 0.25rem; /* espaço para linha no topo */
+}
+/* Linha vermelha no topo para links principais */
+nav > div > div > div > a::before,
+nav > div > div > div > div > button::before {
+    margin-top: -15px;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: #b84141;
+  transition: width 0.3s ease;
+  z-index: 10;
+}
+/* Expande linha no topo ao hover */
+nav > div > div > div > a:hover::before,
+nav > div > div > div > div > button:hover::before {
+  width: 100%;
+}
+
+
+
+
+/* Links dos submenus - linha vermelha animada embaixo do texto */
+nav div[role="menu"] a {
+  position: relative;
+  padding-bottom: 0.25rem; /* espaço para linha embaixo */
+}
+/* Linha vermelha embaixo para submenu */
+nav div[role="menu"] a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: #b84141;
+ }
+
+/* Estilo menu mobile */
+.mobile-menu {
+  transition: max-height 0.3s ease-in-out;
+  overflow: hidden;
+}
+.hamburger {
+  width: 24px;
+  height: 18px;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hamburger .line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #d40818;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+}
+
+/* Posições iniciais das linhas */
+.hamburger .line1 {
+  top: 0;
+}
+.hamburger .line2 {
+  top: 7.5px;
+}
+.hamburger .line3 {
+  bottom: 0;
+}
+
+/* Estado ativo - transforma em X */
+.hamburger.active .line1 {
+  transform: rotate(45deg);
+  top: 7.5px;
+}
+.hamburger.active .line2 {
+  opacity: 0;
+}
+.hamburger.active .line3 {
+  transform: rotate(-45deg);
+  bottom: 7.5px;
+}
+
+  #sobre h2 {
+  /* Linha lateral mais fina e cor institucional */
+  border-left-width: 4px;
+  border-left-color: #b84141;
+  padding-left: 1rem;
+  font-weight: 800;
+  font-size: 2.75rem;
+  margin-bottom: 2.5rem;
+  color: #111;
+}
+
+#sobre .fa-gavel,
+#sobre .fa-bullseye,
+#sobre .fa-balance-scale {
+  color: #b84141;
+}
+
+#sobre p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+#sobre p strong {
+  font-weight: 600;
+  color: #000;
+}
+
+#sobre p.italic {
+  font-style: italic;
+  color: #b84141;
+}
+
+#sobre h3 {
+  font-weight: 700;
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: #111;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.5rem;
+}
+
+#sobre .bg-gray-50 {
+  background-color: #f9f9f9;
+}
+
+#sobre .shadow-sm {
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+}
+
+@media (max-width: 640px) {
+  #sobre {
+    padding: 3rem 1.5rem;
+  }
+  #sobre h2 {
+    font-size: 2rem;
+  }
+  #sobre h3 {
+    font-size: 1.5rem;
+  }
+}
+
+
+
+
+.partners {
+  background-color: #f0f0f0; /* cinza claro */
+  padding: 5rem 1rem 6rem;
+  color: #111;
+  font-family: "Inter", sans-serif;
+}
+
+.partners-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: #000;
+  border-left: 6px solid #b84141;
+  padding-left: 1rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.1;
+}
+
+.partners-subtitle {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.btn-partners {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 2.5rem 0.75rem 2rem;
+  background-color: #b84141;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.125rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  overflow: hidden;
+  margin-bottom: 4rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.btn-partners .btn-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background-color: #fff;
+  border-radius: 30px 0 0 30px;
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: fillLine 1.5s forwards ease-in-out;
+}
+
+.btn-partners:hover {
+  background-color: #8a2c2c;
+  color: #fff;
+}
+
+.carousel-wrapper {
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  height: 120px;
+  position: relative;
+}
+
+.carousel {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  will-change: transform;
+}
+
+.partner-card {
+  flex: 0 0 auto;
+  width: 160px;
+  height: 110px;
+
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.partner-card img {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-1 * var(--scroll-width))); }
+}
+
+
+
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .partners-title {
+    font-size: 2.25rem;
+  }
+
+  .partners-subtitle {
+    font-size: 1.1rem;
+    max-width: 90%;
+  }
+
+  .partner-card {
+    width: 140px;
+    height: 90px;
+  }
+}
+
+@media (max-width: 640px) {
+  .partners {
+    padding: 3rem 1rem 4rem;
+  }
+
+  .partners-title {
+    font-size: 1.75rem;
+    max-width: 100%;
+  }
+
+  .partners-subtitle {
+    font-size: 1rem;
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .btn-partners {
+    font-size: 1rem;
+    padding: 0.6rem 2rem 0.6rem 1.5rem;
+  }
+
+  .carousel {
+    gap: 1.5rem;
+  }
+
+  .partner-card {
+    width: 110px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 640px) {
+  .responsive-bg {
+    background-position: center top !important;
+  }
+}
+
+
+/* Botão lateral fixo - estado clicado */
+.side-button-clicked {
+  transform-origin: top right;
+  animation: sideButtonClick 60ms forwards;
+}
+
+@keyframes sideButtonClick {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  100% {
+    transform: rotate(-6deg) scale(0.98);
+  }
+}
+
+/* Animação overshoot do painel */
+@keyframes panelSlideIn {
+  0% {
+    transform: translateX(24px) scale(0.995);
+    opacity: 0;
+  }
+  70% {
+    transform: translateX(-8px) scale(1.005);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Animação reversa */
+@keyframes panelSlideOut {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) scale(0.995);
+    opacity: 0;
+  }
+}
+
+/* Botões internos - slide up + fade */
+.button-appear {
+  opacity: 0;
+  transform: translateY(8px);
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+.button-appear:nth-child(1) {
+  animation-name: buttonSlideUp;
+  animation-duration: 180ms;
+  animation-delay: 0ms;
+}
+
+.button-appear:nth-child(2) {
+  animation-name: buttonSlideUp;
+  animation-duration: 180ms;
+  animation-delay: 80ms;
+}
+
+.button-appear:nth-child(3) {
+  animation-name: buttonSlideUp;
+  animation-duration: 180ms;
+  animation-delay: 160ms;
+}
+
+@keyframes buttonSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover e foco nos botões */
+#contact-panel button:hover,
+#contact-panel button:focus {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 8px 20px rgba(15, 15, 15, 0.15);
+  outline: none;
+  transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+}
+
+#contact-panel button:active {
+  transform: scale(0.98);
+  transition-duration: 100ms;
+}
+
+/* Toast */
+#toast {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: #333;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 60;
+}
+
+#toast.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+
+
+
+
+.container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        header {
+            background: #ffffff;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            color: #002c66;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            color: #c02123;
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666666;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #002c66;
+        }
+
+        /* Hero Section */
+      /* HERO BASE */
+.hero {
+    font-family: 'Inter', sans-serif;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* BRAND COLORS (sem Tailwind) */
+:root {
+    --brand-red: #b84141;
+    --brand-dark-red: #8a2c2c;
+    --brand-navy: #002c66;
+}
+
+/* BUTTONS */
+.hero-btn-primary {
+    padding: 1rem 2rem;
+    background-color: var(--brand-red);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(184, 65, 65, 0.3);
+    text-decoration: none;
+}
+
+.hero-btn-primary:hover {
+    background-color: var(--brand-dark-red);
+}
+
+.hero-btn-secondary {
+    padding: 1rem 2rem;
+    border: 1px solid #fff;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.hero-btn-secondary:hover {
+    background-color: #fff;
+    color: var(--brand-navy);
+}
+
+/* REVEAL ANIMATION */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+        /* Notícias Grid */
+        .news-section {
+            padding: 3rem 0;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .news-card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover .card-image img {
+            transform: scale(1.02);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-category {
+            display: inline-block;
+            background-color: #002c66;
+            color: #ffffff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #002c66;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .card-excerpt {
+            color: #666666;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #999999;
+            font-size: 0.85rem;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 1rem;
+        }
+
+        .read-more {
+            color: #c02123;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #002c66;
+        }
+
+
+
+          /* Transições suaves para os slides */
+        .background-slide, .content-slide {
+            transition: opacity 1s ease-in-out;
+        }
+        /* Transições para indicadores */
+        .indicator {
+            transition: opacity 0.3s ease;
+        }
+
+  </style>
+  <link rel="icon" type="image/png" sizes="32x32" href="logo6.jpg">
+
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+ </head>
+ <body class="bg-white text-gray-700">
+  <!-- Navbar -->
+<nav id="navbar" class="fixed top-0 left-0 w-full bg-transparent z-50 transition-colors duration-500">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- aumentei de h-16 para h-24 -->
+    <div class="flex items-center justify-between h-24">
+     <div class="flex-shrink-0 mt-20">
+        <a href="#">
+          <img 
+            src="logo6.jpg" 
+            alt="Logo AJT" 
+            class="h-16 w-auto object-contain"
+          />
+        </a>
+     </div>
+
+     <!-- Menu desktop -->
+     <div class="hidden md:flex space-x-6 text-white text-sm font-normal">
+      <a class="hover:underline" href="#">
+       Home
+      </a>
+      <div class="relative group">
+       <button aria-expanded="false" aria-haspopup="true" class="inline-flex items-center hover:underline focus:outline-none">
+        Quem Somos
+        <svg class="ml-1 h-3 w-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+         <path d="M5.516 7.548l4.484 4.484 4.484-4.484z"></path>
+        </svg>
+       </button>
+       <div class="absolute left-0 mt-1 w-40 bg-white text-black rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity" role="menu">
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         História
+        </a>
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         Equipe
+        </a>
+       </div>
+      </div>
+      <div class="relative group">
+       <button aria-expanded="false" aria-haspopup="true" class="inline-flex items-center hover:underline focus:outline-none">
+        Parceiros
+        <svg class="ml-1 h-3 w-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+         <path d="M5.516 7.548l4.484 4.484 4.484-4.484z"></path>
+        </svg>
+       </button>
+       <div class="absolute left-0 mt-1 w-40 bg-white text-black rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity" role="menu">
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         Empresas
+        </a>
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         Instituições
+        </a>
+       </div>
+      </div>
+      <div class="relative group">
+       <button aria-expanded="false" aria-haspopup="true" class="inline-flex items-center hover:underline focus:outline-none">
+        Faça Parte
+        <svg class="ml-1 h-3 w-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+         <path d="M5.516 7.548l4.484 4.484 4.484-4.484z"></path>
+        </svg>
+       </button>
+       <div class="absolute left-0 mt-1 w-40 bg-white text-black rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity" role="menu">
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         Voluntário
+        </a>
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         Doações
+        </a>
+       </div>
+      </div>
+      <div class="relative group">
+       <button aria-expanded="false" aria-haspopup="true" class="inline-flex items-center hover:underline focus:outline-none">
+        Transparência
+        <svg class="ml-1 h-3 w-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+         <path d="M5.516 7.548l4.484 4.484 4.484-4.484z"></path>
+        </svg>
+       </button>
+       <div class="absolute left-0 mt-1 w-40 bg-white text-black rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity" role="menu">
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         Relatórios
+        </a>
+        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
+         Prestação de Contas
+        </a>
+       </div>
+      </div>
+      <a class="hover:underline" href="#">
+       Contato
+      </a>
+     </div>
+
+     <!-- Botão hamburguer mobile -->
+     <div class="md:hidden">
+     <button id="mobile-menu-button" aria-label="Abrir menu" aria-expanded="false" class="hamburger focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#b84141]">
+  <span class="line line1"></span>
+  <span class="line line2"></span>
+  <span class="line line3"></span>
+</button>
+     </div>
+    </div>
+   </div>
+
+   <!-- Menu mobile oculto inicialmente -->
+   <div id="mobile-menu" class="md:hidden bg-white text-black shadow-md max-h-0 mobile-menu overflow-hidden">
+    <div class="px-4 pt-2 pb-4 space-y-1">
+      <a href="#" class="block px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold">Home</a>
+
+      <!-- Quem Somos com submenu -->
+      <div>
+        <button aria-expanded="false" aria-controls="submenu-quem-somos" class="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold focus:outline-none focus:ring-2 focus:ring-[#b84141]" id="btn-quem-somos">
+          Quem Somos
+          <i class="fas fa-chevron-down ml-2 transition-transform duration-300"></i>
+        </button>
+        <div id="submenu-quem-somos" class="max-h-0 overflow-hidden transition-max-height duration-300">
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">História</a>
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Equipe</a>
+        </div>
+      </div>
+
+      <!-- Parceiros com submenu -->
+      <div>
+        <button aria-expanded="false" aria-controls="submenu-parceiros" class="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold focus:outline-none focus:ring-2 focus:ring-[#b84141]" id="btn-parceiros">
+          Parceiros
+          <i class="fas fa-chevron-down ml-2 transition-transform duration-300"></i>
+        </button>
+        <div id="submenu-parceiros" class="max-h-0 overflow-hidden transition-max-height duration-300">
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Empresas</a>
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Instituições</a>
+        </div>
+      </div>
+
+      <!-- Faça Parte com submenu -->
+      <div>
+        <button aria-expanded="false" aria-controls="submenu-faca-parte" class="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold focus:outline-none focus:ring-2 focus:ring-[#b84141]" id="btn-faca-parte">
+          Faça Parte
+          <i class="fas fa-chevron-down ml-2 transition-transform duration-300"></i>
+        </button>
+        <div id="submenu-faca-parte" class="max-h-0 overflow-hidden transition-max-height duration-300">
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Voluntário</a>
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Doações</a>
+        </div>
+      </div>
+
+      <!-- Transparência com submenu -->
+      <div>
+        <button aria-expanded="false" aria-controls="submenu-transparencia" class="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold focus:outline-none focus:ring-2 focus:ring-[#b84141]" id="btn-transparencia">
+          Transparência
+          <i class="fas fa-chevron-down ml-2 transition-transform duration-300"></i>
+        </button>
+        <div id="submenu-transparencia" class="max-h-0 overflow-hidden transition-max-height duration-300">
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Relatórios</a>
+          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Prestação de Contas</a>
+        </div>
+      </div>
+
+      <a href="#" class="block px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold">Contato</a>
+    </div>
+   </div>
+  </nav>
+
+  
+<section class="hero relative h-screen flex items-center justify-center overflow-hidden bg-gray-50">
+    <!-- Background -->
+    <div class="hero-bg absolute inset-0 z-0">
+        <img 
+            src=""
+            alt="Legal Background"
+            class="w-full h-full object-cover"
+        >
+        <div class="absolute inset-0 bg-brand-navy/80 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-black/40"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="hero-content relative z-10 container mx-auto px-6 text-center text-white reveal active">
+        <span class="inline-block py-1 px-3 border border-white/30 rounded-full text-xs font-semibold tracking-wider uppercase mb-6 bg-white/10 backdrop-blur-sm">
+            Desde 1959
+        </span>
+
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold leading-tight mb-6">
+            Justiça como Direito <br>
+            <span class="text-brand-red italic">Universal</span>
+        </h1>
+
+        <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+            Democratizando o acesso à justiça através da excelência jurídica e compromisso social.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#sobre" class="hero-btn-primary">
+                Nossa Missão
+            </a>
+            <a href="#contato" class="hero-btn-secondary">
+                Seja Voluntário
+            </a>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <a href="#sobre" class="text-white/70 hover:text-white transition-colors">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </a>
+    </div>
+</section>
+
+
+<!-- Overlay -->
+<div id="contact-overlay" class="fixed inset-0 bg-black bg-opacity-0 backdrop-blur-sm pointer-events-none opacity-0 transition-opacity duration-180 ease-out z-40" aria-hidden="true"></div>
+
+<!-- Painel lateral -->
+<aside id="contact-panel" class="fixed top-0 right-0 h-full w-80 max-w-full bg-white rounded-l-2xl shadow-lg transform translate-x-full opacity-0 scale-95 transition-all duration-350 ease-[cubic-bezier(.2,.9,.25,1)] z-50" role="dialog" aria-modal="true" aria-labelledby="contact-title" aria-describedby="contact-desc" tabindex="-1" >
+  <header class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+    <div>
+      <h2 id="contact-title" class="text-lg font-semibold text-gray-900">Fale conosco</h2>
+      <p id="contact-desc" class="text-sm text-gray-600">Atendimento jurídico — orientações rápidas</p>
+    </div>
+    <button id="contact-close" aria-label="Fechar painel de contato" class="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#b84141] rounded">
+      <i class="fas fa-times fa-lg"></i>
+    </button>
+  </header>
+  <main class="px-6 py-4 flex flex-col space-y-4">
+    <p class="text-gray-700 text-sm">Escolha a forma mais prática para falar conosco.</p>
+    <button id="btn-whatsapp" class="flex items-center space-x-3 bg-white border border-gray-300 rounded-full px-4 py-3 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#b84141] transition transform" type="button">
+      <i class="fab fa-whatsapp text-green-600 text-xl"></i>
+      <div class="text-left">
+        <p class="text-gray-900 font-semibold text-base">WhatsApp</p>
+        <p class="text-gray-500 text-xs">Mensagem rápida</p>
+      </div>
+    </button>
+    <button id="btn-email" class="flex items-center space-x-3 bg-white border border-gray-300 rounded-full px-4 py-3 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#b84141] transition transform" type="button">
+      <i class="fas fa-envelope text-gray-700 text-xl"></i>
+      <div class="text-left">
+        <p class="text-gray-900 font-semibold text-base">E-mail</p>
+        <p class="text-gray-500 text-xs">Envie detalhes por escrito</p>
+      </div>
+    </button>
+    <button id="btn-agendar" class="flex items-center space-x-3 bg-[#b84141] text-white rounded-full px-4 py-3 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#8a2c2c] transition transform" type="button">
+      <i class="fas fa-calendar-alt text-white text-xl"></i>
+      <div class="text-left">
+        <p class="font-semibold text-base">Agendar</p>
+        <p class="text-sm opacity-80">Marque uma conversa</p>
+      </div>
+    </button>
+  </main>
+  <footer class="px-6 py-3 border-t border-gray-200 text-xs text-gray-500 text-center">
+    <a href="#" class="underline hover:text-[#b84141]">Política de Privacidade</a> &nbsp;|&nbsp; Atendimento: seg.–sex. 9h–17h
+  </footer>
+</aside>
+
+
+
+
+
+   <!-- Sobre -->
+<section id="sobre" class="max-w-4xl mx-auto px-6 py-16 bg-white text-gray-900">
+  <h2 class="text-4xl font-extrabold mb-10 border-l-4 border-[#b84141] pl-4">
+    Sobre a AJJM
+  </h2>
+
+  <!-- Bloco de destaque -->
+  <div class="flex items-center bg-[#f9f5f5] rounded-lg p-6 mb-12 shadow-sm gap-4">
+    <i class="fas fa-gavel text-[#b84141] text-4xl flex-shrink-0"></i>
+    <p class="italic font-semibold text-[#b84141] text-xl md:text-2xl max-w-3xl">
+      Acreditamos que justiça é um direito universal, não um privilégio.
+    </p>
+  </div>
+
+  <!-- Cards grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+    <!-- Nossa Missão -->
+    <div class="bg-gray-50 rounded-lg p-6 shadow-sm flex flex-col items-start">
+      <i class="fas fa-bullseye text-[#b84141] text-3xl mb-4"></i>
+      <h3 class="text-2xl font-bold mb-3 flex items-center gap-2 border-b border-gray-300 pb-2">
+        Nossa Missão
+      </h3>
+      <p class="text-gray-700 leading-relaxed">
+        Democratizar o acesso à justiça, promovendo suporte jurídico humano e eficiente para todos.
+      </p>
+    </div>
+
+    <!-- Nossos Valores -->
+    <div class="bg-gray-50 rounded-lg p-6 shadow-sm flex flex-col items-start">
+      <i class="fas fa-balance-scale text-[#b84141] text-3xl mb-4"></i>
+      <h3 class="text-2xl font-bold mb-3 flex items-center gap-2 border-b border-gray-300 pb-2">
+        Nossos Valores
+      </h3>
+      <p class="italic text-gray-700 leading-relaxed">
+        <em>Ética</em>, <em>excelência</em>, <em>respeito</em> e <em>justiça social</em> guiam cada passo do nosso trabalho.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Texto adicional -->
+  <div class="mt-12 space-y-6 text-gray-800 text-lg leading-relaxed">
+    <p>
+      Oferecemos assistência jurídica qualificada para quem mais precisa, com <strong>ética</strong> e compromisso social.
+    </p>
+    <p>
+      Nosso time atua com dedicação para garantir <strong>dignidade</strong> e acesso à <strong>justiça</strong> para pessoas em situação vulnerável.
+    </p>
+  </div>
+</section>
+
+
+
+<hr>
+
+     <section class="max-w-7xl mx-auto px-6 pt-40 text-center">
+    <h1 class="text-gray-600 font-light text-2xl sm:text-3xl">
+      Estudantes da Faculdade de Direito do Mackenzie e Defensoria Pública juntos
+    </h1>
+    <p class="text-gray-500 text-sm sm:text-base mt-2 max-w-xl mx-auto leading-relaxed">
+      A AJ João Mendes é gerida por alunos e antigos alunos da Faculdade de Direito do Mackenzie, possuindo convênio com a Defensoria Pública do Estado de São Paulo para recebimento e atendimento gratuito da população.
+    </p>
+  </section>
+
+  <section class="bg-gray-50 mt-16 py-16">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 border border-transparent sm:border-t sm:border-b border-gray-200 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+      <div class="text-center px-6 pb-10 sm:pb-0">
+        <i class="fas fa-history text-4xl text-red-600 mb-4"></i>
+        <h2 class="font-extrabold text-gray-900 text-lg mb-2">60 anos</h2>
+        <p class="text-xs text-gray-400 max-w-xs mx-auto leading-relaxed">
+          Fundada em 1959 e refundada em 2017, a AJ João Mendes integra alunos, antigos alunos e profissionais de diversas áreas, além auxiliar projetos autônomos como o Cursinho Popular dos estudantes do Mackenzie
+        </p>
+      </div>
+      <div class="text-center px-6 py-10 sm:py-0">
+        <i class="far fa-heart text-4xl text-red-600 mb-4"></i>
+        <h2 class="font-extrabold text-gray-900 text-lg mb-2">Integração</h2>
+        <p class="text-xs text-gray-400 max-w-xs mx-auto leading-relaxed">
+          A AJ João Mendes tem o apoio institucional de todas as entidades que formam a Faculdade de Direito da Universidade Presbiteriana Mackenzie, da Associação Atlética ao Centro Acadêmico
+        </p>
+      </div>
+      <div class="text-center px-6 pt-10 sm:pt-0">
+        <i class="fas fa-users text-4xl text-red-600 mb-4"></i>
+        <h2 class="font-extrabold text-gray-900 text-lg mb-2">Protagonismo Estudantil</h2>
+        <p class="text-xs text-gray-400 max-w-xs mx-auto leading-relaxed">
+          A AJ João Mendes é uma entidade gerida majoritariamente pelos estudantes, de forma independente e autônoma, constituindo um instrumento de aprendizado e crescimento profissional. Antigos alunos participam e orientam estagiários e diretores
+        </p>
+      </div>
+    </div>
+  </section>
+  <hr>
+
+
+
+
+
+    <section id="parcerias" class="partners">
+  <div class="container mx-auto px-6 max-w-7xl text-center">
+    <h2 class="partners-title">Parcerias</h2>
+    <p class="partners-subtitle mx-auto">Nossas alianças fortalecem o acesso à justiça.</p>
+
+    <a href="parceiros.html"><button class="btn-partners" aria-label="Conheça Nossas Parcerias">
+      <span class="btn-line"></span>
+      Conheça Nossas Parcerias
+    </button></a>
+
+    <div class="carousel-wrapper" aria-label="Logos dos parceiros">
+      <div class="carousel" role="list">
+        <div class="partner-card" role="listitem"><img src="P1.png" alt="Parceiro 1"></div>
+        <div class="partner-card" role="listitem"><img src="logo2.png" alt="Parceiro 2"></div>
+        <div class="partner-card" role="listitem"><img src="logo3.png" alt="Parceiro 3"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+        <section class="hero">
+            <div class="container">
+                <h2>As principais notícias do momento</h2>
+                <p>Fique por dentro das últimas atualizações e tendências que estão moldando o mundo, com análises imparciais e insights profissionais.</p>
+            </div>
+        </section>
+
+        <section class="news-section">
+            <div class="container">
+                <div class="news-grid">
+                    <!-- Notícia 1 -->
+                    <article class="news-card">
+                        <div class="card-image">
+                            <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Imagem%20de%20tecnologia%20avan%C3%A7ada%20com%20circuitos%20eletr%C3%B4nicos%20brilhantes%20e%20futuristas&id=tech-1" alt="Tecnologia avançada com circuitos eletrônicos futuristas">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">Tecnologia</span>
+                            <h3 class="card-title">Revolução na Inteligência Artificial transforma setor tecnológico</h3>
+                            <p class="card-excerpt">Novos avanços em IA estão redefinindo como empresas e consumidores interagem com a tecnologia no dia a dia, impulsionando inovações sem precedentes.</p>
+                            <div class="card-meta">
+                                <span>12 de Janeiro, 2024</span>
+                                <a href="#" class="read-more">Ler mais</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Notícia 2 -->
+                    <article class="news-card">
+                        <div class="card-image">
+                            <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Cena%20de%20mercado%20financeiro%20com%20gr%C3%A1ficos%20e%20indicadores%20econ%C3%B4micos&id=econ-1" alt="Mercado financeiro com gráficos e indicadores econômicos">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">Economia</span>
+                            <h3 class="card-title">Mercado financeiro atinge novos patamares em 2024</h3>
+                            <p class="card-excerpt">Indicadores econômicos mostram crescimento sustentável e perspectivas positivas para o próximo trimestre, com foco em estabilidade global.</p>
+                            <div class="card-meta">
+                                <span>11 de Janeiro, 2024</span>
+                                <a href="#" class="read-more">Ler mais</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Notícia 3 -->
+                    <article class="news-card">
+                        <div class="card-image">
+                            <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Evento%20cultural%20com%20arte%20contempor%C3%A2nea%20e%20exposi%C3%A7%C3%A3o%20moderna&id=culture-1" alt="Evento cultural com arte contemporânea e exposição moderna">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">Cultura</span>
+                            <h3 class="card-title">Festival de arte contemporânea atrai milhares de visitantes</h3>
+                            <p class="card-excerpt">Mostra reúne trabalhos de artistas emergentes e consagrados em exposição que vai até o final do mês, celebrando a diversidade criativa.</p>
+                            <div class="card-meta">
+                                <span>10 de Janeiro, 2024</span>
+                                <a href="#" class="read-more">Ler mais</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Notícia 4 -->
+                    <article class="news-card">
+                        <div class="card-image">
+                            <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Discuss%C3%A3o%20pol%C3%ADtica%20em%20ambiente%20formal%20e%20profissional&id=politics-1" alt="Discussão política em ambiente formal e profissional">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">Política</span>
+                            <h3 class="card-title">Novas medidas legislativas impactam setor empresarial</h3>
+                            <p class="card-excerpt">Reformas aprovadas no congresso visam fomentar o crescimento econômico, mas geram debates sobre regulação e inovação no mercado.</p>
+                            <div class="card-meta">
+                                <span>9 de Janeiro, 2024</span>
+                                <a href="#" class="read-more">Ler mais</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+<section id="aj-play" class="bg-[#f6f6f6] relative py-24 px-6 sm:px-12 lg:px-24">
+
+  <!-- Linhas vermelhas topo e rodapé -->
+  <div class="absolute top-0 left-0 w-full h-[3px] bg-[#c62828]"></div>
+  <div class="absolute bottom-0 left-0 w-full h-[3px] bg-[#c62828]"></div>
+
+  <div class="max-w-7xl mx-auto flex flex-col items-center">
+
+    <!-- Cabeçalho -->
+    <div class="flex flex-col items-center mb-16 px-4 sm:px-0">
+      <img src="play.png" alt="Logo AJ Play" class="w-44 sm:w-52 drop-shadow-md mb-6" />
+
+      <h1 class="text-[#b71c1c] font-extrabold text-4xl sm:text-5xl tracking-wide mb-3" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+        AJ Play
+      </h1>
+
+      <p class="text-[#444444] text-lg sm:text-xl font-medium tracking-widest max-w-3xl text-center leading-relaxed mb-4" style="letter-spacing: 0.12em;">
+        Conheça nossos vídeos e podcasts selecionados com curadoria especial
+      </p>
+
+      <div class="w-20 h-[2px] bg-[#b71c1c] rounded-full"></div>
+    </div>
+
+    <!-- Grade de Conteúdo -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl w-full px-4 sm:px-0">
+
+      <!-- Card Exemplo 1 -->
+      <article tabindex="0" class="bg-white rounded-2xl shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300 cursor-pointer relative overflow-hidden">
+        <!-- Miniatura com degradê -->
+        <div class="relative h-48 bg-gradient-to-b from-white to-[#f7f7f7] overflow-hidden rounded-t-2xl">
+          <img src="https://img.youtube.com/vi/VIDEO_ID_1/hqdefault.jpg" alt="Podcast #12 – Acesso à Justiça" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
+          <!-- Ícone YouTube canto superior direito -->
+          <div class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md">
+            <i class="fab fa-youtube text-[#d32f2f] text-xl"></i>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-black font-bold text-lg leading-tight line-clamp-2 mb-2" title="Podcast #12 – Acesso à Justiça">
+            Podcast #12 – Acesso à Justiça
+          </h3>
+          <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
+            Episódio especial sobre o acesso à justiça e seus desafios na atualidade.
+          </p>
+        </div>
+      </article>
+
+      <!-- Card Exemplo 2 -->
+      <article tabindex="0" class="bg-white rounded-2xl shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300 cursor-pointer relative overflow-hidden">
+        <div class="relative h-48 bg-gradient-to-b from-white to-[#f7f7f7] overflow-hidden rounded-t-2xl">
+          <img src="https://img.youtube.com/vi/VIDEO_ID_2/hqdefault.jpg" alt="Vídeo Institucional" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
+          <div class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md">
+            <i class="fab fa-youtube text-[#d32f2f] text-xl"></i>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-black font-bold text-lg leading-tight line-clamp-2 mb-2" title="Vídeo Institucional">
+            Vídeo Institucional
+          </h3>
+          <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
+            Conheça a missão e os valores que guiam nosso trabalho.
+          </p>
+        </div>
+      </article>
+
+      <!-- Card Exemplo 3 -->
+      <article tabindex="0" class="bg-white rounded-2xl shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300 cursor-pointer relative overflow-hidden">
+        <div class="relative h-48 bg-gradient-to-b from-white to-[#f7f7f7] overflow-hidden rounded-t-2xl flex items-center justify-center text-white text-7xl font-extrabold shadow-inner">
+          <img src="spotify-cover.jpg" alt="Podcast #15 – Direitos Humanos" class="absolute inset-0 w-full h-full object-cover opacity-30" />
+          <div class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md">
+            <i class="fab fa-spotify text-[#1db954] text-xl"></i>
+          </div>
+          <div class="relative z-10 px-4 text-center">
+            <h3 class="text-black font-bold text-lg leading-tight line-clamp-2 mb-2" title="Podcast #15 – Direitos Humanos">
+              Podcast #15 – Direitos Humanos
+            </h3>
+            <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
+              Discussões importantes sobre direitos humanos e justiça social.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card Exemplo 4 -->
+      <article tabindex="0" class="bg-white rounded-2xl shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300 cursor-pointer relative overflow-hidden">
+        <div class="relative h-48 bg-gradient-to-b from-white to-[#f7f7f7] overflow-hidden rounded-t-2xl flex items-center justify-center text-white text-7xl font-extrabold shadow-inner">
+          <img src="spotify-cover2.jpg" alt="Podcast #20 – Justiça Social" class="absolute inset-0 w-full h-full object-cover opacity-30" />
+          <div class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md">
+            <i class="fab fa-spotify text-[#1db954] text-xl"></i>
+          </div>
+          <div class="relative z-10 px-4 text-center">
+            <h3 class="text-black font-bold text-lg leading-tight line-clamp-2 mb-2" title="Podcast #20 – Justiça Social">
+              Podcast #20 – Justiça Social
+            </h3>
+            <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
+              Episódio focado em justiça social e seus impactos na comunidade.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Adicione mais cards conforme necessário -->
+
+    </div>
+
+    <!-- Botões de Ação -->
+    <div class="mt-20 flex flex-col sm:flex-row justify-center gap-8 max-w-3xl w-full px-4 sm:px-0">
+  <a href="https://www.youtube.com/playlist?list=YOUR_YOUTUBE_PLAYLIST_ID" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-4 px-16 py-4 bg-[#fff] text-black font-extrabold rounded-full shadow-lg border border-red-500 hover:shadow-xl hover:scale-105 transition transform focus:outline-none focus:ring-4 focus:ring-[#d32f2f]/50">
+    <i class="fab fa-youtube text-3xl"></i> Ver todos no YouTube
+  </a>
+  <a href="https://open.spotify.com/playlist/YOUR_SPOTIFY_PLAYLIST_ID" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-4 px-16 py-4 bg-[#fff] text-black font-extrabold rounded-full shadow-lg border border-red-500 hover:shadow-xl hover:scale-105 transition transform focus:outline-none focus:ring-4 focus:ring-[#1db954]/50">
+    <i class="fab fa-spotify text-3xl"></i> Ouça no Spotify
+  </a>
+</div>
+
+
+  </div>
+</section>
+
+<style>
+  /* Limitar linhas e adicionar reticências */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+  }
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+  }
+</style>
+
+
+
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const hero = document.querySelector('.hero .reveal');
+
+    if (!hero) return;
+
+    const revealHero = () => {
+        const windowHeight = window.innerHeight;
+        const heroTop = hero.getBoundingClientRect().top;
+
+        if (heroTop < windowHeight - 100) {
+            hero.classList.add('active');
+            window.removeEventListener('scroll', revealHero);
+        }
+    };
+
+    window.addEventListener('scroll', revealHero);
+    revealHero(); // executa ao carregar
+});
+
+
+
+    
+(function initInfiniteCarousel() {
+  const carousel = document.querySelector('.carousel');
+  const wrapper = document.querySelector('.carousel-wrapper');
+  if (!carousel || !wrapper) return;
+
+  if (!carousel.dataset.baseHtml) {
+    carousel.dataset.baseHtml = carousel.innerHTML.trim();
+  }
+  const baseHtml = carousel.dataset.baseHtml;
+
+  function measureHtmlWidth(html) {
+    const temp = document.createElement('div');
+    temp.style.display = 'flex';
+    temp.style.position = 'absolute';
+    temp.style.left = '-9999px';
+    temp.style.gap = getComputedStyle(carousel).gap || '0px';
+    temp.innerHTML = html;
+    document.body.appendChild(temp);
+    const w = temp.offsetWidth;
+    document.body.removeChild(temp);
+    return w;
+  }
+
+  function rebuild() {
+    let singleHtml = baseHtml;
+    let singleWidth = measureHtmlWidth(singleHtml);
+    const wrapperWidth = wrapper.offsetWidth;
+
+    // repete o bloco somente até cobrir a largura da tela
+    while (singleWidth < wrapperWidth) {
+      singleHtml += baseHtml;
+      singleWidth = measureHtmlWidth(singleHtml);
+    }
+
+    // só duplica uma vez para fazer o looping
+    carousel.innerHTML = singleHtml + singleHtml;
+
+    carousel.style.setProperty('--scroll-width', singleWidth + 'px');
+
+    const pxPerSecond = 100; // velocidade
+    const duration = Math.max(8, singleWidth / pxPerSecond);
+    carousel.style.animation = `scroll ${duration}s linear infinite`;
+  }
+
+  rebuild();
+  let t;
+  window.addEventListener('resize', () => {
+    clearTimeout(t);
+    t = setTimeout(rebuild, 120);
+  });
+})();
+
+
+
+
+
+
+ 
+  document.addEventListener('DOMContentLoaded', function() {
+    const backgrounds = document.querySelectorAll('.background-slide[data-slide]');
+    const contents = document.querySelectorAll('.content-slide[data-slide]');
+    const dots = document.querySelectorAll('button[data-slide]');
+    let currentSlide = 0;
+    let autoPlayInterval;
+
+    function showSlide(n) {
+
+      if (autoPlayInterval) clearInterval(autoPlayInterval);
+
+      backgrounds.forEach((bg, index) => {
+        if (index === n) {
+          bg.style.opacity = '1';
+          bg.style.transform = 'scale(1)';
+        } else {
+          bg.style.opacity = '0';
+          bg.style.transform = 'scale(1.05)';
+        }
+      });
+
+
+      contents.forEach((content, index) => {
+        if (index === n) {
+         
+          content.style.opacity = '1';
+          content.style.transform = 'translateY(0) scale(1)';
+          content.style.transitionDelay = '0.2s'; 
+
+  
+          const texts = content.querySelectorAll('h1, p');
+          texts.forEach(text => {
+            text.style.animationPlayState = 'running';
+            text.style.animation = 'none'; 
+            text.offsetHeight; 
+            const delay = text.classList.contains('delay-200') ? '0.3s' : '0s';
+            text.style.animation = `fade-in-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards ${delay}`;
+          });
+        } else {
+    
+          content.style.opacity = '0';
+          content.style.transform = 'translateY(8px) scale(0.95)';
+          content.style.transitionDelay = '0s';
+       
+          const texts = content.querySelectorAll('h1, p');
+          texts.forEach(text => {
+            text.style.animationPlayState = 'paused';
+          });
+        }
+      });
+
+      dots.forEach((dot, index) => {
+        if (index === n) {
+          dot.style.opacity = '1';
+          dot.style.transform = 'scale(1.2)'; 
+        } else {
+          dot.style.opacity = '0.5';
+          dot.style.transform = 'scale(1)';
+        }
+      });
+
+      currentSlide = n;
+
+    
+      autoPlayInterval = setInterval(() => {
+        currentSlide = (currentSlide + 1) % 4;
+        showSlide(currentSlide);
+      }, 5000); 
+    }
+
+  
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSlide(index);
+      });
+    });
+
+   
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        currentSlide = (currentSlide - 1 + 4) % 4;
+        showSlide(currentSlide);
+      } else if (e.key === 'ArrowRight') {
+        currentSlide = (currentSlide + 1) % 4;
+        showSlide(currentSlide);
+      }
+    });
+
+
+    showSlide(0);
+  });
+
+
+
+
+
+
+
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+
+mobileMenuButton.addEventListener('click', () => {
+  const expanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+  mobileMenuButton.setAttribute('aria-expanded', !expanded);
+
+  if (!expanded) {
+    mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
+    mobileMenuButton.classList.add('active'); // ativa animação do X
+  } else {
+    mobileMenu.style.maxHeight = null;
+    mobileMenuButton.classList.remove('active'); // volta para hamburguer
+  }
+});
+
+
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        navbar.classList.add('bg-white', 'shadow-md');
+        navbar.classList.remove('bg-transparent');
+        // Ajusta texto para escuro quando navbar branca
+        navbar.querySelectorAll('a, button').forEach(el => {
+          el.classList.remove('text-white');
+          el.classList.add('text-gray-900');
+        });
+      } else {
+        navbar.classList.remove('bg-white', 'shadow-md');
+        navbar.classList.add('bg-transparent');
+        // Ajusta texto para branco quando navbar transparente
+        navbar.querySelectorAll('a, button').forEach(el => {
+          el.classList.remove('text-gray-900');
+          el.classList.add('text-white');
+        });
+      }
+    });
+
+   
+    // Função para abrir/fechar submenus no mobile
+    function toggleSubmenu(buttonId, submenuId) {
+      const btn = document.getElementById(buttonId);
+      const submenu = document.getElementById(submenuId);
+
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true' || false;
+        btn.setAttribute('aria-expanded', !expanded);
+        if (!expanded) {
+          submenu.style.maxHeight = submenu.scrollHeight + "px";
+          btn.querySelector('i').classList.add('rotate-180');
+        } else {
+          submenu.style.maxHeight = null;
+          btn.querySelector('i').classList.remove('rotate-180');
+        }
+      });
+    }
+
+    toggleSubmenu('btn-quem-somos', 'submenu-quem-somos');
+    toggleSubmenu('btn-parceiros', 'submenu-parceiros');
+    toggleSubmenu('btn-faca-parte', 'submenu-faca-parte');
+    toggleSubmenu('btn-transparencia', 'submenu-transparencia');
+
+
+
+
+
+
+  (() => {
+    const sideButton = document.getElementById('side-contact-button');
+    const panel = document.getElementById('contact-panel');
+    const overlay = document.getElementById('contact-overlay');
+    const closeBtn = document.getElementById('contact-close');
+    const toast = document.getElementById('toast');
+    const toastIcon = document.getElementById('toast-icon');
+    const toastMessage = document.getElementById('toast-message');
+
+    const btnWhatsapp = document.getElementById('btn-whatsapp');
+    const btnEmail = document.getElementById('btn-email');
+    const btnAgendar = document.getElementById('btn-agendar');
+
+    // Botões internos para animação stagger
+    const buttons = [btnWhatsapp, btnEmail, btnAgendar];
+
+    // Estado aberto/fechado
+    let isOpen = false;
+
+    // Função para mostrar toast
+    function showToast(iconClass, message, duration = 2000) {
+      toastIcon.className = iconClass;
+      toastMessage.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, duration);
+    }
+
+    // Função para abrir painel
+    function openPanel() {
+      if (isOpen) return;
+      isOpen = true;
+
+      // Botão: animação clique (micro-rotacao e scale)
+      sideButton.classList.add('side-button-clicked');
+      setTimeout(() => {
+        sideButton.classList.remove('side-button-clicked');
+        // Trocar ícone para fechar
+        sideButton.innerHTML = '<i class="fas fa-times"></i>';
+        sideButton.setAttribute('aria-label', 'Fechar painel de contato');
+        sideButton.setAttribute('aria-expanded', 'true');
+      }, 60);
+
+      // Mostrar overlay
+      overlay.style.pointerEvents = 'auto';
+      overlay.classList.remove('opacity-0');
+      overlay.classList.add('opacity-30');
+      overlay.style.backgroundColor = 'rgba(0,0,0,0.3)';
+      overlay.style.backdropFilter = 'blur(4px)';
+
+      // Mostrar painel com animação overshoot
+      panel.style.transition = 'none';
+      panel.style.transform = 'translateX(24px) scale(0.995)';
+      panel.style.opacity = '0';
+      panel.classList.remove('opacity-0');
+      panel.classList.remove('translate-x-full');
+      panel.style.pointerEvents = 'auto';
+
+      // Forçar reflow para aplicar animação
+      void panel.offsetWidth;
+
+      panel.style.transition = 'transform 360ms cubic-bezier(.2,.9,.25,1), opacity 360ms cubic-bezier(.2,.9,.25,1)';
+      panel.style.transform = 'translateX(-8px) scale(1.005)';
+      panel.style.opacity = '1';
+
+      setTimeout(() => {
+        panel.style.transform = 'translateX(0) scale(1)';
+      }, 250);
+
+      // Animação stagger dos botões
+      buttons.forEach((btn, i) => {
+        btn.classList.add('button-appear');
+        btn.style.animationDelay = `${i * 80}ms`;
+      });
+
+      // Focus trap: foco no primeiro botão
+      btnWhatsapp.focus();
+
+      // Esc para fechar
+      document.addEventListener('keydown', escListener);
+    }
+
+    // Função para fechar painel
+    function closePanel() {
+      if (!isOpen) return;
+      isOpen = false;
+
+      // Reverter botão lateral para original
+      sideButton.innerHTML = '<i class="fas fa-mobile-alt"></i><span>Solicite um Contato</span>';
+      sideButton.setAttribute('aria-label', 'Solicite um Contato');
+      sideButton.setAttribute('aria-expanded', 'false');
+
+      // Ocultar overlay
+      overlay.classList.remove('opacity-30');
+      overlay.classList.add('opacity-0');
+      overlay.style.pointerEvents = 'none';
+
+      // Animação slide out painel
+      panel.style.transition = 'transform 160ms ease-out, opacity 160ms ease-out';
+      panel.style.transform = 'translateX(100%) scale(0.995)';
+      panel.style.opacity = '0';
+      panel.style.pointerEvents = 'none';
+
+      // Remover animações dos botões
+      buttons.forEach(btn => {
+        btn.classList.remove('button-appear');
+        btn.style.animationDelay = '';
+      });
+
+      // Retornar foco ao botão lateral
+      sideButton.focus();
+
+      // Remover listener ESC
+      document.removeEventListener('keydown', escListener);
+    }
+
+    // Listener ESC
+    function escListener(e) {
+      if (e.key === 'Escape') {
+        closePanel();
+      }
+    }
+
+    // Toggle painel
+    sideButton.addEventListener('click', () => {
+      if (isOpen) {
+        closePanel();
+      } else {
+        openPanel();
+      }
+    });
+
+    // Fechar ao clicar no overlay
+    overlay.addEventListener('click', closePanel);
+
+    // Fechar ao clicar no botão fechar
+    closeBtn.addEventListener('click', closePanel);
+
+    // Microinterações botões
+
+    // Função para simular abertura de app com toast e delay
+    function openAppSimulated(appName, url) {
+      showToast('fas fa-spinner fa-spin', `Abrindo ${appName}...`, 3000);
+      setTimeout(() => {
+        window.open(url, '_blank');
+        showToast('fas fa-check', 'Ação iniciada', 2000);
+      }, 1500);
+    }
+
+    btnWhatsapp.addEventListener('click', () => {
+      const message = encodeURIComponent('Olá, gostaria de agendar/obter orientação — [breve motivo]');
+      const url = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+        ? `whatsapp://send?text=${message}`
+        : `https://web.whatsapp.com/send?text=${message}`;
+      openAppSimulated('WhatsApp', url);
+    });
+
+    btnEmail.addEventListener('click', () => {
+      // Exemplo mailto simples
+      const mailto = 'mailto:contato@exemplo.com?subject=Solicitação&body=Olá,%20gostaria%20de%20obter%20orientação.';
+      openAppSimulated('E-mail', mailto);
+    });
+
+    btnAgendar.addEventListener('click', () => {
+      // Aqui você pode abrir modal ou redirecionar para sistema de agendamento
+      showToast('fas fa-check', 'Abrindo agendamento...', 2000);
+      // Exemplo: abrir Calendly
+      window.open('https://calendly.com/seu-agendamento', '_blank');
+    });
+
+    // Accessibility: trap focus inside panel when open
+    panel.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        const focusable = panel.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+    });
+
+  })();
+</script>
+
+  </script>
+ </body>
+</html>
