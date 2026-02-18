@@ -1,1755 +1,2239 @@
-<html class="scroll-smooth" lang="pt-BR">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>
-   AJJM — Assistencia Judiciária João Mendes
-  </title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
-  <style>
-   body {
-      font-family: "Inter", sans-serif;
-    }
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAELklEQVR4AeycQW7bMBBFqaTbZNFzODdI7xI4xwqawzQ9QdNcowuny6JqJoCAwggtWeJwhpxnhJEticP5/z9oR10kPqEdAIDQ8acEAAAQ3IHg8nkCAEBwB4LL5wkAAMEdCCp/ks0TYHIi6BEAggY/yQaAyYmgRwAIGvwkGwAmJ4IeASBo8JNsAJicCHoEgKDBH8s1BeD1Pu0O+2G0HL/v0s2xKZF+mwEgoY/j8Gxt9t+L4Yf0Yt2H1fomAHg03GNPNaCoDsBhn25rCFuzxq+79GXNvJbnVAcgpeEpOf18uhi+OW1NrS0DINS0UHiFAwCwwrSepgBAT2me0JK7BAA5Z4KcB4AgQedkAkDOmSDnASBI0DmZAJBzJsh5AAgSdE4mAOScCXIeADoPek4eAMw51Pl1AOg84Dl5ADDnUOfXAaDzgOfkAcCcQ51fB4DOA56TBwBzDnV+HQA6DXipLABY6lSn9wFAp8EulQUAS53q9D4A6DTYpbIMABjDbb5YGobFfdUBuH5M3y2EsubHDlQHQNq4fhwHOTLsHTABQGQLBMPluJPvjHIOnFvJDABp9OohvQgInsbB+H0Fx+trv7/AFACBgHHaAe33FwDAaf/dXJUng0YzAKDhqlJNjfcXAIBSWBplNd5fAAAaSTVUEwAaCkujVQDQcNWg5tolAWCtc53MA4BOglwrAwDWOtfJPADoJMi1MgBgrXOdzAOAToJcKwMA1jrXyTwAaDzIre0DwFYHG58PAI0HuLV9ANjqYOPzAaDxALe2DwBbHWx8PgA0HuDW9gFgq4ONzweARgMs1TYAlHKy0ToA0GhwpdoGgFJONloHABoNrlTbAFDKyQp1/qTy71YAgArBlVris8K7FQCgVDrKdWQHtcYSAKDhasGawzDe/B9+wdLvpUwBeL1PO9n16mmI2Z7G1df08z0ppX9mAEjo4zg8K+mi7EIHTACQ8Bf2x23KDlQH4LBPt8qaKH+GA9UBSGl4SnzcOGAAgBvtNPLmAAC8mRD5DwAaSV+rTQDQcraRugDQSFBabQKAlrON1AWARoLSahMAtJxtpC4ANBKUVpsAoOVsI3UBwHlQ2u0BgLbDzusDgPOAtNsDAG2HndcHAOcBabcHANoOO68PAM4D0m4PALQddl4fAJwGVKstAKjltNN1AMBpMLXaAoBaTjtdBwCcBlOrLQMAyu9xL2WWxv77Ur1p1akOwLXCHvdS5mjsvy/Vm1ad6gCIENl9K0dPw2NPNfwxAUCEieHD5biT75ZDe//9udpq328GgAi9ekgvAoLl0N5/Lzo9D1MAPBsTpTcAiJJ0RicAZIyJchoAoiSd0QkAGWOinAaAKElndAJAxpjap63WAwAr552sCwBOgrBqAwCsnHeyLgA4CcKqDQCwct7JugDgJAirNgDAynkn6wKAcRDWy/8DAAD//xrxuTwAAAAGSURBVAMAGX3xENdKSOAAAAAASUVORK5CYII=" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Justice For All - Serviços Jurídicos</title>
 
-nav > div > div > .flex-shrink-0 {
-  height: 128px;   /* aumenta mais o container */
-  overflow: visible;
+<style>
+/* CSS Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-nav > div > div > .flex-shrink-0 > img {
-  height: 128px;   /* aumenta bastante a logo */
-  width: 128px;
-  object-fit: contain;
+/* CSS Variables */
+:root {
+  /* Primary Red: HSL 348 83% 47% */
+  --primary: 348 83% 47%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Secondary Blue: HSL 209 53% 36% */
+  --secondary: 209 53% 36%;
+  --secondary-foreground: 0 0% 100%;
+
+  /* Neutral tones */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  
+  --accent: 210 40% 96%;
+  --accent-foreground: 222 47% 11%;
+  
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 348 83% 47%;
+  
+  --radius: 0.5rem;
 }
 
-
-    
-   /* Links principais - linha vermelha no topo da navbar */
-nav > div > div > div > a,
-nav > div > div > div > div > button {
-  position: relative;
-  padding-top: 0.25rem; /* espaço para linha no topo */
-}
-/* Linha vermelha no topo para links principais */
-nav > div > div > div > a::before,
-nav > div > div > div > div > button::before {
-    margin-top: -15px;
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 2px;
-  width: 0;
-  background-color: #b84141;
-  transition: width 0.3s ease;
-  z-index: 10;
-}
-/* Expande linha no topo ao hover */
-nav > div > div > div > a:hover::before,
-nav > div > div > div > div > button:hover::before {
-  width: 100%;
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
 }
 
-
-
-
-/* Links dos submenus - linha vermelha animada embaixo do texto */
-nav div[role="menu"] a {
-  position: relative;
-  padding-bottom: 0.25rem; /* espaço para linha embaixo */
-}
-/* Linha vermelha embaixo para submenu */
-nav div[role="menu"] a::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 0;
-  background-color: #b84141;
- }
-
-/* Estilo menu mobile */
-.mobile-menu {
-  transition: max-height 0.3s ease-in-out;
-  overflow: hidden;
-}
-.hamburger {
-  width: 24px;
-  height: 18px;
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.hamburger .line {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background-color: #d40818;
-  border-radius: 2px;
-  transition: all 0.4s ease;
-}
-
-/* Posições iniciais das linhas */
-.hamburger .line1 {
-  top: 0;
-}
-.hamburger .line2 {
-  top: 7.5px;
-}
-.hamburger .line3 {
-  bottom: 0;
-}
-
-/* Estado ativo - transforma em X */
-.hamburger.active .line1 {
-  transform: rotate(45deg);
-  top: 7.5px;
-}
-.hamburger.active .line2 {
-  opacity: 0;
-}
-.hamburger.active .line3 {
-  transform: rotate(-45deg);
-  bottom: 7.5px;
-}
-
-  #sobre h2 {
-  /* Linha lateral mais fina e cor institucional */
-  border-left-width: 4px;
-  border-left-color: #b84141;
-  padding-left: 1rem;
-  font-weight: 800;
-  font-size: 2.75rem;
-  margin-bottom: 2.5rem;
-  color: #111;
-}
-
-#sobre .fa-gavel,
-#sobre .fa-bullseye,
-#sobre .fa-balance-scale {
-  color: #b84141;
-}
-
-#sobre p {
-  font-size: 1.125rem;
-  line-height: 1.8;
-  color: #444;
-}
-
-#sobre p strong {
-  font-weight: 600;
-  color: #000;
-}
-
-#sobre p.italic {
-  font-style: italic;
-  color: #b84141;
-}
-
-#sobre h3 {
-  font-weight: 700;
-  font-size: 1.75rem;
-  margin-bottom: 0.75rem;
-  color: #111;
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 0.5rem;
-}
-
-#sobre .bg-gray-50 {
-  background-color: #f9f9f9;
-}
-
-#sobre .shadow-sm {
-  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
-}
-
-@media (max-width: 640px) {
-  #sobre {
-    padding: 3rem 1.5rem;
-  }
-  #sobre h2 {
-    font-size: 2rem;
-  }
-  #sobre h3 {
-    font-size: 1.5rem;
-  }
-}
-
-
-
-
-.partners {
-  background-color: #f0f0f0; /* cinza claro */
-  padding: 5rem 1rem 6rem;
-  color: #111;
-  font-family: "Inter", sans-serif;
-}
-
-.partners-title {
-  font-size: 2.75rem;
-  font-weight: 800;
-  color: #000;
-  border-left: 6px solid #b84141;
-  padding-left: 1rem;
-  margin-bottom: 0.75rem;
-  text-align: center;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.1;
-}
-
-.partners-subtitle {
-  font-size: 1.25rem;
-  color: #333;
-  margin-bottom: 3rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  font-weight: 500;
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
 }
 
-.btn-partners {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 2.5rem 0.75rem 2rem;
-  background-color: #b84141;
-  color: #fff;
+h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
-  font-size: 1.125rem;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  overflow: hidden;
-  margin-bottom: 4rem;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  user-select: none;
+  letter-spacing: -0.025em;
 }
 
-.btn-partners .btn-line {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 5px;
-  background-color: #fff;
-  border-radius: 30px 0 0 30px;
-  transform-origin: left;
-  transform: scaleX(0);
-  animation: fillLine 1.5s forwards ease-in-out;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--secondary) / 0.5);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--secondary));
 }
 
-.btn-partners:hover {
-  background-color: #8a2c2c;
-  color: #fff;
-}
-
-.carousel-wrapper {
-  overflow: hidden;
+/* Utility Classes */
+.container {
   width: 100%;
-  max-width: 100%;
-  height: 120px;
-  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.carousel {
+/* Navbar Styles */
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 50;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 0;
+}
+
+.navbar:not(.scrolled) {
+  background: transparent;
+  padding: 1rem 0;
+}
+
+.navbar-content {
   display: flex;
-  gap: 2.5rem;
+  justify-content: space-between;
   align-items: center;
-  will-change: transform;
+  height: 4rem;
 }
 
-.partner-card {
-  flex: 0 0 auto;
-  width: 160px;
-  height: 110px;
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
 
-  border-radius: 16px;
+.logo:hover {
+  transform: scale(1.05);
+}
 
+.logo-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: hsl(var(--primary));
+  border-radius: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.025em;
+  transition: color 0.3s ease;
+}
+
+.navbar.scrolled .logo-text {
+  color: hsl(var(--secondary));
+}
+
+.navbar:not(.scrolled) .logo-text {
+  color: white;
+}
+
+.logo-text .highlight {
+  color: hsl(var(--primary));
+}
+
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .nav-links {
+    display: flex;
+  }
+}
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar.scrolled .nav-link {
+  color: hsl(var(--secondary));
+}
+
+.navbar:not(.scrolled) .nav-link {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.nav-link:hover {
+  color: hsl(var(--primary));
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  border: none;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
 }
 
-.partner-card img {
-  max-width: 85%;
-  max-height: 85%;
-  object-fit: contain;
-  pointer-events: none;
-  user-select: none;
+.btn-primary {
+  background: hsl(var(--primary));
+  color: white;
+  box-shadow: 0 10px 15px -3px rgba(220, 38, 38, 0.3);
+}
+
+.btn-primary:hover {
+  background: hsl(var(--primary) / 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(220, 38, 38, 0.3);
+}
+
+.btn-outline {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.9);
+  color: hsl(var(--secondary));
+  backdrop-filter: blur(4px);
+}
+
+.btn-outline:hover {
+  background: white;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  border: 2px solid hsl(var(--secondary));
+  color: hsl(var(--secondary));
+  background: transparent;
+}
+
+.btn-secondary:hover {
+  background: hsl(var(--secondary));
+  color: white;
+}
+
+/* Mobile Menu */
+.mobile-menu-btn {
+  display: block;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  border-radius: 0.375rem;
+}
+
+@media (min-width: 768px) {
+  .mobile-menu-btn {
+    display: none;
+  }
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.navbar.scrolled .mobile-menu-btn {
+  color: hsl(var(--secondary));
+}
+
+.navbar:not(.scrolled) .mobile-menu-btn {
+  color: white;
+}
+
+.mobile-menu {
+  background: white;
+  border-bottom: 1px solid hsl(var(--border));
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu.open {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.mobile-menu-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobile-menu-link {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: hsl(var(--secondary));
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-link:hover {
+  background: hsl(var(--primary) / 0.05);
+  color: hsl(var(--primary));
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: hsl(var(--secondary) / 0.8);
+  mix-blend-mode: multiply;
+}
+
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, hsl(var(--secondary)), transparent, transparent);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  padding: 8rem 1rem;
+  text-align: center;
+  color: white;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(4px);
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.hero-title-gradient {
+  background: linear-gradient(to right, white, rgb(209, 213, 219));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-description {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgb(229, 231, 235);
+  margin-bottom: 2.5rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.75;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .hero-buttons {
+    flex-direction: row;
+  }
+}
+
+/* About Section */
+.about-section {
+  padding: 6rem 0;
+  background: white;
+  position: relative;
+}
+
+.about-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+}
+
+@media (min-width: 1024px) {
+  .about-grid {
+    flex-direction: row;
+  }
+}
+
+.about-image {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .about-image {
+    width: 50%;
+  }
+}
+
+.about-image-wrapper {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.about-image-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.about-badge {
+  position: absolute;
+  bottom: -2.5rem;
+  right: -2.5rem;
+  background: hsl(var(--primary));
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .about-badge {
+    display: block;
+  }
+}
+
+.about-badge-number {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.about-badge-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.about-content {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .about-content {
+    width: 50%;
+  }
+}
+
+.section-subtitle {
+  color: hsl(var(--primary));
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: hsl(var(--secondary));
+  margin-bottom: 1.5rem;
+}
+
+.section-description {
+  color: hsl(var(--muted-foreground));
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.75;
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+}
+
+.feature-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: hsl(var(--primary));
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.feature-text {
+  color: hsl(var(--secondary));
+  font-weight: 500;
+  font-size: 1.125rem;
+}
+
+/* Services Section */
+.services-section {
+  padding: 6rem 0;
+  background: rgb(249, 250, 251);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 48rem;
+  margin: 0 auto 4rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.service-card {
+  position: relative;
+  background: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 1px solid hsl(var(--border) / 0.5);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.service-card:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border-color: hsl(var(--primary) / 0.2);
+}
+
+.service-icon-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  opacity: 0.05;
+  transition: all 0.5s ease;
+}
+
+.service-card:hover .service-icon-bg {
+  opacity: 0.1;
+  transform: scale(1.1);
+}
+
+.service-icon-bg svg {
+  width: 8rem;
+  height: 8rem;
+  color: hsl(var(--primary));
+}
+
+.service-content {
+  position: relative;
+  z-index: 10;
+}
+
+.service-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  background: hsl(var(--primary) / 0.1);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  background: hsl(var(--primary));
+}
+
+.service-icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: hsl(var(--primary));
+  transition: color 0.3s ease;
+}
+
+.service-card:hover .service-icon svg {
+  color: white;
+}
+
+.service-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: hsl(var(--card-foreground));
+  transition: color 0.3s ease;
+}
+
+.service-card:hover .service-title {
+  color: hsl(var(--primary));
+}
+
+.service-description {
+  color: hsl(var(--muted-foreground));
+  line-height: 1.75;
+}
+
+.service-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: hsl(var(--primary));
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-link {
+  transform: translateX(0.5rem);
+}
+
+.service-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.25rem;
+  background: linear-gradient(to right, hsl(var(--primary)), rgb(37, 99, 235));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-bar {
+  transform: scaleX(1);
+}
+
+/* Social Projects Section - CORREÇÃO AQUI */
+.projects-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.projects-hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.parallax-slide {
+background-attachment: fixed;
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.parallax-slide.active {
+  opacity: 1;
+}
+
+.parallax-slide .slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.slide-content-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.slide-content {
+  max-width: 48rem;
+  text-align: center;
+  color: white;
+}
+
+.slide-badge {
+  display: inline-block;
+  padding: 0.375rem 1rem;
+  border-radius: 9999px;
+  background: hsl(var(--primary));
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.slide-title {
+  font-size: clamp(2rem, 6vw, 3.75rem);
+  font-weight: 800;
+  color: white;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+.slide-description {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgb(226, 232, 240);
+  margin-bottom: 2rem;
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+.slide-button {
+  padding: 1rem 2rem;
+  background: white;
+  color: hsl(var(--secondary));
+  font-weight: 700;
+  font-size: 1.125rem;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.slide-button:hover {
+  background: rgb(241, 245, 249);
+  transform: scale(1.05);
+}
+
+.slide-dots {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.slide-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.slide-dot:hover {
+ background: white;
+}
+
+.slide-dot.active {
+  background: white;
+  transform: scale(1.25);
 }
 
 
+.partners-section {
+  padding: 5rem 0;
+  background: hsl(209, 53%, 36%);
+  border-top: none;
+  overflow: hidden;
+}
+
+.partners-title {
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 2.5rem;
+}
+
+.slider {
+  height: 120px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.slider::before,
+.slider::after {
+  content: "";
+  height: 120px;
+  position: absolute;
+  width: 150px;
+  z-index: 2;
+  background: hsl(209, 53%, 36%);
+}
+
+.slider::after {
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg);
+}
+
+.slider::before {
+  left: 0;
+  top: 0;
+}
+
+.slide-track {
+  animation: scroll 30s linear infinite;
+  display: flex;
+  width: max-content;
+}
 
 @keyframes scroll {
   0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-1 * var(--scroll-width))); }
+  100% { transform: translateX(-50%); }
 }
 
-
-
-
-/* Responsividade */
-@media (max-width: 1024px) {
-  .partners-title {
-    font-size: 2.25rem;
-  }
-
-  .partners-subtitle {
-    font-size: 1.1rem;
-    max-width: 90%;
-  }
-
-  .partner-card {
-    width: 140px;
-    height: 90px;
-  }
+.slide {
+  height: 120px;
+  width: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-@media (max-width: 640px) {
-  .partners {
-    padding: 3rem 1rem 4rem;
-  }
-
-  .partners-title {
-    font-size: 1.75rem;
-    max-width: 100%;
-  }
-
-  .partners-subtitle {
-    font-size: 1rem;
-    max-width: 100%;
-    margin-bottom: 2rem;
-  }
-
-  .btn-partners {
-    font-size: 1rem;
-    padding: 0.6rem 2rem 0.6rem 1.5rem;
-  }
-
-  .carousel {
-    gap: 1.5rem;
-  }
-
-  .partner-card {
-    width: 110px;
-    height: 70px;
-  }
+.slide img {
+  max-height: 80px;
+  max-width: 200px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all 0.3s ease;
 }
 
-@media (max-width: 640px) {
-  .responsive-bg {
-    background-position: center top !important;
-  }
+.slide:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
 }
 
-
-/* Botão lateral fixo - estado clicado */
-.side-button-clicked {
-  transform-origin: top right;
-  animation: sideButtonClick 60ms forwards;
+/* Contact Section */
+.contact-section {
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+  background: hsl(var(--secondary));
 }
 
-@keyframes sideButtonClick {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  100% {
-    transform: rotate(-6deg) scale(0.98);
-  }
+.contact-shape-1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: -5rem;
+  margin-top: -5rem;
+  width: 24rem;
+  height: 24rem;
+  background: hsl(var(--primary) / 0.1);
+  border-radius: 9999px;
+  filter: blur(64px);
 }
 
-/* Animação overshoot do painel */
-@keyframes panelSlideIn {
-  0% {
-    transform: translateX(24px) scale(0.995);
-    opacity: 0;
-  }
-  70% {
-    transform: translateX(-8px) scale(1.005);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(0) scale(1);
-    opacity: 1;
+.contact-shape-2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: -5rem;
+  margin-bottom: -5rem;
+  width: 20rem;
+  height: 20rem;
+  background: rgb(59, 130, 246, 0.1);
+  border-radius: 9999px;
+  filter: blur(64px);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 1024px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Animação reversa */
-@keyframes panelSlideOut {
-  0% {
-    transform: translateX(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(100%) scale(0.995);
-    opacity: 0;
+.contact-info {
+  color: white;
+}
+
+.contact-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.contact-description {
+  color: rgb(209, 213, 219);
+  font-size: 1.125rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.75;
+}
+
+.contact-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-feature {
+  display: flex;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease;
+}
+
+.contact-feature:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.contact-feature-icon {
+  width: 3rem;
+  height: 3rem;
+  background: hsl(var(--primary));
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 1rem;
+}
+
+.contact-feature-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: white;
+}
+
+.contact-feature-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.contact-feature-text {
+  color: rgb(156, 163, 175);
+}
+
+.contact-form-wrapper {
+  background: white;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+@media (min-width: 768px) {
+  .contact-form-wrapper {
+    padding: 2.5rem;
   }
 }
 
-/* Botões internos - slide up + fade */
-.button-appear {
+.contact-form-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: hsl(var(--secondary));
+  margin-bottom: 1.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .form-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  color: hsl(var(--secondary));
+  font-weight: 600;
+}
+
+.form-input,
+.form-textarea {
+  height: 3rem;
+  background: rgb(249, 250, 251);
+  border: 1px solid rgb(229, 231, 235);
+  border-radius: 0.375rem;
+  padding: 0 1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  background: white;
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+}
+
+.form-textarea {
+  min-height: 150px;
+  padding: 1rem;
+  resize: none;
+  height: auto;
+}
+
+.form-error {
+  color: rgb(239, 68, 68);
+  font-size: 0.875rem;
+}
+
+.form-submit {
+  width: 100%;
+  height: 3.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  background: hsl(var(--primary));
+  color: white;
+  box-shadow: 0 10px 15px -3px hsl(var(--primary) / 0.25);
+  transition: all 0.3s ease;
+}
+
+.form-submit:hover {
+  background: hsl(var(--primary) / 0.9);
+  box-shadow: 0 20px 25px -5px hsl(var(--primary) / 0.25);
+}
+
+.form-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Footer */
+.footer {
+  background: hsl(var(--secondary));
+  color: white;
+  padding-top: 5rem;
+  padding-bottom: 2.5rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-description {
+  color: rgb(209, 213, 219);
+  line-height: 1.75;
+  font-size: 0.875rem;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-social-link {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.footer-social-link:hover {
+  background: hsl(var(--primary));
+  transform: scale(1.1);
+}
+
+.footer-social-link svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: white;
+}
+
+.footer-section-title {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style: none;
+}
+
+.footer-link {
+  color: rgb(209, 213, 219);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+}
+
+.footer-link:hover {
+  color: hsl(var(--primary));
+}
+
+.footer-link-bullet {
+  width: 0.375rem;
+  height: 0.375rem;
+  background: hsl(var(--primary));
+  border-radius: 9999px;
+  margin-right: 0.5rem;
   opacity: 0;
-  transform: translateY(8px);
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-out;
+  transition: opacity 0.3s ease;
 }
 
-.button-appear:nth-child(1) {
-  animation-name: buttonSlideUp;
-  animation-duration: 180ms;
-  animation-delay: 0ms;
+.footer-link:hover .footer-link-bullet {
+  opacity: 1;
 }
 
-.button-appear:nth-child(2) {
-  animation-name: buttonSlideUp;
-  animation-duration: 180ms;
-  animation-delay: 80ms;
+.footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  color: rgb(209, 213, 219);
+  font-size: 0.875rem;
 }
 
-.button-appear:nth-child(3) {
-  animation-name: buttonSlideUp;
-  animation-duration: 180ms;
-  animation-delay: 160ms;
+.footer-contact-item svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: hsl(var(--primary));
+  margin-right: 0.75rem;
+  margin-top: 0.125rem;
+  flex-shrink: 0;
 }
 
-@keyframes buttonSlideUp {
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .footer-bottom {
+    flex-direction: row;
+  }
+}
+
+.footer-copyright {
+  color: rgb(156, 163, 175);
+  font-size: 0.875rem;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-legal-link {
+  color: rgb(156, 163, 175);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+}
+
+.footer-legal-link:hover {
+  color: hsl(var(--primary));
+}
+
+/* Loading Skeleton */
+.skeleton {
+  height: 16rem;
+  background: rgb(229, 231, 235);
+  border-radius: 0.75rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 100;
+  transform: translateY(150%);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.toast.success {
+  border-left: 4px solid rgb(34, 197, 94);
+}
+
+.toast.error {
+  border-left: 4px solid rgb(239, 68, 68);
+}
+
+.toast-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.toast.success .toast-icon {
+  color: rgb(34, 197, 94);
+}
+
+.toast.error .toast-icon {
+  color: rgb(239, 68, 68);
+}
+
+.toast-message {
+  color: hsl(var(--foreground));
+  font-weight: 500;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Hover e foco nos botões */
-#contact-panel button:hover,
-#contact-panel button:focus {
-  transform: translateY(-3px) scale(1.06);
-  box-shadow: 0 8px 20px rgba(15, 15, 15, 0.15);
-  outline: none;
-  transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-#contact-panel button:active {
-  transform: scale(0.98);
-  transition-duration: 100ms;
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-/* Toast */
-#toast {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  background: #333;
-  color: white;
-  padding: 0.75rem 1.25rem;
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 60;
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
 }
 
-#toast.show {
-  opacity: 1;
-  pointer-events: auto;
+.animate-fade-in-left {
+  animation: fadeInLeft 0.6s ease-out;
 }
 
+.animate-fade-in-right {
+  animation: fadeInRight 0.6s ease-out;
+}
 
+/* SVG Icons */
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
 
+.icon-fill {
+  fill: currentColor;
+}
+</style>
+</head>
+<body>
 
-
-
-.container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        /* Header */
-        header {
-            background: #ffffff;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid #e5e5e5;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo h1 {
-            font-size: 2rem;
-            font-weight: 300;
-            color: #002c66;
-            letter-spacing: 0.5px;
-        }
-
-        .logo span {
-            color: #c02123;
-            font-weight: 600;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #666666;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #002c66;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 3rem 0;
-            text-align: center;
-        }
-
-        .hero h2 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            color: #002c66;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            color: #666666;
-            font-size: 1.125rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Notícias Grid */
-        .news-section {
-            padding: 3rem 0;
-        }
-
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .news-card {
-            background: #ffffff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            border: 1px solid #f0f0f0;
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
-        }
-
-        .news-card:hover {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transform: translateY(-2px);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 200px;
-            background: #f8f9fa;
-            overflow: hidden;
-        }
-
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .news-card:hover .card-image img {
-            transform: scale(1.02);
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .card-category {
-            display: inline-block;
-            background-color: #002c66;
-            color: #ffffff;
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #002c66;
-            margin-bottom: 0.75rem;
-            line-height: 1.4;
-        }
-
-        .card-excerpt {
-            color: #666666;
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #999999;
-            font-size: 0.85rem;
-            border-top: 1px solid #f0f0f0;
-            padding-top: 1rem;
-        }
-
-        .read-more {
-            color: #c02123;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .read-more:hover {
-            color: #002c66;
-        }
-
-
-
-          /* Transições suaves para os slides */
-        .background-slide, .content-slide {
-            transition: opacity 1s ease-in-out;
-        }
-        /* Transições para indicadores */
-        .indicator {
-            transition: opacity 0.3s ease;
-        }
-
-  </style>
-  <link rel="icon" type="image/png" sizes="32x32" href="logo6.jpg">
-
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
- </head>
- <body class="bg-white text-gray-700">
-  <!-- Navbar -->
-<nav id="navbar" class="fixed top-0 left-0 w-full bg-transparent z-50 transition-colors duration-500">
-   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- aumentei de h-16 para h-24 -->
-    <div class="flex items-center justify-between h-24">
-     <div class="flex-shrink-0 mt-20">
-        <a href="#">
-          <img 
-            src="logo6.jpg" 
-            alt="Logo AJT" 
-            class="h-16 w-auto object-contain"
-          />
-        </a>
-     </div>
-
-     <!-- Menu desktop -->
-     <div class="hidden md:flex space-x-6 text-white text-sm font-normal">
-      <a class="hover:underline" href="#">
-       Home
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-content">
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <svg class="icon" viewBox="0 0 24 24">
+            <path d="M14 2v6m0 0v6m0-6h6m-6 0H8m13 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="2"></path>
+          </svg>
+        </div>
+        <span class="logo-text">JUSTICE<span class="highlight">FOR</span>ALL</span>
       </a>
-      <div class="relative group">
-       <button aria-expanded="false" aria-haspopup="true" class="inline-flex items-center hover:underline focus:outline-none">
-        Quem Somos
-        <svg class="ml-1 h-3 w-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-         <path d="M5.516 7.548l4.484 4.484 4.484-4.484z"></path>
-        </svg>
-       </button>
-       <div class="absolute left-0 mt-1 w-40 bg-white text-black rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity" role="menu">
-        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
-         História
-        </a>
-        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
-         Equipe
-        </a>
-       </div>
-      </div>
-      <div class="relative group">
-       <button aria-expanded="false" aria-haspopup="true" class="inline-flex items-center hover:underline focus:outline-none">
-        Parceiros
-        <svg class="ml-1 h-3 w-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-         <path d="M5.516 7.548l4.484 4.484 4.484-4.484z"></path>
-        </svg>
-       </button>
-       <div class="absolute left-0 mt-1 w-40 bg-white text-black rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity" role="menu">
-        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
-         Empresas
-        </a>
-        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
-         Instituições
-        </a>
-       </div>
-      </div>
-      <div class="relative group">
-       <button aria-expanded="false" aria-haspopup="true" class="inline-flex items-center hover:underline focus:outline-none">
-        Faça Parte
-        <svg class="ml-1 h-3 w-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-         <path d="M5.516 7.548l4.484 4.484 4.484-4.484z"></path>
-        </svg>
-       </button>
-       <div class="absolute left-0 mt-1 w-40 bg-white text-black rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity" role="menu">
-        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
-         Voluntário
-        </a>
-        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
-         Doações
-        </a>
-       </div>
-      </div>
-      <div class="relative group">
-       <button aria-expanded="false" aria-haspopup="true" class="inline-flex items-center hover:underline focus:outline-none">
-        Transparência
-        <svg class="ml-1 h-3 w-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-         <path d="M5.516 7.548l4.484 4.484 4.484-4.484z"></path>
-        </svg>
-       </button>
-       <div class="absolute left-0 mt-1 w-40 bg-white text-black rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity" role="menu">
-        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
-         Relatórios
-        </a>
-        <a class="block px-4 py-2 text-sm hover:bg-gray-100" href="#" role="menuitem">
-         Prestação de Contas
-        </a>
-       </div>
-      </div>
-      <a class="hover:underline" href="#">
-       Contato
-      </a>
-     </div>
 
-     <!-- Botão hamburguer mobile -->
-     <div class="md:hidden">
-     <button id="mobile-menu-button" aria-label="Abrir menu" aria-expanded="false" class="hamburger focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#b84141]">
-  <span class="line line1"></span>
-  <span class="line line2"></span>
-  <span class="line line3"></span>
-</button>
-     </div>
+      <div class="nav-links">
+        <a href="#" class="nav-link">Início</a>
+        <a href="#about" class="nav-link">Sobre</a>
+        <a href="#services" class="nav-link">Serviços</a>
+        <a href="#projects" class="nav-link">Projetos</a>
+        <a href="#partners" class="nav-link">Parceiros</a>
+        <a href="#contact" class="nav-link">Contato</a>
+        <button class="btn btn-primary">
+          <svg class="icon icon-fill" viewBox="0 0 24 24" style="width: 1rem; height: 1rem;">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+          </svg>
+          Doe Agora
+        </button>
+      </div>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <svg class="icon" id="menuIcon" viewBox="0 0 24 24">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg class="icon" id="closeIcon" viewBox="0 0 24 24" style="display: none;">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
     </div>
-   </div>
-
-   <!-- Menu mobile oculto inicialmente -->
-   <div id="mobile-menu" class="md:hidden bg-white text-black shadow-md max-h-0 mobile-menu overflow-hidden">
-    <div class="px-4 pt-2 pb-4 space-y-1">
-      <a href="#" class="block px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold">Home</a>
-
-      <!-- Quem Somos com submenu -->
-      <div>
-        <button aria-expanded="false" aria-controls="submenu-quem-somos" class="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold focus:outline-none focus:ring-2 focus:ring-[#b84141]" id="btn-quem-somos">
-          Quem Somos
-          <i class="fas fa-chevron-down ml-2 transition-transform duration-300"></i>
-        </button>
-        <div id="submenu-quem-somos" class="max-h-0 overflow-hidden transition-max-height duration-300">
-          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">História</a>
-          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Equipe</a>
-        </div>
-      </div>
-
-      <!-- Parceiros com submenu -->
-      <div>
-        <button aria-expanded="false" aria-controls="submenu-parceiros" class="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold focus:outline-none focus:ring-2 focus:ring-[#b84141]" id="btn-parceiros">
-          Parceiros
-          <i class="fas fa-chevron-down ml-2 transition-transform duration-300"></i>
-        </button>
-        <div id="submenu-parceiros" class="max-h-0 overflow-hidden transition-max-height duration-300">
-          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Empresas</a>
-          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Instituições</a>
-        </div>
-      </div>
-
-      <!-- Faça Parte com submenu -->
-      <div>
-        <button aria-expanded="false" aria-controls="submenu-faca-parte" class="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold focus:outline-none focus:ring-2 focus:ring-[#b84141]" id="btn-faca-parte">
-          Faça Parte
-          <i class="fas fa-chevron-down ml-2 transition-transform duration-300"></i>
-        </button>
-        <div id="submenu-faca-parte" class="max-h-0 overflow-hidden transition-max-height duration-300">
-          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Voluntário</a>
-          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Doações</a>
-        </div>
-      </div>
-
-      <!-- Transparência com submenu -->
-      <div>
-        <button aria-expanded="false" aria-controls="submenu-transparencia" class="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold focus:outline-none focus:ring-2 focus:ring-[#b84141]" id="btn-transparencia">
-          Transparência
-          <i class="fas fa-chevron-down ml-2 transition-transform duration-300"></i>
-        </button>
-        <div id="submenu-transparencia" class="max-h-0 overflow-hidden transition-max-height duration-300">
-          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Relatórios</a>
-          <a href="#" class="block px-6 py-2 hover:bg-gray-100 rounded">Prestação de Contas</a>
-        </div>
-      </div>
-
-      <a href="#" class="block px-3 py-2 rounded hover:bg-[#b84141] hover:text-white transition font-semibold">Contato</a>
-    </div>
-   </div>
-  </nav>
-
-  
-    <section class="relative pt-16 h-[750px] sm:h-[650px] overflow-hidden">
-        <!-- Slides de fundo -->
-        <div class="background-slide absolute inset-0 bg-cover bg-center opacity-100" style="background-image: url('download (1).jpg');" data-slide="0"></div>
-        <div class="background-slide absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('download (2).jpg');" data-slide="1"></div>
-        <div class="background-slide absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('download (3).jpg');" data-slide="2"></div>
-        <div class="background-slide absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('download4.jpg');" data-slide="3"></div>
-
-        <!-- Filtro preto fixo -->
-        <div class="absolute inset-0 bg-black bg-opacity-50 z-10 pointer-events-none"></div>
-
-        <!-- Conteúdo dos slides -->
-        <div class="content-slide absolute inset-0 z-20 flex flex-col justify-center items-center text-center px-4 opacity-100" data-slide="0">
-            <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl max-w-4xl">Advogados Voluntários</h1>
-            <p class="text-white max-w-3xl mt-4 text-sm sm:text-base md:text-lg">
-                Podem ser advogados colaboradores voluntários apenas advogados, regularmente inscritos na Ordem dos Advogados do Brasil, graduados pela Faculdade de Direito da Universidade Presbiteriana Mackenzie ou por meio de seleção prévia, caso formado em outra Universidade.
-            </p>
-            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100" href="#">FALE COM A GENTE</a>
-                <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535]" href="#">SOBRE NÓS</a>
-            </div>
-        </div>
-
-        <div class="content-slide absolute inset-0 z-20 flex flex-col justify-center items-center text-center px-4 opacity-0" data-slide="1">
-            <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl max-w-4xl">Serviços Jurídicos Gratuitos</h1>
-            <p class="text-white max-w-3xl mt-4 text-sm sm:text-base md:text-lg">
-                Atuamos em áreas como direito civil, trabalhista e familiar, oferecendo orientação e representação gratuita para famílias de baixa renda e vítimas de injustiças sociais.
-            </p>
-            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100" href="#">FALE COM A GENTE</a>
-                <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535]" href="#">SOBRE NÓS</a>
-            </div>
-        </div>
-
-        <div class="content-slide absolute inset-0 z-20 flex flex-col justify-center items-center text-center px-4 opacity-0" data-slide="2">
-            <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl max-w-4xl">Nossa Missão e Impacto</h1>
-            <p class="text-white max-w-3xl mt-4 text-sm sm:text-base md:text-lg">
-                Com mais de 10 anos de atuação, já auxiliamos milhares de pessoas, promovendo a equidade social e fortalecendo o acesso à justiça em comunidades vulneráveis do Brasil.
-            </p>
-            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100" href="#">FALE COM A GENTE</a>
-                <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535]" href="#">SOBRE NÓS</a>
-            </div>
-        </div>
-
-        <div class="content-slide absolute inset-0 z-20 flex flex-col justify-center items-center text-center px-4 opacity-0" data-slide="3">
-            <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl max-w-4xl">Junte-se à Nossa Equipe</h1>
-            <p class="text-white max-w-3xl mt-4 text-sm sm:text-base md:text-lg">
-                Se você é um profissional do direito apaixonado por causas nobres, candidate-se como voluntário e ajude a transformar realidades. Inscreva-se agora!
-            </p>
-            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                <a class="inline-flex items-center justify-center bg-white text-gray-900 font-semibold text-xs sm:text-sm px-6 py-3 rounded shadow hover:bg-gray-100" href="#">FALE COM A GENTE</a>
-                <a class="inline-flex items-center justify-center bg-[#b84141] text-white font-semibold text-xs sm:text-sm px-8 py-3 rounded shadow hover:bg-[#9e3535]" href="#">SOBRE NÓS</a>
-            </div>
-        </div>
-
-        <!-- Indicadores -->
-        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 justify-center z-30">
-            <button aria-label="Slide 1" class="indicator w-2.5 h-2.5 rounded-full bg-white opacity-100 hover:opacity-100" data-slide="0"></button>
-            <button aria-label="Slide 2" class="indicator w-2.5 h-2.5 rounded-full bg-white opacity-50 hover:opacity-100" data-slide="1"></button>
-            <button aria-label="Slide 3" class="indicator w-2.5 h-2.5 rounded-full bg-white opacity-50 hover:opacity-100" data-slide="2"></button>
-            <button aria-label="Slide 4" class="indicator w-2.5 h-2.5 rounded-full bg-white opacity-50 hover:opacity-100" data-slide="3"></button>
-        </div>
-    </section>
-
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.background-slide, .content-slide');
-        const indicators = document.querySelectorAll('.indicator');
-        const totalSlides = 4;
-
-        // Função para mostrar o slide atual
-        function showSlide(index) {
-            // Esconder todos os slides
-            slides.forEach(slide => {
-                slide.style.opacity = '0';
-            });
-            indicators.forEach(ind => {
-                ind.style.opacity = '0.5';
-            });
-
-            // Mostrar o slide atual
-            document.querySelectorAll(`[data-slide="${index}"]`).forEach(slide => {
-                slide.style.opacity = '1';
-            });
-            indicators[index].style.opacity = '1';
-
-            currentSlide = index;
-        }
-
-        // Função para próximo slide
-        function nextSlide() {
-            const next = (currentSlide + 1) % totalSlides;
-            showSlide(next);
-        }
-
-        // Auto-play a cada 5 segundos
-        setInterval(nextSlide, 5000);
-
-        // Adicionar eventos de clique aos indicadores
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                showSlide(index);
-            });
-        });
-
-        // Inicializar com o primeiro slide
-        showSlide(0);
-    </script>
-
-
-
-
-
-
-
-  <!-- Side Contact Button -->
-<a id="side-contact-button" role="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="contact-panel" aria-label="Solicite um Contato" class="fixed right-0 top-[40%] bg-[#3a6a91] text-white text-xs sm:text-sm font-normal px-3 py-2 rounded-l-md flex items-center space-x-2 rotate-90 origin-top-right hover:bg-[#2e5270] transition z-50 cursor-pointer select-none">
-  <i class="fas fa-mobile-alt"></i>
-  <span>Solicite um Contato</span>
-</a>
-
-
-<!-- Overlay -->
-<div id="contact-overlay" class="fixed inset-0 bg-black bg-opacity-0 backdrop-blur-sm pointer-events-none opacity-0 transition-opacity duration-180 ease-out z-40" aria-hidden="true"></div>
-
-<!-- Painel lateral -->
-<aside id="contact-panel" class="fixed top-0 right-0 h-full w-80 max-w-full bg-white rounded-l-2xl shadow-lg transform translate-x-full opacity-0 scale-95 transition-all duration-350 ease-[cubic-bezier(.2,.9,.25,1)] z-50" role="dialog" aria-modal="true" aria-labelledby="contact-title" aria-describedby="contact-desc" tabindex="-1" >
-  <header class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-    <div>
-      <h2 id="contact-title" class="text-lg font-semibold text-gray-900">Fale conosco</h2>
-      <p id="contact-desc" class="text-sm text-gray-600">Atendimento jurídico — orientações rápidas</p>
-    </div>
-    <button id="contact-close" aria-label="Fechar painel de contato" class="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#b84141] rounded">
-      <i class="fas fa-times fa-lg"></i>
-    </button>
-  </header>
-  <main class="px-6 py-4 flex flex-col space-y-4">
-    <p class="text-gray-700 text-sm">Escolha a forma mais prática para falar conosco.</p>
-    <button id="btn-whatsapp" class="flex items-center space-x-3 bg-white border border-gray-300 rounded-full px-4 py-3 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#b84141] transition transform" type="button">
-      <i class="fab fa-whatsapp text-green-600 text-xl"></i>
-      <div class="text-left">
-        <p class="text-gray-900 font-semibold text-base">WhatsApp</p>
-        <p class="text-gray-500 text-xs">Mensagem rápida</p>
-      </div>
-    </button>
-    <button id="btn-email" class="flex items-center space-x-3 bg-white border border-gray-300 rounded-full px-4 py-3 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#b84141] transition transform" type="button">
-      <i class="fas fa-envelope text-gray-700 text-xl"></i>
-      <div class="text-left">
-        <p class="text-gray-900 font-semibold text-base">E-mail</p>
-        <p class="text-gray-500 text-xs">Envie detalhes por escrito</p>
-      </div>
-    </button>
-    <button id="btn-agendar" class="flex items-center space-x-3 bg-[#b84141] text-white rounded-full px-4 py-3 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#8a2c2c] transition transform" type="button">
-      <i class="fas fa-calendar-alt text-white text-xl"></i>
-      <div class="text-left">
-        <p class="font-semibold text-base">Agendar</p>
-        <p class="text-sm opacity-80">Marque uma conversa</p>
-      </div>
-    </button>
-  </main>
-  <footer class="px-6 py-3 border-t border-gray-200 text-xs text-gray-500 text-center">
-    <a href="#" class="underline hover:text-[#b84141]">Política de Privacidade</a> &nbsp;|&nbsp; Atendimento: seg.–sex. 9h–17h
-  </footer>
-</aside>
-
-
-
-
-
-   <!-- Sobre -->
-<section id="sobre" class="max-w-4xl mx-auto px-6 py-16 bg-white text-gray-900">
-  <h2 class="text-4xl font-extrabold mb-10 border-l-4 border-[#b84141] pl-4">
-    Sobre a AJJM
-  </h2>
-
-  <!-- Bloco de destaque -->
-  <div class="flex items-center bg-[#f9f5f5] rounded-lg p-6 mb-12 shadow-sm gap-4">
-    <i class="fas fa-gavel text-[#b84141] text-4xl flex-shrink-0"></i>
-    <p class="italic font-semibold text-[#b84141] text-xl md:text-2xl max-w-3xl">
-      Acreditamos que justiça é um direito universal, não um privilégio.
-    </p>
   </div>
 
-  <!-- Cards grid -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-    <!-- Nossa Missão -->
-    <div class="bg-gray-50 rounded-lg p-6 shadow-sm flex flex-col items-start">
-      <i class="fas fa-bullseye text-[#b84141] text-3xl mb-4"></i>
-      <h3 class="text-2xl font-bold mb-3 flex items-center gap-2 border-b border-gray-300 pb-2">
-        Nossa Missão
-      </h3>
-      <p class="text-gray-700 leading-relaxed">
-        Democratizar o acesso à justiça, promovendo suporte jurídico humano e eficiente para todos.
-      </p>
-    </div>
-
-    <!-- Nossos Valores -->
-    <div class="bg-gray-50 rounded-lg p-6 shadow-sm flex flex-col items-start">
-      <i class="fas fa-balance-scale text-[#b84141] text-3xl mb-4"></i>
-      <h3 class="text-2xl font-bold mb-3 flex items-center gap-2 border-b border-gray-300 pb-2">
-        Nossos Valores
-      </h3>
-      <p class="italic text-gray-700 leading-relaxed">
-        <em>Ética</em>, <em>excelência</em>, <em>respeito</em> e <em>justiça social</em> guiam cada passo do nosso trabalho.
-      </p>
-    </div>
-
-  </div>
-
-  <!-- Texto adicional -->
-  <div class="mt-12 space-y-6 text-gray-800 text-lg leading-relaxed">
-    <p>
-      Oferecemos assistência jurídica qualificada para quem mais precisa, com <strong>ética</strong> e compromisso social.
-    </p>
-    <p>
-      Nosso time atua com dedicação para garantir <strong>dignidade</strong> e acesso à <strong>justiça</strong> para pessoas em situação vulnerável.
-    </p>
-  </div>
-</section>
-
-
-
-<hr>
-
-     <section class="max-w-7xl mx-auto px-6 pt-40 text-center">
-    <h1 class="text-gray-600 font-light text-2xl sm:text-3xl">
-      Estudantes da Faculdade de Direito do Mackenzie e Defensoria Pública juntos
-    </h1>
-    <p class="text-gray-500 text-sm sm:text-base mt-2 max-w-xl mx-auto leading-relaxed">
-      A AJ João Mendes é gerida por alunos e antigos alunos da Faculdade de Direito do Mackenzie, possuindo convênio com a Defensoria Pública do Estado de São Paulo para recebimento e atendimento gratuito da população.
-    </p>
-  </section>
-
-  <section class="bg-gray-50 mt-16 py-16">
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 border border-transparent sm:border-t sm:border-b border-gray-200 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
-      <div class="text-center px-6 pb-10 sm:pb-0">
-        <i class="fas fa-history text-4xl text-red-600 mb-4"></i>
-        <h2 class="font-extrabold text-gray-900 text-lg mb-2">60 anos</h2>
-        <p class="text-xs text-gray-400 max-w-xs mx-auto leading-relaxed">
-          Fundada em 1959 e refundada em 2017, a AJ João Mendes integra alunos, antigos alunos e profissionais de diversas áreas, além auxiliar projetos autônomos como o Cursinho Popular dos estudantes do Mackenzie
-        </p>
-      </div>
-      <div class="text-center px-6 py-10 sm:py-0">
-        <i class="far fa-heart text-4xl text-red-600 mb-4"></i>
-        <h2 class="font-extrabold text-gray-900 text-lg mb-2">Integração</h2>
-        <p class="text-xs text-gray-400 max-w-xs mx-auto leading-relaxed">
-          A AJ João Mendes tem o apoio institucional de todas as entidades que formam a Faculdade de Direito da Universidade Presbiteriana Mackenzie, da Associação Atlética ao Centro Acadêmico
-        </p>
-      </div>
-      <div class="text-center px-6 pt-10 sm:pt-0">
-        <i class="fas fa-users text-4xl text-red-600 mb-4"></i>
-        <h2 class="font-extrabold text-gray-900 text-lg mb-2">Protagonismo Estudantil</h2>
-        <p class="text-xs text-gray-400 max-w-xs mx-auto leading-relaxed">
-          A AJ João Mendes é uma entidade gerida majoritariamente pelos estudantes, de forma independente e autônoma, constituindo um instrumento de aprendizado e crescimento profissional. Antigos alunos participam e orientam estagiários e diretores
-        </p>
-      </div>
-    </div>
-  </section>
-  <hr>
-
-
-
-
-
-    <section id="parcerias" class="partners">
-  <div class="container mx-auto px-6 max-w-7xl text-center">
-    <h2 class="partners-title">Parcerias</h2>
-    <p class="partners-subtitle mx-auto">Nossas alianças fortalecem o acesso à justiça.</p>
-
-    <a href="parceiros.html"><button class="btn-partners" aria-label="Conheça Nossas Parcerias">
-      <span class="btn-line"></span>
-      Conheça Nossas Parcerias
-    </button></a>
-
-    <div class="carousel-wrapper" aria-label="Logos dos parceiros">
-      <div class="carousel" role="list">
-        <div class="partner-card" role="listitem"><img src="P1.png" alt="Parceiro 1"></div>
-        <div class="partner-card" role="listitem"><img src="logo2.png" alt="Parceiro 2"></div>
-        <div class="partner-card" role="listitem"><img src="logo3.png" alt="Parceiro 3"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-content">
+      <a href="#" class="mobile-menu-link">Início</a>
+      <a href="#about" class="mobile-menu-link">Sobre</a>
+      <a href="#services" class="mobile-menu-link">Serviços</a>
+      <a href="#projects" class="mobile-menu-link">Projetos</a>
+      <a href="#partners" class="mobile-menu-link">Parceiros</a>
+      <a href="#contact" class="mobile-menu-link">Contato</a>
+      <div style="padding-top: 1rem;">
+        <button class="btn btn-primary" style="width: 100%; height: 3rem;">
+          <svg class="icon icon-fill" viewBox="0 0 24 24" style="width: 1rem; height: 1rem;">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+          </svg>
+          Doe Agora
+        </button>
       </div>
     </div>
   </div>
-</section>
+</nav>
 
-
-
-
-
-
-        <section class="hero">
-            <div class="container">
-                <h2>As principais notícias do momento</h2>
-                <p>Fique por dentro das últimas atualizações e tendências que estão moldando o mundo, com análises imparciais e insights profissionais.</p>
-            </div>
-        </section>
-
-        <section class="news-section">
-            <div class="container">
-                <div class="news-grid">
-                    <!-- Notícia 1 -->
-                    <article class="news-card">
-                        <div class="card-image">
-                            <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Imagem%20de%20tecnologia%20avan%C3%A7ada%20com%20circuitos%20eletr%C3%B4nicos%20brilhantes%20e%20futuristas&id=tech-1" alt="Tecnologia avançada com circuitos eletrônicos futuristas">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-category">Tecnologia</span>
-                            <h3 class="card-title">Revolução na Inteligência Artificial transforma setor tecnológico</h3>
-                            <p class="card-excerpt">Novos avanços em IA estão redefinindo como empresas e consumidores interagem com a tecnologia no dia a dia, impulsionando inovações sem precedentes.</p>
-                            <div class="card-meta">
-                                <span>12 de Janeiro, 2024</span>
-                                <a href="#" class="read-more">Ler mais</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Notícia 2 -->
-                    <article class="news-card">
-                        <div class="card-image">
-                            <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Cena%20de%20mercado%20financeiro%20com%20gr%C3%A1ficos%20e%20indicadores%20econ%C3%B4micos&id=econ-1" alt="Mercado financeiro com gráficos e indicadores econômicos">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-category">Economia</span>
-                            <h3 class="card-title">Mercado financeiro atinge novos patamares em 2024</h3>
-                            <p class="card-excerpt">Indicadores econômicos mostram crescimento sustentável e perspectivas positivas para o próximo trimestre, com foco em estabilidade global.</p>
-                            <div class="card-meta">
-                                <span>11 de Janeiro, 2024</span>
-                                <a href="#" class="read-more">Ler mais</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Notícia 3 -->
-                    <article class="news-card">
-                        <div class="card-image">
-                            <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Evento%20cultural%20com%20arte%20contempor%C3%A2nea%20e%20exposi%C3%A7%C3%A3o%20moderna&id=culture-1" alt="Evento cultural com arte contemporânea e exposição moderna">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-category">Cultura</span>
-                            <h3 class="card-title">Festival de arte contemporânea atrai milhares de visitantes</h3>
-                            <p class="card-excerpt">Mostra reúne trabalhos de artistas emergentes e consagrados em exposição que vai até o final do mês, celebrando a diversidade criativa.</p>
-                            <div class="card-meta">
-                                <span>10 de Janeiro, 2024</span>
-                                <a href="#" class="read-more">Ler mais</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Notícia 4 -->
-                    <article class="news-card">
-                        <div class="card-image">
-                            <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Discuss%C3%A3o%20pol%C3%ADtica%20em%20ambiente%20formal%20e%20profissional&id=politics-1" alt="Discussão política em ambiente formal e profissional">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-category">Política</span>
-                            <h3 class="card-title">Novas medidas legislativas impactam setor empresarial</h3>
-                            <p class="card-excerpt">Reformas aprovadas no congresso visam fomentar o crescimento econômico, mas geram debates sobre regulação e inovação no mercado.</p>
-                            <div class="card-meta">
-                                <span>9 de Janeiro, 2024</span>
-                                <a href="#" class="read-more">Ler mais</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-
-
-
-
-
-
-
-
-<section id="aj-play" class="bg-[#f6f6f6] relative py-24 px-6 sm:px-12 lg:px-24">
-
-  <!-- Linhas vermelhas topo e rodapé -->
-  <div class="absolute top-0 left-0 w-full h-[3px] bg-[#c62828]"></div>
-  <div class="absolute bottom-0 left-0 w-full h-[3px] bg-[#c62828]"></div>
-
-  <div class="max-w-7xl mx-auto flex flex-col items-center">
-
-    <!-- Cabeçalho -->
-    <div class="flex flex-col items-center mb-16 px-4 sm:px-0">
-      <img src="play.png" alt="Logo AJ Play" class="w-44 sm:w-52 drop-shadow-md mb-6" />
-
-      <h1 class="text-[#b71c1c] font-extrabold text-4xl sm:text-5xl tracking-wide mb-3" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-        AJ Play
-      </h1>
-
-      <p class="text-[#444444] text-lg sm:text-xl font-medium tracking-widest max-w-3xl text-center leading-relaxed mb-4" style="letter-spacing: 0.12em;">
-        Conheça nossos vídeos e podcasts selecionados com curadoria especial
-      </p>
-
-      <div class="w-20 h-[2px] bg-[#b71c1c] rounded-full"></div>
-    </div>
-
-    <!-- Grade de Conteúdo -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl w-full px-4 sm:px-0">
-
-      <!-- Card Exemplo 1 -->
-      <article tabindex="0" class="bg-white rounded-2xl shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300 cursor-pointer relative overflow-hidden">
-        <!-- Miniatura com degradê -->
-        <div class="relative h-48 bg-gradient-to-b from-white to-[#f7f7f7] overflow-hidden rounded-t-2xl">
-          <img src="https://img.youtube.com/vi/VIDEO_ID_1/hqdefault.jpg" alt="Podcast #12 – Acesso à Justiça" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
-          <!-- Ícone YouTube canto superior direito -->
-          <div class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md">
-            <i class="fab fa-youtube text-[#d32f2f] text-xl"></i>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-black font-bold text-lg leading-tight line-clamp-2 mb-2" title="Podcast #12 – Acesso à Justiça">
-            Podcast #12 – Acesso à Justiça
-          </h3>
-          <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
-            Episódio especial sobre o acesso à justiça e seus desafios na atualidade.
-          </p>
-        </div>
-      </article>
-
-      <!-- Card Exemplo 2 -->
-      <article tabindex="0" class="bg-white rounded-2xl shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300 cursor-pointer relative overflow-hidden">
-        <div class="relative h-48 bg-gradient-to-b from-white to-[#f7f7f7] overflow-hidden rounded-t-2xl">
-          <img src="https://img.youtube.com/vi/VIDEO_ID_2/hqdefault.jpg" alt="Vídeo Institucional" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
-          <div class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md">
-            <i class="fab fa-youtube text-[#d32f2f] text-xl"></i>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-black font-bold text-lg leading-tight line-clamp-2 mb-2" title="Vídeo Institucional">
-            Vídeo Institucional
-          </h3>
-          <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
-            Conheça a missão e os valores que guiam nosso trabalho.
-          </p>
-        </div>
-      </article>
-
-      <!-- Card Exemplo 3 -->
-      <article tabindex="0" class="bg-white rounded-2xl shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300 cursor-pointer relative overflow-hidden">
-        <div class="relative h-48 bg-gradient-to-b from-white to-[#f7f7f7] overflow-hidden rounded-t-2xl flex items-center justify-center text-white text-7xl font-extrabold shadow-inner">
-          <img src="spotify-cover.jpg" alt="Podcast #15 – Direitos Humanos" class="absolute inset-0 w-full h-full object-cover opacity-30" />
-          <div class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md">
-            <i class="fab fa-spotify text-[#1db954] text-xl"></i>
-          </div>
-          <div class="relative z-10 px-4 text-center">
-            <h3 class="text-black font-bold text-lg leading-tight line-clamp-2 mb-2" title="Podcast #15 – Direitos Humanos">
-              Podcast #15 – Direitos Humanos
-            </h3>
-            <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
-              Discussões importantes sobre direitos humanos e justiça social.
-            </p>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card Exemplo 4 -->
-      <article tabindex="0" class="bg-white rounded-2xl shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300 cursor-pointer relative overflow-hidden">
-        <div class="relative h-48 bg-gradient-to-b from-white to-[#f7f7f7] overflow-hidden rounded-t-2xl flex items-center justify-center text-white text-7xl font-extrabold shadow-inner">
-          <img src="spotify-cover2.jpg" alt="Podcast #20 – Justiça Social" class="absolute inset-0 w-full h-full object-cover opacity-30" />
-          <div class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md">
-            <i class="fab fa-spotify text-[#1db954] text-xl"></i>
-          </div>
-          <div class="relative z-10 px-4 text-center">
-            <h3 class="text-black font-bold text-lg leading-tight line-clamp-2 mb-2" title="Podcast #20 – Justiça Social">
-              Podcast #20 – Justiça Social
-            </h3>
-            <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
-              Episódio focado em justiça social e seus impactos na comunidade.
-            </p>
-          </div>
-        </div>
-      </article>
-
-      <!-- Adicione mais cards conforme necessário -->
-
-    </div>
-
-    <!-- Botões de Ação -->
-    <div class="mt-20 flex flex-col sm:flex-row justify-center gap-8 max-w-3xl w-full px-4 sm:px-0">
-  <a href="https://www.youtube.com/playlist?list=YOUR_YOUTUBE_PLAYLIST_ID" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-4 px-16 py-4 bg-[#fff] text-black font-extrabold rounded-full shadow-lg border border-red-500 hover:shadow-xl hover:scale-105 transition transform focus:outline-none focus:ring-4 focus:ring-[#d32f2f]/50">
-    <i class="fab fa-youtube text-3xl"></i> Ver todos no YouTube
-  </a>
-  <a href="https://open.spotify.com/playlist/YOUR_SPOTIFY_PLAYLIST_ID" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-4 px-16 py-4 bg-[#fff] text-black font-extrabold rounded-full shadow-lg border border-red-500 hover:shadow-xl hover:scale-105 transition transform focus:outline-none focus:ring-4 focus:ring-[#1db954]/50">
-    <i class="fab fa-spotify text-3xl"></i> Ouça no Spotify
-  </a>
+<!-- Hero Section -->
+<section class="hero">
+<div class="hero-bg" style="
+  background-image: url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=2000');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+">
+  <div class="hero-overlay"></div>
+  <div class="hero-gradient"></div>
 </div>
 
-
+  <div class="container hero-content animate-fade-in-up">
+    <span class="hero-badge">ESPECIALISTAS JURÍDICOS DE CONFIANÇA</span>
+    <h1 class="hero-title">
+      Defendendo Seus Direitos,<br>
+      <span class="hero-title-gradient">Garantindo Seu Futuro.</span>
+    </h1>
+    <p class="hero-description">
+      Oferecemos soluções jurídicas completas com compromisso com a excelência e a integridade. A sua justiça é a nossa prioridade.
+    </p>
+    <div class="hero-buttons">
+      <button class="btn btn-primary" style="height: 3.5rem; padding: 0 2rem; font-size: 1.125rem;">
+        Consulta Gratuita
+      </button>
+      <button class="btn btn-outline" style="height: 3.5rem; padding: 0 2rem; font-size: 1.125rem;">
+        Nossos Serviços
+      </button>
+    </div>
   </div>
 </section>
 
+<!-- About Section -->
+<section id="about" class="about-section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image">
+        <div class="about-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=1000" alt="Nossa Equipe">
+        </div>
+        <div class="about-badge">
+          <p class="about-badge-number">25+</p>
+          <p class="about-badge-text">Anos de Experiência</p>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <h4 class="section-subtitle">Sobre Nós</h4>
+        <h2 class="section-title">Comprometidos em Ajudar Nossos Clientes a Ter Sucesso</h2>
+        <p class="section-description">
+          Somos um escritório de advocacia completo dedicado a oferecer a mais alta qualidade em representação jurídica. Nossos advogados têm décadas de experiência combinada e já representaram com sucesso milhares de clientes.
+        </p>
+        
+        <div class="features-list">
+          <div class="feature-item">
+            <svg class="feature-icon icon" viewBox="0 0 24 24">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span class="feature-text">Advogados Experientes e Especializados</span>
+          </div>
+          <div class="feature-item">
+            <svg class="feature-icon icon" viewBox="0 0 24 24">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span class="feature-text">Histórico Comprovado de Sucesso</span>
+          </div>
+          <div class="feature-item">
+            <svg class="feature-icon icon" viewBox="0 0 24 24">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span class="feature-text">Abordagem Centrada no Cliente</span>
+          </div>
+          <div class="feature-item">
+            <svg class="feature-icon icon" viewBox="0 0 24 24">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span class="feature-text">Comunicação Transparente</span>
+          </div>
+        </div>
+
+        <button class="btn btn-secondary" style="height: 3rem; padding: 0 2rem;">
+          Saiba Mais Sobre Nós
+          <svg class="icon" viewBox="0 0 24 24" style="width: 1rem; height: 1rem; margin-left: 0.5rem;">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="services-section">
+  <div class="container">
+    <div class="section-header">
+      <h4 class="section-subtitle">Áreas de Atuação</h4>
+      <h2 class="section-title">Como Podemos te Ajudar</h2>
+      <p class="section-description">
+        Oferecemos uma ampla gama de serviços jurídicos adaptados às suas necessidades específicas.
+      </p>
+    </div>
+
+    <div class="services-grid" id="servicesGrid">
+      <!-- Services will be loaded here -->
+    </div>
+  </div>
+</section>
+<!-- Social Projects Section - CORRIGIDO -->
+<section id="projects" class="projects-section">
+  <div class="projects-hero">
+    <!-- Slide 1 -->
+    <div class="parallax-slide active" style="background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=2000');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrapper">
+        <div class="container">
+          <div class="slide-content">
+            <span class="slide-badge">Sustentabilidade</span>
+            <h2 class="slide-title">Impacto Social e Solidariedade</h2>
+            <p class="slide-description">
+              Nossas iniciativas vão além do suporte jurídico, promovendo cidadania, saúde e bem-estar para toda a comunidade.
+            </p>
+            <button class="slide-button" onclick="scrollToSection('#contact')">
+              VER ARTIGO COMPLETO
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="parallax-slide" style="background-image: url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&q=80&w=2000');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrapper">
+        <div class="container">
+          <div class="slide-content">
+            <span class="slide-badge">Educação</span>
+            <h2 class="slide-title">Capacitação e Desenvolvimento</h2>
+            <p class="slide-description">
+              Oficinas gratuitas sobre direitos básicos, educação financeira e orientação profissional para a comunidade.
+            </p>
+            <button class="slide-button" onclick="scrollToSection('#services')">
+              CONHEÇA NOSSOS PROGRAMAS
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="parallax-slide" style="background-image: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=2000');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrapper">
+        <div class="container">
+          <div class="slide-content">
+            <span class="slide-badge">Saúde</span>
+            <h2 class="slide-title">Bem-Estar da Comunidade</h2>
+            <p class="slide-description">
+              Parcerias com profissionais de saúde para oferecer atendimento psicológico e orientação médica a populações vulneráveis.
+            </p>
+            <button class="slide-button" onclick="scrollToSection('#partners')">
+              NOSSOS PARCEIROS
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="parallax-slide" style="background-image: url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&q=80&w=2000');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrapper">
+        <div class="container">
+          <div class="slide-content">
+            <span class="slide-badge">Voluntariado</span>
+            <h2 class="slide-title">Faça Parte da Mudança</h2>
+            <p class="slide-description">
+              Junte-se à nossa equipe de voluntários e ajude a transformar vidas por meio do acesso à justiça e à cidadania.
+            </p>
+            <button class="slide-button" onclick="scrollToSection('#contact')">
+              SEJA UM VOLUNTÁRIO
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="slide-dots">
+      <button class="slide-dot active" onclick="goToSlide(0)"></button>
+      <button class="slide-dot" onclick="goToSlide(1)"></button>
+      <button class="slide-dot" onclick="goToSlide(2)"></button>
+      <button class="slide-dot" onclick="goToSlide(3)"></button>
+    </div>
+  </div>
+</section>
+
+<!-- Partners Section -->
+<section id="partners" class="partners-section">
+  <div class="container">
+    <h4 class="partners-title">Parceiros</h4>
+    <div class="slider">
+      <div class="slide-track">
+        <!-- Primeiro conjunto -->
+        <div class="slide">
+          <img src="https://www.mackenzie.br/fileadmin/ARQUIVOS/Public/top/logo_mackenzie_2.png" alt="Mackenzie">
+        </div>
+        <div class="slide">
+          <img src="https://www.oabsp.org.br/Content/Imagens/logo-oab-sp.png" alt="OAB/SP">
+        </div>
+        <div class="slide">
+          <img src="https://www.defensoria.sp.def.br/dpesp/repositorio/0/img/logo-defensoria.png" alt="Defensoria Pública">
+        </div>
+        <div class="slide">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Seal_of_the_Federal_Public_Defender.svg/1200px-Seal_of_the_Federal_Public_Defender.svg.png" alt="Defensoria">
+        </div>
+        <div class="slide">
+          <img src="https://www.tjsp.jus.br/Download/Portal/Images/logo_tjsp.png" alt="TJSP">
+        </div>
+        <div class="slide">
+          <img src="https://www.cnj.jus.br/wp-content/uploads/2023/03/logo-cnj.png" alt="CNJ">
+        </div>
+        <!-- Segundo conjunto (duplicado para loop infinito) -->
+        <div class="slide">
+          <img src="https://www.mackenzie.br/fileadmin/ARQUIVOS/Public/top/logo_mackenzie_2.png" alt="Mackenzie">
+        </div>
+        <div class="slide">
+          <img src="https://www.oabsp.org.br/Content/Imagens/logo-oab-sp.png" alt="OAB/SP">
+        </div>
+        <div class="slide">
+          <img src="https://www.defensoria.sp.def.br/dpesp/repositorio/0/img/logo-defensoria.png" alt="Defensoria Pública">
+        </div>
+        <div class="slide">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Seal_of_the_Federal_Public_Defender.svg/1200px-Seal_of_the_Federal_Public_Defender.svg.png" alt="Defensoria">
+        </div>
+        <div class="slide">
+          <img src="https://www.tjsp.jus.br/Download/Portal/Images/logo_tjsp.png" alt="TJSP">
+        </div>
+        <div class="slide">
+          <img src="https://www.cnj.jus.br/wp-content/uploads/2023/03/logo-cnj.png" alt="CNJ">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section">
+
+
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h4 class="section-subtitle">Entre em Contato</h4>
+        <h2 class="contact-title">Agende sua Consulta Gratuita</h2>
+        <p class="contact-description">
+          Não espere até ser tarde demais. Entre em contato hoje para discutir seu caso com um de nossos advogados experientes. Estamos aqui para ouvir e lutar por você.
+        </p>
+        <div class="contact-features">
+          <div class="contact-feature">
+            <div class="contact-feature-icon">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <div>
+              <h5 class="contact-feature-title">Orientação Especializada</h5>
+              <p class="contact-feature-text">Receba orientação jurídica profissional adaptada à sua situação.</p>
+            </div>
+          </div>
+          <div class="contact-feature">
+            <div class="contact-feature-icon">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                <path d="M4 22h16"></path>
+                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path>
+              </svg>
+            </div>
+            <div>
+              <h5 class="contact-feature-title">Focados em Resultados</h5>
+              <p class="contact-feature-text">Trabalhamos para alcançar o melhor resultado possível para você.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrapper" style="background:linear-gradient(145deg,#fff 0%,#f0f4f8 100%);border-radius:1rem;padding:3rem 2.5rem;box-shadow:0 25px 50px -12px rgba(0,0,0,0.18);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(to right,hsl(348,83%,47%),hsl(209,53%,36%));"></div>
+        <div style="position:absolute;bottom:-4rem;right:-4rem;width:14rem;height:14rem;border-radius:9999px;background:rgba(44,90,130,0.05);"></div>
+        <div style="width:4rem;height:4rem;background:rgba(44,90,130,0.08);border-radius:9999px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="hsl(209,53%,36%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </div>
+        <h3 style="font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:700;color:hsl(209,53%,36%);margin-bottom:0.75rem;letter-spacing:-0.02em;">Fale Conosco</h3>
+        <p style="color:#6b7280;font-size:0.9rem;line-height:1.75;max-width:300px;margin-bottom:2rem;">Nossa equipe está pronta para atender você. Envie sua mensagem e retornaremos em breve.</p>
+        <div style="width:2.5rem;height:2px;background:linear-gradient(to right,hsl(348,83%,47%),hsl(209,53%,36%));border-radius:9999px;margin-bottom:2rem;"></div>
+        <a href="mailto:parcerias@ajjoaomendes.com" style="display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 2rem;background:hsl(209,53%,36%);border-radius:0.5rem;color:white;font-family:'Montserrat',sans-serif;font-weight:600;font-size:0.875rem;letter-spacing:0.02em;text-decoration:none;transition:all 0.25s ease;box-shadow:0 4px 14px rgba(44,90,130,0.3);position:relative;z-index:1;" onmouseover="this.style.background='hsl(348,83%,47%)';this.style.boxShadow='0 6px 20px rgba(210,38,70,0.35)';this.style.transform='translateY(-2px)';" onmouseout="this.style.background='hsl(209,53%,36%)';this.style.boxShadow='0 4px 14px rgba(44,90,130,0.3)';this.style.transform='translateY(0)';">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          parcerias@ajjoaomendes.com
+        </a>
+        <p style="margin-top:1.25rem;font-size:0.75rem;color:#9ca3af;letter-spacing:0.01em;">Tempo médio de resposta: <strong style="color:hsl(209,53%,36%);">até 24 horas</strong></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- Footer -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
 <style>
-  /* Limitar linhas e adicionar reticências */
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;  
-    overflow: hidden;
-  }
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;  
-    overflow: hidden;
+  .bg-primary { background-color: hsl(348, 83%, 47%); }
+  .text-primary { color: hsl(348, 83%, 47%); }
+  .hover\:bg-primary:hover { background-color: hsl(348, 83%, 47%); }
+  .hover\:text-primary:hover { color: hsl(348, 83%, 47%); }
+  .parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 </style>
 
+<footer class="relative w-full overflow-hidden" style="font-family: 'Montserrat', sans-serif;">
+  <div class="absolute inset-0 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=2000');">
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-900/95"></div>
+  </div>
 
+  <div class="relative z-10 py-20">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/30">
+              <i data-lucide="scale" class="w-7 h-7 text-white"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-white tracking-tight">AJ João Mendes</h3>
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-medium">Assistência Judiciária</p>
+            </div>
+          </div>
+          <p class="text-slate-300 leading-relaxed mb-6 max-w-md">
+            Promovendo justiça social e excelência jurídica desde 1959. Uma iniciativa da Universidade Presbiteriana Mackenzie.
+          </p>
+          <div class="flex gap-4">
+            <a href="#" class="w-10 h-10 bg-white/10 hover:bg-primary rounded-lg flex items-center justify-center text-white transition-all hover:scale-110 backdrop-blur-sm">
+              <i data-lucide="instagram" class="w-5 h-5"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-white/10 hover:bg-primary rounded-lg flex items-center justify-center text-white transition-all hover:scale-110 backdrop-blur-sm">
+              <i data-lucide="linkedin" class="w-5 h-5"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-white/10 hover:bg-primary rounded-lg flex items-center justify-center text-white transition-all hover:scale-110 backdrop-blur-sm">
+              <i data-lucide="facebook" class="w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
 
-  <script>
-(function initInfiniteCarousel() {
-  const carousel = document.querySelector('.carousel');
-  const wrapper = document.querySelector('.carousel-wrapper');
-  if (!carousel || !wrapper) return;
+        <div>
+          <h4 class="text-white font-bold text-lg mb-6 relative inline-block">
+            Links Rápidos
+            <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+          </h4>
+          <ul class="space-y-3">
+            <li><a href="#about" class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2 group"><i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>Sobre Nós</a></li>
+            <li><a href="#services" class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2 group"><i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>Serviços</a></li>
+            <li><a href="#projects" class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2 group"><i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>Projetos Sociais</a></li>
+            <li><a href="#contact" class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2 group"><i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>Contato</a></li>
+          </ul>
+        </div>
 
-  if (!carousel.dataset.baseHtml) {
-    carousel.dataset.baseHtml = carousel.innerHTML.trim();
+        <div>
+          <h4 class="text-white font-bold text-lg mb-6 relative inline-block">
+            Contato
+            <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+          </h4>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3 text-slate-300">
+              <i data-lucide="map-pin" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+              <span class="text-sm leading-relaxed">Rua da Consolação, 930<br>Consolação - SP, 01302-907</span>
+            </li>
+            <li class="flex items-center gap-3 text-slate-300">
+              <i data-lucide="phone" class="w-5 h-5 text-primary flex-shrink-0"></i>
+              <span class="text-sm">(11) 2114-8000</span>
+            </li>
+            <li class="flex items-center gap-3 text-slate-300">
+              <i data-lucide="mail" class="w-5 h-5 text-primary flex-shrink-0"></i>
+              <span class="text-sm">ajjoaomendes@mackenzie.br</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-slate-400 text-sm text-center md:text-left">
+            &copy; <span id="current-year-footer"></span> AJ João Mendes. Todos os direitos reservados.
+          </p>
+          <div class="flex items-center gap-6 text-sm">
+            <a href="#" class="text-slate-400 hover:text-primary transition-colors">Política de Privacidade</a>
+            <span class="text-slate-600">•</span>
+            <a href="#" class="text-slate-400 hover:text-primary transition-colors">Termos de Uso</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+</footer>
+
+<script>
+  lucide.createIcons();
+  document.getElementById('current-year-footer').textContent = new Date().getFullYear();
+</script>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast">
+  <svg class="toast-icon icon" viewBox="0 0 24 24">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+  </svg>
+  <span class="toast-message" id="toastMessage"></span>
+</div>
+
+<script>
+// Services Data
+const services = [
+  {
+    id: 1,
+    title: "Direito Civil",
+    description: "Protegendo liberdades individuais e garantindo igualdade perante a lei. Combatemos a discriminação e defendemos direitos constitucionais.",
+    icon: "Scale"
+  },
+  {
+    id: 2,
+    title: "Direito de Família",
+    description: "Orientação compassiva em divórcio, guarda, adoção e outros assuntos familiares, sempre com foco no seu melhor interesse.",
+    icon: "Users"
+  },
+  {
+    id: 3,
+    title: "Defesa Criminal",
+    description: "Representação firme para proteger seus direitos e sua liberdade. Atuamos em todos os casos criminais, de contravenções a crimes graves.",
+    icon: "Shield"
+  },
+  {
+    id: 4,
+    title: "Direito do Trabalho",
+    description: "Defendendo os direitos dos trabalhadores, tratando casos de demissão injusta, discriminação e assédio no ambiente de trabalho.",
+    icon: "Briefcase"
+  },
+  {
+    id: 5,
+    title: "Serviços de Imigração",
+    description: "Ajudando famílias a navegar pelo complexo sistema de imigração com pedidos de visto, cidadania e defesa contra deportação.",
+    icon: "Globe"
+  },
+  {
+    id: 6,
+    title: "Direito Habitacional",
+    description: "Garantindo práticas habitacionais justas, combatendo despejos ilegais e protegendo os direitos dos inquilinos em todas as comunidades.",
+    icon: "Home"
   }
-  const baseHtml = carousel.dataset.baseHtml;
+];
 
-  function measureHtmlWidth(html) {
-    const temp = document.createElement('div');
-    temp.style.display = 'flex';
-    temp.style.position = 'absolute';
-    temp.style.left = '-9999px';
-    temp.style.gap = getComputedStyle(carousel).gap || '0px';
-    temp.innerHTML = html;
-    document.body.appendChild(temp);
-    const w = temp.offsetWidth;
-    document.body.removeChild(temp);
-    return w;
-  }
+// Icon SVG paths
+const iconPaths = {
+  Scale: '<path d="M16 11V3H8v8"></path><path d="M8 19h8"></path><path d="M10 19v-6h4v6"></path>',
+  Users: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>',
+  Shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>',
+  Briefcase: '<rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>',
+  Globe: '<circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>',
+  Home: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>'
+};
 
-  function rebuild() {
-    let singleHtml = baseHtml;
-    let singleWidth = measureHtmlWidth(singleHtml);
-    const wrapperWidth = wrapper.offsetWidth;
-
-    // repete o bloco somente até cobrir a largura da tela
-    while (singleWidth < wrapperWidth) {
-      singleHtml += baseHtml;
-      singleWidth = measureHtmlWidth(singleHtml);
-    }
-
-    // só duplica uma vez para fazer o looping
-    carousel.innerHTML = singleHtml + singleHtml;
-
-    carousel.style.setProperty('--scroll-width', singleWidth + 'px');
-
-    const pxPerSecond = 100; // velocidade
-    const duration = Math.max(8, singleWidth / pxPerSecond);
-    carousel.style.animation = `scroll ${duration}s linear infinite`;
-  }
-
-  rebuild();
-  let t;
-  window.addEventListener('resize', () => {
-    clearTimeout(t);
-    t = setTimeout(rebuild, 120);
-  });
-})();
-
-
-
-
-
-
- 
-  document.addEventListener('DOMContentLoaded', function() {
-    const backgrounds = document.querySelectorAll('.background-slide[data-slide]');
-    const contents = document.querySelectorAll('.content-slide[data-slide]');
-    const dots = document.querySelectorAll('button[data-slide]');
-    let currentSlide = 0;
-    let autoPlayInterval;
-
-    function showSlide(n) {
-
-      if (autoPlayInterval) clearInterval(autoPlayInterval);
-
-      backgrounds.forEach((bg, index) => {
-        if (index === n) {
-          bg.style.opacity = '1';
-          bg.style.transform = 'scale(1)';
-        } else {
-          bg.style.opacity = '0';
-          bg.style.transform = 'scale(1.05)';
-        }
-      });
-
-
-      contents.forEach((content, index) => {
-        if (index === n) {
-         
-          content.style.opacity = '1';
-          content.style.transform = 'translateY(0) scale(1)';
-          content.style.transitionDelay = '0.2s'; 
-
-  
-          const texts = content.querySelectorAll('h1, p');
-          texts.forEach(text => {
-            text.style.animationPlayState = 'running';
-            text.style.animation = 'none'; 
-            text.offsetHeight; 
-            const delay = text.classList.contains('delay-200') ? '0.3s' : '0s';
-            text.style.animation = `fade-in-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards ${delay}`;
-          });
-        } else {
-    
-          content.style.opacity = '0';
-          content.style.transform = 'translateY(8px) scale(0.95)';
-          content.style.transitionDelay = '0s';
-       
-          const texts = content.querySelectorAll('h1, p');
-          texts.forEach(text => {
-            text.style.animationPlayState = 'paused';
-          });
-        }
-      });
-
-      dots.forEach((dot, index) => {
-        if (index === n) {
-          dot.style.opacity = '1';
-          dot.style.transform = 'scale(1.2)'; 
-        } else {
-          dot.style.opacity = '0.5';
-          dot.style.transform = 'scale(1)';
-        }
-      });
-
-      currentSlide = n;
-
-    
-      autoPlayInterval = setInterval(() => {
-        currentSlide = (currentSlide + 1) % 4;
-        showSlide(currentSlide);
-      }, 5000); 
-    }
-
-  
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', (e) => {
-        e.preventDefault();
-        showSlide(index);
-      });
-    });
-
-   
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        currentSlide = (currentSlide - 1 + 4) % 4;
-        showSlide(currentSlide);
-      } else if (e.key === 'ArrowRight') {
-        currentSlide = (currentSlide + 1) % 4;
-        showSlide(currentSlide);
-      }
-    });
-
-
-    showSlide(0);
-  });
-
-
-
-
-
-
-
-const mobileMenuButton = document.getElementById('mobile-menu-button');
-const mobileMenu = document.getElementById('mobile-menu');
-
-mobileMenuButton.addEventListener('click', () => {
-  const expanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
-  mobileMenuButton.setAttribute('aria-expanded', !expanded);
-
-  if (!expanded) {
-    mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
-    mobileMenuButton.classList.add('active'); // ativa animação do X
+// Navbar Scroll Effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) {
+    navbar.classList.add('scrolled');
   } else {
-    mobileMenu.style.maxHeight = null;
-    mobileMenuButton.classList.remove('active'); // volta para hamburguer
+    navbar.classList.remove('scrolled');
   }
 });
 
+// Mobile Menu Toggle
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const menuIcon = document.getElementById('menuIcon');
+const closeIcon = document.getElementById('closeIcon');
 
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 10) {
-        navbar.classList.add('bg-white', 'shadow-md');
-        navbar.classList.remove('bg-transparent');
-        // Ajusta texto para escuro quando navbar branca
-        navbar.querySelectorAll('a, button').forEach(el => {
-          el.classList.remove('text-white');
-          el.classList.add('text-gray-900');
-        });
-      } else {
-        navbar.classList.remove('bg-white', 'shadow-md');
-        navbar.classList.add('bg-transparent');
-        // Ajusta texto para branco quando navbar transparente
-        navbar.querySelectorAll('a, button').forEach(el => {
-          el.classList.remove('text-gray-900');
-          el.classList.add('text-white');
-        });
-      }
-    });
+mobileMenuBtn.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+  if (mobileMenu.classList.contains('open')) {
+    menuIcon.style.display = 'none';
+    closeIcon.style.display = 'block';
+  } else {
+    menuIcon.style.display = 'block';
+    closeIcon.style.display = 'none';
+  }
+});
 
-   
-    // Função para abrir/fechar submenus no mobile
-    function toggleSubmenu(buttonId, submenuId) {
-      const btn = document.getElementById(buttonId);
-      const submenu = document.getElementById(submenuId);
+// Close mobile menu when clicking a link
+document.querySelectorAll('.mobile-menu-link').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    menuIcon.style.display = 'block';
+    closeIcon.style.display = 'none';
+  });
+});
 
-      btn.addEventListener('click', () => {
-        const expanded = btn.getAttribute('aria-expanded') === 'true' || false;
-        btn.setAttribute('aria-expanded', !expanded);
-        if (!expanded) {
-          submenu.style.maxHeight = submenu.scrollHeight + "px";
-          btn.querySelector('i').classList.add('rotate-180');
-        } else {
-          submenu.style.maxHeight = null;
-          btn.querySelector('i').classList.remove('rotate-180');
-        }
-      });
-    }
-
-    toggleSubmenu('btn-quem-somos', 'submenu-quem-somos');
-    toggleSubmenu('btn-parceiros', 'submenu-parceiros');
-    toggleSubmenu('btn-faca-parte', 'submenu-faca-parte');
-    toggleSubmenu('btn-transparencia', 'submenu-transparencia');
-
-
-
-
-
-
-  (() => {
-    const sideButton = document.getElementById('side-contact-button');
-    const panel = document.getElementById('contact-panel');
-    const overlay = document.getElementById('contact-overlay');
-    const closeBtn = document.getElementById('contact-close');
-    const toast = document.getElementById('toast');
-    const toastIcon = document.getElementById('toast-icon');
-    const toastMessage = document.getElementById('toast-message');
-
-    const btnWhatsapp = document.getElementById('btn-whatsapp');
-    const btnEmail = document.getElementById('btn-email');
-    const btnAgendar = document.getElementById('btn-agendar');
-
-    // Botões internos para animação stagger
-    const buttons = [btnWhatsapp, btnEmail, btnAgendar];
-
-    // Estado aberto/fechado
-    let isOpen = false;
-
-    // Função para mostrar toast
-    function showToast(iconClass, message, duration = 2000) {
-      toastIcon.className = iconClass;
-      toastMessage.textContent = message;
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, duration);
-    }
-
-    // Função para abrir painel
-    function openPanel() {
-      if (isOpen) return;
-      isOpen = true;
-
-      // Botão: animação clique (micro-rotacao e scale)
-      sideButton.classList.add('side-button-clicked');
-      setTimeout(() => {
-        sideButton.classList.remove('side-button-clicked');
-        // Trocar ícone para fechar
-        sideButton.innerHTML = '<i class="fas fa-times"></i>';
-        sideButton.setAttribute('aria-label', 'Fechar painel de contato');
-        sideButton.setAttribute('aria-expanded', 'true');
-      }, 60);
-
-      // Mostrar overlay
-      overlay.style.pointerEvents = 'auto';
-      overlay.classList.remove('opacity-0');
-      overlay.classList.add('opacity-30');
-      overlay.style.backgroundColor = 'rgba(0,0,0,0.3)';
-      overlay.style.backdropFilter = 'blur(4px)';
-
-      // Mostrar painel com animação overshoot
-      panel.style.transition = 'none';
-      panel.style.transform = 'translateX(24px) scale(0.995)';
-      panel.style.opacity = '0';
-      panel.classList.remove('opacity-0');
-      panel.classList.remove('translate-x-full');
-      panel.style.pointerEvents = 'auto';
-
-      // Forçar reflow para aplicar animação
-      void panel.offsetWidth;
-
-      panel.style.transition = 'transform 360ms cubic-bezier(.2,.9,.25,1), opacity 360ms cubic-bezier(.2,.9,.25,1)';
-      panel.style.transform = 'translateX(-8px) scale(1.005)';
-      panel.style.opacity = '1';
-
-      setTimeout(() => {
-        panel.style.transform = 'translateX(0) scale(1)';
-      }, 250);
-
-      // Animação stagger dos botões
-      buttons.forEach((btn, i) => {
-        btn.classList.add('button-appear');
-        btn.style.animationDelay = `${i * 80}ms`;
-      });
-
-      // Focus trap: foco no primeiro botão
-      btnWhatsapp.focus();
-
-      // Esc para fechar
-      document.addEventListener('keydown', escListener);
-    }
-
-    // Função para fechar painel
-    function closePanel() {
-      if (!isOpen) return;
-      isOpen = false;
-
-      // Reverter botão lateral para original
-      sideButton.innerHTML = '<i class="fas fa-mobile-alt"></i><span>Solicite um Contato</span>';
-      sideButton.setAttribute('aria-label', 'Solicite um Contato');
-      sideButton.setAttribute('aria-expanded', 'false');
-
-      // Ocultar overlay
-      overlay.classList.remove('opacity-30');
-      overlay.classList.add('opacity-0');
-      overlay.style.pointerEvents = 'none';
-
-      // Animação slide out painel
-      panel.style.transition = 'transform 160ms ease-out, opacity 160ms ease-out';
-      panel.style.transform = 'translateX(100%) scale(0.995)';
-      panel.style.opacity = '0';
-      panel.style.pointerEvents = 'none';
-
-      // Remover animações dos botões
-      buttons.forEach(btn => {
-        btn.classList.remove('button-appear');
-        btn.style.animationDelay = '';
-      });
-
-      // Retornar foco ao botão lateral
-      sideButton.focus();
-
-      // Remover listener ESC
-      document.removeEventListener('keydown', escListener);
-    }
-
-    // Listener ESC
-    function escListener(e) {
-      if (e.key === 'Escape') {
-        closePanel();
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
+    if (href !== '#' && href.startsWith('#')) {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
       }
     }
+  });
+});
 
-    // Toggle painel
-    sideButton.addEventListener('click', () => {
-      if (isOpen) {
-        closePanel();
-      } else {
-        openPanel();
-      }
-    });
+// Scroll to section function
+function scrollToSection(selector) {
+  const element = document.querySelector(selector);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+}
 
-    // Fechar ao clicar no overlay
-    overlay.addEventListener('click', closePanel);
+// Load Services
+function loadServices() {
+  const servicesGrid = document.getElementById('servicesGrid');
+  
+  services.forEach((service, index) => {
+    const delay = index * 100;
+    const iconPath = iconPaths[service.icon] || iconPaths.Scale;
+    
+    const serviceCard = document.createElement('div');
+    serviceCard.className = 'service-card';
+    serviceCard.style.opacity = '0';
+    serviceCard.style.transform = 'translateY(50px)';
+    
+    serviceCard.innerHTML = `
+      <div class="service-icon-bg">
+        <svg class="icon" viewBox="0 0 24 24">${iconPath}</svg>
+      </div>
+      <div class="service-content">
+        <div class="service-icon">
+          <svg class="icon" viewBox="0 0 24 24">${iconPath}</svg>
+        </div>
+        <h3 class="service-title">${service.title}</h3>
+        <p class="service-description">${service.description}</p>
+        <span class="service-link">Saiba mais &rarr;</span>
+      </div>
+      <div class="service-bar"></div>
+    `;
+    
+    servicesGrid.appendChild(serviceCard);
+    
+    // Animate in
+    setTimeout(() => {
+      serviceCard.style.transition = 'all 0.5s ease';
+      serviceCard.style.opacity = '1';
+      serviceCard.style.transform = 'translateY(0)';
+    }, delay);
+  });
+}
 
-    // Fechar ao clicar no botão fechar
-    closeBtn.addEventListener('click', closePanel);
+// Intersection Observer for animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -100px 0px'
+};
 
-    // Microinterações botões
-
-    // Função para simular abertura de app com toast e delay
-    function openAppSimulated(appName, url) {
-      showToast('fas fa-spinner fa-spin', `Abrindo ${appName}...`, 3000);
-      setTimeout(() => {
-        window.open(url, '_blank');
-        showToast('fas fa-check', 'Ação iniciada', 2000);
-      }, 1500);
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0) translateX(0)';
     }
+  });
+}, observerOptions);
 
-    btnWhatsapp.addEventListener('click', () => {
-      const message = encodeURIComponent('Olá, gostaria de agendar/obter orientação — [breve motivo]');
-      const url = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
-        ? `whatsapp://send?text=${message}`
-        : `https://web.whatsapp.com/send?text=${message}`;
-      openAppSimulated('WhatsApp', url);
-    });
+// Observe animated elements
+document.addEventListener('DOMContentLoaded', () => {
+  const animatedElements = document.querySelectorAll('.about-image, .about-content');
+  animatedElements.forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
+  });
+});
 
-    btnEmail.addEventListener('click', () => {
-      // Exemplo mailto simples
-      const mailto = 'mailto:contato@exemplo.com?subject=Solicitação&body=Olá,%20gostaria%20de%20obter%20orientação.';
-      openAppSimulated('E-mail', mailto);
-    });
+// Contact Form Handling
+const contactForm = document.getElementById('contactForm');
+const submitBtn = document.getElementById('submitBtn');
 
-    btnAgendar.addEventListener('click', () => {
-      // Aqui você pode abrir modal ou redirecionar para sistema de agendamento
-      showToast('fas fa-check', 'Abrindo agendamento...', 2000);
-      // Exemplo: abrir Calendly
-      window.open('https://calendly.com/seu-agendamento', '_blank');
-    });
+contactForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  // Clear previous errors
+  document.querySelectorAll('.form-error').forEach(el => el.textContent = '');
+  
+  const formData = new FormData(contactForm);
+  const data = {
+    name: formData.get('name'),
+    email: formData.get('email'),
+    phone: formData.get('phone') || '',
+    message: formData.get('message')
+  };
+  
+  // Basic validation
+  let hasError = false;
+  
+  if (!data.name.trim()) {
+    document.getElementById('nameError').textContent = 'O nome é obrigatório';
+    hasError = true;
+  }
+  
+  if (!data.email.trim()) {
+    document.getElementById('emailError').textContent = 'O e-mail é obrigatório';
+    hasError = true;
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+    document.getElementById('emailError').textContent = 'Endereço de e-mail inválido';
+    hasError = true;
+  }
+  
+  if (!data.message.trim()) {
+    document.getElementById('messageError').textContent = 'A mensagem é obrigatória';
+    hasError = true;
+  }
+  
+  if (hasError) return;
+  
+  // Simulate form submission
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando Mensagem...';
+  
+  // Simulate API call
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  
+  // Show success toast
+  showToast('Mensagem enviada com sucesso! Entraremos em contato em breve.', 'success');
+  
+  // Reset form
+  contactForm.reset();
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Enviar Mensagem';
+});
 
-    // Accessibility: trap focus inside panel when open
-    panel.addEventListener('keydown', (e) => {
-      if (e.key === 'Tab') {
-        const focusable = panel.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
+// Toast Notification
+function showToast(message, type = 'success') {
+  const toast = document.getElementById('toast');
+  const toastMessage = document.getElementById('toastMessage');
+  
+  toast.className = `toast ${type}`;
+  toastMessage.textContent = message;
+  
+  // Show toast
+  setTimeout(() => {
+    toast.classList.add('show');
+  }, 100);
+  
+  // Hide toast after 4 seconds
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 4000);
+}
 
-        if (e.shiftKey) {
-          if (document.activeElement === first) {
-            e.preventDefault();
-            last.focus();
-          }
-        } else {
-          if (document.activeElement === last) {
-            e.preventDefault();
-            first.focus();
-          }
-        }
-      }
-    });
+// Set current year in footer
+document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-  })();
+// Parallax Slider
+let currentSlide = 0;
+let slideInterval;
+
+function updateSlides() {
+  const slides = document.querySelectorAll('.parallax-slide');
+  const dots = document.querySelectorAll('.slide-dot');
+  
+  slides.forEach((slide, index) => {
+    if (index === currentSlide) {
+      slide.classList.add('active');
+    } else {
+      slide.classList.remove('active');
+    }
+  });
+  
+  dots.forEach((dot, index) => {
+    if (index === currentSlide) {
+      dot.classList.add('active');
+    } else {
+      dot.classList.remove('active');
+    }
+  });
+}
+
+function nextSlide() {
+  const slides = document.querySelectorAll('.parallax-slide');
+  currentSlide = (currentSlide + 1) % slides.length;
+  updateSlides();
+}
+
+function goToSlide(index) {
+  currentSlide = index;
+  updateSlides();
+  resetSlideInterval();
+}
+
+function resetSlideInterval() {
+  clearInterval(slideInterval);
+  slideInterval = setInterval(nextSlide, 6000);
+}
+
+// Initialize slider
+updateSlides();
+slideInterval = setInterval(nextSlide, 6000);
+
+// Pause on hover
+const projectsSection = document.querySelector('#projects');
+if (projectsSection) {
+  projectsSection.addEventListener('mouseenter', () => {
+    clearInterval(slideInterval);
+  });
+  
+  projectsSection.addEventListener('mouseleave', () => {
+    resetSlideInterval();
+  });
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  loadServices();
+});
+
+
+window.addEventListener('scroll', () => {
+  const projectsSection = document.querySelector('.projects-hero');
+  if (!projectsSection) return;
+  
+  const rect = projectsSection.getBoundingClientRect();
+  const visible = rect.top < window.innerHeight && rect.bottom > 0;
+  
+  if (!visible) return;
+  
+  const progress = rect.top / window.innerHeight; // -1 a 1
+  const offset = progress * 80; // quanto desloca em px (ajuste a gosto)
+  
+  document.querySelectorAll('.parallax-slide').forEach(slide => {
+    slide.style.backgroundPosition = `center calc(50% + ${offset}px)`;
+  });
+}, { passive: true });
 </script>
 
-  </script>
- </body>
+</body>
 </html>
