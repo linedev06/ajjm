@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>AJ João Mendes — Assistência Judiciária</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --crimson: #C41E3A;
+  --crimson-dark: #9B1729;
+  --navy: #0A1628;
+  --navy-mid: #162040;
+  --gold: #E8C87A;
+  --parchment: #F2F4F7;
+  --stone: #E2E6ED;
+  --ink: #0D1117;
+  --mist: #64748B;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--parchment); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; line-height: 1.6; overflow-x: hidden; }
+
+/* ── CURSOR PERSONALIZADO ── */
+*, *::before, *::after { cursor: none !important; }
+#cursor { position: fixed; top: 0; left: 0; width: 8px; height: 8px; background: var(--crimson); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s ease, width 0.25s ease, height 0.25s ease, background 0.25s ease; }
+#cursor-ring { position: fixed; top: 0; left: 0; width: 36px; height: 36px; border: 1px solid var(--crimson); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: transform 0.12s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease; opacity: 0.6; }
+body.hovering #cursor { width: 12px; height: 12px; background: var(--gold); }
+body.hovering #cursor-ring { width: 54px; height: 54px; border-color: var(--gold); opacity: 0.4; }
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9000; opacity: 1; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--parchment); }
+::-webkit-scrollbar-thumb { background: var(--crimson); }
+
+/* ── NAVBAR ── */
+.navbar { position: fixed; width: 100%; z-index: 200; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+.navbar::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0; transition: opacity 0.5s ease; }
+.navbar.scrolled::after { opacity: 1; }
+.navbar.scrolled { background: rgba(247, 244, 239, 0.97); backdrop-filter: blur(20px) saturate(180%); }
+.navbar:not(.scrolled) { background: transparent; }
+.navbar-inner { display: flex; justify-content: space-between; align-items: center; height: 5rem; max-width: 1400px; margin: 0 auto; padding: 0 2.5rem; }
+
+.logo { display: flex; align-items: center; gap: 1.25rem; text-decoration: none; }
+.logo-mark { width: 2px; height: 2.5rem; background: var(--crimson); flex-shrink: 0; }
+.logo-text { display: flex; flex-direction: column; gap: 0; }
+.logo-main { font-family: var(--serif); font-weight: 600; font-size: 1.05rem; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1; transition: color 0.4s ease; }
+.logo-sub { font-family: var(--sans); font-weight: 300; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--crimson); margin-top: 0.2rem; line-height: 1; }
+.navbar:not(.scrolled) .logo-main { color: rgba(255,255,255,0.95); }
+.navbar.scrolled .logo-main { color: var(--navy); }
+.navbar:not(.scrolled) .logo-mark { background: rgba(255,255,255,0.7); }
+.navbar.scrolled .logo-mark { background: var(--crimson); }
+
+.nav-links { display: none; align-items: center; gap: 0; }
+@media (min-width: 768px) { .nav-links { display: flex; } }
+.nav-link { font-family: var(--sans); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; padding: 0.5rem 1.25rem; position: relative; transition: color 0.3s ease; }
+.nav-link::after { content: ''; position: absolute; bottom: 0; left: 50%; right: 50%; height: 1px; background: var(--crimson); transition: left 0.3s ease, right 0.3s ease; }
+.nav-link:hover::after { left: 1.25rem; right: 1.25rem; }
+.navbar.scrolled .nav-link { color: var(--navy); }
+.navbar:not(.scrolled) .nav-link { color: rgba(255,255,255,0.8); }
+.nav-link:hover { color: var(--crimson) !important; }
+
+.nav-cta { margin-left: 1.5rem; font-family: var(--sans); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.6rem 1.5rem; border: 1px solid; text-decoration: none; transition: all 0.3s ease; }
+.navbar:not(.scrolled) .nav-cta { border-color: rgba(255,255,255,0.4); color: white; }
+.navbar:not(.scrolled) .nav-cta:hover { background: white; color: var(--navy); border-color: white; }
+.navbar.scrolled .nav-cta { border-color: var(--crimson); color: var(--crimson); }
+.navbar.scrolled .nav-cta:hover { background: var(--crimson); color: white; }
+
+.mobile-menu-btn { display: block; background: none; border: none; padding: 0.5rem; }
+@media (min-width: 768px) { .mobile-menu-btn { display: none; } }
+.hamburger { display: flex; flex-direction: column; gap: 5px; }
+.hamburger span { display: block; width: 24px; height: 1px; transition: all 0.3s ease; }
+.navbar.scrolled .hamburger span { background: var(--navy); }
+.navbar:not(.scrolled) .hamburger span { background: white; }
+.mobile-menu { background: var(--parchment); border-bottom: 1px solid var(--stone); overflow: hidden; max-height: 0; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
+.mobile-menu.open { max-height: 400px; }
+.mobile-menu-content { padding: 1.5rem 2rem; display: flex; flex-direction: column; gap: 1rem; }
+.mobile-menu-link { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--navy); text-decoration: none; font-weight: 500; padding: 0.5rem 0; border-bottom: 1px solid var(--stone); transition: color 0.3s; }
+.mobile-menu-link:hover { color: var(--crimson); }
+
+/* ── HERO ── */
+.hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); transition: transform 8s ease; }
+.hero-bg img.loaded { transform: scale(1); }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(165deg, rgba(10,22,40,0.75) 0%, rgba(10,22,40,0.92) 60%, rgba(10,22,40,0.98) 100%); }
+.hero-content { position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; padding: 0 2.5rem 6rem; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: flex-end; }
+@media (max-width: 768px) { .hero-content { grid-template-columns: 1fr; gap: 2rem; padding-bottom: 4rem; } }
+
+.hero-eyebrow { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+.hero-eyebrow-line { width: 3rem; height: 1px; background: var(--gold); }
+.hero-eyebrow-text { font-family: var(--sans); font-size: 0.65rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
+.hero-title { font-family: var(--serif); font-size: clamp(3.5rem, 7vw, 6rem); font-weight: 300; color: white; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.hero-title em { font-style: italic; color: rgba(255,255,255,0.5); display: block; }
+.hero-title strong { font-weight: 600; display: block; }
+
+.hero-right { display: flex; flex-direction: column; justify-content: flex-end; gap: 2rem; }
+.hero-desc { font-size: 0.875rem; line-height: 1.9; color: rgba(255,255,255,0.55); font-weight: 300; max-width: 380px; border-left: 1px solid rgba(255,255,255,0.15); padding-left: 1.5rem; }
+.hero-actions { display: flex; flex-direction: column; gap: 1rem; }
+.hero-stat-row { display: flex; gap: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
+.hero-stat-num { font-family: var(--serif); font-size: 2rem; font-weight: 600; color: white; line-height: 1; }
+.hero-stat-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 0.3rem; }
+
+.btn-ghost { display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--sans); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: white; text-decoration: none; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; background: none; border-left: 0; border-right: 0; border-top: 0; width: fit-content; }
+.btn-ghost:hover { color: var(--gold); border-bottom-color: var(--gold); gap: 1.25rem; }
+.btn-solid { display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--sans); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: white; background: var(--crimson); padding: 1rem 2rem; transition: all 0.3s ease; text-decoration: none; border: none; }
+.btn-solid:hover { background: var(--crimson-dark); gap: 1.25rem; }
+
+/* ── MARQUEE BAND ── */
+.marquee-band { background: var(--navy); overflow: hidden; padding: 1rem 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.marquee-track { display: flex; animation: marquee 25s linear infinite; width: max-content; }
+.marquee-item { display: flex; align-items: center; gap: 1.5rem; padding: 0 2rem; white-space: nowrap; font-family: var(--sans); font-size: 0.6rem; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+.marquee-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--crimson); flex-shrink: 0; }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ── ABOUT ── */
+.about { background: var(--parchment); padding: 10rem 0; }
+.about-inner { max-width: 1400px; margin: 0 auto; padding: 0 2.5rem; display: grid; grid-template-columns: 1fr 1.4fr; gap: 8rem; align-items: center; }
+@media (max-width: 1024px) { .about-inner { grid-template-columns: 1fr; gap: 4rem; } }
+
+.section-label { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+.section-label-line { width: 2rem; height: 1px; background: var(--crimson); }
+.section-label-text { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--crimson); }
+.about-number { font-family: var(--serif); font-size: clamp(5rem, 12vw, 9rem); font-weight: 300; color: var(--stone); line-height: 1; letter-spacing: -0.04em; margin-bottom: -1rem; position: relative; z-index: 0; }
+.about-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; color: var(--navy); line-height: 1.15; position: relative; z-index: 1; }
+.about-title em { font-style: italic; color: var(--crimson); }
+
+.about-body { font-size: 1rem; line-height: 2; color: var(--mist); font-weight: 300; margin-bottom: 3rem; }
+.about-body strong { color: var(--ink); font-weight: 500; }
+
+.pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--stone); }
+.pillar { padding: 1.75rem; border-right: 1px solid var(--stone); border-bottom: 1px solid var(--stone); transition: background 0.3s ease; }
+.pillar:nth-child(2n) { border-right: none; }
+.pillar:nth-child(3), .pillar:nth-child(4) { border-bottom: none; }
+.pillar:hover { background: white; }
+.pillar-num { font-family: var(--serif); font-size: 0.8rem; color: var(--crimson); margin-bottom: 0.75rem; }
+.pillar-title { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; color: var(--navy); margin-bottom: 0.5rem; }
+.pillar-desc { font-size: 0.75rem; color: var(--mist); line-height: 1.7; }
+
+/* ── SERVICES ── */
+.services { background: hsl(209, 100%, 14%); padding: 10rem 0; position: relative; overflow: hidden; }
+.services::before { content: ''; position: absolute; top: -20%; right: -10%; width: 50vw; height: 50vw; border-radius: 50%; background: radial-gradient(circle, rgba(196,30,58,0.06) 0%, transparent 70%); pointer-events: none; }
+.services-inner { max-width: 1400px; margin: 0 auto; padding: 0 2.5rem; }
+.services-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: flex-end; margin-bottom: 6rem; }
+@media (max-width: 768px) { .services-header { grid-template-columns: 1fr; gap: 2rem; } }
+.services-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; color: rgb(209, 209, 209); line-height: 1.05; }
+.services-title em { font-style: italic; color: rgba(255,255,255,0.3); }
+.services-intro { font-size: 0.875rem; color: rgba(255,255,255,0.4); line-height: 1.9; font-weight: 300; max-width: 380px; align-self: flex-end; }
+
+.services-list { display: flex; flex-direction: column; }
+.service-row { display: grid; grid-template-columns: 3rem 1fr auto; gap: 2rem; align-items: center; padding: 2rem 0; border-top: 1px solid rgba(255,255,255,0.06); transition: all 0.4s ease; position: relative; overflow: hidden; }
+.service-row::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: rgba(196,30,58,0.05); transition: width 0.4s ease; }
+.service-row:hover::before { width: 100%; }
+.service-row:last-child { border-bottom: 1px solid rgba(255,255,255,0.06); }
+.service-row:hover .service-row-name { color: white; }
+.service-row:hover .service-row-arrow { transform: translateX(0.5rem); opacity: 1; }
+.service-row-index { font-family: var(--serif); font-size: 0.75rem; color: rgba(255,255,255,0.2); align-self: flex-start; padding-top: 0.2rem; }
+.service-row-name { font-family: var(--serif); font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 400; color: rgba(255,255,255,0.7); line-height: 1.2; margin-bottom: 0.5rem; transition: color 0.4s ease; }
+.service-row-desc { font-size: 0.75rem; color: rgba(255,255,255,0.25); line-height: 1.8; max-width: 500px; font-weight: 300; }
+.service-row-arrow { font-size: 1.25rem; color: var(--crimson); opacity: 0; transition: all 0.4s ease; flex-shrink: 0; }
+
+/* ── PARALLAX SLIDES ── */
+.stories { position: relative; height: 100vh; overflow: hidden; }
+.story-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s cubic-bezier(0.4,0,0.2,1); }
+.story-slide.active { opacity: 1; }
+.story-slide img { width: 100%; height: 100%; object-fit: cover; }
+.story-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,22,40,0.85) 40%, rgba(10,22,40,0.3) 100%); }
+.story-content { position: absolute; inset: 0; z-index: 10; display: flex; align-items: center; max-width: 1400px; margin: 0 auto; padding: 0 2.5rem; left: 50%; transform: translateX(-50%); width: 100%; }
+.story-text { max-width: 560px; }
+.story-tag { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+.story-tag::before { content: ''; width: 2rem; height: 1px; background: var(--gold); }
+.story-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; color: white; line-height: 1.05; margin-bottom: 1.5rem; }
+.story-desc { font-size: 0.875rem; color: rgba(255,255,255,0.55); line-height: 1.9; margin-bottom: 2.5rem; font-weight: 300; }
+.story-nav { position: absolute; bottom: 3rem; right: 3rem; z-index: 20; display: flex; align-items: center; gap: 1.5rem; }
+.story-nav-btn { width: 3rem; height: 3rem; border: 1px solid rgba(255,255,255,0.2); background: none; color: white; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+.story-nav-btn:hover { background: var(--crimson); border-color: var(--crimson); }
+.story-progress { font-family: var(--serif); font-size: 0.875rem; color: rgba(255,255,255,0.4); }
+
+/* ── PARTNERS ── */
+.partners { background: white; padding: 6rem 0; border-bottom: 1px solid var(--stone); }
+.partners-inner { max-width: 1400px; margin: 0 auto; padding: 0 2.5rem; }
+.partners-label {
+  font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--mist); margin-bottom: 3rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.partners-label::after { content: ''; flex: 1; height: 1px; background: var(--stone); }
+
+/* Viewport wrapper — clips overflow */
+.logo-marquee-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* The scrolling track — contains 2 sets of items side by side */
+.logo-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: max-content;
+  animation: logoMarquee 28s linear infinite;
+  will-change: transform;
+}
+
+/* Each "set" of logos is a flex group */
+.logo-marquee-set {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  padding: 0 2rem;
+  flex-shrink: 0;
+}
+
+/* Individual logo item — uses text fallback since external images often 404 */
+.logo-partner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 48px;
+  padding: 0 1rem;
+}
+
+/* Text-based partner logos — reliable, no broken images */
+.logo-partner-text {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--navy);
+  opacity: 0.22;
+  white-space: nowrap;
+  transition: opacity 0.4s ease;
+  text-transform: uppercase;
+}
+
+.logo-partner:hover .logo-partner-text {
+  opacity: 0.7;
+}
+
+/* Separator dot between logos */
+.logo-partner-sep {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--stone);
+  flex-shrink: 0;
+}
+
+@keyframes logoMarquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── CONTACT ── */
+.contact { background: var(--parchment); padding: 10rem 0; }
+.contact-inner { max-width: 1400px; margin: 0 auto; padding: 0 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; }
+@media (max-width: 1024px) { .contact-inner { grid-template-columns: 1fr; gap: 4rem; } }
+.contact-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; color: var(--navy); line-height: 1.05; margin-bottom: 2rem; }
+.contact-title em { font-style: italic; color: var(--crimson); }
+.contact-body { font-size: 0.9rem; color: var(--mist); line-height: 1.9; margin-bottom: 3rem; font-weight: 300; }
+
+.contact-details { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--stone); }
+.contact-detail { display: flex; gap: 2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--stone); align-items: flex-start; }
+.contact-detail-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--crimson); width: 6rem; flex-shrink: 0; padding-top: 0.15rem; }
+.contact-detail-value { font-size: 0.875rem; color: var(--navy); font-weight: 400; line-height: 1.6; }
+
+.contact-right { padding-top: 4rem; }
+.contact-form-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mist); margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; }
+.contact-form-label::before { content: ''; width: 2rem; height: 1px; background: var(--stone); }
+.contact-email-display { font-family: var(--serif); font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--navy); font-weight: 400; margin-bottom: 2rem; word-break: break-all; }
+.contact-email-display a { color: inherit; text-decoration: none; transition: color 0.3s; }
+.contact-email-display a:hover { color: var(--crimson); }
+.contact-note { font-size: 0.75rem; color: var(--mist); margin-bottom: 2.5rem; line-height: 1.8; }
+
+/* ── FOOTER ── */
+footer { background: var(--navy); padding: 4rem 0 2rem; }
+.footer-inner { max-width: 1400px; margin: 0 auto; padding: 0 2.5rem; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+@media (max-width: 768px) { .footer-top { grid-template-columns: 1fr; gap: 2rem; } }
+.footer-logo { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: white; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+.footer-logo-sub { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 1.5rem; }
+.footer-about { font-size: 0.8rem; color: rgba(255,255,255,0.35); line-height: 1.9; max-width: 300px; }
+.footer-col-title { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer-links { display: flex; flex-direction: column; gap: 0.75rem; }
+.footer-link { font-size: 0.8rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.3s; }
+.footer-link:hover { color: white; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); }
+.footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.2); }
+.footer-socials { display: flex; gap: 1rem; }
+.social-btn { width: 2rem; height: 2rem; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.4); transition: all 0.3s; text-decoration: none; }
+.social-btn:hover { border-color: var(--crimson); color: var(--crimson); }
+
+/* ── UTILS ── */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark"></div>
+      <div class="logo-text">
+        <span class="logo-main">AJ João Mendes</span>
+        <span class="logo-sub">Assistência Judiciária · Est. 1959</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#about" class="nav-link">Sobre</a>
+      <a href="#services" class="nav-link">Serviços</a>
+      <a href="#projects" class="nav-link">Projetos</a>
+      <a href="#partners" class="nav-link">Parceiros</a>
+      <a href="#contact" class="nav-cta">Contato</a>
+    </div>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-content">
+      <a href="#about" class="mobile-menu-link">Sobre</a>
+      <a href="#services" class="mobile-menu-link">Serviços</a>
+      <a href="#projects" class="mobile-menu-link">Projetos</a>
+      <a href="#partners" class="mobile-menu-link">Parceiros</a>
+      <a href="#contact" class="mobile-menu-link">Contato</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img id="heroImg" src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=2400" alt="">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-left reveal">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">Especialistas Jurídicos de Confiança</span>
+      </div>
+      <h1 class="hero-title">
+        <em>Defendendo</em>
+        <strong>Seus Direitos.</strong>
+      </h1>
+    </div>
+    <div class="hero-right reveal reveal-delay-2">
+      <p class="hero-desc">Oferecemos soluções jurídicas completas com compromisso com a excelência e a integridade. A sua justiça é a nossa prioridade desde 1959.</p>
+      <div class="hero-actions">
+        <button class="btn-solid">Consulta Gratuita &nbsp;→</button>
+        <a href="#services" class="btn-ghost">Ver nossos serviços &nbsp;→</a>
+      </div>
+      <div class="hero-stat-row">
+        <div class="hero-stat">
+          <div class="hero-stat-num">25+</div>
+          <div class="hero-stat-label">Anos de Experiência</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">5K+</div>
+          <div class="hero-stat-label">Clientes Atendidos</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">98%</div>
+          <div class="hero-stat-label">Taxa de Satisfação</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE BAND -->
+<div class="marquee-band">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="marquee-dot"></span> Direito Civil</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Direito de Família</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Defesa Criminal</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Direito do Trabalho</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Imigração</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Direito Habitacional</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Consulta Gratuita</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Justiça Social</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Direito Civil</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Direito de Família</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Defesa Criminal</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Direito do Trabalho</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Imigração</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Direito Habitacional</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Consulta Gratuita</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Justiça Social</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="about-inner">
+    <div class="about-left reveal">
+      <div class="section-label">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">Sobre Nós</span>
+      </div>
+      <div class="about-number">65</div>
+      <h2 class="about-title">Comprometidos em <em>servir</em> quem mais precisa.</h2>
+    </div>
+    <div class="about-right reveal reveal-delay-2">
+      <p class="about-body">Somos um escritório de advocacia completo dedicado a oferecer a mais alta qualidade em representação jurídica. Nossos advogados têm <strong>décadas de experiência combinada</strong> e já representaram com sucesso milhares de clientes ao longo de nossa história.</p>
+      <p class="about-body" style="margin-top: -1.5rem;">Uma iniciativa da Universidade Presbiteriana Mackenzie, nossa missão é garantir que o acesso à justiça não seja privilégio de poucos — mas um direito de todos.</p>
+      <div class="pillars" style="margin-top: 2rem;">
+        <div class="pillar"><div class="pillar-num">01</div><div class="pillar-title">Advogados Especializados</div><div class="pillar-desc">Profissionais com foco em cada área do direito</div></div>
+        <div class="pillar"><div class="pillar-num">02</div><div class="pillar-title">Histórico Comprovado</div><div class="pillar-desc">Resultados consistentes ao longo de décadas</div></div>
+        <div class="pillar"><div class="pillar-num">03</div><div class="pillar-title">Foco no Cliente</div><div class="pillar-desc">Abordagem centrada nas suas necessidades</div></div>
+        <div class="pillar"><div class="pillar-num">04</div><div class="pillar-title">Transparência Total</div><div class="pillar-desc">Comunicação clara em cada etapa do processo</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+  <div class="services-inner">
+    <div class="services-header reveal">
+      <h2 class="services-title">Como podemos <em>te ajudar</em></h2>
+      <p class="services-intro">Oferecemos uma ampla gama de serviços jurídicos adaptados às suas necessidades específicas, com excelência e compromisso.</p>
+    </div>
+    <div class="services-list reveal">
+      <div class="service-row"><span class="service-row-index">01</span><div class="service-row-body"><div class="service-row-name">Direito Civil</div><div class="service-row-desc">Protegendo liberdades individuais e garantindo igualdade perante a lei.</div></div><span class="service-row-arrow">→</span></div>
+      <div class="service-row"><span class="service-row-index">02</span><div class="service-row-body"><div class="service-row-name">Direito de Família</div><div class="service-row-desc">Orientação compassiva em divórcio, guarda, adoção e outros assuntos familiares.</div></div><span class="service-row-arrow">→</span></div>
+      <div class="service-row"><span class="service-row-index">03</span><div class="service-row-body"><div class="service-row-name">Defesa Criminal</div><div class="service-row-desc">Representação firme para proteger seus direitos e sua liberdade.</div></div><span class="service-row-arrow">→</span></div>
+      <div class="service-row"><span class="service-row-index">04</span><div class="service-row-body"><div class="service-row-name">Direito do Trabalho</div><div class="service-row-desc">Defendendo os direitos dos trabalhadores contra demissão injusta e discriminação.</div></div><span class="service-row-arrow">→</span></div>
+      <div class="service-row"><span class="service-row-index">05</span><div class="service-row-body"><div class="service-row-name">Serviços de Imigração</div><div class="service-row-desc">Ajudando famílias a navegar pelo complexo sistema de imigração.</div></div><span class="service-row-arrow">→</span></div>
+      <div class="service-row"><span class="service-row-index">06</span><div class="service-row-body"><div class="service-row-name">Direito Habitacional</div><div class="service-row-desc">Garantindo práticas habitacionais justas e protegendo os direitos dos inquilinos.</div></div><span class="service-row-arrow">→</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES / PROJECTS -->
+<section id="projects" class="stories">
+  <div class="story-slide active">
+    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=2000" alt="">
+    <div class="story-overlay"></div>
+    <div class="story-content"><div class="story-text"><div class="story-tag">Sustentabilidade</div><h2 class="story-title">Impacto Social e Solidariedade</h2><p class="story-desc">Nossas iniciativas vão além do suporte jurídico, promovendo cidadania, saúde e bem-estar para toda a comunidade.</p><button class="btn-solid" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Saiba Mais &nbsp;→</button></div></div>
+  </div>
+  <div class="story-slide">
+    <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&q=80&w=2000" alt="">
+    <div class="story-overlay"></div>
+    <div class="story-content"><div class="story-text"><div class="story-tag">Educação</div><h2 class="story-title">Capacitação e Desenvolvimento</h2><p class="story-desc">Oficinas gratuitas sobre direitos básicos, educação financeira e orientação profissional para a comunidade.</p><button class="btn-solid" onclick="document.querySelector('#services').scrollIntoView({behavior:'smooth'})">Ver Programas &nbsp;→</button></div></div>
+  </div>
+  <div class="story-slide">
+    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=2000" alt="">
+    <div class="story-overlay"></div>
+    <div class="story-content"><div class="story-text"><div class="story-tag">Saúde</div><h2 class="story-title">Bem-Estar da Comunidade</h2><p class="story-desc">Parcerias com profissionais de saúde para oferecer atendimento psicológico e orientação médica a populações vulneráveis.</p><button class="btn-solid" onclick="document.querySelector('#partners').scrollIntoView({behavior:'smooth'})">Nossos Parceiros &nbsp;→</button></div></div>
+  </div>
+  <div class="story-slide">
+    <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&q=80&w=2000" alt="">
+    <div class="story-overlay"></div>
+    <div class="story-content"><div class="story-text"><div class="story-tag">Voluntariado</div><h2 class="story-title">Faça Parte da Mudança</h2><p class="story-desc">Junte-se à nossa equipe de voluntários e ajude a transformar vidas por meio do acesso à justiça e à cidadania.</p><button class="btn-solid" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Seja Voluntário &nbsp;→</button></div></div>
+  </div>
+  <div class="story-nav">
+    <button class="story-nav-btn" id="prevBtn">←</button>
+    <div class="story-progress" id="storyProgress">01 / 04</div>
+    <button class="story-nav-btn" id="nextBtn">→</button>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<!--
+  ESTRUTURA DO MARQUEE:
+  .logo-marquee-viewport  ← overflow: hidden (janela visível)
+    .logo-marquee-track   ← display: flex, animado com translateX
+      .logo-marquee-set   ← grupo A (os 5 parceiros)
+      .logo-marquee-set   ← grupo B (cópia idêntica via JS)
+  
+  A animação vai de translateX(0) → translateX(-50%)
+  -50% = exatamente a largura de 1 set = loop perfeito e invisível
+-->
+<section id="partners" class="partners">
+  <div class="partners-inner">
+    <div class="partners-label">Parceiros de Confiança</div>
+    <div class="logo-marquee-viewport">
+      <div class="logo-marquee-track" id="logoMarqueeTrack">
+        <!-- SET A — apenas este grupo existe no HTML -->
+        <div class="logo-marquee-set" id="logoSetA">
+          <div class="logo-partner"><span class="logo-partner-text">Mackenzie</span></div>
+          <div class="logo-partner-sep"></div>
+          <div class="logo-partner"><span class="logo-partner-text">OAB / SP</span></div>
+          <div class="logo-partner-sep"></div>
+          <div class="logo-partner"><span class="logo-partner-text">Defensoria Pública</span></div>
+          <div class="logo-partner-sep"></div>
+          <div class="logo-partner"><span class="logo-partner-text">TJSP</span></div>
+          <div class="logo-partner-sep"></div>
+          <div class="logo-partner"><span class="logo-partner-text">CNJ</span></div>
+          <div class="logo-partner-sep"></div>
+          <div class="logo-partner"><span class="logo-partner-text">Ministério Público</span></div>
+          <div class="logo-partner-sep"></div>
+          <div class="logo-partner"><span class="logo-partner-text">CAASP</span></div>
+          <div class="logo-partner-sep"></div>
+        </div>
+        <!-- SET B será injetado via JS como clone do SET A -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="contact-inner">
+    <div class="contact-left reveal">
+      <div class="section-label">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">Entre em Contato</span>
+      </div>
+      <h2 class="contact-title">Agende sua<br>Consulta <em>Gratuita</em></h2>
+      <p class="contact-body">Não espere até ser tarde demais. Entre em contato hoje para discutir seu caso com um de nossos advogados experientes. Estamos aqui para ouvir e lutar por você.</p>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <span class="contact-detail-label">Endereço</span>
+          <span class="contact-detail-value">Rua da Consolação, 930<br>Consolação — São Paulo, SP 01302-907</span>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-label">Telefone</span>
+          <span class="contact-detail-value">(11) 2114-8000</span>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-label">Horário</span>
+          <span class="contact-detail-value">Segunda a Sexta<br>08h00 — 18h00</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-right reveal reveal-delay-2">
+      <div class="contact-form-label">E-mail Direto</div>
+      <div class="contact-email-display">
+        <a href="mailto:parcerias@ajjoaomendes.com">parcerias@ajjoaomendes.com</a>
+      </div>
+      <p class="contact-note">Nossa equipe jurídica está pronta para ouvir você. Respondemos em até 24 horas. Todas as comunicações são tratadas com sigilo profissional absoluto.</p>
+      <a href="mailto:parcerias@ajjoaomendes.com" class="btn-solid">Enviar Email &nbsp;→</a>
+      <div style="margin-top: 3rem; padding-top: 3rem; border-top: 1px solid var(--stone);">
+        <div class="contact-form-label">E-mail Institucional</div>
+        <div class="contact-email-display" style="font-size: 1rem;">
+          <a href="mailto:ajjoaomendes@mackenzie.br">ajjoaomendes@mackenzie.br</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">AJ João Mendes</div>
+        <div class="footer-logo-sub">Assistência Judiciária · Est. 1959</div>
+        <p class="footer-about">Promovendo justiça social e excelência jurídica desde 1959. Uma iniciativa da Universidade Presbiteriana Mackenzie dedicada a garantir o acesso à justiça para todos.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navegação</div>
+        <div class="footer-links">
+          <a href="#about" class="footer-link">Sobre Nós</a>
+          <a href="#services" class="footer-link">Serviços</a>
+          <a href="#projects" class="footer-link">Projetos Sociais</a>
+          <a href="#partners" class="footer-link">Parceiros</a>
+          <a href="#contact" class="footer-link">Contato</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Serviços</div>
+        <div class="footer-links">
+          <a href="#services" class="footer-link">Direito Civil</a>
+          <a href="#services" class="footer-link">Direito de Família</a>
+          <a href="#services" class="footer-link">Defesa Criminal</a>
+          <a href="#services" class="footer-link">Direito do Trabalho</a>
+          <a href="#services" class="footer-link">Imigração</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contato</div>
+        <div class="footer-links">
+          <span class="footer-link" style="cursor:default;">Rua da Consolação, 930</span>
+          <span class="footer-link" style="cursor:default;">Consolação — SP</span>
+          <a href="tel:+551121148000" class="footer-link">(11) 2114-8000</a>
+          <a href="mailto:ajjoaomendes@mackenzie.br" class="footer-link">ajjoaomendes@mackenzie.br</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© <span id="footerYear"></span> AJ João Mendes. Todos os direitos reservados.</span>
+      <div class="footer-socials">
+        <a href="#" class="social-btn" title="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="#" class="social-btn" title="LinkedIn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        </a>
+        <a href="#" class="social-btn" title="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ── LOGO MARQUEE — clone seguro dentro do DOMContentLoaded ──
+  // Só existe 1 set no HTML. O JS clona e appenda ao track.
+  // A animação CSS vai de translateX(0) → translateX(-50%),
+  // que equivale exatamente à largura de 1 set → loop invisível.
+  const setA = document.getElementById('logoSetA');
+  if (setA) {
+    const setB = setA.cloneNode(true);
+    setB.removeAttribute('id');
+    setB.setAttribute('aria-hidden', 'true');
+    document.getElementById('logoMarqueeTrack').appendChild(setB);
+  }
+
+  // ── CURSOR ──
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+  document.querySelectorAll('a, button, .service-row, .pillar, .logo-partner').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+  });
+
+  // ── NAVBAR ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
+
+  // ── MOBILE MENU ──
+  document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-menu-link').forEach(l =>
+    l.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'))
+  );
+
+  // ── SMOOTH SCROLL ──
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      if (href.length > 1) { e.preventDefault(); document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // ── HERO IMG ──
+  const heroImg = document.getElementById('heroImg');
+  heroImg.addEventListener('load', () => heroImg.classList.add('loaded'));
+  if (heroImg.complete) heroImg.classList.add('loaded');
+
+  // ── STORIES SLIDER ──
+  let current = 0;
+  const slides = document.querySelectorAll('.story-slide');
+  const progress = document.getElementById('storyProgress');
+  function showSlide(n) {
+    slides.forEach((s, i) => s.classList.toggle('active', i === n));
+    progress.textContent = String(n + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+  }
+  document.getElementById('nextBtn').addEventListener('click', () => { current = (current + 1) % slides.length; showSlide(current); });
+  document.getElementById('prevBtn').addEventListener('click', () => { current = (current - 1 + slides.length) % slides.length; showSlide(current); });
+  let autoSlide = setInterval(() => { current = (current + 1) % slides.length; showSlide(current); }, 7000);
+  document.querySelector('.stories').addEventListener('mouseenter', () => clearInterval(autoSlide));
+  document.querySelector('.stories').addEventListener('mouseleave', () => {
+    autoSlide = setInterval(() => { current = (current + 1) % slides.length; showSlide(current); }, 7000);
+  });
+
+  // ── REVEAL ON SCROLL ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── FOOTER YEAR ──
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+});
+</script>
+</body>
+</html>
