@@ -262,6 +262,44 @@ h1,h2,h3,h4,h5,h6 { font-weight: 700; letter-spacing: -0.025em; }
 @media (max-width: 768px) {
   .hero-bg, .parallax-slide, .parallax-bg { background-attachment: scroll !important; }
 }
+
+/* ── Contact card tabs (APENAS ESTA PARTE FOI ADICIONADA) ── */
+.ctab-wrap { background:#fff; border-radius:1.25rem; overflow:hidden; box-shadow:0 32px 64px -12px rgba(0,0,0,0.22); }
+.ctab-bar { height:5px; background:linear-gradient(90deg,hsl(348,83%,47%) 0%,hsl(209,53%,36%) 100%); }
+.ctab-header { padding:1.75rem 2rem 0; display:flex; align-items:center; gap:1rem; }
+.ctab-icon { width:2.75rem; height:2.75rem; background:hsl(209,53%,36%); border-radius:.625rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.ctab-title { font-size:1.15rem; font-weight:700; color:hsl(222,47%,11%); line-height:1.2; }
+.ctab-sub { font-size:.78rem; color:#9ca3af; margin-top:.15rem; font-weight:500; }
+.ctabs { margin:1.5rem 2rem 0; display:flex; border-bottom:2px solid #e5e7eb; position:relative; }
+.ctab-btn { flex:1; padding:.65rem .5rem; font-family:'Montserrat',sans-serif; font-size:.82rem; font-weight:600; color:#6b7280; background:none; border:none; cursor:pointer; transition:color .25s; display:flex; align-items:center; justify-content:center; gap:.4rem; letter-spacing:.02em; }
+.ctab-btn.active { color:hsl(209,53%,36%); }
+.ctab-btn:hover:not(.active) { color:hsl(222,47%,11%); }
+.ctab-ink { position:absolute; bottom:-2px; left:0; height:2px; width:50%; background:hsl(209,53%,36%); border-radius:2px 2px 0 0; transition:left .35s cubic-bezier(.4,0,.2,1); }
+.ctab-ink.right { left:50%; }
+.ctab-panels { overflow:hidden; position:relative; width:100%; }
+.ctab-track { display:flex; width:200%; transition:transform .4s cubic-bezier(.4,0,.2,1); will-change:transform; }
+.ctab-track.to-right { transform:translateX(-50%); }
+.ctab-panel { width:50%; min-width:0; padding:1.75rem 2rem 2rem; box-sizing:border-box; }
+.ctab-field { margin-bottom:1.1rem; }
+.ctab-field label { display:block; font-size:.8rem; font-weight:600; color:hsl(222,47%,11%); margin-bottom:.3rem; letter-spacing:.01em; }
+.ctab-field input, .ctab-field textarea { width:100%; padding:.72rem 1rem; border:1.5px solid #e5e7eb; border-radius:.5rem; font-family:'Montserrat',sans-serif; font-size:.875rem; color:hsl(222,47%,11%); background:#f9fafb; transition:border-color .2s,box-shadow .2s,background .2s; outline:none; resize:vertical; }
+.ctab-field input:focus, .ctab-field textarea:focus { border-color:hsl(209,53%,36%); background:#fff; box-shadow:0 0 0 3px hsl(209,53%,36%,.12); }
+.ctab-field input::placeholder, .ctab-field textarea::placeholder { color:#b0b8c4; }
+.ctab-submit { width:100%; padding:.85rem; background:hsl(209,53%,36%); color:#fff; border:none; border-radius:.5rem; font-family:'Montserrat',sans-serif; font-size:.875rem; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:.55rem; transition:background .25s,transform .2s,box-shadow .25s; box-shadow:0 4px 14px hsl(209,53%,36%,.28); letter-spacing:.02em; margin-top:1.35rem; }
+.ctab-submit:hover { background:hsl(348,83%,47%); transform:translateY(-2px); box-shadow:0 6px 20px hsl(348,83%,47%,.32); }
+.ctab-submit:active { transform:translateY(0); }
+.ctab-email-box { background:#f9fafb; border:1.5px solid #e5e7eb; border-radius:.625rem; padding:.9rem 1.1rem; display:flex; align-items:center; gap:.7rem; margin-bottom:1.5rem; }
+.ctab-email-box span { font-size:.875rem; font-weight:600; color:hsl(222,47%,11%); letter-spacing:.01em; }
+.ctab-divider { width:2.25rem; height:2px; background:linear-gradient(to right,hsl(348,83%,47%),hsl(209,53%,36%)); border-radius:9999px; margin-bottom:1.4rem; }
+.ctab-desc { color:#6b7280; font-size:.875rem; line-height:1.8; margin-bottom:1.5rem; }
+.ctab-privacy { display:flex; align-items:center; gap:.35rem; font-size:.72rem; color:#b0b8c4; margin-top:1rem; line-height:1.5; }
+.ctab-success { display:none; flex-direction:column; align-items:center; text-align:center; padding:2.5rem 1rem; }
+.ctab-success.visible { display:flex; }
+.ctab-success-circle { width:64px; height:64px; border-radius:50%; background:hsl(348,83%,47%,.1); display:flex; align-items:center; justify-content:center; margin-bottom:1.25rem; animation:ctabPopIn .4s cubic-bezier(.34,1.56,.64,1) both; }
+@keyframes ctabPopIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+@keyframes ctabSpin { to{transform:rotate(360deg)} }
+.ctab-success-title { font-size:1.35rem; font-weight:700; color:hsl(222,47%,11%); margin-bottom:.5rem; }
+.ctab-success-sub { font-size:.875rem; color:#6b7280; line-height:1.7; }
 </style>
 </head>
 <body>
@@ -269,40 +307,23 @@ h1,h2,h3,h4,h5,h6 { font-weight: 700; letter-spacing: -0.025em; }
 <nav class="navbar" id="navbar">
   <div class="container">
     <div class="navbar-content">
-
-    
       <a href="#" class="logo">
         <img src="logo6.jpg" alt="AJ João Mendes" class="logo-icon" style="object-fit:contain;padding:0;background:transparent;border-radius:0.5rem;">
-
         <div class="logo-text-wrap">
-     
           <span class="logo-abbr">A</span>
-        
           <span class="logo-expand">ssistência</span>
           <span class="logo-space">&nbsp;</span>
-
- 
           <span class="logo-abbr logo-highlight">J</span>
-         
           <span class="logo-expand">udiciária</span>
           <span class="logo-space">&nbsp;</span>
-
-         
           <span class="logo-dot"></span>
-
-  
           <span class="logo-abbr">J</span>
-       
           <span class="logo-expand">oão</span>
           <span class="logo-space">&nbsp;</span>
-
-    
           <span class="logo-abbr">M</span>
-        
           <span class="logo-expand">endes</span>
         </div>
       </a>
-
       <div class="nav-links">
         <a href="#" class="nav-link">Início</a>
         <a href="#about" class="nav-link">Sobre</a>
@@ -393,50 +414,10 @@ h1,h2,h3,h4,h5,h6 { font-weight: 700; letter-spacing: -0.025em; }
 
 <section id="projects" class="projects-section">
   <div class="projects-hero">
-    <div class="parallax-slide" style="background-image:url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=2000');">
-      <div class="slide-overlay"></div>
-      <div class="slide-content-wrapper">
-        <div class="slide-content">
-          <span class="slide-badge">Sustentabilidade</span>
-          <h2 class="slide-title">Impacto Social e Solidariedade</h2>
-          <p class="slide-description">Nossas iniciativas vão além do suporte jurídico, promovendo cidadania, saúde e bem-estar para toda a comunidade.</p>
-          <button class="slide-button" onclick="scrollToSection('#contact')">VER ARTIGO COMPLETO</button>
-        </div>
-      </div>
-    </div>
-    <div class="parallax-slide" style="background-image:url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&q=80&w=2000');">
-      <div class="slide-overlay"></div>
-      <div class="slide-content-wrapper">
-        <div class="slide-content">
-          <span class="slide-badge">Educação</span>
-          <h2 class="slide-title">Capacitação e Desenvolvimento</h2>
-          <p class="slide-description">Oficinas gratuitas sobre direitos básicos, educação financeira e orientação profissional para a comunidade.</p>
-          <button class="slide-button" onclick="scrollToSection('#services')">CONHEÇA NOSSOS PROGRAMAS</button>
-        </div>
-      </div>
-    </div>
-    <div class="parallax-slide" style="background-image:url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=2000');">
-      <div class="slide-overlay"></div>
-      <div class="slide-content-wrapper">
-        <div class="slide-content">
-          <span class="slide-badge">Saúde</span>
-          <h2 class="slide-title">Bem-Estar da Comunidade</h2>
-          <p class="slide-description">Parcerias com profissionais de saúde para oferecer atendimento psicológico e orientação médica a populações vulneráveis.</p>
-          <button class="slide-button" onclick="scrollToSection('#partners')">NOSSOS PARCEIROS</button>
-        </div>
-      </div>
-    </div>
-    <div class="parallax-slide" style="background-image:url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&q=80&w=2000');">
-      <div class="slide-overlay"></div>
-      <div class="slide-content-wrapper">
-        <div class="slide-content">
-          <span class="slide-badge">Voluntariado</span>
-          <h2 class="slide-title">Faça Parte da Mudança</h2>
-          <p class="slide-description">Junte-se à nossa equipe de voluntários e ajude a transformar vidas por meio do acesso à justiça e à cidadania.</p>
-          <button class="slide-button" onclick="scrollToSection('#contact')">SEJA UM VOLUNTÁRIO</button>
-        </div>
-      </div>
-    </div>
+    <div class="parallax-slide" style="background-image:url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=2000');"><div class="slide-overlay"></div><div class="slide-content-wrapper"><div class="slide-content"><span class="slide-badge">Sustentabilidade</span><h2 class="slide-title">Impacto Social e Solidariedade</h2><p class="slide-description">Nossas iniciativas vão além do suporte jurídico, promovendo cidadania, saúde e bem-estar para toda a comunidade.</p><button class="slide-button" onclick="scrollToSection('#contact')">VER ARTIGO COMPLETO</button></div></div></div>
+    <div class="parallax-slide" style="background-image:url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&q=80&w=2000');"><div class="slide-overlay"></div><div class="slide-content-wrapper"><div class="slide-content"><span class="slide-badge">Educação</span><h2 class="slide-title">Capacitação e Desenvolvimento</h2><p class="slide-description">Oficinas gratuitas sobre direitos básicos, educação financeira e orientação profissional para a comunidade.</p><button class="slide-button" onclick="scrollToSection('#services')">CONHEÇA NOSSOS PROGRAMAS</button></div></div></div>
+    <div class="parallax-slide" style="background-image:url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=2000');"><div class="slide-overlay"></div><div class="slide-content-wrapper"><div class="slide-content"><span class="slide-badge">Saúde</span><h2 class="slide-title">Bem-Estar da Comunidade</h2><p class="slide-description">Parcerias com profissionais de saúde para oferecer atendimento psicológico e orientação médica a populações vulneráveis.</p><button class="slide-button" onclick="scrollToSection('#partners')">NOSSOS PARCEIROS</button></div></div></div>
+    <div class="parallax-slide" style="background-image:url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&q=80&w=2000');"><div class="slide-overlay"></div><div class="slide-content-wrapper"><div class="slide-content"><span class="slide-badge">Voluntariado</span><h2 class="slide-title">Faça Parte da Mudança</h2><p class="slide-description">Junte-se à nossa equipe de voluntários e ajude a transformar vidas por meio do acesso à justiça e à cidadania.</p><button class="slide-button" onclick="scrollToSection('#contact')">SEJA UM VOLUNTÁRIO</button></div></div></div>
     <div class="slide-dots">
       <button class="slide-dot" onclick="goToSlide(0)"></button>
       <button class="slide-dot" onclick="goToSlide(1)"></button>
@@ -447,16 +428,12 @@ h1,h2,h3,h4,h5,h6 { font-weight: 700; letter-spacing: -0.025em; }
 </section>
 
 <section id="partners" class="partners-section" style="padding:4rem 0 4.5rem;background:hsl(209,53%,36%);overflow:hidden;position:relative;">
- 
   <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.15),transparent);"></div>
-
   <div class="container" style="text-align:center;margin-bottom:2.5rem;">
     <span style="display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:0.6rem;">Trabalhamos com</span>
     <h4 style="color:white;font-weight:700;font-size:1.35rem;letter-spacing:-0.01em;">Parceiros de Confiança</h4>
-    
     <div style="width:2.5rem;height:2px;background:hsl(348,83%,47%);border-radius:9999px;margin:0.85rem auto 0;"></div>
   </div>
-
   <div class="slider">
     <div class="slide-track">
       <div class="slide"><img src="https://www.mackenzie.br/fileadmin/ARQUIVOS/Public/top/logo_mackenzie_2.png" alt="Mackenzie"></div>
@@ -473,8 +450,6 @@ h1,h2,h3,h4,h5,h6 { font-weight: 700; letter-spacing: -0.025em; }
       <div class="slide"><img src="https://www.cnj.jus.br/wp-content/uploads/2023/03/logo-cnj.png" alt="CNJ"></div>
     </div>
   </div>
-
-  
   <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.12),transparent);"></div>
 </section>
 
@@ -482,7 +457,6 @@ h1,h2,h3,h4,h5,h6 { font-weight: 700; letter-spacing: -0.025em; }
   <div class="container">
     <div class="contact-grid">
 
-      
       <div class="contact-info">
         <h4 class="section-subtitle">Entre em Contato</h4>
         <h2 class="contact-title">Agende sua<br>Consulta Gratuita</h2>
@@ -509,61 +483,97 @@ h1,h2,h3,h4,h5,h6 { font-weight: 700; letter-spacing: -0.025em; }
         </div>
       </div>
 
-      
-      <div style="position:relative;background:#fff;border-radius:1.25rem;overflow:hidden;box-shadow:0 32px 64px -12px rgba(0,0,0,0.22);">
-        
-        <div style="height:5px;background:linear-gradient(90deg,hsl(348,83%,47%) 0%,hsl(209,53%,36%) 100%);"></div>
+      <div class="ctab-wrap">
+        <div class="ctab-bar"></div>
 
-        <div style="padding:3rem 2.75rem;display:flex;flex-direction:column;align-items:flex-start;">
-
-         
-          <div style="display:flex;align-items:center;gap:1rem;margin-bottom:2rem;">
-            <div style="width:3rem;height:3rem;background:hsl(209,53%,36%);border-radius:0.625rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            </div>
-            <div>
-              <h3 style="font-family:'Montserrat',sans-serif;font-size:1.25rem;font-weight:700;color:hsl(222,47%,11%);line-height:1.2;">Fale Conosco</h3>
-              <p style="font-size:0.8rem;color:#9ca3af;font-weight:500;margin-top:0.15rem;">Respondemos em até 24 horas</p>
-            </div>
+        <div class="ctab-header">
+          <div class="ctab-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
           </div>
-
-          
-          <div style="width:100%;height:1px;background:#f3f4f6;margin-bottom:2rem;"></div>
-
-         
-          <p style="color:#6b7280;font-size:0.9rem;line-height:1.8;margin-bottom:2rem;font-family:'Montserrat',sans-serif;">Nossa equipe jurídica está pronta para ouvir você. Envie sua mensagem e um especialista retornará em breve.</p>
-
-        
-          <div style="width:100%;background:#f9fafb;border:1px solid #e5e7eb;border-radius:0.625rem;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="hsl(209,53%,36%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            <span style="font-family:'Montserrat',sans-serif;font-size:0.875rem;font-weight:600;color:hsl(222,47%,11%);letter-spacing:0.01em;">parcerias@ajjoaomendes.com</span>
+          <div>
+            <div class="ctab-title">Fale Conosco</div>
+            <div class="ctab-sub">Respondemos em até 24 horas</div>
           </div>
+        </div>
 
-          
-       <div style="width:2.5rem;height:2px;background:linear-gradient(to right,hsl(348,83%,47%),hsl(209,53%,36%));border-radius:9999px;margin-bottom:2rem;"></div>
-        <a href="mailto:parcerias@ajjoaomendes.com" style="display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 2rem;background:hsl(209,53%,36%);border-radius:0.5rem;color:white;font-family:'Montserrat',sans-serif;font-weight:600;font-size:0.875rem;letter-spacing:0.02em;text-decoration:none;transition:all 0.25s ease;box-shadow:0 4px 14px rgba(44,90,130,0.3);position:relative;z-index:1;" onmouseover="this.style.background='hsl(348,83%,47%)';this.style.boxShadow='0 6px 20px rgba(210,38,70,0.35)';this.style.transform='translateY(-2px)';" onmouseout="this.style.background='hsl(209,53%,36%)';this.style.boxShadow='0 4px 14px rgba(44,90,130,0.3)';this.style.transform='translateY(0)';">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-          </svg>
-          Enviar email
-        </a>
-        <p style="margin-top:1.25rem;font-size:0.75rem;color:#9ca3af;letter-spacing:0.01em;">Tempo médio de resposta: <strong style="color:hsl(209,53%,36%);">até 24 horas</strong></p>
-      </div>
+        <div class="ctabs">
+          <button class="ctab-btn active" id="ctab0" onclick="ctabSwitch(0)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Formulário
+          </button>
+          <button class="ctab-btn" id="ctab1" onclick="ctabSwitch(1)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Enviar E-mail
+          </button>
+          <span class="ctab-ink" id="ctabInk"></span>
+        </div>
 
-      
-          <p style="margin-top:1.25rem;font-size:0.72rem;color:#d1d5db;font-family:'Montserrat',sans-serif;text-align:center;width:100%;line-height:1.6;">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:3px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            Todas as comunicações são tratadas com sigilo profissional absoluto.
-          </p>
+        <div class="ctab-panels">
+          <div class="ctab-track" id="ctabTrack">
 
+            <div class="ctab-panel">
+              <div class="ctab-success" id="ctabSuccess">
+                <div class="ctab-success-circle">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="hsl(348,83%,47%)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <div class="ctab-success-title">Mensagem enviada!</div>
+                <div class="ctab-success-sub">Em breve um de nossos especialistas<br>entrará em contato com você.</div>
+              </div>
+
+              <form id="contactForm">
+                <div class="ctab-field">
+                  <label for="cf-name">Nome completo</label>
+                  <input type="text" id="cf-name" name="name" required placeholder="Seu nome">
+                </div>
+                <div class="ctab-field">
+                  <label for="cf-email">E-mail</label>
+                  <input type="email" id="cf-email" name="email" required placeholder="seu@email.com">
+                </div>
+                <div class="ctab-field">
+                  <label for="cf-message">Mensagem</label>
+                  <textarea id="cf-message" name="message" rows="4" required placeholder="Escreva sua mensagem..."></textarea>
+                </div>
+                <button type="submit" class="ctab-submit" id="ctabSubmitBtn">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                  Enviar mensagem
+                </button>
+                <div class="ctab-privacy">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  Todas as comunicações são tratadas com sigilo profissional absoluto.
+                </div>
+              </form>
+            </div>
+
+  
+            <div class="ctab-panel">
+              <p class="ctab-desc">Nossa equipe jurídica está pronta para ouvir você. Clique abaixo para abrir seu cliente de e-mail e enviar sua mensagem diretamente.</p>
+              <div class="ctab-email-box">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="hsl(209,53%,36%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span>parcerias@ajjoaomendes.com</span>
+              </div>
+              <div class="ctab-divider"></div>
+              <a href="mailto:parcerias@ajjoaomendes.com" class="ctab-submit" style="text-decoration:none;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Abrir e-mail
+              </a>
+              <p style="margin-top:1rem;font-size:.75rem;color:#9ca3af;">Tempo médio de resposta: <strong style="color:hsl(209,53%,36%);">até 24 horas</strong></p>
+              <div class="ctab-privacy" style="margin-top:.85rem;">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Todas as comunicações são tratadas com sigilo profissional absoluto.
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
+ 
 
     </div>
   </div>
 </section>
-
 
 <footer class="relative w-full overflow-hidden" style="font-family:'Montserrat',sans-serif;">
   <div class="absolute inset-0 parallax-bg" style="background-image:url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=2000');">
@@ -646,7 +656,6 @@ document.addEventListener('DOMContentLoaded', () => {
     Home: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>'
   };
 
-  
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
 
@@ -669,7 +678,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
- 
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
@@ -680,7 +688,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-
 
   const grid = document.getElementById('servicesGrid');
   services.forEach((svc, i) => {
@@ -701,7 +708,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => { card.style.cssText = 'transition:all 0.5s ease;opacity:1;transform:translateY(0);'; }, i * 100);
   });
 
-
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } });
   }, { threshold: 0.1 });
@@ -711,7 +717,6 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(el);
   });
 
-  
   let current = 0;
   let timer;
   const slides = document.querySelectorAll('.parallax-slide');
@@ -734,6 +739,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const proj = document.querySelector('#projects');
   if (proj) { proj.addEventListener('mouseenter', stopTimer); proj.addEventListener('mouseleave', startTimer); }
+
+
+  let ctabCurrent = 0;
+  window.ctabSwitch = function(idx) {
+    if (idx === ctabCurrent) return;
+    ctabCurrent = idx;
+    document.querySelectorAll('.ctab-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+    document.getElementById('ctabInk').classList.toggle('right', idx === 1);
+    document.getElementById('ctabTrack').classList.toggle('to-right', idx === 1);
+  };
+
+  const form = document.getElementById('contactForm');
+  const successEl = document.getElementById('ctabSuccess');
+  const submitBtn = document.getElementById('ctabSubmitBtn');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation:ctabSpin .7s linear infinite"><path d="M21 12a9 9 0 1 1-9-9"/></svg> Enviando…`;
+    submitBtn.style.opacity = '.75';
+
+    const data = { name: form.name.value, email: form.email.value, message: form.message.value };
+
+    try {
+      const res = await fetch('https://formspree.io/f/mdalpbwq', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        successEl.classList.add('visible');
+      } else { throw new Error(); }
+    } catch {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Tentar novamente`;
+      submitBtn.style.opacity = '1';
+      alert('Ocorreu um erro. Tente novamente mais tarde.');
+    }
+  });
 
 });
 </script>
