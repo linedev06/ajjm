@@ -1,443 +1,550 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-  <link rel="icon" type="image/png" href="logo6.jpg">
-  <link rel="apple-touch-icon" href="logo6.jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <title>Parceiros — AJ João Mendes</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<link rel="icon" type="image/png" href="logo6.jpg">
+<link rel="apple-touch-icon" href="logo6.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<title>Parceiros — AJ João Mendes</title>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --primary: 348 83% 47%;
-  --secondary: 209 53% 36%;
-  --muted: 210 40% 96%;
-  --muted-fg: 215 16% 47%;
-  --card-fg: 222 47% 11%;
-  --border: 214 32% 91%;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:hsl(348,83%,47%);
+  --blue:hsl(209,53%,36%);
+  --dark:#080d18;
+  --ink:hsl(222,47%,11%);
+  --muted:hsl(215,16%,47%);
+  --white:#fff;
+  --cream:#f4f1ed;
+  --light:hsl(210,40%,96%);
+  --navy-dk:hsl(209,53%,22%);
+  --nav-h:64px;
 }
-html { scroll-behavior: smooth; }
-body { background:#fff; color:hsl(var(--card-fg)); font-family:'Montserrat',sans-serif; -webkit-font-smoothing:antialiased; line-height:1.5; overflow-x:hidden; }
-h1,h2,h3,h4,h5,h6 { font-weight:700; letter-spacing:-0.025em; }
-::-webkit-scrollbar{width:10px} ::-webkit-scrollbar-track{background:hsl(var(--muted))} ::-webkit-scrollbar-thumb{background:hsl(var(--secondary)/.5);border-radius:5px} ::-webkit-scrollbar-thumb:hover{background:hsl(var(--secondary))}
-.container{width:100%;max-width:1280px;margin:0 auto;padding:0 1.5rem}
+html{overflow-x:hidden;scroll-behavior:auto}
+body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:hsl(348,83%,47%,.5);border-radius:3px}
 
-/* NAVBAR */
-.navbar{position:fixed;width:100%;z-index:50;transition:all .4s cubic-bezier(.4,0,.2,1)}
-.navbar.scrolled{background:rgba(255,255,255,.97);backdrop-filter:blur(16px);box-shadow:0 4px 24px -1px rgba(0,0,0,.1);padding:.25rem 0}
-.navbar:not(.scrolled){background:transparent;padding:1rem 0}
-.navbar-content{display:flex;justify-content:space-between;align-items:center;height:4rem}
-.logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;transition:transform .3s ease}
-.logo:hover{transform:scale(1.04)}
-.logo-icon{width:2.5rem;height:2.5rem;border-radius:.5rem;object-fit:contain}
-.logo-text-wrap{overflow:hidden;display:flex;align-items:baseline}
-.logo-abbr{font-weight:800;font-size:1.25rem;letter-spacing:.04em;transition:color .4s ease;white-space:nowrap}
-.logo-expand{display:inline-block;overflow:hidden;white-space:nowrap;font-weight:700;font-size:1.05rem;transition:max-width .55s cubic-bezier(.4,0,.2,1),opacity .45s cubic-bezier(.4,0,.2,1),color .4s ease}
-.navbar:not(.scrolled) .logo-expand{max-width:400px;opacity:1;color:rgba(255,255,255,.92)}
-.navbar.scrolled .logo-expand{max-width:0;opacity:0}
-.navbar:not(.scrolled) .logo-abbr{color:#fff;font-size:1.1rem}
-.navbar.scrolled .logo-abbr{color:hsl(var(--secondary));font-size:1.35rem}
-.logo-highlight{color:hsl(var(--primary))}
-.logo-space{display:inline-block;overflow:hidden;transition:width .45s cubic-bezier(.4,0,.2,1),opacity .35s ease}
-.navbar:not(.scrolled) .logo-space{width:.35rem;opacity:1}
-.navbar.scrolled .logo-space{width:0;opacity:0}
-.logo-dot{display:inline-block;width:4px;height:4px;border-radius:50%;background:hsl(var(--primary));margin:0;transition:opacity .35s ease,transform .4s ease,margin .45s ease;transform-origin:center}
-.navbar:not(.scrolled) .logo-dot{opacity:0;margin:0;transform:scale(0)}
-.navbar.scrolled .logo-dot{opacity:1;margin:0 3px 3px;transform:scale(1)}
+/* ── PROGRESS ─────────────────────────── */
+#prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--red),var(--blue));z-index:10000;transform-origin:left;transform:scaleX(0)}
+
+/* ══════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════ */
+.nav{position:fixed;width:100%;z-index:1000;transition:all .4s cubic-bezier(.4,0,.2,1)}
+.nav:not(.s){background:transparent;padding:1rem 0}
+.nav.s{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.07);padding:.25rem 0}
+.nav-inner{display:flex;justify-content:space-between;align-items:center;height:var(--nav-h);max-width:1280px;margin:0 auto;padding:0 2rem}
+.logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;transition:transform .3s}
+.logo:hover{transform:scale(1.03)}
+.logo-icon{width:2.5rem;height:2.5rem;border-radius:.5rem;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.logo-tw{overflow:hidden;display:flex;align-items:baseline}
+.la{font-weight:800;font-size:1.25rem;letter-spacing:.04em;white-space:nowrap;color:rgba(255,255,255,.95);transition:color .4s,font-size .4s}
+.le{display:inline-block;overflow:hidden;white-space:nowrap;font-weight:700;font-size:1.05rem;letter-spacing:-.01em;color:rgba(255,255,255,.85);transition:max-width .55s cubic-bezier(.4,0,.2,1),opacity .45s cubic-bezier(.4,0,.2,1),margin .45s cubic-bezier(.4,0,.2,1),color .4s}
+.nav:not(.s) .le{max-width:400px;opacity:1}
+.nav.s .le{max-width:0;opacity:0;margin:0}
+.ls{display:inline-block;overflow:hidden;transition:width .45s cubic-bezier(.4,0,.2,1),opacity .35s}
+.nav:not(.s) .ls{width:.35rem;opacity:1}
+.nav.s .ls{width:0;opacity:0}
+.nav.s .la{font-size:1.35rem;color:var(--ink)}
+.ldot{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--red);margin:0;transition:opacity .35s,transform .4s,margin .45s;transform-origin:center}
+.nav:not(.s) .ldot{opacity:0;transform:scale(0)}
+.nav.s .ldot{opacity:1;margin:0 3px 3px;transform:scale(1)}
+.lh{color:var(--red)}
+@media(max-width:767px){.la{font-size:.78rem!important}.le{font-size:.78rem!important}.nav.s .la{font-size:.95rem!important}.logo-icon{width:2rem;height:2rem}.logo{gap:.35rem}}
 .nav-links{display:none;align-items:center;gap:2rem}
 @media(min-width:768px){.nav-links{display:flex}}
-.nav-link{font-size:.875rem;font-weight:600;text-decoration:none;transition:color .3s ease}
-.navbar.scrolled .nav-link{color:hsl(var(--secondary))}
-.navbar:not(.scrolled) .nav-link{color:rgba(255,255,255,.9)}
-.nav-link:hover,.nav-link.active{color:hsl(var(--primary))}
-.btn{padding:.75rem 1.5rem;border-radius:9999px;font-weight:700;transition:all .3s ease;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;font-family:inherit;font-size:.875rem}
-.btn-primary{background:hsl(var(--primary));color:white;box-shadow:0 10px 15px -3px rgba(192,19,47,.3)}
-.btn-primary:hover{background:hsl(var(--primary)/.9);transform:translateY(-2px);box-shadow:0 20px 25px -5px rgba(192,19,47,.3)}
-.mobile-menu-btn{display:block;padding:.5rem;background:none;border:none;cursor:pointer;border-radius:.375rem}
-@media(min-width:768px){.mobile-menu-btn{display:none}}
-.navbar.scrolled .mobile-menu-btn{color:hsl(var(--secondary))}
-.navbar:not(.scrolled) .mobile-menu-btn{color:white}
-.mobile-menu{background:white;border-bottom:1px solid hsl(var(--border));box-shadow:0 10px 15px -3px rgba(0,0,0,.1);overflow:hidden;max-height:0;opacity:0;transition:all .3s ease}
-.mobile-menu.open{max-height:500px;opacity:1}
-.mobile-menu-content{padding:1rem;display:flex;flex-direction:column;gap:.5rem}
-.mobile-menu-link{display:block;padding:.75rem 1rem;color:hsl(var(--secondary));font-weight:500;text-decoration:none;border-radius:.5rem;transition:all .3s ease}
-.mobile-menu-link:hover,.mobile-menu-link.active{background:hsl(var(--primary)/.05);color:hsl(var(--primary))}
+.nav-link{font-size:.875rem;font-weight:600;text-decoration:none;color:rgba(255,255,255,.88);transition:color .3s;position:relative}
+.nav-link::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.nav-link:hover,.nav-link.active{color:var(--red)}
+.nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}
+.nav.s .nav-link{color:hsl(222,47%,25%)}
+.nav.s .nav-link:hover,.nav.s .nav-link.active{color:var(--red)}
+.btn{padding:.75rem 1.5rem;border-radius:9999px;font-weight:700;transition:all .3s;border:none;display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;font-family:inherit;font-size:.875rem;cursor:pointer}
+.btn-r{background:var(--red);color:white;box-shadow:0 8px 20px hsl(348,83%,47%,.3)}
+.btn-r:hover{background:hsl(348,83%,40%);transform:translateY(-2px);box-shadow:0 16px 30px hsl(348,83%,47%,.4)}
+.mob-btn{display:block;padding:.5rem;background:none;border:none;color:rgba(255,255,255,.9);cursor:pointer}
+.nav.s .mob-btn{color:var(--ink)}
+@media(min-width:768px){.mob-btn{display:none}}
+.mob-menu{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.07);overflow:hidden;max-height:0;opacity:0;transition:all .3s}
+.mob-menu.open{max-height:500px;opacity:1}
+.mob-menu-content{padding:1rem 2rem;display:flex;flex-direction:column;gap:.5rem}
+.mob-link{display:block;padding:.75rem 1rem;color:hsl(222,47%,30%);font-weight:500;text-decoration:none;border-radius:.5rem;transition:all .3s}
+.mob-link:hover,.mob-link.active{background:hsl(348,83%,47%,.08);color:var(--red)}
 
-/* HERO */
-.hero{position:relative;min-height:52vh;display:flex;align-items:flex-end;overflow:hidden;padding-bottom:5rem}
-.hero-bg{position:absolute;inset:0;z-index:0;background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=2000');background-attachment:fixed;background-position:center;background-size:cover}
-.hero-overlay{position:absolute;inset:0;background:hsl(var(--secondary)/.82);mix-blend-mode:multiply}
-.hero-gradient{position:absolute;inset:0;background:linear-gradient(160deg,transparent 40%,rgba(0,0,0,.5))}
-.hero-content{position:relative;z-index:10;color:white;padding-top:8rem}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .9rem;border-radius:9999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.25rem;backdrop-filter:blur(4px)}
-.hero-title{font-size:clamp(2.25rem,6vw,4rem);font-weight:800;line-height:1.05;margin-bottom:1.25rem}
-.hero-accent{color:hsl(var(--primary)/.9)}
-.hero-desc{font-size:clamp(.95rem,1.5vw,1.1rem);color:rgba(255,255,255,.75);max-width:42rem;line-height:1.8;font-weight:300}
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+#hero{height:100vh;min-height:700px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--dark)}
+.h-bg{position:absolute;inset:-8%;background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=2000');background-position:center;background-size:cover;will-change:transform}
+.h-ov{position:absolute;inset:0;background:hsl(209,53%,18%,.86);mix-blend-mode:multiply}
+.h-gr{position:absolute;inset:0;background:linear-gradient(to top,hsl(209,53%,10%) 0%,transparent 55%)}
+.h-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:88px 88px;pointer-events:none;will-change:transform,opacity}
+.h-ring{position:absolute;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:1}
+.h-ring-1{width:480px;height:480px;border:1px solid rgba(255,255,255,.05)}
+.h-ring-2{width:820px;height:820px;border:1px solid rgba(220,38,38,.05)}
+.h-ring-3{width:1160px;height:1160px;border:1px solid rgba(255,255,255,.025)}
+.h-acc{position:absolute;pointer-events:none;z-index:1;background:rgba(255,255,255,.065)}
+.h-acc-1{width:1px;height:38vh;top:0;left:23%;transform-origin:top;transform:scaleY(0)}
+.h-acc-2{width:1px;height:32vh;bottom:0;right:26%;transform-origin:bottom;transform:scaleY(0)}
+.h-acc-3{height:1px;width:18vw;top:30%;left:0;transform-origin:left;transform:scaleX(0)}
+.h-acc-4{height:1px;width:14vw;bottom:33%;right:0;transform-origin:right;transform:scaleX(0)}
+.h-dot{position:absolute;border-radius:50%;pointer-events:none;z-index:2}
+.h-dot-1{width:5px;height:5px;background:var(--red);top:28%;left:17%;opacity:0}
+.h-dot-2{width:4px;height:4px;top:62%;right:20%;opacity:0;background:hsl(209,70%,65%)}
+.h-dot-3{width:6px;height:6px;background:var(--red);top:44%;right:14%;opacity:0}
+.h-content{position:relative;z-index:10;text-align:center;padding:8rem 2rem 6rem;color:white;max-width:1060px}
+.h-eyebrow{display:inline-flex;align-items:center;gap:.75rem;padding:.3rem 1rem;border-radius:9999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-bottom:2rem;backdrop-filter:blur(8px);opacity:0;transform:translateY(22px)}
+.h-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,13vw,13rem);line-height:.87;letter-spacing:-.01em;color:white;overflow:hidden}
+.h-h1 .hl{overflow:hidden;display:block}
+.h-h1 .hl span{display:block;transform:translateY(110%);will-change:transform}
+.h-h1 .hl.serif{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:.38em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.58);letter-spacing:.04em}
+.h-desc{font-size:clamp(.88rem,1.7vw,1.1rem);color:rgba(255,255,255,.48);margin:2rem auto 0;max-width:44rem;line-height:1.9;opacity:0;transform:translateY(22px);will-change:transform,opacity}
+.h-btns{display:flex;flex-direction:column;gap:1rem;justify-content:center;margin-top:2.5rem;opacity:0;transform:translateY(22px);will-change:transform,opacity}
+@media(min-width:620px){.h-btns{flex-direction:row}}
+.btn-o{border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);color:var(--white);backdrop-filter:blur(8px)}
+.btn-o:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
+.scue{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.65rem;z-index:10;opacity:0}
+.scue span{font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.28)}
+.scue-track{width:1px;height:58px;background:rgba(255,255,255,.1);position:relative;overflow:hidden}
+.scue-fill{position:absolute;top:-100%;left:0;width:100%;height:100%;background:linear-gradient(to bottom,var(--red),transparent)}
 
-/* LABELS */
-.eyebrow{color:hsl(var(--primary));font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
-.eyebrow::before{content:'';display:inline-block;width:1.5rem;height:2px;background:hsl(var(--primary));border-radius:9999px}
-.sec-title{font-size:clamp(1.6rem,4vw,2.25rem);font-weight:800;color:hsl(var(--secondary));line-height:1.1}
-.sec-desc{color:hsl(var(--muted-fg));font-size:1rem;line-height:1.8;margin-top:.75rem}
+/* ══════════════════════════════════════
+   PINNED PARTNERS GRID  (400vh)
+══════════════════════════════════════ */
+#pin-partners{height:400vh;position:relative;scroll-margin-top:4.5rem}
+.pt-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--white);display:flex;align-items:center;padding-top:80px;padding-bottom:80px}
+.pt-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(12rem,26vw,24rem);color:transparent;-webkit-text-stroke:1px rgba(0,0,0,.04);right:-4%;bottom:-10%;pointer-events:none;user-select:none;white-space:nowrap;opacity:0;letter-spacing:.03em}
+.pt-inner{max-width:1280px;margin:0 auto;padding:0 2.5rem;width:100%}
 
-/* PARTNERS */
-.partners-section{padding:6rem 0;background:#fff}
-.filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:3rem}
-.filter-btn{padding:.45rem 1.1rem;border-radius:9999px;font-size:.78rem;font-weight:600;border:1.5px solid hsl(var(--border));background:transparent;color:hsl(var(--muted-fg));cursor:pointer;transition:all .25s ease;font-family:inherit;letter-spacing:.02em}
-.filter-btn:hover{border-color:hsl(var(--secondary));color:hsl(var(--secondary))}
-.filter-btn.active{background:hsl(var(--secondary));border-color:hsl(var(--secondary));color:white}
-.partners-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
-@media(min-width:640px){.partners-grid{grid-template-columns:repeat(3,1fr)}}
+/* header */
+.pt-head{margin-bottom:2rem}
+.pt-head-sub{font-size:.62rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:.4rem;transform:translateY(28px);opacity:0}
+.pt-head-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4.5rem);color:var(--ink);letter-spacing:.01em;line-height:.92;transform:translateY(60px);opacity:0}
+.pt-head-line{height:2px;width:0;background:linear-gradient(90deg,var(--red),var(--blue));border-radius:9999px;margin-top:.6rem;opacity:0}
 
-.partner-card{position:relative;background:#fff;border:1.5px solid hsl(var(--border));border-radius:1rem;padding:2rem 1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);min-height:140px;overflow:hidden;gap:.75rem}
-.partner-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,hsl(var(--primary)),hsl(var(--secondary)));transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
-.partner-card:hover{border-color:hsl(var(--secondary)/.35);box-shadow:0 12px 36px -8px rgba(42,100,150,.15);transform:translateY(-4px)}
-.partner-card:hover::after{transform:scaleX(1)}
-.partner-mono{width:60px;height:60px;border-radius:.75rem;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;color:white;transition:all .3s ease;flex-shrink:0}
-.partner-label{font-size:.75rem;font-weight:700;color:hsl(var(--secondary));text-align:center;letter-spacing:.03em}
-.p-dot{position:absolute;top:.75rem;right:.75rem;width:6px;height:6px;border-radius:50%}
+/* filter bar */
+.pt-filter{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;transform:translateY(30px);opacity:0}
+.filter-btn{padding:.4rem 1.1rem;border-radius:9999px;font-size:.72rem;font-weight:700;border:1.5px solid rgba(0,0,0,.1);background:transparent;color:var(--muted);cursor:pointer;transition:all .25s;font-family:'Montserrat',sans-serif;letter-spacing:.04em}
+.filter-btn:hover{border-color:var(--blue);color:var(--blue)}
+.filter-btn.active{background:var(--navy-dk);border-color:var(--navy-dk);color:white}
 
-/* MODAL */
-.modal-backdrop{position:fixed;inset:0;z-index:100;background:rgba(15,23,42,.65);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .35s ease}
-.modal-backdrop.visible{opacity:1;pointer-events:all}
-.modal{background:#fff;border-radius:1.25rem;width:100%;max-width:520px;overflow:hidden;box-shadow:0 40px 80px -20px rgba(0,0,0,.3);transform:translateY(24px) scale(.97);transition:transform .4s cubic-bezier(.34,1.28,.64,1)}
-.modal-backdrop.visible .modal{transform:translateY(0) scale(1)}
-.modal-bar{height:5px;background:linear-gradient(90deg,hsl(var(--primary)),hsl(var(--secondary)))}
+/* grid */
+.pt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+@media(max-width:900px){.pt-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.pt-grid{grid-template-columns:1fr}}
+
+.pt-card{
+  position:relative;background:white;border:1.5px solid rgba(0,0,0,.07);border-radius:1rem;
+  padding:2rem 1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);min-height:150px;overflow:hidden;gap:.75rem;
+  transform:translateY(80px);opacity:0;will-change:transform,opacity;
+}
+.pt-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--blue));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.pt-card:hover{border-color:hsl(209,53%,36%,.35);box-shadow:0 16px 40px -8px rgba(42,100,150,.18);transform:translateY(-4px)!important}
+.pt-card:hover::after{transform:scaleX(1)}
+.pt-card-mono{width:64px;height:64px;border-radius:.875rem;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;font-weight:400;color:white;transition:all .3s;flex-shrink:0}
+.pt-card:hover .pt-card-mono{transform:scale(1.06)}
+.pt-card-label{font-size:.75rem;font-weight:700;color:var(--blue);text-align:center;letter-spacing:.04em}
+.pt-card-dot{position:absolute;top:.75rem;right:.75rem;width:6px;height:6px;border-radius:50%}
+
+/* ══════════════════════════════════════
+   PINNED WHY  (300vh)
+══════════════════════════════════════ */
+#pin-why{height:300vh;position:relative;scroll-margin-top:4.5rem}
+.wy-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--navy-dk);display:flex;align-items:center;padding-top:80px;padding-bottom:80px}
+.wy-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(10rem,24vw,22rem);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.04);right:-4%;bottom:-10%;pointer-events:none;user-select:none;white-space:nowrap;opacity:0;letter-spacing:.03em}
+.wy-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:88px 88px;pointer-events:none}
+.wy-inner{max-width:1280px;margin:0 auto;padding:0 2.5rem;width:100%}
+.wy-head{margin-bottom:2.5rem}
+.wy-head-sub{font-size:.62rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:.4rem;transform:translateY(28px);opacity:0}
+.wy-head-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4.5rem);color:white;letter-spacing:.01em;line-height:.92;transform:translateY(60px);opacity:0}
+.wy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+@media(max-width:900px){.wy-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.wy-grid{grid-template-columns:1fr}}
+.wy-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.75rem;transition:all .3s;position:relative;overflow:hidden;transform:translateY(70px);opacity:0;will-change:transform,opacity}
+.wy-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.06),transparent);opacity:0;transition:opacity .3s}
+.wy-card:hover{background:rgba(255,255,255,.1);transform:translateY(-4px)!important}
+.wy-card:hover::before{opacity:1}
+.wy-icon{width:2.75rem;height:2.75rem;background:hsl(348,83%,47%,.15);border-radius:.625rem;display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;transition:background .3s}
+.wy-card:hover .wy-icon{background:var(--red)}
+.wy-icon svg{color:hsl(348,83%,70%);transition:color .3s}
+.wy-card:hover .wy-icon svg{color:white}
+.wy-title{font-size:.9rem;font-weight:700;color:white;margin-bottom:.4rem}
+.wy-desc{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.75;font-weight:400}
+
+/* ══════════════════════════════════════
+   PINNED BECOME  (300vh)
+══════════════════════════════════════ */
+#pin-become{height:300vh;position:relative;scroll-margin-top:4.5rem}
+.bc-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--light);display:flex;align-items:center;padding-top:80px;padding-bottom:80px}
+.bc-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(10rem,22vw,20rem);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.7);right:-4%;top:50%;transform:translateY(-50%);pointer-events:none;user-select:none;white-space:nowrap;opacity:0;letter-spacing:.03em}
+.bc-inner{max-width:1280px;margin:0 auto;padding:0 2.5rem;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+@media(max-width:900px){.bc-inner{grid-template-columns:1fr;gap:2.5rem;padding:0 1.5rem}}
+.bc-info{transform:translateX(-90px);opacity:0;will-change:transform,opacity}
+.bc-head-sub{font-size:.62rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:.4rem}
+.bc-head-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);color:var(--ink);letter-spacing:.01em;line-height:.92;margin-bottom:1rem;overflow:hidden}
+.bc-head-h2 .cl{overflow:hidden;display:block}
+.bc-head-h2 .cl span{display:block;transform:translateY(110%);will-change:transform}
+.bc-desc{color:var(--muted);font-size:.9rem;line-height:1.8;margin-bottom:1.5rem;max-width:34rem}
+.bc-steps{display:flex;flex-direction:column}
+.bc-step{display:flex;align-items:flex-start;gap:1.1rem;padding-bottom:1.75rem;position:relative;transform:translateX(-40px);opacity:0;will-change:transform,opacity}
+.bc-step:not(:last-child)::after{content:'';position:absolute;left:1.1rem;top:2.5rem;width:1px;height:calc(100% - .5rem);background:linear-gradient(to bottom,hsl(209,53%,36%,.25),transparent)}
+.bc-step-num{width:2.25rem;height:2.25rem;background:var(--navy-dk);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.72rem;font-weight:800;color:white;z-index:1;position:relative}
+.bc-step-title{font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:.2rem;margin-top:.35rem}
+.bc-step-desc{font-size:.8rem;color:var(--muted);line-height:1.7}
+
+/* contact card */
+.bc-card{background:var(--navy-dk);border-radius:1.5rem;padding:2.75rem;position:relative;overflow:hidden;box-shadow:0 32px 64px -12px hsl(209,53%,22%,.4);transform:translateX(90px);opacity:0;will-change:transform,opacity}
+.bc-card::before{content:'';position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04)}
+.bc-card::after{content:'';position:absolute;bottom:-60px;left:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.03)}
+.bc-card-ey{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.9rem;display:flex;align-items:center;gap:.4rem}
+.bc-card-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3vw,2.75rem);color:white;line-height:.92;margin-bottom:.9rem;letter-spacing:.01em}
+.bc-card-title span{color:hsl(348,83%,70%)}
+.bc-card-desc{font-size:.83rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:1.75rem;font-weight:400}
+.bc-card-pill{display:flex;align-items:center;gap:.75rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:.75rem;padding:.9rem 1.1rem;margin-bottom:1.5rem;position:relative;z-index:1}
+.bc-card-pill-icon{width:2.25rem;height:2.25rem;background:var(--red);border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bc-card-pill-label{font-size:.65rem;color:rgba(255,255,255,.4);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.1rem}
+.bc-card-pill-addr{font-size:.83rem;color:white;font-weight:700}
+.bc-copy-btn{background:rgba(255,255,255,.1);border:none;border-radius:.375rem;padding:.4rem .6rem;color:rgba(255,255,255,.5);cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:600;display:flex;align-items:center;gap:.3rem;white-space:nowrap}
+.bc-copy-btn:hover{background:rgba(255,255,255,.2);color:white}
+.bc-copy-btn.ok{background:rgba(255,255,255,.2);color:#86efac}
+.bc-card-btn{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:1rem;background:white;color:var(--navy-dk);border:none;border-radius:.75rem;font-family:'Montserrat',sans-serif;font-size:.875rem;font-weight:800;cursor:pointer;text-decoration:none;transition:all .25s;box-shadow:0 8px 24px rgba(0,0,0,.15);position:relative;z-index:1}
+.bc-card-btn:hover{background:var(--red);color:white;transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.2)}
+.bc-card-note{margin-top:1.1rem;display:flex;align-items:center;gap:.4rem;font-size:.68rem;color:rgba(255,255,255,.3);position:relative;z-index:1;justify-content:center}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+.ft{position:relative;overflow:hidden;font-family:'Montserrat',sans-serif}
+.ft-bg{position:absolute;inset:-8%;background-image:url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=2000');background-position:center;background-size:cover;will-change:transform}
+.ft-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(6,10,20,.97),rgba(18,28,48,.93))}
+.ft-inner{position:relative;z-index:1;padding:5.5rem 0 3rem;max-width:1280px;margin:0 auto}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:4rem;padding:0 2rem}
+@media(max-width:768px){.ft-grid{grid-template-columns:1fr;padding:0 1.5rem}}
+.ft-brand h3{font-size:1.5rem;font-weight:700;color:white;margin-bottom:.2rem}
+.ft-brand .sub{font-size:.68rem;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.4rem;display:block}
+.ft-brand .desc{font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.85;max-width:320px;margin-bottom:1.4rem}
+.ft-socials{display:flex;gap:.65rem}
+.ft-soc{width:2.2rem;height:2.2rem;background:rgba(255,255,255,.06);border-radius:.45rem;display:flex;align-items:center;justify-content:center;color:white;transition:all .3s;text-decoration:none;border:1px solid rgba(255,255,255,.1)}
+.ft-soc:hover{background:var(--red);border-color:var(--red);transform:scale(1.1)}
+.ft-col h4{font-size:.75rem;font-weight:700;color:rgba(255,255,255,.35);margin-bottom:1.2rem;text-transform:uppercase;letter-spacing:.15em}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.ft-col ul li a{display:flex;align-items:center;gap:.35rem;color:rgba(255,255,255,.45);font-size:.82rem;text-decoration:none;transition:color .3s;font-weight:500}
+.ft-col ul li a:hover{color:white}
+.ft-col ul li a::before{content:'';width:0;height:1px;background:var(--red);transition:width .25s}
+.ft-col ul li a:hover::before{width:.75rem}
+.ft-contacts{list-style:none;display:flex;flex-direction:column;gap:.85rem}
+.ft-contacts li{display:flex;align-items:flex-start;gap:.7rem;color:rgba(255,255,255,.45);font-size:.8rem;line-height:1.65;font-weight:500}
+.ft-bottom{border-top:1px solid rgba(255,255,255,.055);padding:2rem 2rem 0;display:flex;flex-direction:column;gap:1rem}
+@media(min-width:768px){.ft-bottom{flex-direction:row;justify-content:space-between;align-items:center}}
+.ft-copy{font-size:.78rem;color:rgba(255,255,255,.22)}
+.ft-links{display:flex;gap:1.4rem}
+.ft-links a{font-size:.78rem;color:rgba(255,255,255,.22);text-decoration:none;transition:color .3s}
+.ft-links a:hover{color:var(--red)}
+.ft-accent{position:absolute;bottom:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:.4}
+
+/* ══════════════════════════════════════
+   MODAL
+══════════════════════════════════════ */
+.modal-bd{position:fixed;inset:0;z-index:2000;background:rgba(8,13,24,.75);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .35s}
+.modal-bd.visible{opacity:1;pointer-events:all}
+.modal{background:white;border-radius:1.25rem;width:100%;max-width:520px;overflow:hidden;box-shadow:0 40px 80px -20px rgba(0,0,0,.4);transform:translateY(30px) scale(.96);transition:transform .45s cubic-bezier(.34,1.28,.64,1)}
+.modal-bd.visible .modal{transform:translateY(0) scale(1)}
+.modal-bar{height:5px;background:linear-gradient(90deg,var(--red),var(--blue))}
 .modal-head{padding:2rem 2rem 1.25rem;display:flex;align-items:flex-start;gap:1.25rem}
-.modal-mono{width:60px;height:60px;border-radius:.75rem;display:flex;align-items:center;justify-content:center;font-size:1.25rem;font-weight:800;color:white;flex-shrink:0}
+.modal-mono{width:3.75rem;height:3.75rem;border-radius:.875rem;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;font-weight:400;color:white;flex-shrink:0}
 .modal-meta{flex:1;min-width:0}
-.modal-name{font-size:1.15rem;font-weight:800;color:hsl(var(--secondary));margin-bottom:.3rem}
-.modal-cat{display:inline-flex;align-items:center;gap:.35rem;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.2rem .65rem;border-radius:9999px}
-.modal-x{width:2rem;height:2rem;background:hsl(var(--muted));border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto;transition:background .2s;color:hsl(var(--muted-fg))}
-.modal-x:hover{background:hsl(var(--border))}
-.modal-div{height:1px;background:hsl(var(--border));margin:0 2rem}
+.modal-name{font-size:1.1rem;font-weight:800;color:var(--blue);margin-bottom:.3rem;letter-spacing:-.02em}
+.modal-cat{display:inline-flex;align-items:center;gap:.35rem;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.22rem .7rem;border-radius:9999px}
+.modal-x{width:2rem;height:2rem;background:hsl(210,40%,94%);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto;transition:background .2s;color:var(--muted)}
+.modal-x:hover{background:hsl(210,40%,88%)}
+.modal-div{height:1px;background:hsl(215,16%,90%);margin:0 2rem}
 .modal-body{padding:1.5rem 2rem 2rem}
-.modal-desc{color:hsl(var(--muted-fg));font-size:.875rem;line-height:1.85;margin-bottom:1.5rem}
+.modal-desc{color:var(--muted);font-size:.875rem;line-height:1.85;margin-bottom:1.5rem}
 .modal-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.75rem}
-.modal-tag{font-size:.7rem;font-weight:600;padding:.25rem .7rem;border-radius:9999px;border:1.5px solid hsl(var(--border));color:hsl(var(--muted-fg))}
-.modal-cta{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:.9rem;background:hsl(var(--secondary));color:white;border:none;border-radius:.625rem;font-family:'Montserrat',sans-serif;font-size:.875rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .25s ease;box-shadow:0 4px 14px hsl(var(--secondary)/.28)}
-.modal-cta:hover{background:hsl(var(--primary));box-shadow:0 6px 20px hsl(var(--primary)/.32);transform:translateY(-2px)}
+.modal-tag{font-size:.68rem;font-weight:600;padding:.25rem .7rem;border-radius:9999px;border:1.5px solid hsl(215,16%,90%);color:var(--muted)}
+.modal-cta{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:.9rem;background:var(--blue);color:white;border:none;border-radius:.625rem;font-family:'Montserrat',sans-serif;font-size:.875rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .25s;box-shadow:0 4px 14px hsl(209,53%,36%,.28)}
+.modal-cta:hover{background:var(--red);box-shadow:0 6px 20px hsl(348,83%,47%,.32);transform:translateY(-2px)}
 
-/* WHY */
-.why-section{padding:6rem 0;background:hsl(var(--secondary))}
-.why-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:3rem}
-@media(min-width:768px){.why-grid{grid-template-columns:repeat(3,1fr)}}
-.why-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:2rem;transition:all .3s ease}
-.why-card:hover{background:rgba(255,255,255,.1);transform:translateY(-4px)}
-.why-icon{width:3rem;height:3rem;background:hsl(var(--primary)/.15);border-radius:.625rem;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
-.why-icon svg{color:hsl(var(--primary)/.9)}
-.why-title{font-size:1rem;font-weight:700;color:white;margin-bottom:.5rem}
-.why-desc{font-size:.875rem;color:rgba(255,255,255,.55);line-height:1.75}
-
-/* BECOME */
-.become-section{padding:7rem 0;background:#fff;position:relative;overflow:hidden}
-.become-section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 60% 50% at 80% 50%,hsl(var(--muted)) 0%,transparent 70%);pointer-events:none}
-.become-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr;gap:5rem;align-items:center}
-@media(min-width:1024px){.become-inner{grid-template-columns:1fr 1fr}}
-.steps{margin-top:2.5rem;display:flex;flex-direction:column}
-.step{display:flex;gap:1.25rem;align-items:flex-start;opacity:0;transform:translateX(-20px);transition:all .5s ease;position:relative}
-.step:not(:last-child)::after{content:'';position:absolute;left:1.1rem;top:2.5rem;width:1px;height:calc(100% - .5rem);background:linear-gradient(to bottom,hsl(var(--secondary)/.3),transparent)}
-.step.visible{opacity:1;transform:translateX(0)}
-.step-num{width:2.25rem;height:2.25rem;background:hsl(var(--secondary));border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.72rem;font-weight:800;color:white;z-index:1;position:relative}
-.step-body{padding-bottom:2rem}
-.step-title{font-size:.9rem;font-weight:700;color:hsl(var(--card-fg));margin-bottom:.2rem;margin-top:.35rem}
-.step-desc{font-size:.82rem;color:hsl(var(--muted-fg));line-height:1.7}
-
-/* CONTACT CARD */
-.cc{background:hsl(var(--secondary));border-radius:1.5rem;padding:3rem 2.5rem;position:relative;overflow:hidden;box-shadow:0 32px 64px -12px hsl(var(--secondary)/.35)}
-.cc::before{content:'';position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04)}
-.cc::after{content:'';position:absolute;bottom:-60px;left:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.03)}
-.cc-ey{display:inline-flex;align-items:center;gap:.4rem;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1rem}
-.cc-title{font-size:1.75rem;font-weight:800;color:white;line-height:1.15;margin-bottom:1rem}
-.cc-title span{color:hsl(var(--primary)/.85)}
-.cc-desc{font-size:.875rem;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:2rem;font-weight:400}
-.cc-pill{display:flex;align-items:center;gap:.75rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:.75rem;padding:1rem 1.25rem;margin-bottom:1.5rem;position:relative;z-index:1}
-.cc-pill-icon{width:2.25rem;height:2.25rem;background:hsl(var(--primary));border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.cc-pill-text{flex:1;min-width:0}
-.cc-pill-label{font-size:.68rem;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.1rem}
-.cc-pill-addr{font-size:.875rem;color:white;font-weight:700}
-.cc-copy{background:rgba(255,255,255,.1);border:none;border-radius:.375rem;padding:.4rem .6rem;color:rgba(255,255,255,.6);cursor:pointer;transition:all .2s;font-family:inherit;font-size:.7rem;font-weight:600;display:flex;align-items:center;gap:.3rem;white-space:nowrap}
-.cc-copy:hover{background:rgba(255,255,255,.2);color:white}
-.cc-copy.ok{background:rgba(255,255,255,.2);color:#86efac}
-.cc-btn{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:1rem;background:white;color:hsl(var(--secondary));border:none;border-radius:.75rem;font-family:'Montserrat',sans-serif;font-size:.9rem;font-weight:800;cursor:pointer;text-decoration:none;transition:all .25s ease;box-shadow:0 8px 24px rgba(0,0,0,.15);position:relative;z-index:1}
-.cc-btn:hover{background:hsl(var(--primary));color:white;transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.2)}
-.cc-note{margin-top:1.25rem;display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:rgba(255,255,255,.35);position:relative;z-index:1;justify-content:center}
-
-/* FOOTER */
-footer{position:relative;overflow:hidden;font-family:'Montserrat',sans-serif}
-.ft-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=2000');background-size:cover;background-position:center}
-.ft-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,23,42,.97) 0%,rgba(30,41,59,.93) 100%)}
-.ft-in{position:relative;z-index:10;padding:5rem 0 2rem}
-.ft-grid{display:grid;grid-template-columns:1fr;gap:3rem;margin-bottom:4rem}
-@media(min-width:768px){.ft-grid{grid-template-columns:2fr 1fr 1fr}}
-.ft-brand p{color:rgb(148,163,184);font-size:.875rem;line-height:1.75;margin:1rem 0 1.5rem;max-width:22rem}
-.ft-socials{display:flex;gap:.75rem}
-.ft-soc{width:2.5rem;height:2.5rem;background:rgba(255,255,255,.08);border-radius:.5rem;display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all .25s ease}
-.ft-soc:hover{background:hsl(var(--primary));transform:scale(1.1)}
-.ft-col h4{font-size:.875rem;font-weight:700;color:white;margin-bottom:1.25rem;text-transform:uppercase;letter-spacing:.08em}
-.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
-.ft-col a{color:rgb(148,163,184);font-size:.8rem;text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:.4rem}
-.ft-col a:hover{color:hsl(var(--primary))}
-.ft-bot{border-top:1px solid rgba(255,255,255,.08);padding-top:1.75rem;display:flex;flex-direction:column;align-items:center;gap:1rem;text-align:center}
-@media(min-width:640px){.ft-bot{flex-direction:row;justify-content:space-between;text-align:left}}
-.ft-copy{color:rgb(100,116,139);font-size:.8rem}
-.ft-links{display:flex;gap:1.5rem}
-.ft-links a{color:rgb(100,116,139);font-size:.8rem;text-decoration:none;transition:color .2s}
-.ft-links a:hover{color:hsl(var(--primary))}
-.ft-acc{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,hsl(var(--primary)/.5),transparent)}
-
-/* ANIM */
-.anim{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-.anim.in{opacity:1;transform:translateY(0)}
-@media(max-width:768px){.hero-bg{background-attachment:scroll!important}}
+@media(max-width:580px){body{cursor:auto}}
 </style>
 </head>
 <body>
 
-<nav class="navbar" id="navbar">
-  <div class="container">
-    <div class="navbar-content">
-      <a href="index.html" class="logo">
-        <img src="logo6.jpg" alt="AJ João Mendes" class="logo-icon">
-        <div class="logo-text-wrap">
-          <span class="logo-abbr">A</span><span class="logo-expand">ssistência</span>
-          <span class="logo-space">&nbsp;</span>
-          <span class="logo-abbr logo-highlight">J</span><span class="logo-expand">udiciária</span>
-          <span class="logo-space">&nbsp;</span>
-          <span class="logo-dot"></span>
-          <span class="logo-abbr">J</span><span class="logo-expand">oão</span>
-          <span class="logo-space">&nbsp;</span>
-          <span class="logo-abbr">M</span><span class="logo-expand">endes</span>
-        </div>
+<div id="prog"></div>
+
+<!-- NAVBAR -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <img src="logo6.jpg" alt="AJ" class="logo-icon" style="object-fit:contain;padding:0;background:transparent;width:2.5rem;height:2.5rem;">
+      <div class="logo-tw">
+        <span class="la">A</span><span class="le">ssistência</span><span class="ls">&nbsp;</span>
+        <span class="la lh">J</span><span class="le">udiciária</span><span class="ls">&nbsp;</span>
+        <span class="ldot"></span>
+        <span class="la">J</span><span class="le">oão</span><span class="ls">&nbsp;</span>
+        <span class="la">M</span><span class="le">endes</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Início</a>
+      <a href="index.html#pin-about" class="nav-link">Sobre</a>
+      <a href="index.html#pin-services" class="nav-link">Serviços</a>
+      <a href="index.html#pin-projects" class="nav-link">Projetos</a>
+      <a href="parceiros.html" class="nav-link active">Parceiros</a>
+      <a href="index.html#pin-contact" class="nav-link">Contato</a>
+      <a href="doe.html" class="btn btn-r">
+        <svg style="width:.9rem;height:.9rem;fill:white;stroke:none" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        Doe Agora
       </a>
-      <div class="nav-links">
-        <a href="index.html" class="nav-link">Início</a>
-        <a href="index.html#about" class="nav-link">Sobre</a>
-        <a href="index.html#services" class="nav-link">Serviços</a>
-        <a href="index.html#projects" class="nav-link">Projetos</a>
-        <a href="parceiros.html" class="nav-link active">Parceiros</a>
-        <a href="index.html#contact" class="nav-link">Contato</a>
-        <a href="doe.html" class="btn btn-primary">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-          Doe Agora
-        </a>
-      </div>
-      <button class="mobile-menu-btn" id="mobileMenuBtn">
-        <svg id="menuIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        <svg id="closeIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
     </div>
+    <button class="mob-btn" id="mmBtn">
+      <svg width="22" height="22" id="mIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg width="22" height="22" id="cIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
   </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-content">
-      <a href="index.html" class="mobile-menu-link">Início</a>
-      <a href="index.html#about" class="mobile-menu-link">Sobre</a>
-      <a href="index.html#services" class="mobile-menu-link">Serviços</a>
-      <a href="index.html#projects" class="mobile-menu-link">Projetos</a>
-      <a href="parceiros.html" class="mobile-menu-link active">Parceiros</a>
-      <a href="index.html#contact" class="mobile-menu-link">Contato</a>
-      <div style="padding-top:1rem">
-        <a href="doe.html" class="btn btn-primary" style="width:100%;height:3rem;justify-content:center">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-          Doe Agora
-        </a>
-      </div>
+  <div class="mob-menu" id="mm">
+    <div class="mob-menu-content">
+      <a href="index.html" class="mob-link">Início</a>
+      <a href="index.html#pin-about" class="mob-link">Sobre</a>
+      <a href="index.html#pin-services" class="mob-link">Serviços</a>
+      <a href="index.html#pin-projects" class="mob-link">Projetos</a>
+      <a href="parceiros.html" class="mob-link active">Parceiros</a>
+      <a href="index.html#pin-contact" class="mob-link">Contato</a>
+      <a href="doe.html" class="mob-link" style="color:var(--red);font-weight:700;">♥ Doe Agora</a>
     </div>
   </div>
 </nav>
 
-<section class="hero">
-  <div class="hero-bg"><div class="hero-overlay"></div><div class="hero-gradient"></div></div>
-  <div class="container hero-content">
-    <span class="hero-eyebrow">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+<!-- ═══════════ HERO ══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="h-bg" id="hBg"></div>
+  <div class="h-ov"></div><div class="h-gr"></div>
+  <div class="h-grid" id="hGrid"></div>
+  <div class="h-ring h-ring-1" id="hr1"></div>
+  <div class="h-ring h-ring-2" id="hr2"></div>
+  <div class="h-ring h-ring-3" id="hr3"></div>
+  <div class="h-acc h-acc-1"></div>
+  <div class="h-acc h-acc-2"></div>
+  <div class="h-acc h-acc-3"></div>
+  <div class="h-acc h-acc-4"></div>
+  <div class="h-dot h-dot-1" id="hd1"></div>
+  <div class="h-dot h-dot-2" id="hd2"></div>
+  <div class="h-dot h-dot-3" id="hd3"></div>
+  <div class="h-content" id="hC">
+    <span class="h-eyebrow" id="hEye">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
       Rede de Parceiros
     </span>
-    <h1 class="hero-title">
-      <span style="display:block">Juntos pela</span>
-      <span style="display:block" class="hero-accent">Justiça Social.</span>
+    <h1 class="h-h1" id="hH1">
+      <span class="hl"><span>JUNTOS</span></span>
+      <span class="hl"><span>PELA</span></span>
+      <span class="hl serif"><span>Justiça Social.</span></span>
     </h1>
-    <p class="hero-desc">Escritórios, associações e instituições que compartilham o compromisso com o acesso à justiça e o desenvolvimento da sociedade.</p>
+    <p class="h-desc" id="hDesc">Escritórios, associações e instituições que compartilham o compromisso com o acesso à justiça e o desenvolvimento da sociedade.</p>
+    <div class="h-btns" id="hBtns">
+      <button class="btn btn-r" style="height:3.5rem;padding:0 2.2rem;font-size:1.05rem;" onclick="lenis.scrollTo(document.getElementById('pin-partners'),{offset:0,duration:1.2})">Conhecer Parceiros</button>
+      <button class="btn btn-o" style="height:3.5rem;padding:0 2.2rem;font-size:1.05rem;" onclick="lenis.scrollTo(document.getElementById('pin-become'),{offset:0,duration:1.2})">Seja um Parceiro</button>
+    </div>
+  </div>
+  <div class="scue" id="scue">
+    <div class="scue-track"><div class="scue-fill" id="scfill"></div></div>
+    <span>Scroll</span>
   </div>
 </section>
 
-<section class="partners-section" id="parceiros">
-  <div class="container">
-    <div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:2.5rem" class="anim">
-      <div class="eyebrow">Nossos Parceiros</div>
-      <h2 class="sec-title">Instituições que constroem<br>a justiça conosco</h2>
-      <p class="sec-desc" style="max-width:36rem">Clique em qualquer parceiro para conhecer mais sobre a instituição e acessar o contato oficial.</p>
-    </div>
-    <div class="filter-bar anim" id="filterBar">
-      <button class="filter-btn active" data-filter="all">Todos</button>
-      <button class="filter-btn" data-filter="juridico">Escritórios</button>
-      <button class="filter-btn" data-filter="educacao">Associações</button>
-    </div>
-    <div class="partners-grid" id="partnersGrid"></div>
-  </div>
-</section>
-
-<section class="why-section">
-  <div class="container">
-    <div style="max-width:36rem" class="anim">
-      <div class="eyebrow" style="color:hsl(var(--primary))">Por que Ser Parceiro</div>
-      <h2 class="sec-title" style="color:white">Benefícios de fazer<br>parte da rede</h2>
-    </div>
-    <div class="why-grid">
-      <div class="why-card anim">
-        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div class="why-title">Credibilidade Institucional</div>
-        <div class="why-desc">Associe-se a uma das mais tradicionais assistências judiciárias do Brasil, com décadas de atuação reconhecida.</div>
+<!-- ═══════════ PINNED PARTNERS GRID  (400vh) ══════════════ -->
+<div id="pin-partners">
+  <div class="pt-sticky">
+    <div class="pt-bg-word" id="ptBgW">PARCEIROS</div>
+    <div class="pt-inner">
+      <div class="pt-head">
+        <span class="pt-head-sub" id="ptSub">Nossos Parceiros</span>
+        <div class="pt-head-h2" id="ptH2">INSTITUIÇÕES QUE<br>CONSTROEM A JUSTIÇA CONOSCO</div>
+        <div class="pt-head-line" id="ptLine"></div>
       </div>
-      <div class="why-card anim">
-        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-        <div class="why-title">Visibilidade e Alcance</div>
-        <div class="why-desc">Sua instituição ganha visibilidade perante a comunidade acadêmica, jurídica e a sociedade civil paulistana.</div>
+      <div class="pt-filter" id="ptFilter">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="juridico">Escritórios</button>
+        <button class="filter-btn" data-filter="educacao">Associações</button>
       </div>
-      <div class="why-card anim">
-        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <div class="why-title">Impacto Social Real</div>
-        <div class="why-desc">Contribua diretamente para o acesso à justiça de populações vulneráveis e gere impacto social mensurável.</div>
-      </div>
-      <div class="why-card anim">
-        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-        <div class="why-title">Capacitação Conjunta</div>
-        <div class="why-desc">Desenvolva ações conjuntas de formação, eventos e publicações de relevância acadêmica e jurídica.</div>
-      </div>
-      <div class="why-card anim">
-        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <div class="why-title">Acesso a Recursos</div>
-        <div class="why-desc">Oportunidades de editais e projetos compartilhados com apoio institucional da Mackenzie.</div>
-      </div>
-      <div class="why-card anim">
-        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <div class="why-title">Crescimento em Rede</div>
-        <div class="why-desc">Faça parte de uma rede colaborativa com reuniões periódicas e projetos integrados de impacto.</div>
-      </div>
+      <div class="pt-grid" id="ptGrid"></div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="become-section" id="seja-parceiro">
-  <div class="container">
-    <div class="become-inner">
-      <div class="anim">
-        <div class="eyebrow">Seja um Parceiro</div>
-        <h2 class="sec-title">Construa algo<br>maior conosco</h2>
-        <p class="sec-desc" style="max-width:34rem">Sua instituição compartilha do compromisso com a justiça social? O processo é direto — apresente-se por e-mail e nossa coordenação entrará em contato.</p>
-        <div class="steps" style="margin-top:2.5rem">
-          <div class="step" id="step1">
-            <div class="step-num">01</div>
-            <div class="step-body">
-              <div class="step-title">Envie um e-mail de apresentação</div>
-              <div class="step-desc">Conte quem é sua instituição, sua área de atuação e como imagina a parceria conosco.</div>
-            </div>
-          </div>
-          <div class="step" id="step2">
-            <div class="step-num">02</div>
-            <div class="step-body">
-              <div class="step-title">Conversa de alinhamento</div>
-              <div class="step-desc">Nossa coordenação entrará em contato para entender objetivos e verificar sinergia.</div>
-            </div>
-          </div>
-          <div class="step" id="step3">
-            <div class="step-num">03</div>
-            <div class="step-body" style="padding-bottom:0">
-              <div class="step-title">Formalização da parceria</div>
-              <div class="step-desc">Com os termos definidos, assinamos o convênio e iniciamos as ações conjuntas.</div>
-            </div>
-          </div>
+<!-- ═══════════ PINNED WHY  (300vh) ══════════════════════════ -->
+<div id="pin-why">
+  <div class="wy-sticky">
+    <div class="wy-bg-word" id="wyBgW">BENEFÍCIOS</div>
+    <div class="wy-grid-bg"></div>
+    <div class="wy-inner">
+      <div class="wy-head">
+        <span class="wy-head-sub" id="wySub">Por que Ser Parceiro</span>
+        <div class="wy-head-h2" id="wyH2">BENEFÍCIOS DE FAZER<br>PARTE DA REDE</div>
+      </div>
+      <div class="wy-grid">
+        <div class="wy-card" id="wyc0">
+          <div class="wy-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="wy-title">Credibilidade Institucional</div>
+          <div class="wy-desc">Associe-se a uma das mais tradicionais assistências judiciárias do Brasil, com décadas de atuação reconhecida.</div>
         </div>
-      </div>
-      <div class="anim" style="transition-delay:.15s">
-        <div class="cc">
-          <div class="cc-ey">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Contato Direto
-          </div>
-          <div class="cc-title">Fale com nossa<br><span>coordenação</span></div>
-          <div class="cc-desc">Respondemos propostas de parceria em até 3 dias úteis. Apresente sua instituição diretamente — sem intermediários.</div>
-          <div class="cc-pill">
-            <div class="cc-pill-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <div class="cc-pill-text">
-              <div class="cc-pill-label">E-mail institucional</div>
-              <div class="cc-pill-addr">parcerias@ajjoaomendes.com</div>
-            </div>
-            <button class="cc-copy" id="copyBtn" onclick="copyEmail()">
-              <svg id="copyIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              <span id="copyLabel">Copiar</span>
-            </button>
-          </div>
-          <a class="cc-btn" href="mailto:parcerias@ajjoaomendes.com?subject=Proposta%20de%20Parceria&body=Olá%2C%20gostaria%20de%20apresentar%20minha%20instituição%20e%20discutir%20uma%20possível%20parceria.">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Enviar proposta agora
-          </a>
-          <div class="cc-note">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            Sigilo profissional absoluto em todas as comunicações
-          </div>
+        <div class="wy-card" id="wyc1">
+          <div class="wy-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+          <div class="wy-title">Visibilidade e Alcance</div>
+          <div class="wy-desc">Sua instituição ganha visibilidade perante a comunidade acadêmica, jurídica e a sociedade civil paulistana.</div>
+        </div>
+        <div class="wy-card" id="wyc2">
+          <div class="wy-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <div class="wy-title">Impacto Social Real</div>
+          <div class="wy-desc">Contribua diretamente para o acesso à justiça de populações vulneráveis e gere impacto social mensurável.</div>
+        </div>
+        <div class="wy-card" id="wyc3">
+          <div class="wy-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div class="wy-title">Capacitação Conjunta</div>
+          <div class="wy-desc">Desenvolva ações conjuntas de formação, eventos e publicações de relevância acadêmica e jurídica.</div>
+        </div>
+        <div class="wy-card" id="wyc4">
+          <div class="wy-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+          <div class="wy-title">Acesso a Recursos</div>
+          <div class="wy-desc">Oportunidades de editais e projetos compartilhados com apoio institucional da Mackenzie.</div>
+        </div>
+        <div class="wy-card" id="wyc5">
+          <div class="wy-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="wy-title">Crescimento em Rede</div>
+          <div class="wy-desc">Faça parte de uma rede colaborativa com reuniões periódicas e projetos integrados de impacto.</div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<footer>
-  <div class="ft-bg"></div><div class="ft-ov"></div>
-  <div class="ft-in">
-    <div class="container">
-      <div class="ft-grid">
-        <div class="ft-brand">
-          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
-            <div style="width:2.5rem;height:2.5rem;background:hsl(var(--primary));border-radius:.5rem;display:flex;align-items:center;justify-content:center">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M16 11V3H8v8"/><path d="M8 19h8"/><path d="M10 19v-6h4v6"/></svg>
-            </div>
+<!-- ═══════════ PINNED BECOME  (300vh) ════════════════════════ -->
+<div id="pin-become">
+  <div class="bc-sticky">
+    <div class="bc-bg-word" id="bcBgW">PARCERIA</div>
+    <div class="bc-inner">
+      <div class="bc-info" id="bcInfo">
+        <span class="bc-head-sub">Seja um Parceiro</span>
+        <h2 class="bc-head-h2">
+          <span class="cl"><span>CONSTRUA ALGO</span></span>
+          <span class="cl"><span>MAIOR CONOSCO</span></span>
+        </h2>
+        <p class="bc-desc">Sua instituição compartilha do compromisso com a justiça social? O processo é direto — apresente-se por e-mail e nossa coordenação entrará em contato.</p>
+        <div class="bc-steps">
+          <div class="bc-step" id="bcs0">
+            <div class="bc-step-num">01</div>
             <div>
-              <div style="font-size:1.1rem;font-weight:800;color:white;line-height:1.1">AJ João Mendes</div>
-              <div style="font-size:.65rem;color:rgba(148,163,184,.7);letter-spacing:.12em;text-transform:uppercase;font-weight:600">Assistência Judiciária</div>
+              <div class="bc-step-title">Envie um e-mail de apresentação</div>
+              <div class="bc-step-desc">Conte quem é sua instituição, sua área de atuação e como imagina a parceria conosco.</div>
             </div>
           </div>
-          <p>Promovendo justiça social e excelência jurídica desde 1959. Uma iniciativa da Universidade Presbiteriana Mackenzie.</p>
-          <div class="ft-socials">
-            <a href="#" class="ft-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-            <a href="#" class="ft-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-            <a href="#" class="ft-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <div class="bc-step" id="bcs1">
+            <div class="bc-step-num">02</div>
+            <div>
+              <div class="bc-step-title">Conversa de alinhamento</div>
+              <div class="bc-step-desc">Nossa coordenação entrará em contato para entender objetivos e verificar sinergia.</div>
+            </div>
+          </div>
+          <div class="bc-step" id="bcs2">
+            <div class="bc-step-num">03</div>
+            <div style="padding-bottom:0">
+              <div class="bc-step-title">Formalização da parceria</div>
+              <div class="bc-step-desc">Com os termos definidos, assinamos o convênio e iniciamos as ações conjuntas.</div>
+            </div>
           </div>
         </div>
-        <div class="ft-col">
-          <h4>Links Rápidos</h4>
-          <ul>
-            <li><a href="index.html#about"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>Sobre Nós</a></li>
-            <li><a href="index.html#services"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>Serviços</a></li>
-            <li><a href="index.html#projects"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>Projetos Sociais</a></li>
-            <li><a href="#seja-parceiro"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>Seja um Parceiro</a></li>
-          </ul>
-        </div>
-        <div class="ft-col">
-          <h4>Contato</h4>
-          <ul>
-            <li><a href="#" style="align-items:flex-start"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Rua da Consolação, 930<br>Consolação – SP</a></li>
-            <li><a href="tel:+551121148000"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.18C1.65 2.09 2.56 1 3.66 1H6.7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6 6l1.06-1.06a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(11) 2114-8000</a></li>
-            <li><a href="mailto:ajjoaomendes@mackenzie.br"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>ajjoaomendes@mackenzie.br</a></li>
-          </ul>
-        </div>
       </div>
-      <div class="ft-bot">
-        <span class="ft-copy">© <span id="footerYear"></span> AJ João Mendes. Todos os direitos reservados.</span>
-        <div class="ft-links"><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a></div>
+      <div class="bc-card" id="bcCard">
+        <div class="bc-card-ey">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          Contato Direto
+        </div>
+        <div class="bc-card-title">Fale com nossa<br><span>coordenação</span></div>
+        <div class="bc-card-desc">Respondemos propostas de parceria em até 3 dias úteis. Apresente sua instituição diretamente — sem intermediários.</div>
+        <div class="bc-card-pill">
+          <div class="bc-card-pill-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div style="flex:1;min-width:0">
+            <div class="bc-card-pill-label">E-mail institucional</div>
+            <div class="bc-card-pill-addr">parcerias@ajjoaomendes.com</div>
+          </div>
+          <button class="bc-copy-btn" id="copyBtn" onclick="copyEmail()">
+            <svg id="copyIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            <span id="copyLabel">Copiar</span>
+          </button>
+        </div>
+        <a class="bc-card-btn" href="mailto:parcerias@ajjoaomendes.com?subject=Proposta%20de%20Parceria&body=Ol%C3%A1%2C%20gostaria%20de%20apresentar%20minha%20institui%C3%A7%C3%A3o%20e%20discutir%20uma%20poss%C3%ADvel%20parceria.">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Enviar proposta agora
+        </a>
+        <div class="bc-card-note">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          Sigilo profissional absoluto em todas as comunicações
+        </div>
       </div>
     </div>
   </div>
-  <div class="ft-acc"></div>
+</div>
+
+<!-- ═══════════ FOOTER ══════════════════════════════════════ -->
+<footer class="ft">
+  <div class="ft-bg" id="ftBg"></div>
+  <div class="ft-ov"></div>
+  <div class="ft-inner">
+    <div class="ft-grid">
+      <div class="ft-brand" id="ftBrand">
+        <h3>AJ João Mendes</h3>
+        <span class="sub">Assistência Judiciária — Mackenzie</span>
+        <p class="desc">Promovendo justiça social e excelência jurídica desde 1959. Uma iniciativa da Universidade Presbiteriana Mackenzie para garantir acesso à justiça para todos.</p>
+        <div class="ft-socials">
+          <a href="#" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        </div>
+      </div>
+      <div class="ft-col" id="ftCol1">
+        <h4>Links Rápidos</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="index.html#pin-about">Sobre Nós</a></li>
+          <li><a href="index.html#pin-services">Serviços</a></li>
+          <li><a href="index.html#pin-projects">Projetos Sociais</a></li>
+          <li><a href="index.html#pin-contact">Contato</a></li>
+        </ul>
+      </div>
+      <div class="ft-col" id="ftCol2">
+        <h4>Contato</h4>
+        <ul class="ft-contacts">
+          <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:2px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Rua da Consolação, 930<br>Consolação — SP, 01302-907</span></li>
+          <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><span>(11) 2114-8000</span></li>
+          <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>ajjoaomendes@mackenzie.br</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p class="ft-copy">&copy; <span id="ftYear"></span> AJ João Mendes. Todos os direitos reservados.</p>
+      <div class="ft-links">
+        <a href="#">Política de Privacidade</a>
+        <span style="color:rgba(255,255,255,.1)">•</span>
+        <a href="#">Termos de Uso</a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-accent"></div>
 </footer>
 
-<div class="modal-backdrop" id="modal" role="dialog" aria-modal="true">
+<!-- MODAL -->
+<div class="modal-bd" id="modal">
   <div class="modal">
     <div class="modal-bar"></div>
     <div class="modal-head">
@@ -446,7 +553,7 @@ footer{position:relative;overflow:hidden;font-family:'Montserrat',sans-serif}
         <div class="modal-name" id="modalName"></div>
         <span class="modal-cat" id="modalCat"></span>
       </div>
-      <button class="modal-x" onclick="closeModal()" aria-label="Fechar">
+      <button class="modal-x" onclick="closeModal()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
@@ -455,7 +562,7 @@ footer{position:relative;overflow:hidden;font-family:'Montserrat',sans-serif}
       <p class="modal-desc" id="modalDesc"></p>
       <div class="modal-tags" id="modalTags"></div>
       <a class="modal-cta" id="modalCta" href="#" target="_blank" rel="noopener">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         Conhecer o parceiro
       </a>
     </div>
@@ -463,79 +570,91 @@ footer{position:relative;overflow:hidden;font-family:'Montserrat',sans-serif}
 </div>
 
 <script>
-document.getElementById('footerYear').textContent = new Date().getFullYear();
+gsap.registerPlugin(ScrollTrigger);
 
+/* ── LENIS ───────────────────────────────── */
+const lenis = new Lenis({duration:1.18, easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add(t => lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+
+/* ── PROGRESS ────────────────────────────── */
+gsap.to('#prog', {scaleX:1, ease:'none', scrollTrigger:{scrub:.35, start:'top top', end:'bottom bottom'}});
+
+/* ── NAVBAR ──────────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('s', window.scrollY > 20));
+
+/* ── MOBILE MENU ─────────────────────────── */
+const mmBtn = document.getElementById('mmBtn'), mm = document.getElementById('mm');
+const mi = document.getElementById('mIcon'), ci = document.getElementById('cIcon');
+mmBtn.addEventListener('click', () => {
+  const o = mm.classList.toggle('open');
+  mi.style.display = o ? 'none' : 'block';
+  ci.style.display = o ? 'block' : 'none';
+});
+document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', () => {
+  mm.classList.remove('open'); mi.style.display='block'; ci.style.display='none';
+}));
+
+/* ── FOOTER YEAR ─────────────────────────── */
+document.getElementById('ftYear').textContent = new Date().getFullYear();
+
+/* ════════════════════════════════════
+   PARTNERS DATA
+════════════════════════════════════ */
 const PARTNERS = [
-  {
-    id:1, name:"Fachini Advogados", short:"Fachini", initial:"F",
-    category:"juridico", categoryLabel:"Escritório",
-    url:"https://share.google/kN6fCpsTWNOVVnIs6",
-    desc:"Escritório parceiro da AJ João Mendes comprometido com a excelência na prestação de serviços jurídicos. Apoia a assistência judiciária promovendo acesso à justiça e suporte técnico especializado à nossa equipe e aos clientes atendidos.",
-    tags:["Advocacia","Parceiro","São Paulo"]
-  },
-  {
-    id:2, name:"Alumni Direito Mackenzie", short:"Alumni", initial:"A",
-    category:"educacao", categoryLabel:"Associação",
-    url:"https://www.instagram.com/alumnidireitomackenzie",
-    desc:"Associação de ex-alunos do curso de Direito da Universidade Presbiteriana Mackenzie. Conecta egressos, estudantes e profissionais do mercado jurídico, fortalecendo a rede de apoio, mentoria e desenvolvimento profissional da AJ João Mendes.",
-    tags:["Ex-alunos","Mackenzie","Direito","Rede"]
-  },
-  {
-    id:3, name:"GS Law", short:"GS Law", initial:"GS",
-    category:"juridico", categoryLabel:"Escritório",
-    url:"https://share.google/UBewxvqu439f6b72g",
-    desc:"Escritório jurídico parceiro comprometido com soluções estratégicas e de alto impacto. A parceria com a AJ João Mendes reforça a capacidade de atendimento e a qualidade técnica nas orientações prestadas à comunidade.",
-    tags:["Advocacia","Estratégia","Parceiro"]
-  },
-  {
-    id:4, name:"Pellegrina Advogados", short:"Pellegrina", initial:"P",
-    category:"juridico", categoryLabel:"Escritório",
-    url:"https://share.google/ranBZd8jVYnONBo9D",
-    desc:"Escritório parceiro com atuação dedicada e especializada, contribuindo para o fortalecimento da assistência jurídica gratuita. A parceria amplia o alcance dos serviços prestados pela AJ João Mendes às populações vulneráveis.",
-    tags:["Advocacia","Parceiro","Assistência"]
-  },
-  {
-    id:5, name:"Boscatti Advogados", short:"Boscatti", initial:"B",
-    category:"juridico", categoryLabel:"Escritório",
-    url:"https://share.google/PHd7ZXdmMHdT6sAT7",
-    desc:"Escritório parceiro com trajetória de compromisso ético e técnico. Apoia as atividades da AJ João Mendes por meio de suporte especializado, orientação aos estagiários e colaboração em casos de maior complexidade.",
-    tags:["Advocacia","Ética","Parceiro"]
-  },
-  {
-    id:6, name:"Canovae Advogados", short:"Canovae", initial:"C",
-    category:"juridico", categoryLabel:"Escritório",
-    url:"https://share.google/77R5WF7DnS7VSLkOW",
-    desc:"Escritório parceiro que integra a rede de suporte jurídico da AJ João Mendes. Contribui com expertise técnica e engajamento com a causa do acesso à justiça, reforçando o compromisso coletivo com a cidadania e os direitos sociais.",
-    tags:["Advocacia","Cidadania","Parceiro"]
-  }
+  {id:1,name:"Fachini Advogados",short:"Fachini",initial:"F",category:"juridico",categoryLabel:"Escritório",url:"https://share.google/kN6fCpsTWNOVVnIs6",desc:"Escritório parceiro da AJ João Mendes comprometido com a excelência na prestação de serviços jurídicos. Apoia a assistência judiciária promovendo acesso à justiça e suporte técnico especializado à nossa equipe e aos clientes atendidos.",tags:["Advocacia","Parceiro","São Paulo"]},
+  {id:2,name:"Alumni Direito Mackenzie",short:"Alumni",initial:"A",category:"educacao",categoryLabel:"Associação",url:"https://www.instagram.com/alumnidireitomackenzie",desc:"Associação de ex-alunos do curso de Direito da Universidade Presbiteriana Mackenzie. Conecta egressos, estudantes e profissionais do mercado jurídico, fortalecendo a rede de apoio, mentoria e desenvolvimento profissional da AJ João Mendes.",tags:["Ex-alunos","Mackenzie","Direito","Rede"]},
+  {id:3,name:"GS Law",short:"GS Law",initial:"GS",category:"juridico",categoryLabel:"Escritório",url:"https://share.google/UBewxvqu439f6b72g",desc:"Escritório jurídico parceiro comprometido com soluções estratégicas e de alto impacto. A parceria com a AJ João Mendes reforça a capacidade de atendimento e a qualidade técnica nas orientações prestadas à comunidade.",tags:["Advocacia","Estratégia","Parceiro"]},
+  {id:4,name:"Pellegrina Advogados",short:"Pellegrina",initial:"P",category:"juridico",categoryLabel:"Escritório",url:"https://share.google/ranBZd8jVYnONBo9D",desc:"Escritório parceiro com atuação dedicada e especializada, contribuindo para o fortalecimento da assistência jurídica gratuita. A parceria amplia o alcance dos serviços prestados pela AJ João Mendes às populações vulneráveis.",tags:["Advocacia","Parceiro","Assistência"]},
+  {id:5,name:"Boscatti Advogados",short:"Boscatti",initial:"B",category:"juridico",categoryLabel:"Escritório",url:"https://share.google/PHd7ZXdmMHdT6sAT7",desc:"Escritório parceiro com trajetória de compromisso ético e técnico. Apoia as atividades da AJ João Mendes por meio de suporte especializado, orientação aos estagiários e colaboração em casos de maior complexidade.",tags:["Advocacia","Ética","Parceiro"]},
+  {id:6,name:"Canovae Advogados",short:"Canovae",initial:"C",category:"juridico",categoryLabel:"Escritório",url:"https://share.google/77R5WF7DnS7VSLkOW",desc:"Escritório parceiro que integra a rede de suporte jurídico da AJ João Mendes. Contribui com expertise técnica e engajamento com a causa do acesso à justiça, reforçando o compromisso coletivo com a cidadania e os direitos sociais.",tags:["Advocacia","Cidadania","Parceiro"]},
 ];
 
 const CAT = {
-  juridico:{ bg:"rgba(192,19,47,.1)", color:"hsl(348,83%,47%)", dot:"hsl(348,83%,47%)" },
-  educacao:{ bg:"rgba(42,100,150,.1)", color:"hsl(209,53%,36%)", dot:"hsl(209,53%,36%)" }
+  juridico:{bg:"rgba(192,19,47,.1)",color:"hsl(348,83%,47%)",dot:"hsl(348,83%,47%)"},
+  educacao:{bg:"rgba(42,100,150,.1)",color:"hsl(209,53%,36%)",dot:"hsl(209,53%,36%)"}
 };
 
-let activeFilter = "all";
+let activeFilter = 'all';
 
 function renderPartners() {
-  const grid = document.getElementById('partnersGrid');
+  const grid = document.getElementById('ptGrid');
   grid.innerHTML = '';
   const list = activeFilter === 'all' ? PARTNERS : PARTNERS.filter(p => p.category === activeFilter);
   list.forEach((p, i) => {
     const c = CAT[p.category];
     const card = document.createElement('div');
-    card.className = 'partner-card';
-    card.style.cssText = 'opacity:0;transform:translateY(16px)';
+    card.className = 'pt-card';
     card.innerHTML = `
-      <div class="p-dot" style="background:${c.dot}"></div>
-      <div class="partner-mono" style="background:${c.color}">${p.initial}</div>
-      <div class="partner-label">${p.short}</div>`;
+      <div class="pt-card-dot" style="background:${c.dot}"></div>
+      <div class="pt-card-mono" style="background:${c.color}">${p.initial}</div>
+      <div class="pt-card-label">${p.short}</div>`;
     card.addEventListener('click', () => openModal(p));
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect(), cx = r.left+r.width/2, cy = r.top+r.height/2;
+      gsap.to(card, {rotationY:(e.clientX-cx)/(r.width/2)*6, rotationX:-(e.clientY-cy)/(r.height/2)*6, transformPerspective:800, duration:.4, ease:'power2.out'});
+    });
+    card.addEventListener('mouseleave', () => gsap.to(card, {rotationY:0, rotationX:0, duration:.55, ease:'elastic.out(1,.65)'}));
     grid.appendChild(card);
-    setTimeout(() => { card.style.transition='all .4s ease'; card.style.opacity='1'; card.style.transform='translateY(0)'; }, 40 + i*70);
+    // Staggered entrance animation
+    gsap.fromTo(card, {y:60, opacity:0}, {y:0, opacity:1, duration:.7, delay:.04+i*.08, ease:'power3.out'});
   });
 }
 
+document.getElementById('ptFilter').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if(!btn) return;
+  activeFilter = btn.dataset.filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPartners();
+});
+
+/* ════════════════════════════════════
+   MODAL
+════════════════════════════════════ */
 function openModal(p) {
   const c = CAT[p.category];
   document.getElementById('modalMono').textContent = p.initial;
@@ -547,47 +666,127 @@ function openModal(p) {
   document.getElementById('modalTags').innerHTML = p.tags.map(t=>`<span class="modal-tag">${t}</span>`).join('');
   document.getElementById('modalCta').href = p.url;
   document.getElementById('modal').classList.add('visible');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
 
-function closeModal() {
+window.closeModal = function() {
   document.getElementById('modal').classList.remove('visible');
-  document.body.style.overflow='';
-}
+  document.body.style.overflow = '';
+};
 
 document.getElementById('modal').addEventListener('click', e => { if(e.target===document.getElementById('modal')) closeModal(); });
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    activeFilter = btn.dataset.filter;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderPartners();
-  });
+/* ════════════════════════════════════
+   HERO ENTRANCE
+════════════════════════════════════ */
+const heroIn = gsap.timeline({defaults:{ease:'power4.out'}});
+heroIn
+  .to('#hEye',              {opacity:1, y:0, duration:.9}, 0)
+  .to('.h-acc-1,.h-acc-2',  {scaleY:1, duration:1.4, stagger:.18}, '.1')
+  .to('.h-acc-3,.h-acc-4',  {scaleX:1, duration:1.2, stagger:.12}, '.3')
+  .to('#hH1 .hl span',      {y:0, duration:1.5, stagger:.12, ease:'expo.out'}, '.2')
+  .to('#hDesc',              {opacity:1, y:0, duration:1.1}, '.75')
+  .to('#hBtns',              {opacity:1, y:0, duration:.95}, '.9')
+  .to('#scue',               {opacity:1, duration:.9}, '1.1')
+  .to('#hr1', {rotation:360, duration:55, ease:'none', repeat:-1}, 0)
+  .to('#hr2', {rotation:-360, duration:80, ease:'none', repeat:-1}, 0)
+  .to('#hr3', {rotation:180, duration:110, ease:'none', repeat:-1}, 0)
+  .to(['#hd1','#hd2','#hd3'], {opacity:1, scale:1, duration:.6, stagger:.2, ease:'back.out(2)'}, '.6');
+
+gsap.to('#scfill', {yPercent:200, duration:1.5, ease:'power1.inOut', repeat:-1, repeatDelay:.25});
+
+/* HERO SCRUB */
+gsap.timeline({scrollTrigger:{trigger:'#hero', start:'top top', end:'bottom top', scrub:1.7}})
+  .to('#hEye',  {y:-140, opacity:0, ease:'power2.in'}, 0)
+  .to('#hH1 .hl:nth-child(1) span', {y:'-140%', x:'-10vw', ease:'power2.in'}, 0)
+  .to('#hH1 .hl:nth-child(2) span', {y:'-90%',  x:'12vw',  ease:'power2.in'}, 0)
+  .to('#hH1 .hl:nth-child(3) span', {y:'-60%',  x:'-7vw',  ease:'power2.in'}, 0)
+  .to('#hDesc', {y:-80, opacity:0, ease:'power2.in'}, 0)
+  .to('#hBtns', {y:-55, opacity:0, ease:'power2.in'}, 0)
+  .to('#hr1', {scale:2.8, opacity:0}, 0)
+  .to('#hr2', {scale:.25, opacity:0}, 0)
+  .to('#hr3', {scale:1.9, opacity:0}, 0)
+  .to('.h-acc-1,.h-acc-2', {scaleY:0}, 0)
+  .to('.h-acc-3,.h-acc-4', {scaleX:0}, 0)
+  .to('#hGrid', {scale:1.35, opacity:0}, 0)
+  .to('#hBg',   {yPercent:32}, 0)
+  .to('#scue',  {opacity:0, y:40}, 0)
+  .to('#hd1', {x:'-20vw', opacity:0}, 0)
+  .to('#hd2', {x:'18vw', opacity:0}, 0)
+  .to('#hd3', {y:'-15vh', opacity:0}, 0);
+
+/* ════════════════════════════════════
+   PINNED PARTNERS GRID
+════════════════════════════════════ */
+const ptTl = gsap.timeline({
+  scrollTrigger:{trigger:'#pin-partners', start:'top top', end:'bottom bottom', scrub:1.2, pin:'.pt-sticky', anticipatePin:1}
+});
+ptTl
+  .to('#ptBgW',  {opacity:1, x:-50, ease:'none'}, 0)
+  .to('#ptSub',  {y:0, opacity:1, ease:'power2.out'}, .04)
+  .to('#ptH2',   {y:0, opacity:1, ease:'expo.out'}, .1)
+  .to('#ptLine', {width:'120px', opacity:1, ease:'power3.out'}, .17)
+  .to('#ptFilter',{y:0, opacity:1, ease:'power3.out'}, .24)
+  .to('#ptBgW',  {x:-100, ease:'none'}, .8);
+
+// Render partners on enter
+ScrollTrigger.create({
+  trigger:'#pin-partners', start:'top 85%', once:true,
+  onEnter: renderPartners
 });
 
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
-navbar.classList.toggle('scrolled', window.scrollY > 20);
+/* ════════════════════════════════════
+   PINNED WHY
+════════════════════════════════════ */
+const wyTl = gsap.timeline({
+  scrollTrigger:{trigger:'#pin-why', start:'top top', end:'bottom bottom', scrub:1.2, pin:'.wy-sticky', anticipatePin:1}
+});
+wyTl
+  .to('#wyBgW', {opacity:1, y:-30, ease:'none'}, 0)
+  .to('#wySub', {y:0, opacity:1, ease:'power2.out'}, .04)
+  .to('#wyH2',  {y:0, opacity:1, ease:'expo.out'}, .1)
+  .to('#wyc0',  {y:0, opacity:1, ease:'power3.out'}, .18)
+  .to('#wyc1',  {y:0, opacity:1, ease:'power3.out'}, .26)
+  .to('#wyc2',  {y:0, opacity:1, ease:'power3.out'}, .34)
+  .to('#wyc3',  {y:0, opacity:1, ease:'power3.out'}, .42)
+  .to('#wyc4',  {y:0, opacity:1, ease:'power3.out'}, .50)
+  .to('#wyc5',  {y:0, opacity:1, ease:'power3.out'}, .58)
+  .to('#wyBgW', {y:-70, ease:'none'}, .7);
 
-const mm = document.getElementById('mobileMenu');
-document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-  const open = mm.classList.toggle('open');
-  document.getElementById('menuIcon').style.display = open ? 'none' : 'block';
-  document.getElementById('closeIcon').style.display = open ? 'block' : 'none';
+/* ════════════════════════════════════
+   PINNED BECOME
+════════════════════════════════════ */
+const bcTl = gsap.timeline({
+  scrollTrigger:{trigger:'#pin-become', start:'top top', end:'bottom bottom', scrub:1.3, pin:'.bc-sticky', anticipatePin:1}
+});
+bcTl
+  .to('#bcBgW',  {opacity:1, y:-40, ease:'none'}, 0)
+  .to('#bcInfo', {x:0, opacity:1, ease:'power3.out'}, .05)
+  .to('.bc-head-h2 .cl:nth-child(1) span', {y:0, ease:'expo.out'}, .12)
+  .to('.bc-head-h2 .cl:nth-child(2) span', {y:0, ease:'expo.out'}, .22)
+  .to('#bcs0',   {x:0, opacity:1, ease:'power3.out'}, .32)
+  .to('#bcs1',   {x:0, opacity:1, ease:'power3.out'}, .42)
+  .to('#bcs2',   {x:0, opacity:1, ease:'power3.out'}, .52)
+  .to('#bcCard', {x:0, opacity:1, ease:'power3.out'}, .1)
+  .to('#bcBgW',  {y:-90, ease:'none'}, .75);
+
+/* ════════════════════════════════════
+   FOOTER
+════════════════════════════════════ */
+gsap.to('#ftBg', {
+  yPercent:20, ease:'none',
+  scrollTrigger:{trigger:'.ft', start:'top bottom', end:'bottom bottom', scrub:true}
+});
+gsap.from(['#ftBrand','#ftCol1','#ftCol2'], {
+  y:55, opacity:0, duration:1, stagger:.15, ease:'power3.out',
+  scrollTrigger:{trigger:'.ft', start:'top 85%', toggleActions:'play none none none'}
 });
 
-const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('in'); }), {threshold:.12});
-document.querySelectorAll('.anim').forEach(el => obs.observe(el));
-
-const stepObs = new IntersectionObserver(e => {
-  e.forEach(x => { if(x.isIntersecting) { ['step1','step2','step3'].forEach((id,i) => setTimeout(()=>document.getElementById(id)?.classList.add('visible'),i*150)); stepObs.disconnect(); } });
-}, {threshold:.2});
-const stepsEl = document.querySelector('.steps');
-if(stepsEl) stepObs.observe(stepsEl);
-
-function copyEmail() {
+/* ════════════════════════════════════
+   COPY EMAIL
+════════════════════════════════════ */
+window.copyEmail = function() {
   navigator.clipboard.writeText('parcerias@ajjoaomendes.com').then(() => {
     const btn = document.getElementById('copyBtn');
     const label = document.getElementById('copyLabel');
@@ -596,12 +795,10 @@ function copyEmail() {
     icon.innerHTML = '<path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
     setTimeout(() => {
       btn.classList.remove('ok'); label.textContent = 'Copiar';
-      icon.innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>';
+      icon.innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>';
     }, 2200);
   });
-}
-
-renderPartners();
+};
 </script>
 </body>
 </html>
