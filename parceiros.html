@@ -1,446 +1,607 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nossos Parceiros</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
-  <style>
-    /* Reset and base */
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      background: #fff;
-      font-family: 'Poppins', 'Montserrat', sans-serif;
-      color: #111;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    /* Container da seção */
-    section.parceiros {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 48px 24px 64px;
-      display: flex;
-      flex-direction: column;
-      gap: 48px;
-    }
-    /* Cabeçalho */
-    .parceiros-header {
-      text-align: center;
-    }
-    .parceiros-header h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 2.75rem;
-      color: #000;
-      margin: 0 0 8px;
-      line-height: 1.1;
-    }
-    .parceiros-header .underline {
-      width: 60px;
-      height: 2px;
-      background: #c8102e; /* vermelho */
-      margin: 0 auto 12px;
-      border-radius: 1px;
-    }
-    .parceiros-header p {
-      font-weight: 400;
-      font-size: 1rem;
-      color: #333333dd; /* cinza escuro suave */
-      margin: 0;
-    }
-    /* Grid dos parceiros */
-    .parceiros-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 32px 24px;
-      justify-items: center;
-    }
-    /* Card parceiro */
-    .parceiro-card {
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 24px 16px 32px;
-      cursor: default;
-      position: relative;
-      transition: border-color 0.3s ease;
-      border-bottom: 2px solid transparent;
-      user-select: none;
-      max-width: 180px;
-      min-height: 180px;
-    }
-    .parceiro-card:hover {
-      border-bottom-color: #c8102e;
-    }
-    /* Logo parceiro */
-    .parceiro-logo {
-      max-width: 100%;
-      max-height: 100px;
-      object-fit: contain;
-      filter: none;
-      margin-bottom: 16px;
-      cursor: pointer; /* Adicionado para indicar que é clicável */
-    }
-    /* Ícone vermelho discreto abaixo do logo */
-    .parceiro-icon {
-      width: 20px;
-      height: 20px;
-      stroke: #c8102e;
-      fill: #c8102e;
-      flex-shrink: 0;
-    }
-    /* Faixa institucional */
-    .faixa-institucional {
-      background: #fff;
-      padding: 24px 16px;
-      text-align: center;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 400;
-      font-size: 1.125rem;
-      color: #000;
-      position: relative;
-      max-width: 900px;
-      margin: 0 auto;
-      line-height: 1.4;
-    }
-    .faixa-institucional .destaque-vermelho {
-      color: #c8102e;
-      font-weight: 700;
-      position: relative;
-    }
-    .faixa-institucional .barra-lateral {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 4px;
-      height: 60%;
-      background: #c8102e;
-      border-radius: 2px;
-    }
-    /* Rodapé da seção */
-    .parceiros-footer {
-      border-top: 1px solid #11111122;
-      padding-top: 24px;
-      text-align: center;
-    }
-    .btn-parceiro {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: #111;
-      background: transparent;
-      border: 2px solid #111;
-      border-radius: 4px;
-      padding: 10px 28px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      user-select: none;
-      outline-offset: 2px;
-      text-decoration: none; /* Para remover sublinhado do link */
-      display: inline-block; /* Para comportar-se como botão */
-    }
-    .btn-parceiro:hover,
-    .btn-parceiro:focus {
-      color: #c8102e;
-      border-color: #c8102e;
-      outline: none;
-    }
-    /* Ícone handshake minimalista (line icon) */
-    svg.handshake {
-      stroke-width: 1.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-    /* Modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background-color: #fff;
-      padding: 32px;
-      border-radius: 8px;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    .modal-text {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.125rem;
-      color: #333;
-      margin-bottom: 24px;
-    }
-    .modal-btn {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: #fff;
-      background: #c8102e;
-      border: none;
-      border-radius: 4px;
-      padding: 12px 24px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .modal-btn:hover {
-      background: #a00d25;
-    }
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      color: #aaa;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .close:hover,
-    .close:focus {
-      color: #000;
-      text-decoration: none;
-    }
-    /* Responsive tweaks */
-    @media (max-width: 480px) {
-      .parceiros-header h1 {
-        font-size: 2rem;
-      }
-      .faixa-institucional {
-        font-size: 1rem;
-        padding: 16px 12px;
-      }
-      .parceiro-card {
-        max-width: 140px;
-        min-height: 160px;
-        padding: 16px 12px 24px;
-      }
-      .parceiro-logo {
-        max-height: 80px;
-        margin-bottom: 12px;
-      }
-      .modal-content {
-        padding: 24px;
-      }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <link rel="icon" type="image/png" href="logo6.jpg">
+  <link rel="apple-touch-icon" href="logo6.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Parceiros — AJ João Mendes</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: 348 83% 47%;
+  --secondary: 209 53% 36%;
+  --muted: 210 40% 96%;
+  --muted-fg: 215 16% 47%;
+  --card-fg: 222 47% 11%;
+  --border: 214 32% 91%;
+}
+html { scroll-behavior: smooth; }
+body { background:#fff; color:hsl(var(--card-fg)); font-family:'Montserrat',sans-serif; -webkit-font-smoothing:antialiased; line-height:1.5; overflow-x:hidden; }
+h1,h2,h3,h4,h5,h6 { font-weight:700; letter-spacing:-0.025em; }
+::-webkit-scrollbar{width:10px} ::-webkit-scrollbar-track{background:hsl(var(--muted))} ::-webkit-scrollbar-thumb{background:hsl(var(--secondary)/.5);border-radius:5px} ::-webkit-scrollbar-thumb:hover{background:hsl(var(--secondary))}
+.container{width:100%;max-width:1280px;margin:0 auto;padding:0 1.5rem}
+
+/* NAVBAR */
+.navbar{position:fixed;width:100%;z-index:50;transition:all .4s cubic-bezier(.4,0,.2,1)}
+.navbar.scrolled{background:rgba(255,255,255,.97);backdrop-filter:blur(16px);box-shadow:0 4px 24px -1px rgba(0,0,0,.1);padding:.25rem 0}
+.navbar:not(.scrolled){background:transparent;padding:1rem 0}
+.navbar-content{display:flex;justify-content:space-between;align-items:center;height:4rem}
+.logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;transition:transform .3s ease}
+.logo:hover{transform:scale(1.04)}
+.logo-icon{width:2.5rem;height:2.5rem;border-radius:.5rem;object-fit:contain}
+.logo-text-wrap{overflow:hidden;display:flex;align-items:baseline}
+.logo-abbr{font-weight:800;font-size:1.25rem;letter-spacing:.04em;transition:color .4s ease;white-space:nowrap}
+.logo-expand{display:inline-block;overflow:hidden;white-space:nowrap;font-weight:700;font-size:1.05rem;transition:max-width .55s cubic-bezier(.4,0,.2,1),opacity .45s cubic-bezier(.4,0,.2,1),color .4s ease}
+.navbar:not(.scrolled) .logo-expand{max-width:400px;opacity:1;color:rgba(255,255,255,.92)}
+.navbar.scrolled .logo-expand{max-width:0;opacity:0}
+.navbar:not(.scrolled) .logo-abbr{color:#fff;font-size:1.1rem}
+.navbar.scrolled .logo-abbr{color:hsl(var(--secondary));font-size:1.35rem}
+.logo-highlight{color:hsl(var(--primary))}
+.logo-space{display:inline-block;overflow:hidden;transition:width .45s cubic-bezier(.4,0,.2,1),opacity .35s ease}
+.navbar:not(.scrolled) .logo-space{width:.35rem;opacity:1}
+.navbar.scrolled .logo-space{width:0;opacity:0}
+.logo-dot{display:inline-block;width:4px;height:4px;border-radius:50%;background:hsl(var(--primary));margin:0;transition:opacity .35s ease,transform .4s ease,margin .45s ease;transform-origin:center}
+.navbar:not(.scrolled) .logo-dot{opacity:0;margin:0;transform:scale(0)}
+.navbar.scrolled .logo-dot{opacity:1;margin:0 3px 3px;transform:scale(1)}
+.nav-links{display:none;align-items:center;gap:2rem}
+@media(min-width:768px){.nav-links{display:flex}}
+.nav-link{font-size:.875rem;font-weight:600;text-decoration:none;transition:color .3s ease}
+.navbar.scrolled .nav-link{color:hsl(var(--secondary))}
+.navbar:not(.scrolled) .nav-link{color:rgba(255,255,255,.9)}
+.nav-link:hover,.nav-link.active{color:hsl(var(--primary))}
+.btn{padding:.75rem 1.5rem;border-radius:9999px;font-weight:700;transition:all .3s ease;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;font-family:inherit;font-size:.875rem}
+.btn-primary{background:hsl(var(--primary));color:white;box-shadow:0 10px 15px -3px rgba(192,19,47,.3)}
+.btn-primary:hover{background:hsl(var(--primary)/.9);transform:translateY(-2px);box-shadow:0 20px 25px -5px rgba(192,19,47,.3)}
+.mobile-menu-btn{display:block;padding:.5rem;background:none;border:none;cursor:pointer;border-radius:.375rem}
+@media(min-width:768px){.mobile-menu-btn{display:none}}
+.navbar.scrolled .mobile-menu-btn{color:hsl(var(--secondary))}
+.navbar:not(.scrolled) .mobile-menu-btn{color:white}
+.mobile-menu{background:white;border-bottom:1px solid hsl(var(--border));box-shadow:0 10px 15px -3px rgba(0,0,0,.1);overflow:hidden;max-height:0;opacity:0;transition:all .3s ease}
+.mobile-menu.open{max-height:500px;opacity:1}
+.mobile-menu-content{padding:1rem;display:flex;flex-direction:column;gap:.5rem}
+.mobile-menu-link{display:block;padding:.75rem 1rem;color:hsl(var(--secondary));font-weight:500;text-decoration:none;border-radius:.5rem;transition:all .3s ease}
+.mobile-menu-link:hover,.mobile-menu-link.active{background:hsl(var(--primary)/.05);color:hsl(var(--primary))}
+
+/* HERO */
+.hero{position:relative;min-height:52vh;display:flex;align-items:flex-end;overflow:hidden;padding-bottom:5rem}
+.hero-bg{position:absolute;inset:0;z-index:0;background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=2000');background-attachment:fixed;background-position:center;background-size:cover}
+.hero-overlay{position:absolute;inset:0;background:hsl(var(--secondary)/.82);mix-blend-mode:multiply}
+.hero-gradient{position:absolute;inset:0;background:linear-gradient(160deg,transparent 40%,rgba(0,0,0,.5))}
+.hero-content{position:relative;z-index:10;color:white;padding-top:8rem}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .9rem;border-radius:9999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.25rem;backdrop-filter:blur(4px)}
+.hero-title{font-size:clamp(2.25rem,6vw,4rem);font-weight:800;line-height:1.05;margin-bottom:1.25rem}
+.hero-accent{color:hsl(var(--primary)/.9)}
+.hero-desc{font-size:clamp(.95rem,1.5vw,1.1rem);color:rgba(255,255,255,.75);max-width:42rem;line-height:1.8;font-weight:300}
+
+/* LABELS */
+.eyebrow{color:hsl(var(--primary));font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+.eyebrow::before{content:'';display:inline-block;width:1.5rem;height:2px;background:hsl(var(--primary));border-radius:9999px}
+.sec-title{font-size:clamp(1.6rem,4vw,2.25rem);font-weight:800;color:hsl(var(--secondary));line-height:1.1}
+.sec-desc{color:hsl(var(--muted-fg));font-size:1rem;line-height:1.8;margin-top:.75rem}
+
+/* PARTNERS */
+.partners-section{padding:6rem 0;background:#fff}
+.filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:3rem}
+.filter-btn{padding:.45rem 1.1rem;border-radius:9999px;font-size:.78rem;font-weight:600;border:1.5px solid hsl(var(--border));background:transparent;color:hsl(var(--muted-fg));cursor:pointer;transition:all .25s ease;font-family:inherit;letter-spacing:.02em}
+.filter-btn:hover{border-color:hsl(var(--secondary));color:hsl(var(--secondary))}
+.filter-btn.active{background:hsl(var(--secondary));border-color:hsl(var(--secondary));color:white}
+.partners-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+@media(min-width:640px){.partners-grid{grid-template-columns:repeat(3,1fr)}}
+
+.partner-card{position:relative;background:#fff;border:1.5px solid hsl(var(--border));border-radius:1rem;padding:2rem 1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);min-height:140px;overflow:hidden;gap:.75rem}
+.partner-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,hsl(var(--primary)),hsl(var(--secondary)));transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.partner-card:hover{border-color:hsl(var(--secondary)/.35);box-shadow:0 12px 36px -8px rgba(42,100,150,.15);transform:translateY(-4px)}
+.partner-card:hover::after{transform:scaleX(1)}
+.partner-mono{width:60px;height:60px;border-radius:.75rem;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;color:white;transition:all .3s ease;flex-shrink:0}
+.partner-label{font-size:.75rem;font-weight:700;color:hsl(var(--secondary));text-align:center;letter-spacing:.03em}
+.p-dot{position:absolute;top:.75rem;right:.75rem;width:6px;height:6px;border-radius:50%}
+
+/* MODAL */
+.modal-backdrop{position:fixed;inset:0;z-index:100;background:rgba(15,23,42,.65);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .35s ease}
+.modal-backdrop.visible{opacity:1;pointer-events:all}
+.modal{background:#fff;border-radius:1.25rem;width:100%;max-width:520px;overflow:hidden;box-shadow:0 40px 80px -20px rgba(0,0,0,.3);transform:translateY(24px) scale(.97);transition:transform .4s cubic-bezier(.34,1.28,.64,1)}
+.modal-backdrop.visible .modal{transform:translateY(0) scale(1)}
+.modal-bar{height:5px;background:linear-gradient(90deg,hsl(var(--primary)),hsl(var(--secondary)))}
+.modal-head{padding:2rem 2rem 1.25rem;display:flex;align-items:flex-start;gap:1.25rem}
+.modal-mono{width:60px;height:60px;border-radius:.75rem;display:flex;align-items:center;justify-content:center;font-size:1.25rem;font-weight:800;color:white;flex-shrink:0}
+.modal-meta{flex:1;min-width:0}
+.modal-name{font-size:1.15rem;font-weight:800;color:hsl(var(--secondary));margin-bottom:.3rem}
+.modal-cat{display:inline-flex;align-items:center;gap:.35rem;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.2rem .65rem;border-radius:9999px}
+.modal-x{width:2rem;height:2rem;background:hsl(var(--muted));border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto;transition:background .2s;color:hsl(var(--muted-fg))}
+.modal-x:hover{background:hsl(var(--border))}
+.modal-div{height:1px;background:hsl(var(--border));margin:0 2rem}
+.modal-body{padding:1.5rem 2rem 2rem}
+.modal-desc{color:hsl(var(--muted-fg));font-size:.875rem;line-height:1.85;margin-bottom:1.5rem}
+.modal-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.75rem}
+.modal-tag{font-size:.7rem;font-weight:600;padding:.25rem .7rem;border-radius:9999px;border:1.5px solid hsl(var(--border));color:hsl(var(--muted-fg))}
+.modal-cta{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:.9rem;background:hsl(var(--secondary));color:white;border:none;border-radius:.625rem;font-family:'Montserrat',sans-serif;font-size:.875rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .25s ease;box-shadow:0 4px 14px hsl(var(--secondary)/.28)}
+.modal-cta:hover{background:hsl(var(--primary));box-shadow:0 6px 20px hsl(var(--primary)/.32);transform:translateY(-2px)}
+
+/* WHY */
+.why-section{padding:6rem 0;background:hsl(var(--secondary))}
+.why-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:3rem}
+@media(min-width:768px){.why-grid{grid-template-columns:repeat(3,1fr)}}
+.why-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:2rem;transition:all .3s ease}
+.why-card:hover{background:rgba(255,255,255,.1);transform:translateY(-4px)}
+.why-icon{width:3rem;height:3rem;background:hsl(var(--primary)/.15);border-radius:.625rem;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
+.why-icon svg{color:hsl(var(--primary)/.9)}
+.why-title{font-size:1rem;font-weight:700;color:white;margin-bottom:.5rem}
+.why-desc{font-size:.875rem;color:rgba(255,255,255,.55);line-height:1.75}
+
+/* BECOME */
+.become-section{padding:7rem 0;background:#fff;position:relative;overflow:hidden}
+.become-section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 60% 50% at 80% 50%,hsl(var(--muted)) 0%,transparent 70%);pointer-events:none}
+.become-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr;gap:5rem;align-items:center}
+@media(min-width:1024px){.become-inner{grid-template-columns:1fr 1fr}}
+.steps{margin-top:2.5rem;display:flex;flex-direction:column}
+.step{display:flex;gap:1.25rem;align-items:flex-start;opacity:0;transform:translateX(-20px);transition:all .5s ease;position:relative}
+.step:not(:last-child)::after{content:'';position:absolute;left:1.1rem;top:2.5rem;width:1px;height:calc(100% - .5rem);background:linear-gradient(to bottom,hsl(var(--secondary)/.3),transparent)}
+.step.visible{opacity:1;transform:translateX(0)}
+.step-num{width:2.25rem;height:2.25rem;background:hsl(var(--secondary));border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.72rem;font-weight:800;color:white;z-index:1;position:relative}
+.step-body{padding-bottom:2rem}
+.step-title{font-size:.9rem;font-weight:700;color:hsl(var(--card-fg));margin-bottom:.2rem;margin-top:.35rem}
+.step-desc{font-size:.82rem;color:hsl(var(--muted-fg));line-height:1.7}
+
+/* CONTACT CARD */
+.cc{background:hsl(var(--secondary));border-radius:1.5rem;padding:3rem 2.5rem;position:relative;overflow:hidden;box-shadow:0 32px 64px -12px hsl(var(--secondary)/.35)}
+.cc::before{content:'';position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04)}
+.cc::after{content:'';position:absolute;bottom:-60px;left:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.03)}
+.cc-ey{display:inline-flex;align-items:center;gap:.4rem;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1rem}
+.cc-title{font-size:1.75rem;font-weight:800;color:white;line-height:1.15;margin-bottom:1rem}
+.cc-title span{color:hsl(var(--primary)/.85)}
+.cc-desc{font-size:.875rem;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:2rem;font-weight:400}
+.cc-pill{display:flex;align-items:center;gap:.75rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:.75rem;padding:1rem 1.25rem;margin-bottom:1.5rem;position:relative;z-index:1}
+.cc-pill-icon{width:2.25rem;height:2.25rem;background:hsl(var(--primary));border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cc-pill-text{flex:1;min-width:0}
+.cc-pill-label{font-size:.68rem;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.1rem}
+.cc-pill-addr{font-size:.875rem;color:white;font-weight:700}
+.cc-copy{background:rgba(255,255,255,.1);border:none;border-radius:.375rem;padding:.4rem .6rem;color:rgba(255,255,255,.6);cursor:pointer;transition:all .2s;font-family:inherit;font-size:.7rem;font-weight:600;display:flex;align-items:center;gap:.3rem;white-space:nowrap}
+.cc-copy:hover{background:rgba(255,255,255,.2);color:white}
+.cc-copy.ok{background:rgba(255,255,255,.2);color:#86efac}
+.cc-btn{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:1rem;background:white;color:hsl(var(--secondary));border:none;border-radius:.75rem;font-family:'Montserrat',sans-serif;font-size:.9rem;font-weight:800;cursor:pointer;text-decoration:none;transition:all .25s ease;box-shadow:0 8px 24px rgba(0,0,0,.15);position:relative;z-index:1}
+.cc-btn:hover{background:hsl(var(--primary));color:white;transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.2)}
+.cc-note{margin-top:1.25rem;display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:rgba(255,255,255,.35);position:relative;z-index:1;justify-content:center}
+
+/* FOOTER */
+footer{position:relative;overflow:hidden;font-family:'Montserrat',sans-serif}
+.ft-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=2000');background-size:cover;background-position:center}
+.ft-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,23,42,.97) 0%,rgba(30,41,59,.93) 100%)}
+.ft-in{position:relative;z-index:10;padding:5rem 0 2rem}
+.ft-grid{display:grid;grid-template-columns:1fr;gap:3rem;margin-bottom:4rem}
+@media(min-width:768px){.ft-grid{grid-template-columns:2fr 1fr 1fr}}
+.ft-brand p{color:rgb(148,163,184);font-size:.875rem;line-height:1.75;margin:1rem 0 1.5rem;max-width:22rem}
+.ft-socials{display:flex;gap:.75rem}
+.ft-soc{width:2.5rem;height:2.5rem;background:rgba(255,255,255,.08);border-radius:.5rem;display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all .25s ease}
+.ft-soc:hover{background:hsl(var(--primary));transform:scale(1.1)}
+.ft-col h4{font-size:.875rem;font-weight:700;color:white;margin-bottom:1.25rem;text-transform:uppercase;letter-spacing:.08em}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.ft-col a{color:rgb(148,163,184);font-size:.8rem;text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:.4rem}
+.ft-col a:hover{color:hsl(var(--primary))}
+.ft-bot{border-top:1px solid rgba(255,255,255,.08);padding-top:1.75rem;display:flex;flex-direction:column;align-items:center;gap:1rem;text-align:center}
+@media(min-width:640px){.ft-bot{flex-direction:row;justify-content:space-between;text-align:left}}
+.ft-copy{color:rgb(100,116,139);font-size:.8rem}
+.ft-links{display:flex;gap:1.5rem}
+.ft-links a{color:rgb(100,116,139);font-size:.8rem;text-decoration:none;transition:color .2s}
+.ft-links a:hover{color:hsl(var(--primary))}
+.ft-acc{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,hsl(var(--primary)/.5),transparent)}
+
+/* ANIM */
+.anim{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.anim.in{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.hero-bg{background-attachment:scroll!important}}
+</style>
 </head>
 <body>
-  <section class="parceiros" aria-label="Seção Nossos Parceiros">
-    <header class="parceiros-header">
-      <h1>Nossos Parceiros</h1>
-      <div class="underline" aria-hidden="true"></div>
-      <p>Construindo confiança lado a lado com grandes nomes do setor</p>
-    </header>
 
-    <div class="parceiros-grid" role="list">
-      <!-- Exemplo de parceiro -->
-      <article class="parceiro-card" role="listitem" tabindex="0" aria-label="Parceiro: Empresa Alpha">
-        <img
-          src="https://dummyimage.com/160x80/000/fff&text=Alpha"
-          alt="Logotipo da Empresa Alpha"
-          class="parceiro-logo"
-          data-text="Descubra as inovações tecnológicas da Empresa Alpha, líder em soluções digitais."
-          loading="lazy"
-          decoding="async"
-        />
-        <svg
-          class="parceiro-icon handshake"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path
-            d="M2 12l5 5 7-7 5 5"
-            fill="none"
-            stroke="#c8102e"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <circle cx="12" cy="12" r="10" fill="none" stroke="#c8102e" />
-        </svg>
-      </article>
-
-      <article class="parceiro-card" role="listitem" tabindex="0" aria-label="Parceiro: Empresa Beta">
-        <img
-          src="https://dummyimage.com/160x80/000/fff&text=Beta"
-          alt="Logotipo da Empresa Beta"
-          class="parceiro-logo"
-          data-text="Explore os serviços premium oferecidos pela Empresa Beta, focada em excelência."
-          loading="lazy"
-          decoding="async"
-        />
-        <svg
-          class="parceiro-icon handshake"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path
-            d="M2 12l5 5 7-7 5 5"
-            fill="none"
-            stroke="#c8102e"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <circle cx="12" cy="12" r="10" fill="none" stroke="#c8102e" />
-        </svg>
-      </article>
-
-      <article class="parceiro-card" role="listitem" tabindex="0" aria-label="Parceiro: Empresa Gamma">
-        <img
-          src="https://dummyimage.com/160x80/000/fff&text=Gamma"
-          alt="Logotipo da Empresa Gamma"
-          class="parceiro-logo"
-          data-text="Conheça as soluções sustentáveis da Empresa Gamma, comprometida com o futuro."
-          loading="lazy"
-          decoding="async"
-        />
-        <svg
-          class="parceiro-icon handshake"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path
-            d="M2 12l5 5 7-7 5 5"
-            fill="none"
-            stroke="#c8102e"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <circle cx="12" cy="12" r="10" fill="none" stroke="#c8102e" />
-        </svg>
-      </article>
-
-      <article class="parceiro-card" role="listitem" tabindex="0" aria-label="Parceiro: Empresa Delta">
-        <img
-          src="https://dummyimage.com/160x80/000/fff&text=Delta"
-          alt="Logotipo da Empresa Delta"
-          class="parceiro-logo"
-          data-text="Descubra a expertise da Empresa Delta em consultoria e desenvolvimento."
-          loading="lazy"
-          decoding="async"
-        />
-        <svg
-          class="parceiro-icon handshake"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path
-            d="M2 12l5 5 7-7 5 5"
-            fill="none"
-            stroke="#c8102e"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <circle cx="12" cy="12" r="10" fill="none" stroke="#c8102e" />
-        </svg>
-      </article>
-
-      <article class="parceiro-card" role="listitem" tabindex="0" aria-label="Parceiro: Empresa Epsilon">
-        <img
-          src="https://dummyimage.com/160x80/000/fff&text=Epsilon"
-          alt="Logotipo da Empresa Epsilon"
-          class="parceiro-logo"
-          data-text="Saiba mais sobre as inovações da Empresa Epsilon, pioneira em novas tecnologias."
-          loading="lazy"
-          decoding="async"
-        />
-        <svg
-          class="parceiro-icon handshake"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path
-            d="M2 12l5 5 7-7 5 5"
-            fill="none"
-            stroke="#c8102e"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <circle cx="12" cy="12" r="10" fill="none" stroke="#c8102e" />
-        </svg>
-      </article>
-    </div>
-
-    <div class="faixa-institucional" role="region" aria-label="Mensagem institucional sobre parcerias">
-      <span class="barra-lateral" aria-hidden="true"></span>
-      Cada parceria é construída sobre <span class="destaque-vermelho">confiança</span>, valores sólidos e visão compartilhada.
-    </div>
-
-    <footer class="parceiros-footer">
-      <a href="mailto:parcerias@ajjoaomendes.com" class="btn-parceiro" aria-label="Seja um Parceiro">
-        Seja um Parceiro
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-content">
+      <a href="index.html" class="logo">
+        <img src="logo6.jpg" alt="AJ João Mendes" class="logo-icon">
+        <div class="logo-text-wrap">
+          <span class="logo-abbr">A</span><span class="logo-expand">ssistência</span>
+          <span class="logo-space">&nbsp;</span>
+          <span class="logo-abbr logo-highlight">J</span><span class="logo-expand">udiciária</span>
+          <span class="logo-space">&nbsp;</span>
+          <span class="logo-dot"></span>
+          <span class="logo-abbr">J</span><span class="logo-expand">oão</span>
+          <span class="logo-space">&nbsp;</span>
+          <span class="logo-abbr">M</span><span class="logo-expand">endes</span>
+        </div>
       </a>
-    </footer>
-  </section>
-
-  <!-- Modal -->
-  <div id="parceiroModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p class="modal-text"></p>
-      <button class="modal-btn">Venha conhecer o site</button>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Início</a>
+        <a href="index.html#about" class="nav-link">Sobre</a>
+        <a href="index.html#services" class="nav-link">Serviços</a>
+        <a href="index.html#projects" class="nav-link">Projetos</a>
+        <a href="parceiros.html" class="nav-link active">Parceiros</a>
+        <a href="index.html#contact" class="nav-link">Contato</a>
+        <a href="doe.html" class="btn btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          Doe Agora
+        </a>
+      </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <svg id="menuIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="closeIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
   </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-content">
+      <a href="index.html" class="mobile-menu-link">Início</a>
+      <a href="index.html#about" class="mobile-menu-link">Sobre</a>
+      <a href="index.html#services" class="mobile-menu-link">Serviços</a>
+      <a href="index.html#projects" class="mobile-menu-link">Projetos</a>
+      <a href="parceiros.html" class="mobile-menu-link active">Parceiros</a>
+      <a href="index.html#contact" class="mobile-menu-link">Contato</a>
+      <div style="padding-top:1rem">
+        <a href="doe.html" class="btn btn-primary" style="width:100%;height:3rem;justify-content:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          Doe Agora
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
 
-  <script>
-    // Modal functionality
-    const modal = document.getElementById('parceiroModal');
-    const closeBtn = document.querySelector('.close');
-    const modalBtn = document.querySelector('.modal-btn');
-    const modalText = document.querySelector('.modal-text');
-    const logos = document.querySelectorAll('.parceiro-logo');
+<section class="hero">
+  <div class="hero-bg"><div class="hero-overlay"></div><div class="hero-gradient"></div></div>
+  <div class="container hero-content">
+    <span class="hero-eyebrow">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Rede de Parceiros
+    </span>
+    <h1 class="hero-title">
+      <span style="display:block">Juntos pela</span>
+      <span style="display:block" class="hero-accent">Justiça Social.</span>
+    </h1>
+    <p class="hero-desc">Escritórios, associações e instituições que compartilham o compromisso com o acesso à justiça e o desenvolvimento da sociedade.</p>
+  </div>
+</section>
 
-    // Open modal on logo click and set custom text
-    logos.forEach(logo => {
-      logo.addEventListener('click', () => {
-        modalText.textContent = logo.getAttribute('data-text');
-        modal.style.display = 'flex';
-      });
-    });
+<section class="partners-section" id="parceiros">
+  <div class="container">
+    <div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:2.5rem" class="anim">
+      <div class="eyebrow">Nossos Parceiros</div>
+      <h2 class="sec-title">Instituições que constroem<br>a justiça conosco</h2>
+      <p class="sec-desc" style="max-width:36rem">Clique em qualquer parceiro para conhecer mais sobre a instituição e acessar o contato oficial.</p>
+    </div>
+    <div class="filter-bar anim" id="filterBar">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="juridico">Escritórios</button>
+      <button class="filter-btn" data-filter="educacao">Associações</button>
+    </div>
+    <div class="partners-grid" id="partnersGrid"></div>
+  </div>
+</section>
 
-    // Close modal on close button click
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
+<section class="why-section">
+  <div class="container">
+    <div style="max-width:36rem" class="anim">
+      <div class="eyebrow" style="color:hsl(var(--primary))">Por que Ser Parceiro</div>
+      <h2 class="sec-title" style="color:white">Benefícios de fazer<br>parte da rede</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card anim">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="why-title">Credibilidade Institucional</div>
+        <div class="why-desc">Associe-se a uma das mais tradicionais assistências judiciárias do Brasil, com décadas de atuação reconhecida.</div>
+      </div>
+      <div class="why-card anim">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="why-title">Visibilidade e Alcance</div>
+        <div class="why-desc">Sua instituição ganha visibilidade perante a comunidade acadêmica, jurídica e a sociedade civil paulistana.</div>
+      </div>
+      <div class="why-card anim">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="why-title">Impacto Social Real</div>
+        <div class="why-desc">Contribua diretamente para o acesso à justiça de populações vulneráveis e gere impacto social mensurável.</div>
+      </div>
+      <div class="why-card anim">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="why-title">Capacitação Conjunta</div>
+        <div class="why-desc">Desenvolva ações conjuntas de formação, eventos e publicações de relevância acadêmica e jurídica.</div>
+      </div>
+      <div class="why-card anim">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="why-title">Acesso a Recursos</div>
+        <div class="why-desc">Oportunidades de editais e projetos compartilhados com apoio institucional da Mackenzie.</div>
+      </div>
+      <div class="why-card anim">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="why-title">Crescimento em Rede</div>
+        <div class="why-desc">Faça parte de uma rede colaborativa com reuniões periódicas e projetos integrados de impacto.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    // Close modal on modal button click (placeholder action)
-    modalBtn.addEventListener('click', () => {
-      alert('Redirecionando para o site do parceiro...'); // Placeholder; replace with actual URL if available
-      modal.style.display = 'none';
-    });
+<section class="become-section" id="seja-parceiro">
+  <div class="container">
+    <div class="become-inner">
+      <div class="anim">
+        <div class="eyebrow">Seja um Parceiro</div>
+        <h2 class="sec-title">Construa algo<br>maior conosco</h2>
+        <p class="sec-desc" style="max-width:34rem">Sua instituição compartilha do compromisso com a justiça social? O processo é direto — apresente-se por e-mail e nossa coordenação entrará em contato.</p>
+        <div class="steps" style="margin-top:2.5rem">
+          <div class="step" id="step1">
+            <div class="step-num">01</div>
+            <div class="step-body">
+              <div class="step-title">Envie um e-mail de apresentação</div>
+              <div class="step-desc">Conte quem é sua instituição, sua área de atuação e como imagina a parceria conosco.</div>
+            </div>
+          </div>
+          <div class="step" id="step2">
+            <div class="step-num">02</div>
+            <div class="step-body">
+              <div class="step-title">Conversa de alinhamento</div>
+              <div class="step-desc">Nossa coordenação entrará em contato para entender objetivos e verificar sinergia.</div>
+            </div>
+          </div>
+          <div class="step" id="step3">
+            <div class="step-num">03</div>
+            <div class="step-body" style="padding-bottom:0">
+              <div class="step-title">Formalização da parceria</div>
+              <div class="step-desc">Com os termos definidos, assinamos o convênio e iniciamos as ações conjuntas.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="anim" style="transition-delay:.15s">
+        <div class="cc">
+          <div class="cc-ey">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Contato Direto
+          </div>
+          <div class="cc-title">Fale com nossa<br><span>coordenação</span></div>
+          <div class="cc-desc">Respondemos propostas de parceria em até 3 dias úteis. Apresente sua instituição diretamente — sem intermediários.</div>
+          <div class="cc-pill">
+            <div class="cc-pill-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="cc-pill-text">
+              <div class="cc-pill-label">E-mail institucional</div>
+              <div class="cc-pill-addr">parcerias@ajjoaomendes.com</div>
+            </div>
+            <button class="cc-copy" id="copyBtn" onclick="copyEmail()">
+              <svg id="copyIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span id="copyLabel">Copiar</span>
+            </button>
+          </div>
+          <a class="cc-btn" href="mailto:parcerias@ajjoaomendes.com?subject=Proposta%20de%20Parceria&body=Olá%2C%20gostaria%20de%20apresentar%20minha%20instituição%20e%20discutir%20uma%20possível%20parceria.">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Enviar proposta agora
+          </a>
+          <div class="cc-note">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Sigilo profissional absoluto em todas as comunicações
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    // Close modal on outside click
-    window.addEventListener('click', (event) => {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-  </script>
+<footer>
+  <div class="ft-bg"></div><div class="ft-ov"></div>
+  <div class="ft-in">
+    <div class="container">
+      <div class="ft-grid">
+        <div class="ft-brand">
+          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
+            <div style="width:2.5rem;height:2.5rem;background:hsl(var(--primary));border-radius:.5rem;display:flex;align-items:center;justify-content:center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M16 11V3H8v8"/><path d="M8 19h8"/><path d="M10 19v-6h4v6"/></svg>
+            </div>
+            <div>
+              <div style="font-size:1.1rem;font-weight:800;color:white;line-height:1.1">AJ João Mendes</div>
+              <div style="font-size:.65rem;color:rgba(148,163,184,.7);letter-spacing:.12em;text-transform:uppercase;font-weight:600">Assistência Judiciária</div>
+            </div>
+          </div>
+          <p>Promovendo justiça social e excelência jurídica desde 1959. Uma iniciativa da Universidade Presbiteriana Mackenzie.</p>
+          <div class="ft-socials">
+            <a href="#" class="ft-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" class="ft-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="#" class="ft-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          </div>
+        </div>
+        <div class="ft-col">
+          <h4>Links Rápidos</h4>
+          <ul>
+            <li><a href="index.html#about"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>Sobre Nós</a></li>
+            <li><a href="index.html#services"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>Serviços</a></li>
+            <li><a href="index.html#projects"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>Projetos Sociais</a></li>
+            <li><a href="#seja-parceiro"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>Seja um Parceiro</a></li>
+          </ul>
+        </div>
+        <div class="ft-col">
+          <h4>Contato</h4>
+          <ul>
+            <li><a href="#" style="align-items:flex-start"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Rua da Consolação, 930<br>Consolação – SP</a></li>
+            <li><a href="tel:+551121148000"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.18C1.65 2.09 2.56 1 3.66 1H6.7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6 6l1.06-1.06a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(11) 2114-8000</a></li>
+            <li><a href="mailto:ajjoaomendes@mackenzie.br"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>ajjoaomendes@mackenzie.br</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="ft-bot">
+        <span class="ft-copy">© <span id="footerYear"></span> AJ João Mendes. Todos os direitos reservados.</span>
+        <div class="ft-links"><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft-acc"></div>
+</footer>
+
+<div class="modal-backdrop" id="modal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-bar"></div>
+    <div class="modal-head">
+      <div class="modal-mono" id="modalMono"></div>
+      <div class="modal-meta">
+        <div class="modal-name" id="modalName"></div>
+        <span class="modal-cat" id="modalCat"></span>
+      </div>
+      <button class="modal-x" onclick="closeModal()" aria-label="Fechar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-div"></div>
+    <div class="modal-body">
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-tags" id="modalTags"></div>
+      <a class="modal-cta" id="modalCta" href="#" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Conhecer o parceiro
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+const PARTNERS = [
+  {
+    id:1, name:"Fachini Advogados", short:"Fachini", initial:"F",
+    category:"juridico", categoryLabel:"Escritório",
+    url:"https://share.google/kN6fCpsTWNOVVnIs6",
+    desc:"Escritório parceiro da AJ João Mendes comprometido com a excelência na prestação de serviços jurídicos. Apoia a assistência judiciária promovendo acesso à justiça e suporte técnico especializado à nossa equipe e aos clientes atendidos.",
+    tags:["Advocacia","Parceiro","São Paulo"]
+  },
+  {
+    id:2, name:"Alumni Direito Mackenzie", short:"Alumni", initial:"A",
+    category:"educacao", categoryLabel:"Associação",
+    url:"https://www.instagram.com/alumnidireitomackenzie",
+    desc:"Associação de ex-alunos do curso de Direito da Universidade Presbiteriana Mackenzie. Conecta egressos, estudantes e profissionais do mercado jurídico, fortalecendo a rede de apoio, mentoria e desenvolvimento profissional da AJ João Mendes.",
+    tags:["Ex-alunos","Mackenzie","Direito","Rede"]
+  },
+  {
+    id:3, name:"GS Law", short:"GS Law", initial:"GS",
+    category:"juridico", categoryLabel:"Escritório",
+    url:"https://share.google/UBewxvqu439f6b72g",
+    desc:"Escritório jurídico parceiro comprometido com soluções estratégicas e de alto impacto. A parceria com a AJ João Mendes reforça a capacidade de atendimento e a qualidade técnica nas orientações prestadas à comunidade.",
+    tags:["Advocacia","Estratégia","Parceiro"]
+  },
+  {
+    id:4, name:"Pellegrina Advogados", short:"Pellegrina", initial:"P",
+    category:"juridico", categoryLabel:"Escritório",
+    url:"https://share.google/ranBZd8jVYnONBo9D",
+    desc:"Escritório parceiro com atuação dedicada e especializada, contribuindo para o fortalecimento da assistência jurídica gratuita. A parceria amplia o alcance dos serviços prestados pela AJ João Mendes às populações vulneráveis.",
+    tags:["Advocacia","Parceiro","Assistência"]
+  },
+  {
+    id:5, name:"Boscatti Advogados", short:"Boscatti", initial:"B",
+    category:"juridico", categoryLabel:"Escritório",
+    url:"https://share.google/PHd7ZXdmMHdT6sAT7",
+    desc:"Escritório parceiro com trajetória de compromisso ético e técnico. Apoia as atividades da AJ João Mendes por meio de suporte especializado, orientação aos estagiários e colaboração em casos de maior complexidade.",
+    tags:["Advocacia","Ética","Parceiro"]
+  },
+  {
+    id:6, name:"Canovae Advogados", short:"Canovae", initial:"C",
+    category:"juridico", categoryLabel:"Escritório",
+    url:"https://share.google/77R5WF7DnS7VSLkOW",
+    desc:"Escritório parceiro que integra a rede de suporte jurídico da AJ João Mendes. Contribui com expertise técnica e engajamento com a causa do acesso à justiça, reforçando o compromisso coletivo com a cidadania e os direitos sociais.",
+    tags:["Advocacia","Cidadania","Parceiro"]
+  }
+];
+
+const CAT = {
+  juridico:{ bg:"rgba(192,19,47,.1)", color:"hsl(348,83%,47%)", dot:"hsl(348,83%,47%)" },
+  educacao:{ bg:"rgba(42,100,150,.1)", color:"hsl(209,53%,36%)", dot:"hsl(209,53%,36%)" }
+};
+
+let activeFilter = "all";
+
+function renderPartners() {
+  const grid = document.getElementById('partnersGrid');
+  grid.innerHTML = '';
+  const list = activeFilter === 'all' ? PARTNERS : PARTNERS.filter(p => p.category === activeFilter);
+  list.forEach((p, i) => {
+    const c = CAT[p.category];
+    const card = document.createElement('div');
+    card.className = 'partner-card';
+    card.style.cssText = 'opacity:0;transform:translateY(16px)';
+    card.innerHTML = `
+      <div class="p-dot" style="background:${c.dot}"></div>
+      <div class="partner-mono" style="background:${c.color}">${p.initial}</div>
+      <div class="partner-label">${p.short}</div>`;
+    card.addEventListener('click', () => openModal(p));
+    grid.appendChild(card);
+    setTimeout(() => { card.style.transition='all .4s ease'; card.style.opacity='1'; card.style.transform='translateY(0)'; }, 40 + i*70);
+  });
+}
+
+function openModal(p) {
+  const c = CAT[p.category];
+  document.getElementById('modalMono').textContent = p.initial;
+  document.getElementById('modalMono').style.background = c.color;
+  document.getElementById('modalName').textContent = p.name;
+  const cat = document.getElementById('modalCat');
+  cat.textContent = p.categoryLabel; cat.style.background = c.bg; cat.style.color = c.color;
+  document.getElementById('modalDesc').textContent = p.desc;
+  document.getElementById('modalTags').innerHTML = p.tags.map(t=>`<span class="modal-tag">${t}</span>`).join('');
+  document.getElementById('modalCta').href = p.url;
+  document.getElementById('modal').classList.add('visible');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('visible');
+  document.body.style.overflow='';
+}
+
+document.getElementById('modal').addEventListener('click', e => { if(e.target===document.getElementById('modal')) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeFilter = btn.dataset.filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderPartners();
+  });
+});
+
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+navbar.classList.toggle('scrolled', window.scrollY > 20);
+
+const mm = document.getElementById('mobileMenu');
+document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+  const open = mm.classList.toggle('open');
+  document.getElementById('menuIcon').style.display = open ? 'none' : 'block';
+  document.getElementById('closeIcon').style.display = open ? 'block' : 'none';
+});
+
+const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('in'); }), {threshold:.12});
+document.querySelectorAll('.anim').forEach(el => obs.observe(el));
+
+const stepObs = new IntersectionObserver(e => {
+  e.forEach(x => { if(x.isIntersecting) { ['step1','step2','step3'].forEach((id,i) => setTimeout(()=>document.getElementById(id)?.classList.add('visible'),i*150)); stepObs.disconnect(); } });
+}, {threshold:.2});
+const stepsEl = document.querySelector('.steps');
+if(stepsEl) stepObs.observe(stepsEl);
+
+function copyEmail() {
+  navigator.clipboard.writeText('parcerias@ajjoaomendes.com').then(() => {
+    const btn = document.getElementById('copyBtn');
+    const label = document.getElementById('copyLabel');
+    const icon = document.getElementById('copyIcon');
+    btn.classList.add('ok'); label.textContent = 'Copiado!';
+    icon.innerHTML = '<path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+    setTimeout(() => {
+      btn.classList.remove('ok'); label.textContent = 'Copiar';
+      icon.innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>';
+    }, 2200);
+  });
+}
+
+renderPartners();
+</script>
 </body>
 </html>

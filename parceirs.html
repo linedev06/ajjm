@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nossos Parceiros</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #fff;
+      font-family: 'Poppins', 'Montserrat', sans-serif;
+      color: #111;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    /* Container da seção */
+    section.parceiros {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+    /* Cabeçalho */
+    .parceiros-header {
+      text-align: center;
+    }
+    .parceiros-header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 2.75rem;
+      color: #000;
+      margin: 0 0 8px;
+      line-height: 1.1;
+    }
+    .parceiros-header .underline {
+      width: 60px;
+      height: 2px;
+      background: #c8102e; /* vermelho */
+      margin: 0 auto 12px;
+      border-radius: 1px;
+    }
+    .parceiros-header p {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #333333dd; /* cinza escuro suave */
+      margin: 0;
+    }
+    /* Grid dos parceiros */
+    .parceiros-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 32px 24px;
+      justify-items: center;
+    }
+    /* Card parceiro */
+    .parceiro-card {
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 32px;
+      cursor: default;
+      position: relative;
+      transition: border-color 0.3s ease;
+      border-bottom: 2px solid transparent;
+      user-select: none;
+      max-width: 180px;
+      min-height: 180px;
+    }
+    .parceiro-card:hover {
+      border-bottom-color: #c8102e;
+    }
+    /* Logo parceiro */
+    .parceiro-logo {
+      max-width: 100%;
+      max-height: 100px;
+      object-fit: contain;
+      filter: none;
+      margin-bottom: 16px;
+      cursor: pointer; /* Adicionado para indicar que é clicável */
+    }
+    /* Ícone vermelho discreto abaixo do logo */
+    .parceiro-icon {
+      width: 20px;
+      height: 20px;
+      stroke: #c8102e;
+      fill: #c8102e;
+      flex-shrink: 0;
+    }
+    /* Faixa institucional */
+    .faixa-institucional {
+      background: #fff;
+      padding: 24px 16px;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      font-size: 1.125rem;
+      color: #000;
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+    .faixa-institucional .destaque-vermelho {
+      color: #c8102e;
+      font-weight: 700;
+      position: relative;
+    }
+    .faixa-institucional .barra-lateral {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 60%;
+      background: #c8102e;
+      border-radius: 2px;
+    }
+    /* Rodapé da seção */
+    .parceiros-footer {
+      border-top: 1px solid #11111122;
+      padding-top: 24px;
+      text-align: center;
+    }
+    .btn-parceiro {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #111;
+      background: transparent;
+      border: 2px solid #111;
+      border-radius: 4px;
+      padding: 10px 28px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+      outline-offset: 2px;
+      text-decoration: none; /* Para remover sublinhado do link */
+      display: inline-block; /* Para comportar-se como botão */
+    }
+    .btn-parceiro:hover,
+    .btn-parceiro:focus {
+      color: #c8102e;
+      border-color: #c8102e;
+      outline: none;
+    }
+    /* Ícone handshake minimalista (line icon) */
+    svg.handshake {
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fff;
+      padding: 32px;
+      border-radius: 8px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .modal-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.125rem;
+      color: #333;
+      margin-bottom: 24px;
+    }
+    .modal-btn {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      background: #c8102e;
+      border: none;
+      border-radius: 4px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .modal-btn:hover {
+      background: #a00d25;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: #aaa;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+    }
+    /* Responsive tweaks */
+    @media (max-width: 480px) {
+      .parceiros-header h1 {
+        font-size: 2rem;
+      }
+      .faixa-institucional {
+        font-size: 1rem;
+        padding: 16px 12px;
+      }
+      .parceiro-card {
+        max-width: 140px;
+        min-height: 160px;
+        padding: 16px 12px 24px;
+      }
+      .parceiro-logo {
+        max-height: 80px;
+        margin-bottom: 12px;
+      }
+      .modal-content {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="parceiros" aria-label="Seção Nossos Parceiros">
+    <header class="parceiros-header">
+      <h1>Nossos Parceiros</h1>
+      <div class="underline" aria-hidden="true"></div>
+      <p>Construindo confiança lado a lado com grandes nomes do setor</p>
+    </header>
+
+    <div class="parceiros-grid" role="list">
+      <!-- Exemplo de parceiro -->
+      <article class="parceiro-card" role="listitem" tabindex="0" aria-label="Parceiro: Empresa Alpha">
+        <img
+          src="https://dummyimage.com/160x80/000/fff&text=Alpha"
+          alt="Logotipo da Empresa Alpha"
+          class="parceiro-logo"
+          data-text="Descubra as inovações tecnológicas da Empresa Alpha, líder em soluções digitais."
+          loading="lazy"
+          decoding="async"
+        />
+        <svg
+          class="parceiro-icon handshake"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M2 12l5 5 7-7 5 5"
+            fill="none"
+            stroke="#c8102e"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <circle cx="12" cy="12" r="10" fill="none" stroke="#c8102e" />
+        </svg>
+      </article>
+
+      <article class="parceiro-card" role="listitem" tabindex="0" aria-label="Parceiro: Empresa Beta">
+        <img
+          src="https://dummyimage.com/160x80/000/fff&text=Beta"
+          alt="Logotipo da Empresa Beta"
+          class="parceiro-logo"
+          data-text="Explore os serviços premium oferecidos pela Empresa Beta, focada em excelência."
+          loading="lazy"
+          decoding="async"
+        />
+        <svg
+          class="parceiro-icon handshake"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M2 12l5 5 7-7 5 5"
+            fill="none"
+            stroke="#c8102e"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <circle cx="12" cy="12" r="10" fill="none" stroke="#c8102e" />
+        </svg>
+      </article>
+
+      <article class="parceiro-card" role="listitem" tabindex="0" aria-label="Parceiro: Empresa Gamma">
+        <img
+          src="https://dummyimage.com/160x80/000/fff&text=Gamma"
+          alt="Logotipo da Empresa Gamma"
+          class="parceiro-logo"
+          data-text="Conheça as soluções sustentáveis da Empresa Gamma, comprometida com o futuro."
+          loading="lazy"
+          decoding="async"
+        />
+        <svg
+          class="parceiro-icon handshake"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M2 12l5 5 7-7 5 5"
+            fill="none"
+            stroke="#c8102e"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <circle cx="12" cy="12" r="10" fill="none" stroke="#c8102e" />
+        </svg>
+      </article>
+
+      <article class="parceiro-card" role="listitem" tabindex="0" aria-label="Parceiro: Empresa Delta">
+        <img
+          src="https://dummyimage.com/160x80/000/fff&text=Delta"
+          alt="Logotipo da Empresa Delta"
+          class="parceiro-logo"
+          data-text="Descubra a expertise da Empresa Delta em consultoria e desenvolvimento."
+          loading="lazy"
+          decoding="async"
+        />
+        <svg
+          class="parceiro-icon handshake"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M2 12l5 5 7-7 5 5"
+            fill="none"
+            stroke="#c8102e"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <circle cx="12" cy="12" r="10" fill="none" stroke="#c8102e" />
+        </svg>
+      </article>
+
+      <article class="parceiro-card" role="listitem" tabindex="0" aria-label="Parceiro: Empresa Epsilon">
+        <img
+          src="https://dummyimage.com/160x80/000/fff&text=Epsilon"
+          alt="Logotipo da Empresa Epsilon"
+          class="parceiro-logo"
+          data-text="Saiba mais sobre as inovações da Empresa Epsilon, pioneira em novas tecnologias."
+          loading="lazy"
+          decoding="async"
+        />
+        <svg
+          class="parceiro-icon handshake"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M2 12l5 5 7-7 5 5"
+            fill="none"
+            stroke="#c8102e"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <circle cx="12" cy="12" r="10" fill="none" stroke="#c8102e" />
+        </svg>
+      </article>
+    </div>
+
+    <div class="faixa-institucional" role="region" aria-label="Mensagem institucional sobre parcerias">
+      <span class="barra-lateral" aria-hidden="true"></span>
+      Cada parceria é construída sobre <span class="destaque-vermelho">confiança</span>, valores sólidos e visão compartilhada.
+    </div>
+
+    <footer class="parceiros-footer">
+      <a href="mailto:parcerias@ajjoaomendes.com" class="btn-parceiro" aria-label="Seja um Parceiro">
+        Seja um Parceiro
+      </a>
+    </footer>
+  </section>
+
+  <!-- Modal -->
+  <div id="parceiroModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p class="modal-text"></p>
+      <button class="modal-btn">Venha conhecer o site</button>
+    </div>
+  </div>
+
+  <script>
+    // Modal functionality
+    const modal = document.getElementById('parceiroModal');
+    const closeBtn = document.querySelector('.close');
+    const modalBtn = document.querySelector('.modal-btn');
+    const modalText = document.querySelector('.modal-text');
+    const logos = document.querySelectorAll('.parceiro-logo');
+
+    // Open modal on logo click and set custom text
+    logos.forEach(logo => {
+      logo.addEventListener('click', () => {
+        modalText.textContent = logo.getAttribute('data-text');
+        modal.style.display = 'flex';
+      });
+    });
+
+    // Close modal on close button click
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Close modal on modal button click (placeholder action)
+    modalBtn.addEventListener('click', () => {
+      alert('Redirecionando para o site do parceiro...'); // Placeholder; replace with actual URL if available
+      modal.style.display = 'none';
+    });
+
+    // Close modal on outside click
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
