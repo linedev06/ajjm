@@ -1,839 +1,735 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-  <link rel="icon" type="image/png" href="logo6.jpg">
-  <link rel="apple-touch-icon" href="logo6.jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <title>AJ João Mendes - Assistência Judiciária</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSAP Style — Letras Caóticas</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-:root {
-  --primary: 348 83% 47%;
-  --secondary: 209 53% 36%;
-  --muted: 210 40% 96%;
-  --muted-foreground: 215 16% 47%;
-  --card-foreground: 222 47% 11%;
-  --border: 214 32% 91%;
-}
+  :root {
+    --bg: #0d0d0d;
+    --green: #75fb4c;
+    --white: #f2f0ea;
+    --gray: #1a1a1a;
+  }
 
-html { scroll-behavior: smooth; }
-body { background: #fff; color: hsl(222 47% 11%); font-family: 'Montserrat', sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.5; }
-h1,h2,h3,h4,h5,h6 { font-weight: 700; letter-spacing: -0.025em; }
+  html { scroll-behavior: auto; }
 
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: hsl(var(--muted)); }
-::-webkit-scrollbar-thumb { background: hsl(var(--secondary) / 0.5); border-radius: 5px; }
-::-webkit-scrollbar-thumb:hover { background: hsl(var(--secondary)); }
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
 
-.container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    background: rgba(13,13,13,0.7);
+  }
 
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.05em;
+    color: var(--white);
+  }
 
-.navbar { position: fixed; width: 100%; z-index: 50; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-.navbar.scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(16px); box-shadow: 0 4px 24px -1px rgba(0,0,0,0.10); padding: 0.25rem 0; }
-.navbar:not(.scrolled) { background: transparent; padding: 1rem 0; }
-.navbar-content { display: flex; justify-content: space-between; align-items: center; height: 4rem; }
+  .nav-logo span { color: var(--green); }
 
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
 
-.logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; transition: transform 0.3s ease; }
-.logo:hover { transform: scale(1.04); }
-.logo-icon { width: 2.5rem; height: 2.5rem; background: hsl(var(--primary)); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.4s ease; }
+  .nav-links a {
+    font-size: 13px; color: rgba(242,240,234,0.5);
+    text-decoration: none; letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
 
+  .nav-links a:hover { color: var(--white); }
 
-.logo-text-wrap { overflow: hidden; display: flex; align-items: baseline; gap: 0; }
+  .nav-cta {
+    padding: 10px 22px;
+    background: var(--green);
+    color: #0d0d0d;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.04em;
+    border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s;
+  }
 
+  .nav-cta:hover { opacity: 0.85; }
 
-.logo-abbr { font-weight: 800; font-size: 1.25rem; letter-spacing: 0.04em; transition: color 0.4s ease, font-size 0.4s ease; white-space: nowrap; }
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
 
+  /* Background grid */
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(117,251,76,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(117,251,76,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
 
-.logo-expand {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: -0.01em;
-  transition:
-    max-width 0.55s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-    margin 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.4s ease;
-}
+  /* Glow */
+  .hero-glow {
+    position: absolute;
+    width: 800px; height: 400px;
+    background: radial-gradient(ellipse, rgba(117,251,76,0.07) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
 
+  /* ── MAIN TITLE ── */
+  .hero-title-wrap {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    z-index: 2;
+  }
 
-.navbar:not(.scrolled) .logo-expand {
-  max-width: 400px;
-  opacity: 1;
-}
+  /* The "Animate" word container */
+  .word-animate {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 14vw, 200px);
+    line-height: 0.9;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
+  }
 
-.navbar.scrolled .logo-expand {
-  max-width: 0;
-  opacity: 0;
-  margin: 0;
-}
+  /* Each letter is absolutely placed and will animate to its final spot */
+  .chaos-letter {
+    display: inline-block;
+    position: relative;
+    /* will be controlled by GSAP */
+  }
 
+  /* Color variants like gsap.com */
+  .chaos-letter.green { color: var(--green); }
+  .chaos-letter.dim   { color: rgba(242,240,234,0.25); }
+  .chaos-letter.ghost { color: rgba(117,251,76,0.3); }
 
-.logo-space {
-  display: inline-block;
-  transition: width 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
-  overflow: hidden;
-}
-.navbar:not(.scrolled) .logo-space { width: 0.35rem; opacity: 1; }
-.navbar.scrolled .logo-space { width: 0; opacity: 0; }
+  /* "Anything" line */
+  .word-anything {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 14vw, 200px);
+    line-height: 0.9;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    overflow: visible;
+  }
 
+  /* Subtitle */
+  .hero-sub {
+    margin-top: 40px;
+    max-width: 560px;
+    text-align: center;
+    font-size: clamp(16px, 1.5vw, 20px);
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(242,240,234,0.55);
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-.navbar:not(.scrolled) .logo-abbr { color: #fff; font-size: 1.1rem; }
-.navbar.scrolled .logo-abbr { color: hsl(var(--secondary)); font-size: 1.35rem; }
+  .hero-sub strong { color: var(--white); font-weight: 400; }
 
+  /* CTA buttons */
+  .hero-ctas {
+    display: flex; gap: 16px; margin-top: 40px;
+    opacity: 0; transform: translateY(20px);
+  }
 
-.navbar:not(.scrolled) .logo-expand { color: rgba(255,255,255,0.92); }
-.navbar.scrolled .logo-expand { color: hsl(var(--secondary)); }
+  .btn-primary {
+    padding: 14px 32px;
+    background: var(--green);
+    color: #0d0d0d;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 0.04em;
+    border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
 
+  .btn-primary:hover { opacity: 0.85; }
 
-.logo-dot {
-  display: inline-block;
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: hsl(var(--primary));
-  margin: 0;
-  transition: opacity 0.35s ease, transform 0.4s ease, margin 0.45s ease;
-  transform-origin: center;
-}
-.navbar:not(.scrolled) .logo-dot { opacity: 0; margin: 0; transform: scale(0); }
-.navbar.scrolled .logo-dot { opacity: 1; margin: 0 3px 3px; transform: scale(1); }
+  .btn-secondary {
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--white);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    border: 1px solid rgba(242,240,234,0.2);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
 
+  .btn-secondary:hover { border-color: rgba(242,240,234,0.5); }
 
-.logo-highlight { color: hsl(var(--primary)); }
+  /* ── SCROLL SECTION (scroll to see more) ── */
+  .scroll-zone {
+    height: 400vh; /* long scroll for the pin effect */
+    position: relative;
+  }
 
+  .scroll-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 40px;
+  }
 
-@media (max-width: 767px) {
-  .logo-abbr { font-size: 0.78rem !important; }
-  .logo-expand { font-size: 0.78rem !important; }
-  .navbar.scrolled .logo-abbr { font-size: 0.95rem !important; }
-  .logo-icon { width: 2rem; height: 2rem; }
-  .logo { gap: 0.35rem; }
-}
+  /* The big display line that assembles */
+  .assemble-wrap {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
+  .assemble-label {
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(117,251,76,0.6);
+    margin-bottom: 20px;
+    opacity: 0;
+  }
 
-.nav-links { display: none; align-items: center; gap: 2rem; }
-@media (min-width: 768px) { .nav-links { display: flex; } }
-.nav-link { font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: color 0.3s ease; }
-.navbar.scrolled .nav-link { color: hsl(var(--secondary)); }
-.navbar:not(.scrolled) .nav-link { color: rgba(255,255,255,0.9); }
-.nav-link:hover { color: hsl(var(--primary)); }
+  /* Letters container — full viewport width */
+  .letters-stage {
+    width: 100%;
+    height: clamp(120px, 18vw, 260px);
+    position: relative;
+  }
 
-.btn { padding: 0.75rem 1.5rem; border-radius: 9999px; font-weight: 700; transition: all 0.3s ease; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; font-family: inherit; }
-.btn-primary { background: hsl(var(--primary)); color: white; box-shadow: 0 10px 15px -3px rgba(220,38,38,0.3); }
-.btn-primary:hover { background: hsl(var(--primary) / 0.9); transform: translateY(-2px); box-shadow: 0 20px 25px -5px rgba(220,38,38,0.3); }
-.btn-outline { border: 2px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: hsl(var(--secondary)); backdrop-filter: blur(4px); }
-.btn-outline:hover { background: white; transform: translateY(-2px); }
-.btn-secondary { border: 2px solid hsl(var(--secondary)); color: hsl(var(--secondary)); background: transparent; }
-.btn-secondary:hover { background: hsl(var(--secondary)); color: white; }
+  /* Individual positioned letters for the chaos→assembly effect */
+  .stage-letter {
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 13vw, 200px);
+    line-height: 1;
+    color: var(--white);
+    /* GSAP controls x, y, opacity, rotation */
+  }
 
-.mobile-menu-btn { display: block; padding: 0.5rem; background: none; border: none; cursor: pointer; border-radius: 0.375rem; }
-@media (min-width: 768px) { .mobile-menu-btn { display: none; } }
-.navbar.scrolled .mobile-menu-btn { color: hsl(var(--secondary)); }
-.navbar:not(.scrolled) .mobile-menu-btn { color: white; }
-.mobile-menu { background: white; border-bottom: 1px solid hsl(var(--border)); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); overflow: hidden; max-height: 0; opacity: 0; transition: all 0.3s ease; }
-.mobile-menu.open { max-height: 500px; opacity: 1; }
-.mobile-menu-content { padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
-.mobile-menu-link { display: block; padding: 0.75rem 1rem; color: hsl(var(--secondary)); font-weight: 500; text-decoration: none; border-radius: 0.5rem; transition: all 0.3s ease; }
-.mobile-menu-link:hover { background: hsl(var(--primary) / 0.05); color: hsl(var(--primary)); }
+  .stage-letter.accent { color: var(--green); }
 
+  /* Desc text under the letters */
+  .assemble-desc {
+    margin-top: 32px;
+    font-size: clamp(15px, 1.3vw, 18px);
+    font-weight: 300;
+    color: rgba(242,240,234,0.45);
+    text-align: center;
+    max-width: 480px;
+    opacity: 0;
+  }
 
-.hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.hero-bg { position: absolute; inset: 0; z-index: 0; background-image: url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=2000'); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; }
-.hero-overlay { position: absolute; inset: 0; background: hsl(var(--secondary) / 0.8); mix-blend-mode: multiply; }
-.hero-gradient { position: absolute; inset: 0; background: linear-gradient(to top, hsl(var(--secondary)), transparent, transparent); }
-.hero-content { position: relative; z-index: 10; padding: 8rem 1rem; text-align: center; color: white; }
-.hero-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 9999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
-.hero-title { font-size: clamp(2.5rem, 7vw, 4.5rem); font-weight: 700; margin-bottom: 1.5rem; line-height: 1.1; }
-.hero-title-gradient { background: linear-gradient(to right, white, rgb(209,213,219)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.hero-description { font-size: clamp(1rem, 2vw, 1.25rem); color: rgb(229,231,235); margin-bottom: 2.5rem; max-width: 48rem; margin-left: auto; margin-right: auto; line-height: 1.75; }
-.hero-buttons { display: flex; flex-direction: column; gap: 1rem; justify-content: center; }
-@media (min-width: 640px) { .hero-buttons { flex-direction: row; } }
+  .word-reveal {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
 
-.about-section { padding: 6rem 0; background: white; }
-.about-grid { display: flex; flex-direction: column; align-items: center; gap: 4rem; }
-@media (min-width: 1024px) { .about-grid { flex-direction: row; } }
-.about-image { width: 100%; }
-@media (min-width: 1024px) { .about-image { width: 50%; } }
-.about-image-wrapper { position: relative; border-radius: 1rem; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
-.about-image-wrapper img { width: 100%; height: auto; object-fit: cover; }
-.about-badge { position: absolute; bottom: -2.5rem; right: -2.5rem; background: hsl(var(--primary)); padding: 2rem; border-radius: 0.75rem; display: none; }
-@media (min-width: 768px) { .about-badge { display: block; } }
-.about-badge-number { font-size: 2.25rem; font-weight: 700; color: white; margin-bottom: 0.5rem; }
-.about-badge-text { color: rgba(255,255,255,0.9); font-weight: 500; }
-.about-content { width: 100%; }
-@media (min-width: 1024px) { .about-content { width: 50%; } }
+  .word-reveal-inner {
+    display: inline-block;
+    transform: translateY(100%);
+  }
 
-.section-subtitle { color: hsl(var(--primary)); font-weight: 700; font-size: 1.125rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
-.section-title { font-size: 2.25rem; font-weight: 700; color: hsl(var(--secondary)); margin-bottom: 1.5rem; }
-.section-description { color: hsl(var(--muted-foreground)); font-size: 1.125rem; margin-bottom: 1.5rem; line-height: 1.75; }
+  /* ── FEATURES SECTION ── */
+  .features {
+    padding: 120px 80px;
+    background: var(--gray);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
 
-.features-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
-.feature-item { display: flex; align-items: center; }
-.feature-icon { width: 1.5rem; height: 1.5rem; color: hsl(var(--primary)); margin-right: 0.75rem; flex-shrink: 0; }
-.feature-text { color: hsl(var(--secondary)); font-weight: 500; font-size: 1.125rem; }
+  .feature-card {
+    padding: 48px 40px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
 
-.services-section { padding: 6rem 0; background: rgb(249,250,251); }
-.section-header { text-align: center; max-width: 48rem; margin: 0 auto 4rem; }
-.services-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-@media (min-width: 768px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .services-grid { grid-template-columns: repeat(3, 1fr); } }
-.service-card { position: relative; background: white; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border: 1px solid hsl(var(--border) / 0.5); transition: all 0.3s ease; overflow: hidden; }
-.service-card:hover { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); border-color: hsl(var(--primary) / 0.2); }
-.service-icon-bg { position: absolute; top: 0; right: 0; padding: 1rem; opacity: 0.05; transition: all 0.5s ease; }
-.service-card:hover .service-icon-bg { opacity: 0.1; transform: scale(1.1); }
-.service-icon-bg svg { width: 8rem; height: 8rem; color: hsl(var(--primary)); }
-.service-content { position: relative; z-index: 10; }
-.service-icon { width: 3.5rem; height: 3.5rem; background: hsl(var(--primary) / 0.1); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; transition: all 0.3s ease; }
-.service-card:hover .service-icon { background: hsl(var(--primary)); }
-.service-icon svg { width: 1.75rem; height: 1.75rem; color: hsl(var(--primary)); transition: color 0.3s ease; }
-.service-card:hover .service-icon svg { color: white; }
-.service-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: hsl(var(--card-foreground)); transition: color 0.3s ease; }
-.service-card:hover .service-title { color: hsl(var(--primary)); }
-.service-description { color: hsl(var(--muted-foreground)); line-height: 1.75; }
-.service-link { display: inline-block; margin-top: 1.5rem; font-size: 0.875rem; font-weight: 600; color: hsl(var(--primary)); transition: transform 0.3s ease; }
-.service-card:hover .service-link { transform: translateX(0.5rem); }
-.service-bar { position: absolute; bottom: 0; left: 0; width: 100%; height: 0.25rem; background: linear-gradient(to right, hsl(var(--primary)), rgb(37,99,235)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
-.service-card:hover .service-bar { transform: scaleX(1); }
+  .feature-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--green);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s ease;
+  }
 
-.projects-section { position: relative; }
-.projects-hero { position: relative; min-height: 70vh; }
-.parallax-slide { position: absolute; inset: 0; background-position: center; background-repeat: no-repeat; background-size: cover; background-attachment: fixed; opacity: 0; transition: opacity 1s ease-in-out; }
-.parallax-slide.active { opacity: 1; }
-.slide-overlay { position: absolute; inset: 0; background: rgba(15,23,42,0.6); }
-.slide-content-wrapper { position: absolute; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center; padding: 4rem 1rem; }
-.slide-content { max-width: 48rem; text-align: center; color: white; }
-.slide-badge { display: inline-block; padding: 0.375rem 1rem; border-radius: 9999px; background: hsl(var(--primary)); color: white; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
-.slide-title { font-size: clamp(2rem, 6vw, 3.75rem); font-weight: 800; color: white; margin-bottom: 1.5rem; line-height: 1.1; }
-.slide-description { font-size: clamp(1rem, 2vw, 1.25rem); color: rgb(226,232,240); margin-bottom: 2rem; line-height: 1.75; font-weight: 300; }
-.slide-button { padding: 1rem 2rem; background: white; color: hsl(var(--secondary)); font-weight: 700; font-size: 1.125rem; border-radius: 0.75rem; border: none; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
-.slide-button:hover { background: rgb(241,245,249); transform: scale(1.05); }
-.slide-dots { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 20; display: flex; gap: 0.75rem; }
-.slide-dot { width: 0.75rem; height: 0.75rem; border-radius: 9999px; background: rgba(255,255,255,0.5); border: none; cursor: pointer; transition: all 0.3s ease; padding: 0; }
-.slide-dot:hover { background: white; }
-.slide-dot.active { background: white; transform: scale(1.25); }
+  .feature-card:hover::before { transform: scaleX(1); }
 
-.partners-section { padding: 5rem 0; background: hsl(209, 53%, 36%); overflow: hidden; }
-.partners-title { text-align: center; color: white; font-weight: 700; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2.5rem; }
-.slider { height: 120px; margin: auto; overflow: hidden; position: relative; width: 100%; }
-.slider::before, .slider::after { content: ""; height: 120px; position: absolute; width: 150px; z-index: 2; background: hsl(209, 53%, 36%); }
-.slider::after { right: 0; top: 0; transform: rotateZ(180deg); }
-.slider::before { left: 0; top: 0; }
-.slide-track { animation: scroll 30s linear infinite; display: flex; width: max-content; }
-@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-.slide { height: 120px; width: 280px; display: flex; align-items: center; justify-content: center; padding: 20px; }
-.slide img { max-height: 80px; max-width: 200px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease; }
-.slide:hover img { filter: grayscale(0%); opacity: 1; }
+  .feature-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px; letter-spacing: 0.3em;
+    color: rgba(117,251,76,0.5);
+    margin-bottom: 24px;
+  }
 
-.contact-section { padding: 6rem 0; background: hsl(var(--secondary)); overflow: hidden; }
-.contact-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center; }
-@media (min-width: 1024px) { .contact-grid { grid-template-columns: repeat(2, 1fr); } }
-.contact-info { color: white; }
-.contact-title { font-size: 2.25rem; font-weight: 700; margin-bottom: 1.5rem; }
-.contact-description { color: rgb(209,213,219); font-size: 1.125rem; margin-bottom: 2.5rem; line-height: 1.75; }
-.contact-features { display: flex; flex-direction: column; gap: 1.5rem; }
-.contact-feature { display: flex; align-items: flex-start; background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.1); transition: background 0.3s ease; }
-.contact-feature:hover { background: rgba(255,255,255,0.1); }
-.contact-feature-icon { width: 3rem; height: 3rem; background: hsl(var(--primary)); border-radius: 9999px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-right: 1rem; }
-.contact-feature-icon svg { width: 1.5rem; height: 1.5rem; color: white; }
-.contact-feature-title { font-weight: 700; font-size: 1.25rem; margin-bottom: 0.25rem; }
-.contact-feature-text { color: rgb(156,163,175); }
+  .feature-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 3vw, 48px);
+    line-height: 1;
+    margin-bottom: 16px;
+    opacity: 0; transform: translateY(20px);
+  }
 
-.icon { width: 1.5rem; height: 1.5rem; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
-.icon-fill { fill: currentColor; }
+  .feature-body {
+    font-size: 14px; line-height: 1.8;
+    color: rgba(242,240,234,0.4);
+    opacity: 0; transform: translateY(10px);
+  }
 
-.bg-primary { background-color: hsl(348, 83%, 47%) !important; }
-.text-primary { color: hsl(348, 83%, 47%) !important; }
-.hover\:bg-primary:hover { background-color: hsl(348, 83%, 47%) !important; }
-.hover\:text-primary:hover { color: hsl(348, 83%, 47%) !important; }
-.parallax-bg { background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; }
+  /* ── WHY GSAP ── */
+  .why {
+    padding: 140px 80px;
+    display: flex; gap: 80px; align-items: flex-start;
+    max-width: 1200px; margin: 0 auto;
+  }
 
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-.animate-fade-in-up { animation: fadeInUp 0.8s ease-out; }
+  .why-left { flex: 1; }
 
-@media (max-width: 768px) {
-  .hero-bg, .parallax-slide, .parallax-bg { background-attachment: scroll !important; }
-}
+  .why-tag {
+    font-size: 10px; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--green);
+    margin-bottom: 20px; display: block;
+  }
 
-/* ── Contact card tabs (APENAS ESTA PARTE FOI ADICIONADA) ── */
-.ctab-wrap { background:#fff; border-radius:1.25rem; overflow:hidden; box-shadow:0 32px 64px -12px rgba(0,0,0,0.22); }
-.ctab-bar { height:5px; background:linear-gradient(90deg,hsl(348,83%,47%) 0%,hsl(209,53%,36%) 100%); }
-.ctab-header { padding:1.75rem 2rem 0; display:flex; align-items:center; gap:1rem; }
-.ctab-icon { width:2.75rem; height:2.75rem; background:hsl(209,53%,36%); border-radius:.625rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.ctab-title { font-size:1.15rem; font-weight:700; color:hsl(222,47%,11%); line-height:1.2; }
-.ctab-sub { font-size:.78rem; color:#9ca3af; margin-top:.15rem; font-weight:500; }
-.ctabs { margin:1.5rem 2rem 0; display:flex; border-bottom:2px solid #e5e7eb; position:relative; }
-.ctab-btn { flex:1; padding:.65rem .5rem; font-family:'Montserrat',sans-serif; font-size:.82rem; font-weight:600; color:#6b7280; background:none; border:none; cursor:pointer; transition:color .25s; display:flex; align-items:center; justify-content:center; gap:.4rem; letter-spacing:.02em; }
-.ctab-btn.active { color:hsl(209,53%,36%); }
-.ctab-btn:hover:not(.active) { color:hsl(222,47%,11%); }
-.ctab-ink { position:absolute; bottom:-2px; left:0; height:2px; width:50%; background:hsl(209,53%,36%); border-radius:2px 2px 0 0; transition:left .35s cubic-bezier(.4,0,.2,1); }
-.ctab-ink.right { left:50%; }
-.ctab-panels { overflow:hidden; position:relative; width:100%; }
-.ctab-track { display:flex; width:200%; transition:transform .4s cubic-bezier(.4,0,.2,1); will-change:transform; }
-.ctab-track.to-right { transform:translateX(-50%); }
-.ctab-panel { width:50%; min-width:0; padding:1.75rem 2rem 2rem; box-sizing:border-box; }
-.ctab-field { margin-bottom:1.1rem; }
-.ctab-field label { display:block; font-size:.8rem; font-weight:600; color:hsl(222,47%,11%); margin-bottom:.3rem; letter-spacing:.01em; }
-.ctab-field input, .ctab-field textarea { width:100%; padding:.72rem 1rem; border:1.5px solid #e5e7eb; border-radius:.5rem; font-family:'Montserrat',sans-serif; font-size:.875rem; color:hsl(222,47%,11%); background:#f9fafb; transition:border-color .2s,box-shadow .2s,background .2s; outline:none; resize:vertical; }
-.ctab-field input:focus, .ctab-field textarea:focus { border-color:hsl(209,53%,36%); background:#fff; box-shadow:0 0 0 3px hsl(209,53%,36%,.12); }
-.ctab-field input::placeholder, .ctab-field textarea::placeholder { color:#b0b8c4; }
-.ctab-submit { width:100%; padding:.85rem; background:hsl(209,53%,36%); color:#fff; border:none; border-radius:.5rem; font-family:'Montserrat',sans-serif; font-size:.875rem; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:.55rem; transition:background .25s,transform .2s,box-shadow .25s; box-shadow:0 4px 14px hsl(209,53%,36%,.28); letter-spacing:.02em; margin-top:1.35rem; }
-.ctab-submit:hover { background:hsl(348,83%,47%); transform:translateY(-2px); box-shadow:0 6px 20px hsl(348,83%,47%,.32); }
-.ctab-submit:active { transform:translateY(0); }
-.ctab-email-box { background:#f9fafb; border:1.5px solid #e5e7eb; border-radius:.625rem; padding:.9rem 1.1rem; display:flex; align-items:center; gap:.7rem; margin-bottom:1.5rem; }
-.ctab-email-box span { font-size:.875rem; font-weight:600; color:hsl(222,47%,11%); letter-spacing:.01em; }
-.ctab-divider { width:2.25rem; height:2px; background:linear-gradient(to right,hsl(348,83%,47%),hsl(209,53%,36%)); border-radius:9999px; margin-bottom:1.4rem; }
-.ctab-desc { color:#6b7280; font-size:.875rem; line-height:1.8; margin-bottom:1.5rem; }
-.ctab-privacy { display:flex; align-items:center; gap:.35rem; font-size:.72rem; color:#b0b8c4; margin-top:1rem; line-height:1.5; }
-.ctab-success { display:none; flex-direction:column; align-items:center; text-align:center; padding:2.5rem 1rem; }
-.ctab-success.visible { display:flex; }
-.ctab-success-circle { width:64px; height:64px; border-radius:50%; background:hsl(348,83%,47%,.1); display:flex; align-items:center; justify-content:center; margin-bottom:1.25rem; animation:ctabPopIn .4s cubic-bezier(.34,1.56,.64,1) both; }
-@keyframes ctabPopIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
-@keyframes ctabSpin { to{transform:rotate(360deg)} }
-.ctab-success-title { font-size:1.35rem; font-weight:700; color:hsl(222,47%,11%); margin-bottom:.5rem; }
-.ctab-success-sub { font-size:.875rem; color:#6b7280; line-height:1.7; }
+  .why-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 4vw, 64px);
+    line-height: 1.05;
+  }
+
+  .why-heading .line-wrap { display: block; overflow: hidden; }
+  .why-heading .line-inner { display: block; transform: translateY(100%); }
+
+  .why-right {
+    flex: 1.2;
+    display: flex; flex-direction: column; gap: 32px;
+    padding-top: 20px;
+  }
+
+  .why-item {
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(242,240,234,0.07);
+    opacity: 0; transform: translateY(24px);
+  }
+
+  .why-item-title {
+    font-size: 15px; font-weight: 700;
+    margin-bottom: 10px; color: var(--white);
+  }
+
+  .why-item-body {
+    font-size: 14px; line-height: 1.8;
+    color: rgba(242,240,234,0.4);
+  }
+
+  /* Footer */
+  footer {
+    padding: 60px 80px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px; letter-spacing: 0.05em;
+  }
+
+  .footer-logo span { color: var(--green); }
+
+  footer p { font-size: 12px; color: rgba(242,240,234,0.2); letter-spacing: 0.05em; }
 </style>
 </head>
 <body>
 
-<nav class="navbar" id="navbar">
-  <div class="container">
-    <div class="navbar-content">
-      <a href="#" class="logo">
-        <img src="logo6.jpg" alt="AJ João Mendes" class="logo-icon" style="object-fit:contain;padding:0;background:transparent;border-radius:0.5rem;">
-        <div class="logo-text-wrap">
-          <span class="logo-abbr">A</span>
-          <span class="logo-expand">ssistência</span>
-          <span class="logo-space">&nbsp;</span>
-          <span class="logo-abbr logo-highlight">J</span>
-          <span class="logo-expand">udiciária</span>
-          <span class="logo-space">&nbsp;</span>
-          <span class="logo-dot"></span>
-          <span class="logo-abbr">J</span>
-          <span class="logo-expand">oão</span>
-          <span class="logo-space">&nbsp;</span>
-          <span class="logo-abbr">M</span>
-          <span class="logo-expand">endes</span>
-        </div>
-      </a>
-      <div class="nav-links">
-        <a href="#" class="nav-link">Início</a>
-        <a href="#about" class="nav-link">Sobre</a>
-        <a href="#services" class="nav-link">Serviços</a>
-        <a href="#projects" class="nav-link">Projetos</a>
-        <a href="#partners" class="nav-link">Parceiros</a>
-        <a href="#contact" class="nav-link">Contato</a>
-        <a href="doe.html" class="btn btn-primary">
-  <svg class="icon icon-fill" viewBox="0 0 24 24" style="width:1rem;height:1rem;"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path></svg>
-  Doe Agora
-</a>
-      </div>
-      <button class="mobile-menu-btn" id="mobileMenuBtn">
-        <svg class="icon" id="menuIcon" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        <svg class="icon" id="closeIcon" viewBox="0 0 24 24" style="display:none;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-    </div>
-  </div>
-<div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-content">
-      <a href="#" class="mobile-menu-link">Início</a>
-      <a href="#about" class="mobile-menu-link">Sobre</a>
-      <a href="#services" class="mobile-menu-link">Serviços</a>
-      <a href="#projects" class="mobile-menu-link">Projetos</a>
-      <a href="#partners" class="mobile-menu-link">Parceiros</a>
-      <a href="#contact" class="mobile-menu-link">Contato</a>
-   <div style="padding-top:1rem;">
-  <a href="doe.html" class="btn btn-primary" style="width:100%;height:3rem;justify-content:center;display:flex;">
-    <svg class="icon icon-fill" viewBox="0 0 24 24" style="width:1rem;height:1rem;"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path></svg>
-    Doe Agora
-  </a>
-</div>
-    </div>
-  </div>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">GS<span>AP</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Core</a></li>
+    <li><a href="#">Scroll</a></li>
+    <li><a href="#">SVG</a></li>
+    <li><a href="#">Text</a></li>
+    <li><a href="#">Docs</a></li>
+  </ul>
+  <button class="nav-cta">Get GSAP</button>
 </nav>
 
-<section class="hero">
-  <div class="hero-bg"><div class="hero-overlay"></div><div class="hero-gradient"></div></div>
-  <div class="container hero-content animate-fade-in-up">
-    <span class="hero-badge">ESPECIALISTAS JURÍDICOS DE CONFIANÇA</span>
-    <h1 class="hero-title">Defendendo Seus Direitos,<br><span class="hero-title-gradient">Garantindo Seu Futuro.</span></h1>
-    <p class="hero-description">Oferecemos soluções jurídicas completas com compromisso com a excelência e a integridade. A sua justiça é a nossa prioridade.</p>
-    <div class="hero-buttons">
-      <button class="btn btn-primary" style="height:3.5rem;padding:0 2rem;font-size:1.125rem;">Consulta Gratuita</button>
-      <button class="btn btn-outline" style="height:3.5rem;padding:0 2rem;font-size:1.125rem;">Nossos Serviços</button>
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero-glow"></div>
+
+  <div class="hero-title-wrap">
+
+    <!-- "Animate" — letters will scatter and reassemble -->
+    <div class="word-animate" id="wordAnimate">
+      <!-- Letters injected by JS -->
+    </div>
+
+    <!-- "Anything" — same treatment -->
+    <div class="word-anything" id="wordAnything">
+    </div>
+
+  </div>
+
+  <p class="hero-sub" id="heroSub">
+    A <strong>wildly robust</strong> JavaScript animation library built for professionals.
+    Delivering silky-smooth performance and unmatched support.
+  </p>
+
+  <div class="hero-ctas" id="heroCtas">
+    <a href="#" class="btn-primary">Get GSAP — It's Free</a>
+    <a href="#" class="btn-secondary">View Docs →</a>
+  </div>
+</section>
+
+<!-- ── SCROLL ASSEMBLY SECTION ── -->
+<section class="scroll-zone" id="scrollZone">
+  <div class="scroll-sticky" id="scrollSticky">
+    <div class="assemble-wrap">
+      <span class="assemble-label" id="assembleLabel">SCROLL TRIGGER</span>
+      <div class="letters-stage" id="lettersStage">
+        <!-- letters injected by JS -->
+      </div>
+      <p class="assemble-desc" id="assembleDesc">
+        As letras estavam <em>espalhadas pelo caos</em> — o scroll as trouxe de volta.
+      </p>
     </div>
   </div>
 </section>
 
-<section id="about" class="about-section">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-image">
-        <div class="about-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=1000" alt="Nossa Equipe">
-        </div>
-        <div class="about-badge">
-          <p class="about-badge-number">25+</p>
-          <p class="about-badge-text">Anos de Experiência</p>
-        </div>
-      </div>
-      <div class="about-content">
-        <h4 class="section-subtitle">Sobre Nós</h4>
-        <h2 class="section-title">Comprometidos em Ajudar Nossos Clientes a Ter Sucesso</h2>
-        <p class="section-description">Somos um escritório de advocacia completo dedicado a oferecer a mais alta qualidade em representação jurídica. Nossos advogados têm décadas de experiência combinada e já representaram com sucesso milhares de clientes.</p>
-        <div class="features-list">
-          <div class="feature-item"><svg class="feature-icon icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><span class="feature-text">Advogados Experientes e Especializados</span></div>
-          <div class="feature-item"><svg class="feature-icon icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><span class="feature-text">Histórico Comprovado de Sucesso</span></div>
-          <div class="feature-item"><svg class="feature-icon icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><span class="feature-text">Abordagem Centrada no Cliente</span></div>
-          <div class="feature-item"><svg class="feature-icon icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><span class="feature-text">Comunicação Transparente</span></div>
-        </div>
-        <button class="btn btn-secondary" style="height:3rem;padding:0 2rem;">Saiba Mais Sobre Nós <svg class="icon" viewBox="0 0 24 24" style="width:1rem;height:1rem;margin-left:0.5rem;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
-      </div>
+<!-- ── FEATURES ── -->
+<section class="features" id="features">
+  <div class="feature-card">
+    <div class="feature-num">01</div>
+    <h3 class="feature-title" id="ft1">SCROLL<br>TRIGGER</h3>
+    <p class="feature-body" id="fb1">Pin, scrub e parallax com precisão cirúrgica. Transforma o scroll em narrativa.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-num">02</div>
+    <h3 class="feature-title" id="ft2">SPLIT<br>TEXT</h3>
+    <p class="feature-body" id="fb2">Divide texto em linhas, palavras e letras. Anima cada fragmento individualmente.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-num">03</div>
+    <h3 class="feature-title" id="ft3">MORPH<br>SVG</h3>
+    <p class="feature-body" id="fb3">Transforma qualquer path SVG em outro com interpolação suave e precisa.</p>
+  </div>
+</section>
+
+<!-- ── WHY ── -->
+<section class="why" id="why">
+  <div class="why-left">
+    <span class="why-tag">Por que GSAP?</span>
+    <h2 class="why-heading" id="whyHeading">
+      <span class="line-wrap"><span class="line-inner">Feito para</span></span>
+      <span class="line-wrap"><span class="line-inner" style="color:var(--green)">profissionais</span></span>
+      <span class="line-wrap"><span class="line-inner">que exigem</span></span>
+      <span class="line-wrap"><span class="line-inner">o melhor.</span></span>
+    </h2>
+  </div>
+  <div class="why-right">
+    <div class="why-item" id="wi1">
+      <div class="why-item-title">⚡ Performance de 60fps garantida</div>
+      <div class="why-item-body">GSAP usa requestAnimationFrame e otimizações internas para garantir animações fluidas mesmo em dispositivos mais lentos.</div>
+    </div>
+    <div class="why-item" id="wi2">
+      <div class="why-item-title">🎯 Controle total da timeline</div>
+      <div class="why-item-body">Play, pause, reverse, seek. Construa sequências complexas com total controle sobre cada frame.</div>
+    </div>
+    <div class="why-item" id="wi3">
+      <div class="why-item-title">🔌 Ecossistema de plugins</div>
+      <div class="why-item-body">ScrollTrigger, SplitText, MorphSVG, DrawSVG e muito mais. Um ecossistema completo para qualquer necessidade.</div>
     </div>
   </div>
 </section>
 
-<section id="services" class="services-section">
-  <div class="container">
-    <div class="section-header">
-      <h4 class="section-subtitle">Áreas de Atuação</h4>
-      <h2 class="section-title">Como Podemos te Ajudar</h2>
-      <p class="section-description">Oferecemos uma ampla gama de serviços jurídicos adaptados às suas necessidades específicas.</p>
-    </div>
-    <div class="services-grid" id="servicesGrid"></div>
-  </div>
-</section>
-
-<section id="projects" class="projects-section">
-  <div class="projects-hero">
-    <div class="parallax-slide" style="background-image:url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=2000');"><div class="slide-overlay"></div><div class="slide-content-wrapper"><div class="slide-content"><span class="slide-badge">Sustentabilidade</span><h2 class="slide-title">Impacto Social e Solidariedade</h2><p class="slide-description">Nossas iniciativas vão além do suporte jurídico, promovendo cidadania, saúde e bem-estar para toda a comunidade.</p><button class="slide-button" onclick="scrollToSection('#contact')">VER ARTIGO COMPLETO</button></div></div></div>
-    <div class="parallax-slide" style="background-image:url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&q=80&w=2000');"><div class="slide-overlay"></div><div class="slide-content-wrapper"><div class="slide-content"><span class="slide-badge">Educação</span><h2 class="slide-title">Capacitação e Desenvolvimento</h2><p class="slide-description">Oficinas gratuitas sobre direitos básicos, educação financeira e orientação profissional para a comunidade.</p><button class="slide-button" onclick="scrollToSection('#services')">CONHEÇA NOSSOS PROGRAMAS</button></div></div></div>
-    <div class="parallax-slide" style="background-image:url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=2000');"><div class="slide-overlay"></div><div class="slide-content-wrapper"><div class="slide-content"><span class="slide-badge">Saúde</span><h2 class="slide-title">Bem-Estar da Comunidade</h2><p class="slide-description">Parcerias com profissionais de saúde para oferecer atendimento psicológico e orientação médica a populações vulneráveis.</p><button class="slide-button" onclick="scrollToSection('#partners')">NOSSOS PARCEIROS</button></div></div></div>
-    <div class="parallax-slide" style="background-image:url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&q=80&w=2000');"><div class="slide-overlay"></div><div class="slide-content-wrapper"><div class="slide-content"><span class="slide-badge">Voluntariado</span><h2 class="slide-title">Faça Parte da Mudança</h2><p class="slide-description">Junte-se à nossa equipe de voluntários e ajude a transformar vidas por meio do acesso à justiça e à cidadania.</p><button class="slide-button" onclick="scrollToSection('#contact')">SEJA UM VOLUNTÁRIO</button></div></div></div>
-    <div class="slide-dots">
-      <button class="slide-dot" onclick="goToSlide(0)"></button>
-      <button class="slide-dot" onclick="goToSlide(1)"></button>
-      <button class="slide-dot" onclick="goToSlide(2)"></button>
-      <button class="slide-dot" onclick="goToSlide(3)"></button>
-    </div>
-  </div>
-</section>
-
-<section id="partners" class="partners-section" style="padding:4rem 0 4.5rem;background:hsl(209,53%,36%);overflow:hidden;position:relative;">
-  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.15),transparent);"></div>
-  <div class="container" style="text-align:center;margin-bottom:2.5rem;">
-    <span style="display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:0.6rem;">Trabalhamos com</span>
-    <h4 style="color:white;font-weight:700;font-size:1.35rem;letter-spacing:-0.01em;">Parceiros de Confiança</h4>
-    <div style="width:2.5rem;height:2px;background:hsl(348,83%,47%);border-radius:9999px;margin:0.85rem auto 0;"></div>
-  </div>
-  <div class="slider">
-    <div class="slide-track">
-
-      <div class="slide" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
-        <img src="" alt="FACHINI" style="width:80px;height:80px;object-fit:contain;">
-        <span style="color:rgba(255,255,255,0.6);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">FACHINI</span>
-      </div>
-
-      <div class="slide" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
-        <img src="" alt="ALUMINI" style="width:80px;height:80px;object-fit:contain;">
-        <span style="color:rgba(255,255,255,0.6);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">ALUMINI</span>
-      </div>
-
-      <div class="slide" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
-        <img src="" alt="GSLAW" style="width:80px;height:80px;object-fit:contain;">
-        <span style="color:rgba(255,255,255,0.6);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">GSLAW</span>
-      </div>
-
-      <div class="slide" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
-        <img src="" alt="PELLEGRINA" style="width:80px;height:80px;object-fit:contain;">
-        <span style="color:rgba(255,255,255,0.6);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">PELLEGRINA</span>
-      </div>
-
-      <div class="slide" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
-        <img src="" alt="BOSCATTI" style="width:80px;height:80px;object-fit:contain;">
-        <span style="color:rgba(255,255,255,0.6);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">BOSCATTI</span>
-      </div>
-
-      <div class="slide" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
-        <img src="" alt="CANOVAE ADVOGADOS" style="width:80px;height:80px;object-fit:contain;">
-        <span style="color:rgba(255,255,255,0.6);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">CANOVAE ADVOGADOS</span>
-      </div>
-
-      <!-- Duplicatas para o loop do slider -->
-      <div class="slide" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
-        <img src="" alt="FACHINI" style="width:80px;height:80px;object-fit:contain;">
-        <span style="color:rgba(255,255,255,0.6);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">FACHINI</span>
-      </div>
-
-      <div class="slide" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
-        <img src="" alt="ALUMINI" style="width:80px;height:80px;object-fit:contain;">
-        <span style="color:rgba(255,255,255,0.6);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">ALUMINI</span>
-      </div>
-
-      <div class="slide" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
-        <img src="" alt="GSLAW" style="width:80px;height:80px;object-fit:contain;">
-        <span style="color:rgba(255,255,255,0.6);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">GSLAW</span>
-      </div>
-
-      <div class="slide" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
-        <img src="" alt="PELLEGRINA" style="width:80px;height:80px;object-fit:contain;">
-        <span style="color:rgba(255,255,255,0.6);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">PELLEGRINA</span>
-      </div>
-
-      <div class="slide" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
-        <img src="" alt="BOSCATTI" style="width:80px;height:80px;object-fit:contain;">
-        <span style="color:rgba(255,255,255,0.6);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">BOSCATTI</span>
-      </div>
-
-      <div class="slide" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
-        <img src="" alt="CANOVAE ADVOGADOS" style="width:80px;height:80px;object-fit:contain;">
-        <span style="color:rgba(255,255,255,0.6);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">CANOVAE ADVOGADOS</span>
-      </div>
-
-    </div>
-  </div>
-  <div style="text-align:center;margin-top:2rem;">
-    <a href="parceiros.html" style="display:inline-block;padding:0.65rem 1.75rem;background:hsl(348,83%,47%);color:white;font-weight:700;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;border-radius:4px;text-decoration:none;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Ver Todos os Parceiros</a>
-  </div>
-  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.12),transparent);"></div>
-</section>
-
-<section id="contact" class="contact-section">
-  <div class="container">
-    <div class="contact-grid">
-
-      <div class="contact-info">
-        <h4 class="section-subtitle">Entre em Contato</h4>
-        <h2 class="contact-title">Agende sua<br>Consulta Gratuita</h2>
-        <p class="contact-description">Não espere até ser tarde demais. Entre em contato hoje para discutir seu caso com um de nossos advogados experientes. Estamos aqui para ouvir e lutar por você.</p>
-        <div class="contact-features">
-          <div class="contact-feature">
-            <div class="contact-feature-icon">
-              <svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-            </div>
-            <div>
-              <h5 class="contact-feature-title">Orientação Especializada</h5>
-              <p class="contact-feature-text">Receba orientação jurídica profissional adaptada à sua situação.</p>
-            </div>
-          </div>
-          <div class="contact-feature">
-            <div class="contact-feature-icon">
-              <svg class="icon" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path></svg>
-            </div>
-            <div>
-              <h5 class="contact-feature-title">Focados em Resultados</h5>
-              <p class="contact-feature-text">Trabalhamos para alcançar o melhor resultado possível para você.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="ctab-wrap">
-        <div class="ctab-bar"></div>
-
-        <div class="ctab-header">
-          <div class="ctab-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
-          </div>
-          <div>
-            <div class="ctab-title">Fale Conosco</div>
-            <div class="ctab-sub">Respondemos em até 24 horas</div>
-          </div>
-        </div>
-
-        <div class="ctabs">
-          <button class="ctab-btn active" id="ctab0" onclick="ctabSwitch(0)">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            Formulário
-          </button>
-          <button class="ctab-btn" id="ctab1" onclick="ctabSwitch(1)">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            Enviar E-mail
-          </button>
-          <span class="ctab-ink" id="ctabInk"></span>
-        </div>
-
-        <div class="ctab-panels">
-          <div class="ctab-track" id="ctabTrack">
-
-            <div class="ctab-panel">
-              <div class="ctab-success" id="ctabSuccess">
-                <div class="ctab-success-circle">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="hsl(348,83%,47%)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                </div>
-                <div class="ctab-success-title">Mensagem enviada!</div>
-                <div class="ctab-success-sub">Em breve um de nossos especialistas<br>entrará em contato com você.</div>
-              </div>
-
-              <form id="contactForm">
-                <div class="ctab-field">
-                  <label for="cf-name">Nome completo</label>
-                  <input type="text" id="cf-name" name="name" required placeholder="Seu nome">
-                </div>
-                <div class="ctab-field">
-                  <label for="cf-email">E-mail</label>
-                  <input type="email" id="cf-email" name="email" required placeholder="seu@email.com">
-                </div>
-                <div class="ctab-field">
-                  <label for="cf-message">Mensagem</label>
-                  <textarea id="cf-message" name="message" rows="4" required placeholder="Escreva sua mensagem..."></textarea>
-                </div>
-                <button type="submit" class="ctab-submit" id="ctabSubmitBtn">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                  Enviar mensagem
-                </button>
-                <div class="ctab-privacy">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  Todas as comunicações são tratadas com sigilo profissional absoluto.
-                </div>
-              </form>
-            </div>
-
-  
-            <div class="ctab-panel">
-              <p class="ctab-desc">Nossa equipe jurídica está pronta para ouvir você. Clique abaixo para abrir seu cliente de e-mail e enviar sua mensagem diretamente.</p>
-              <div class="ctab-email-box">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="hsl(209,53%,36%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                <span>parcerias@ajjoaomendes.com</span>
-              </div>
-              <div class="ctab-divider"></div>
-              <a href="mailto:parcerias@ajjoaomendes.com" class="ctab-submit" style="text-decoration:none;">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                Abrir e-mail
-              </a>
-              <p style="margin-top:1rem;font-size:.75rem;color:#9ca3af;">Tempo médio de resposta: <strong style="color:hsl(209,53%,36%);">até 24 horas</strong></p>
-              <div class="ctab-privacy" style="margin-top:.85rem;">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                Todas as comunicações são tratadas com sigilo profissional absoluto.
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
- 
-
-    </div>
-  </div>
-</section>
-
-<footer class="relative w-full overflow-hidden" style="font-family:'Montserrat',sans-serif;">
-  <div class="absolute inset-0 parallax-bg" style="background-image:url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=2000');">
-    <div class="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-900/95"></div>
-  </div>
-  <div class="relative z-10 py-20">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-        <div class="lg:col-span-2">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-content-center">
-              <i data-lucide="scale" class="w-7 h-7 text-white" style="display:block;margin:auto;"></i>
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold text-white tracking-tight">AJ João Mendes</h3>
-              <p class="text-xs text-slate-400 uppercase tracking-wider font-medium">Assistência Judiciária</p>
-            </div>
-          </div>
-          <p class="text-slate-300 leading-relaxed mb-6 max-w-md">Promovendo justiça social e excelência jurídica desde 1959. Uma iniciativa da Universidade Presbiteriana Mackenzie.</p>
-          <div class="flex gap-4">
-            <a href="#" class="w-10 h-10 bg-white/10 hover:bg-primary rounded-lg flex items-center justify-center text-white transition-all hover:scale-110"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-            <a href="#" class="w-10 h-10 bg-white/10 hover:bg-primary rounded-lg flex items-center justify-center text-white transition-all hover:scale-110"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-            <a href="#" class="w-10 h-10 bg-white/10 hover:bg-primary rounded-lg flex items-center justify-center text-white transition-all hover:scale-110"><i data-lucide="facebook" class="w-5 h-5"></i></a>
-          </div>
-        </div>
-        <div>
-          <h4 class="text-white font-bold text-lg mb-6 relative inline-block">Links Rápidos<span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span></h4>
-          <ul class="space-y-3">
-            <li><a href="#about" class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2 group"><i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>Sobre Nós</a></li>
-            <li><a href="#services" class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2 group"><i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>Serviços</a></li>
-            <li><a href="#projects" class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2 group"><i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>Projetos Sociais</a></li>
-            <li><a href="#contact" class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2 group"><i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>Contato</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-white font-bold text-lg mb-6 relative inline-block">Contato<span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span></h4>
-          <ul class="space-y-4">
-            <li class="flex items-start gap-3 text-slate-300"><i data-lucide="map-pin" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i><span class="text-sm leading-relaxed">Rua da Consolação, 930<br>Consolação - SP, 01302-907</span></li>
-            <li class="flex items-center gap-3 text-slate-300"><i data-lucide="phone" class="w-5 h-5 text-primary flex-shrink-0"></i><span class="text-sm">(11) 2114-8000</span></li>
-            <li class="flex items-center gap-3 text-slate-300"><i data-lucide="mail" class="w-5 h-5 text-primary flex-shrink-0"></i><span class="text-sm">ajjoaomendes@mackenzie.br</span></li>
-          </ul>
-        </div>
-      </div>
-      <div class="pt-8 border-t border-white/10">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p class="text-slate-400 text-sm">&copy; <span id="footerYear"></span> AJ João Mendes. Todos os direitos reservados.</p>
-          <div class="flex items-center gap-6 text-sm">
-            <a href="#" class="text-slate-400 hover:text-primary transition-colors">Política de Privacidade</a>
-            <span class="text-slate-600">•</span>
-            <a href="#" class="text-slate-400 hover:text-primary transition-colors">Termos de Uso</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+<footer>
+  <div class="footer-logo">GS<span>AP</span></div>
+  <p>© 2026 — Exemplo educacional inspirado em gsap.com</p>
 </footer>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+gsap.registerPlugin(ScrollTrigger);
 
-  lucide.createIcons();
-  document.getElementById('footerYear').textContent = new Date().getFullYear();
+// ──────────────────────────────────────────────
+// HERO — scatter letters then assemble on load
+// ──────────────────────────────────────────────
 
-  const services = [
-    { id: 1, title: "Direito Civil", description: "Protegendo liberdades individuais e garantindo igualdade perante a lei. Combatemos a discriminação e defendemos direitos constitucionais.", icon: "Scale" },
-    { id: 2, title: "Direito de Família", description: "Orientação compassiva em divórcio, guarda, adoção e outros assuntos familiares, sempre com foco no seu melhor interesse.", icon: "Users" },
-    { id: 3, title: "Defesa Criminal", description: "Representação firme para proteger seus direitos e sua liberdade. Atuamos em todos os casos criminais, de contravenções a crimes graves.", icon: "Shield" },
-    { id: 4, title: "Direito do Trabalho", description: "Defendendo os direitos dos trabalhadores, tratando casos de demissão injusta, discriminação e assédio no ambiente de trabalho.", icon: "Briefcase" },
-    { id: 5, title: "Serviços de Imigração", description: "Ajudando famílias a navegar pelo complexo sistema de imigração com pedidos de visto, cidadania e defesa contra deportação.", icon: "Globe" },
-    { id: 6, title: "Direito Habitacional", description: "Garantindo práticas habitacionais justas, combatendo despejos ilegais e protegendo os direitos dos inquilinos em todas as comunidades.", icon: "Home" }
-  ];
+function buildHeroWord(containerId, text, colors) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  const letters = [];
 
-  const iconPaths = {
-    Scale: '<path d="M16 11V3H8v8"></path><path d="M8 19h8"></path><path d="M10 19v-6h4v6"></path>',
-    Users: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>',
-    Shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>',
-    Briefcase: '<rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>',
-    Globe: '<circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>',
-    Home: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>'
-  };
-
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
-
-  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const menuIcon = document.getElementById('menuIcon');
-  const closeIcon = document.getElementById('closeIcon');
-
-  mobileMenuBtn.addEventListener('click', () => {
-    const open = mobileMenu.classList.toggle('open');
-    menuIcon.style.display = open ? 'none' : 'block';
-    closeIcon.style.display = open ? 'block' : 'none';
+  [...text].forEach((ch, i) => {
+    const span = document.createElement('span');
+    span.className = 'chaos-letter' + (colors && colors[i] ? ' ' + colors[i] : '');
+    span.textContent = ch;
+    container.appendChild(span);
+    letters.push(span);
   });
 
-  document.querySelectorAll('.mobile-menu-link').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-      menuIcon.style.display = 'block';
-      closeIcon.style.display = 'none';
+  return letters;
+}
+
+// "Animate" — some letters are green/dim like gsap.com
+const animateColors = { 0:'green', 5:'dim', 6:'green' };
+const lAnimate = buildHeroWord('wordAnimate', 'Animate', animateColors);
+
+// "Anything"
+const anythingColors = { 3:'green', 7:'dim' };
+const lAnything = buildHeroWord('wordAnything', 'Anything', anythingColors);
+
+const allHeroLetters = [...lAnimate, ...lAnything];
+
+// Set initial chaotic state
+allHeroLetters.forEach(l => {
+  const rx = (Math.random() - 0.5) * 800;
+  const ry = (Math.random() - 0.5) * 500;
+  const rr = (Math.random() - 0.5) * 360;
+  const rs = 0.3 + Math.random() * 0.7;
+  gsap.set(l, { x: rx, y: ry, rotation: rr, scale: rs, opacity: 0 });
+});
+
+// Assemble on load
+const heroTl = gsap.timeline({ delay: 0.3 });
+
+heroTl
+  .to(allHeroLetters, {
+    x: 0, y: 0, rotation: 0, scale: 1, opacity: 1,
+    duration: 1.2,
+    stagger: {
+      each: 0.05,
+      from: 'random',
+      ease: 'power2.inOut'
+    },
+    ease: 'expo.out'
+  })
+  .to('#heroSub',  { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+  .to('#heroCtas', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5');
+
+// ──────────────────────────────────────────────
+// SCROLL ZONE — letters scatter and reassemble
+// ──────────────────────────────────────────────
+
+const phrase = 'SCROLL';
+const stage = document.getElementById('lettersStage');
+
+// Calculate final positions (evenly spaced centered)
+const letterEls = [];
+const letterW  = window.innerWidth * 0.13; // approx width per letter
+const totalW   = letterW * phrase.length;
+const startX   = (window.innerWidth - totalW) / 2;
+
+phrase.split('').forEach((ch, i) => {
+  const el = document.createElement('div');
+  el.className = 'stage-letter' + (i === 2 ? ' accent' : '');
+  el.textContent = ch;
+  stage.appendChild(el);
+  letterEls.push(el);
+});
+
+// Get stage center
+const stageH = stage.offsetHeight || 180;
+
+// Initial: letters scattered all over viewport
+function scatterLetters() {
+  letterEls.forEach(el => {
+    const rx = (Math.random() - 0.5) * window.innerWidth * 1.6;
+    const ry = (Math.random() - 0.5) * window.innerHeight * 1.2;
+    const rr = (Math.random() - 0.5) * 720;
+    gsap.set(el, {
+      x: rx,
+      y: ry,
+      rotation: rr,
+      opacity: 0,
+      scale: 0.5 + Math.random()
     });
   });
+}
 
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-      if (href !== '#' && href.startsWith('#')) {
-        e.preventDefault();
-        const el = document.querySelector(href);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
+scatterLetters();
 
-  const grid = document.getElementById('servicesGrid');
-  services.forEach((svc, i) => {
-    const ip = iconPaths[svc.icon] || iconPaths.Scale;
-    const card = document.createElement('div');
-    card.className = 'service-card';
-    card.style.cssText = 'opacity:0;transform:translateY(50px);';
-    card.innerHTML = `
-      <div class="service-icon-bg"><svg class="icon" viewBox="0 0 24 24">${ip}</svg></div>
-      <div class="service-content">
-        <div class="service-icon"><svg class="icon" viewBox="0 0 24 24">${ip}</svg></div>
-        <h3 class="service-title">${svc.title}</h3>
-        <p class="service-description">${svc.description}</p>
-        <span class="service-link">Saiba mais &rarr;</span>
-      </div>
-      <div class="service-bar"></div>`;
-    grid.appendChild(card);
-    setTimeout(() => { card.style.cssText = 'transition:all 0.5s ease;opacity:1;transform:translateY(0);'; }, i * 100);
-  });
+// Final positions: evenly distributed, vertically centered in stage
+function getFinalPos(i) {
+  const lw = Math.min(window.innerWidth * 0.13, 200);
+  const totalPhraseW = lw * phrase.length;
+  const sx = (window.innerWidth - totalPhraseW) / 2;
+  return { x: sx + i * lw, y: 0 };
+}
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.about-image, .about-content').forEach(el => {
-    el.style.cssText = 'opacity:0;transform:translateY(30px);transition:all 0.6s ease;';
-    observer.observe(el);
-  });
-
-  let current = 0;
-  let timer;
-  const slides = document.querySelectorAll('.parallax-slide');
-  const dots = document.querySelectorAll('.slide-dot');
-
-  function showSlide(n) {
-    slides.forEach((s, i) => s.classList.toggle('active', i === n));
-    dots.forEach((d, i) => d.classList.toggle('active', i === n));
+// ScrollTrigger: scatter → assemble as you scroll down
+const scrollTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: '#scrollZone',
+    start: 'top top',
+    end: 'bottom bottom',
+    pin: '#scrollSticky',
+    scrub: 1.5,
   }
+});
 
-  function next() { current = (current + 1) % slides.length; showSlide(current); }
-  function startTimer() { timer = setInterval(next, 6000); }
-  function stopTimer() { clearInterval(timer); }
+// Phase 1 (0–30% scroll): letters appear scattered
+scrollTl.to(letterEls, {
+  opacity: 1,
+  duration: 0.2,
+  stagger: { each: 0.03, from: 'random' },
+  ease: 'none'
+}, 0);
 
-  window.goToSlide = function(n) { current = n; showSlide(n); stopTimer(); startTimer(); };
-  window.scrollToSection = function(sel) { const el = document.querySelector(sel); if (el) el.scrollIntoView({ behavior: 'smooth' }); };
+// Phase 2 (30–70%): letters zoom in but still chaotic
+scrollTl.to(letterEls, {
+  scale: 1,
+  duration: 0.4,
+  stagger: { each: 0.04, from: 'random' }
+}, 0.2);
 
-  showSlide(0);
-  startTimer();
+// Phase 3 (40–100%): letters assemble into word
+letterEls.forEach((el, i) => {
+  const fp = getFinalPos(i);
+  scrollTl.to(el, {
+    x: fp.x,
+    y: fp.y,
+    rotation: 0,
+    scale: 1,
+    duration: 0.6,
+    ease: 'expo.out'
+  }, 0.35 + i * 0.04);
+});
 
-  const proj = document.querySelector('#projects');
-  if (proj) { proj.addEventListener('mouseenter', stopTimer); proj.addEventListener('mouseleave', startTimer); }
+// Show label + desc when assembled
+scrollTl.to('#assembleLabel', { opacity: 1, y: 0, duration: 0.2 }, 0.9);
+scrollTl.to('#assembleDesc',  { opacity: 1, y: 0, duration: 0.2 }, 0.95);
 
+// ──────────────────────────────────────────────
+// FEATURES — letter-by-letter on scroll
+// ──────────────────────────────────────────────
 
-  let ctabCurrent = 0;
-  window.ctabSwitch = function(idx) {
-    if (idx === ctabCurrent) return;
-    ctabCurrent = idx;
-    document.querySelectorAll('.ctab-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
-    document.getElementById('ctabInk').classList.toggle('right', idx === 1);
-    document.getElementById('ctabTrack').classList.toggle('to-right', idx === 1);
-  };
+function splitAndAnimate(headingId, bodyId) {
+  const heading = document.getElementById(headingId);
+  const body    = document.getElementById(bodyId);
 
-  const form = document.getElementById('contactForm');
-  const successEl = document.getElementById('ctabSuccess');
-  const submitBtn = document.getElementById('ctabSubmitBtn');
+  // Split heading into letters
+  const originalHTML = heading.innerHTML;
+  const lines = originalHTML.split('<br>');
+  heading.innerHTML = '';
 
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation:ctabSpin .7s linear infinite"><path d="M21 12a9 9 0 1 1-9-9"/></svg> Enviando…`;
-    submitBtn.style.opacity = '.75';
+  lines.forEach((line, li) => {
+    if (li > 0) heading.appendChild(document.createElement('br'));
+    [...line].forEach(ch => {
+      const s = document.createElement('span');
+      s.style.display = 'inline-block';
+      s.style.opacity = '0';
+      s.style.transform = 'translateY(30px)';
+      s.textContent = ch;
+      heading.appendChild(s);
+    });
+  });
 
-    const data = { name: form.name.value, email: form.email.value, message: form.message.value };
+  const letters = heading.querySelectorAll('span');
 
-    try {
-      const res = await fetch('https://formspree.io/f/mdalpbwq', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data)
+  ScrollTrigger.create({
+    trigger: heading,
+    start: 'top 80%',
+    onEnter: () => {
+      gsap.to(heading, { opacity: 1, duration: 0 });
+      gsap.to(letters, {
+        opacity: 1, y: 0,
+        duration: 0.5,
+        stagger: { each: 0.04, from: 'start' },
+        ease: 'back.out(1.8)'
       });
-      if (res.ok) {
-        form.style.display = 'none';
-        successEl.classList.add('visible');
-      } else { throw new Error(); }
-    } catch {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Tentar novamente`;
-      submitBtn.style.opacity = '1';
-      alert('Ocorreu um erro. Tente novamente mais tarde.');
+      gsap.to(body, {
+        opacity: 1, y: 0, duration: 0.8, delay: 0.4, ease: 'power3.out'
+      });
     }
   });
+}
 
+splitAndAnimate('ft1', 'fb1');
+splitAndAnimate('ft2', 'fb2');
+splitAndAnimate('ft3', 'fb3');
+
+// ──────────────────────────────────────────────
+// WHY SECTION
+// ──────────────────────────────────────────────
+
+ScrollTrigger.create({
+  trigger: '#whyHeading',
+  start: 'top 75%',
+  onEnter: () => {
+    gsap.to('#whyHeading .line-inner', {
+      y: '0%', duration: 0.9, stagger: 0.1, ease: 'power4.out'
+    });
+  }
+});
+
+['wi1','wi2','wi3'].forEach((id, i) => {
+  ScrollTrigger.create({
+    trigger: `#${id}`,
+    start: 'top 85%',
+    onEnter: () => {
+      gsap.to(`#${id}`, {
+        opacity: 1, y: 0, duration: 0.7, delay: i * 0.1, ease: 'power3.out'
+      });
+    }
+  });
+});
+
+// Refresh on resize
+window.addEventListener('resize', () => {
+  scatterLetters();
+  ScrollTrigger.refresh();
 });
 </script>
 </body>

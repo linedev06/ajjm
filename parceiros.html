@@ -32,46 +32,58 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
 ::-webkit-scrollbar-track{background:var(--dark)}
 ::-webkit-scrollbar-thumb{background:hsl(348,83%,47%,.5);border-radius:3px}
 
-/* ── PROGRESS ─────────────────────────── */
 #prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--red),var(--blue));z-index:10000;transform-origin:left;transform:scaleX(0)}
 
-/* ══════════════════════════════════════
-   NAVBAR
-══════════════════════════════════════ */
-.nav{position:fixed;width:100%;z-index:1000;transition:all .4s cubic-bezier(.4,0,.2,1)}
-.nav:not(.s){background:transparent;padding:1rem 0}
-.nav.s{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.07);padding:.25rem 0}
+/* ── NAVBAR ── */
+.nav{position:fixed;width:100%;z-index:1000;transition:background .55s cubic-bezier(.4,0,.2,1),backdrop-filter .55s cubic-bezier(.4,0,.2,1),border-color .55s cubic-bezier(.4,0,.2,1),box-shadow .55s cubic-bezier(.4,0,.2,1),padding .4s cubic-bezier(.4,0,.2,1);padding:1rem 0;border-bottom:1px solid transparent;}
+.nav[data-theme="dark"]{background:transparent;backdrop-filter:none;border-color:transparent;box-shadow:none;padding:1rem 0;}
+.nav[data-theme="light"]{background:rgba(255,255,255,.96);backdrop-filter:blur(22px);border-color:rgba(0,0,0,.07);box-shadow:0 1px 0 rgba(0,0,0,.06),0 4px 20px rgba(0,0,0,.06);padding:.25rem 0;}
+.nav[data-theme="blue"]{background:hsl(209,53%,28%,.96);backdrop-filter:blur(22px);border-color:rgba(255,255,255,.08);box-shadow:0 1px 0 rgba(0,0,0,.18),0 6px 24px rgba(0,0,0,.22);padding:.25rem 0;}
+.nav[data-theme="dark"] .la,.nav[data-theme="dark"] .le{color:rgba(255,255,255,.92)}
+.nav[data-theme="dark"] .lh{color:var(--red)}
+.nav[data-theme="dark"] .ldot{opacity:0;transform:scale(0)}
+.nav[data-theme="light"] .la{color:var(--ink);font-size:1.35rem}
+.nav[data-theme="light"] .le{color:hsl(222,47%,30%);max-width:0;opacity:0;margin:0}
+.nav[data-theme="light"] .ls{width:0;opacity:0}
+.nav[data-theme="light"] .lh{color:var(--red)}
+.nav[data-theme="light"] .ldot{opacity:1;margin:0 3px 3px;transform:scale(1)}
+.nav[data-theme="blue"] .la,.nav[data-theme="blue"] .le{color:rgba(255,255,255,.9)}
+.nav[data-theme="blue"] .lh{color:hsl(0,85%,72%)}
+.nav[data-theme="blue"] .le{max-width:0;opacity:0;margin:0}
+.nav[data-theme="blue"] .ls{width:0;opacity:0}
+.nav[data-theme="blue"] .ldot{opacity:1;margin:0 3px 3px;transform:scale(1);background:hsl(0,85%,72%)}
+.nav[data-theme="dark"] .nav-link{color:rgba(255,255,255,.88)}
+.nav[data-theme="dark"] .nav-link:hover,.nav[data-theme="dark"] .nav-link.active{color:var(--red)}
+.nav[data-theme="light"] .nav-link{color:hsl(222,47%,25%)}
+.nav[data-theme="light"] .nav-link:hover,.nav[data-theme="light"] .nav-link.active{color:var(--red)}
+.nav[data-theme="blue"] .nav-link{color:rgba(255,255,255,.8)}
+.nav[data-theme="blue"] .nav-link:hover,.nav[data-theme="blue"] .nav-link.active{color:rgba(255,255,255,1)}
+.nav[data-theme="dark"] .mob-btn{color:rgba(255,255,255,.9)}
+.nav[data-theme="light"] .mob-btn{color:var(--ink)}
+.nav[data-theme="blue"] .mob-btn{color:rgba(255,255,255,.9)}
+.la,.le,.ls,.ldot{transition:color .45s,font-size .4s,max-width .55s cubic-bezier(.4,0,.2,1),opacity .45s cubic-bezier(.4,0,.2,1),margin .45s cubic-bezier(.4,0,.2,1),transform .4s,background .4s}
 .nav-inner{display:flex;justify-content:space-between;align-items:center;height:var(--nav-h);max-width:1280px;margin:0 auto;padding:0 2rem}
 .logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;transition:transform .3s}
 .logo:hover{transform:scale(1.03)}
 .logo-icon{width:2.5rem;height:2.5rem;border-radius:.5rem;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .logo-tw{overflow:hidden;display:flex;align-items:baseline}
-.la{font-weight:800;font-size:1.25rem;letter-spacing:.04em;white-space:nowrap;color:rgba(255,255,255,.95);transition:color .4s,font-size .4s}
-.le{display:inline-block;overflow:hidden;white-space:nowrap;font-weight:700;font-size:1.05rem;letter-spacing:-.01em;color:rgba(255,255,255,.85);transition:max-width .55s cubic-bezier(.4,0,.2,1),opacity .45s cubic-bezier(.4,0,.2,1),margin .45s cubic-bezier(.4,0,.2,1),color .4s}
-.nav:not(.s) .le{max-width:400px;opacity:1}
-.nav.s .le{max-width:0;opacity:0;margin:0}
-.ls{display:inline-block;overflow:hidden;transition:width .45s cubic-bezier(.4,0,.2,1),opacity .35s}
-.nav:not(.s) .ls{width:.35rem;opacity:1}
-.nav.s .ls{width:0;opacity:0}
-.nav.s .la{font-size:1.35rem;color:var(--ink)}
-.ldot{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--red);margin:0;transition:opacity .35s,transform .4s,margin .45s;transform-origin:center}
-.nav:not(.s) .ldot{opacity:0;transform:scale(0)}
-.nav.s .ldot{opacity:1;margin:0 3px 3px;transform:scale(1)}
+.la{font-weight:800;font-size:1.25rem;letter-spacing:.04em;white-space:nowrap}
+.le{display:inline-block;overflow:hidden;white-space:nowrap;font-weight:700;font-size:1.05rem;letter-spacing:-.01em}
+.ls{display:inline-block;overflow:hidden}
+.ldot{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--red);transform-origin:center}
 .lh{color:var(--red)}
-@media(max-width:767px){.la{font-size:.78rem!important}.le{font-size:.78rem!important}.nav.s .la{font-size:.95rem!important}.logo-icon{width:2rem;height:2rem}.logo{gap:.35rem}}
+@media(max-width:767px){.la{font-size:.78rem!important}.le{font-size:.78rem!important}.logo-icon{width:2rem;height:2rem}.logo{gap:.35rem}}
 .nav-links{display:none;align-items:center;gap:2rem}
 @media(min-width:768px){.nav-links{display:flex}}
-.nav-link{font-size:.875rem;font-weight:600;text-decoration:none;color:rgba(255,255,255,.88);transition:color .3s;position:relative}
+.nav-link{font-size:.875rem;font-weight:600;text-decoration:none;transition:color .3s;position:relative}
 .nav-link::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s}
-.nav-link:hover,.nav-link.active{color:var(--red)}
 .nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}
-.nav.s .nav-link{color:hsl(222,47%,25%)}
-.nav.s .nav-link:hover,.nav.s .nav-link.active{color:var(--red)}
 .btn{padding:.75rem 1.5rem;border-radius:9999px;font-weight:700;transition:all .3s;border:none;display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;font-family:inherit;font-size:.875rem;cursor:pointer}
 .btn-r{background:var(--red);color:white;box-shadow:0 8px 20px hsl(348,83%,47%,.3)}
 .btn-r:hover{background:hsl(348,83%,40%);transform:translateY(-2px);box-shadow:0 16px 30px hsl(348,83%,47%,.4)}
-.mob-btn{display:block;padding:.5rem;background:none;border:none;color:rgba(255,255,255,.9);cursor:pointer}
-.nav.s .mob-btn{color:var(--ink)}
+.btn-o{border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);color:var(--white);backdrop-filter:blur(8px)}
+.btn-o:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
+.mob-btn{display:block;padding:.5rem;background:none;border:none;transition:color .4s;cursor:pointer}
 @media(min-width:768px){.mob-btn{display:none}}
 .mob-menu{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.07);overflow:hidden;max-height:0;opacity:0;transition:all .3s}
 .mob-menu.open{max-height:500px;opacity:1}
@@ -79,14 +91,12 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
 .mob-link{display:block;padding:.75rem 1rem;color:hsl(222,47%,30%);font-weight:500;text-decoration:none;border-radius:.5rem;transition:all .3s}
 .mob-link:hover,.mob-link.active{background:hsl(348,83%,47%,.08);color:var(--red)}
 
-/* ══════════════════════════════════════
-   HERO
-══════════════════════════════════════ */
+/* ── HERO ── */
 #hero{height:100vh;min-height:700px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--dark)}
 .h-bg{position:absolute;inset:-8%;background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=2000');background-position:center;background-size:cover;will-change:transform}
 .h-ov{position:absolute;inset:0;background:hsl(209,53%,18%,.86);mix-blend-mode:multiply}
 .h-gr{position:absolute;inset:0;background:linear-gradient(to top,hsl(209,53%,10%) 0%,transparent 55%)}
-.h-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:88px 88px;pointer-events:none;will-change:transform,opacity}
+.h-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:88px 88px;pointer-events:none;}
 .h-ring{position:absolute;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:1}
 .h-ring-1{width:480px;height:480px;border:1px solid rgba(255,255,255,.05)}
 .h-ring-2{width:820px;height:820px;border:1px solid rgba(220,38,38,.05)}
@@ -106,109 +116,158 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
 .h-h1 .hl{overflow:hidden;display:block}
 .h-h1 .hl span{display:block;transform:translateY(110%);will-change:transform}
 .h-h1 .hl.serif{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:.38em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.58);letter-spacing:.04em}
-.h-desc{font-size:clamp(.88rem,1.7vw,1.1rem);color:rgba(255,255,255,.48);margin:2rem auto 0;max-width:44rem;line-height:1.9;opacity:0;transform:translateY(22px);will-change:transform,opacity}
-.h-btns{display:flex;flex-direction:column;gap:1rem;justify-content:center;margin-top:2.5rem;opacity:0;transform:translateY(22px);will-change:transform,opacity}
+.h-desc{font-size:clamp(.88rem,1.7vw,1.1rem);color:rgba(255,255,255,.48);margin:2rem auto 0;max-width:44rem;line-height:1.9;opacity:0;transform:translateY(22px);}
+.h-btns{display:flex;flex-direction:column;gap:1rem;justify-content:center;margin-top:2.5rem;opacity:0;transform:translateY(22px);}
 @media(min-width:620px){.h-btns{flex-direction:row}}
-.btn-o{border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);color:var(--white);backdrop-filter:blur(8px)}
-.btn-o:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
 .scue{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.65rem;z-index:10;opacity:0}
 .scue span{font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.28)}
 .scue-track{width:1px;height:58px;background:rgba(255,255,255,.1);position:relative;overflow:hidden}
 .scue-fill{position:absolute;top:-100%;left:0;width:100%;height:100%;background:linear-gradient(to bottom,var(--red),transparent)}
 
 /* ══════════════════════════════════════
-   PINNED PARTNERS GRID  (400vh)
+   PARTNERS GRID — REDESIGN REVEAL
 ══════════════════════════════════════ */
 #pin-partners{height:400vh;position:relative;scroll-margin-top:4.5rem}
 .pt-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--white);display:flex;align-items:center;padding-top:80px;padding-bottom:80px}
+
 .pt-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(12rem,26vw,24rem);color:transparent;-webkit-text-stroke:1px rgba(0,0,0,.04);right:-4%;bottom:-10%;pointer-events:none;user-select:none;white-space:nowrap;opacity:0;letter-spacing:.03em}
-.pt-inner{max-width:1280px;margin:0 auto;padding:0 2.5rem;width:100%}
 
-/* header */
-.pt-head{margin-bottom:2rem}
-.pt-head-sub{font-size:.62rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:.4rem;transform:translateY(28px);opacity:0}
-.pt-head-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4.5rem);color:var(--ink);letter-spacing:.01em;line-height:.92;transform:translateY(60px);opacity:0}
-.pt-head-line{height:2px;width:0;background:linear-gradient(90deg,var(--red),var(--blue));border-radius:9999px;margin-top:.6rem;opacity:0}
+.pt-inner{max-width:1280px;margin:0 auto;padding:0 5vw;width:100%;display:grid;grid-template-columns:1fr 1.6fr;gap:5rem;align-items:start;}
+@media(max-width:960px){.pt-inner{grid-template-columns:1fr;gap:2rem;padding:0 2rem}}
 
-/* filter bar */
-.pt-filter{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;transform:translateY(30px);opacity:0}
-.filter-btn{padding:.4rem 1.1rem;border-radius:9999px;font-size:.72rem;font-weight:700;border:1.5px solid rgba(0,0,0,.1);background:transparent;color:var(--muted);cursor:pointer;transition:all .25s;font-family:'Montserrat',sans-serif;letter-spacing:.04em}
+/* Left col */
+.pt-left{padding-top:1.5rem}
+.pt-head-sub{font-size:.62rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:1.1rem;transform:translateY(28px);opacity:0}
+.pt-headline{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(2.6rem,4.5vw,3.8rem);color:var(--ink);line-height:1.08;margin-bottom:1.2rem;opacity:0;transform:translateY(30px);}
+.pt-headline strong{font-weight:600;font-style:normal;font-family:'Bebas Neue',sans-serif;font-size:1.15em;color:var(--blue);display:block;letter-spacing:.03em;}
+.pt-subdesc{font-size:.82rem;color:var(--muted);line-height:1.9;max-width:260px;opacity:0;transform:translateY(18px);}
+.pt-index-line{margin-top:1.8rem;height:1px;background:linear-gradient(90deg,var(--red),transparent);width:0;opacity:0;}
+
+.pt-filter{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem;opacity:0;transform:translateY(16px);}
+.filter-btn{padding:.38rem 1rem;border-radius:9999px;font-size:.68rem;font-weight:700;border:1.5px solid rgba(0,0,0,.1);background:transparent;color:var(--muted);cursor:pointer;transition:all .25s;font-family:'Montserrat',sans-serif;letter-spacing:.04em}
 .filter-btn:hover{border-color:var(--blue);color:var(--blue)}
 .filter-btn.active{background:var(--navy-dk);border-color:var(--navy-dk);color:white}
 
-/* grid */
-.pt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-@media(max-width:900px){.pt-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.pt-grid{grid-template-columns:1fr}}
+/* Right col — reveal grid */
+.pt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+@media(max-width:640px){.pt-grid{grid-template-columns:repeat(2,1fr)}}
 
 .pt-card{
-  position:relative;background:white;border:1.5px solid rgba(0,0,0,.07);border-radius:1rem;
-  padding:2rem 1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);min-height:150px;overflow:hidden;gap:.75rem;
-  transform:translateY(80px);opacity:0;will-change:transform,opacity;
+  position:relative;padding:1.75rem 1.2rem;
+  border:1px solid rgba(0,0,0,.07);
+  overflow:hidden;cursor:pointer;
+  opacity:0;transform:translateY(40px);
+  transition:background .4s,border-color .4s;
+  min-height:140px;
+  display:flex;flex-direction:column;justify-content:flex-end;
 }
-.pt-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--blue));transform:scaleX(0);transform-origin:left;transition:transform .3s}
-.pt-card:hover{border-color:hsl(209,53%,36%,.35);box-shadow:0 16px 40px -8px rgba(42,100,150,.18);transform:translateY(-4px)!important}
-.pt-card:hover::after{transform:scaleX(1)}
-.pt-card-mono{width:64px;height:64px;border-radius:.875rem;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;font-weight:400;color:white;transition:all .3s;flex-shrink:0}
-.pt-card:hover .pt-card-mono{transform:scale(1.06)}
-.pt-card-label{font-size:.75rem;font-weight:700;color:var(--blue);text-align:center;letter-spacing:.04em}
-.pt-card-dot{position:absolute;top:.75rem;right:.75rem;width:6px;height:6px;border-radius:50%}
+.pt-card:hover{background:rgba(0,0,0,.02);border-color:rgba(0,0,0,.14);z-index:2;}
+
+/* Reveal panel */
+.pt-reveal{
+  position:absolute;inset:0;
+  transform:translateY(101%);
+  transition:transform .52s cubic-bezier(.76,0,.24,1);
+  display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:flex-end;
+  padding:1.2rem;
+}
+.pt-card:hover .pt-reveal{transform:translateY(0)}
+.pt-reveal-arrow{position:absolute;top:.9rem;right:.9rem;width:1.5rem;height:1.5rem;border:1px solid rgba(255,255,255,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.pt-reveal-arrow svg{width:.65rem;height:.65rem;stroke:white;transform:rotate(-45deg)}
+.pt-reveal-name{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.06em;color:white;margin-bottom:.3rem;line-height:1;}
+.pt-reveal-cat{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.5rem;}
+.pt-reveal-desc{font-size:.7rem;color:rgba(255,255,255,.75);line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+
+/* Resting state */
+.pt-card-num{font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:.22em;color:rgba(0,0,0,.18);display:block;margin-bottom:.55rem;transition:opacity .3s;}
+.pt-card-initial{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;line-height:1;letter-spacing:.04em;transition:opacity .3s,color .3s;}
+.pt-card-name{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;transition:opacity .3s;margin-top:.3rem;}
+.pt-card-tag{display:inline-block;margin-top:.4rem;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:opacity .3s;}
+.pt-card:hover .pt-card-num,
+.pt-card:hover .pt-card-initial,
+.pt-card:hover .pt-card-name,
+.pt-card:hover .pt-card-tag{opacity:0}
 
 /* ══════════════════════════════════════
-   PINNED WHY  (300vh)
+   WHY — REDESIGN EDITORIAL LIST
 ══════════════════════════════════════ */
 #pin-why{height:300vh;position:relative;scroll-margin-top:4.5rem}
-.wy-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--navy-dk);display:flex;align-items:center;padding-top:80px;padding-bottom:80px}
+.wy-sticky{
+  position:sticky;top:0;height:100vh;overflow:hidden;
+  background:var(--navy-dk);display:flex;align-items:center;
+  padding-top:40px;padding-bottom:40px;
+}
 .wy-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(10rem,24vw,22rem);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.04);right:-4%;bottom:-10%;pointer-events:none;user-select:none;white-space:nowrap;opacity:0;letter-spacing:.03em}
-.wy-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:88px 88px;pointer-events:none}
-.wy-inner{max-width:1280px;margin:0 auto;padding:0 2.5rem;width:100%}
-.wy-head{margin-bottom:2.5rem}
-.wy-head-sub{font-size:.62rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:.4rem;transform:translateY(28px);opacity:0}
-.wy-head-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4.5rem);color:white;letter-spacing:.01em;line-height:.92;transform:translateY(60px);opacity:0}
-.wy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
-@media(max-width:900px){.wy-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.wy-grid{grid-template-columns:1fr}}
-.wy-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.75rem;transition:all .3s;position:relative;overflow:hidden;transform:translateY(70px);opacity:0;will-change:transform,opacity}
-.wy-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.06),transparent);opacity:0;transition:opacity .3s}
-.wy-card:hover{background:rgba(255,255,255,.1);transform:translateY(-4px)!important}
-.wy-card:hover::before{opacity:1}
-.wy-icon{width:2.75rem;height:2.75rem;background:hsl(348,83%,47%,.15);border-radius:.625rem;display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;transition:background .3s}
-.wy-card:hover .wy-icon{background:var(--red)}
-.wy-icon svg{color:hsl(348,83%,70%);transition:color .3s}
-.wy-card:hover .wy-icon svg{color:white}
-.wy-title{font-size:.9rem;font-weight:700;color:white;margin-bottom:.4rem}
-.wy-desc{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.75;font-weight:400}
+.wy-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:88px 88px;pointer-events:none}
 
-/* ══════════════════════════════════════
-   PINNED BECOME  (300vh)
-══════════════════════════════════════ */
+.wy-inner{max-width:1280px;margin:0 auto;padding:0 5vw;width:100%;display:grid;grid-template-columns:1fr 1.8fr;gap:5rem;align-items:start;}
+@media(max-width:900px){.wy-inner{grid-template-columns:1fr;gap:2rem;padding:0 2rem}}
+
+/* Left */
+.wy-left{padding-top:2rem}
+.wy-head-sub{font-size:.62rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:1.1rem;opacity:0;transform:translateY(18px);}
+.wy-headline{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(2.6rem,4.5vw,3.8rem);color:white;line-height:1.08;margin-bottom:1.2rem;opacity:0;transform:translateY(30px);}
+.wy-headline strong{font-weight:600;font-style:normal;font-family:'Bebas Neue',sans-serif;font-size:1.15em;color:hsl(348,83%,70%);display:block;letter-spacing:.03em;}
+.wy-subdesc{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.9;max-width:260px;opacity:0;transform:translateY(18px);}
+.wy-index-line{margin-top:1.8rem;height:1px;background:linear-gradient(90deg,hsl(348,83%,47%),transparent);width:0;opacity:0;}
+
+/* Right — editorial list */
+.wy-list{display:flex;flex-direction:column;position:relative}
+.wy-list::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:rgba(255,255,255,.1);}
+
+.wy-item{
+  display:grid;grid-template-columns:3.5rem 1fr auto;
+  align-items:center;gap:1.5rem;
+  padding:1.3rem 0 1.3rem 1.5rem;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  position:relative;overflow:hidden;cursor:default;
+  opacity:0;transform:translateX(60px);
+  transition:background .4s;
+}
+.wy-item::before{content:'';position:absolute;left:0;top:0;width:2px;height:100%;background:hsl(348,83%,60%);transform:scaleY(0);transform-origin:bottom;transition:transform .45s cubic-bezier(.4,0,.2,1);}
+.wy-item:hover::before{transform:scaleY(1)}
+.wy-item:hover{background:rgba(255,255,255,.04)}
+
+.wy-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.3rem,2.2vw,1.85rem);color:rgba(255,255,255,.15);letter-spacing:.04em;transition:color .35s;line-height:1;}
+.wy-item:hover .wy-num{color:hsl(348,83%,60%)}
+
+.wy-body{min-width:0}
+.wy-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(1rem,1.8vw,1.4rem);letter-spacing:.04em;color:white;line-height:1;margin-bottom:.28rem;transition:color .3s;}
+.wy-item:hover .wy-name{color:hsl(0,85%,75%)}
+.wy-detail{font-size:.72rem;color:rgba(255,255,255,.38);line-height:1.6;max-height:0;overflow:hidden;opacity:0;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .4s;}
+.wy-item:hover .wy-detail{max-height:5rem;opacity:1}
+
+.wy-arrow{width:1.8rem;height:1.8rem;border-radius:50%;border:1.5px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .35s;}
+.wy-arrow svg{width:.8rem;height:.8rem;stroke:rgba(255,255,255,.3);transition:stroke .3s,transform .35s}
+.wy-item:hover .wy-arrow{background:hsl(348,83%,47%);border-color:hsl(348,83%,47%);transform:rotate(-45deg) scale(1.08);}
+.wy-item:hover .wy-arrow svg{stroke:white}
+
+/* ── BECOME ── */
 #pin-become{height:300vh;position:relative;scroll-margin-top:4.5rem}
 .bc-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--light);display:flex;align-items:center;padding-top:80px;padding-bottom:80px}
 .bc-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(10rem,22vw,20rem);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.7);right:-4%;top:50%;transform:translateY(-50%);pointer-events:none;user-select:none;white-space:nowrap;opacity:0;letter-spacing:.03em}
 .bc-inner{max-width:1280px;margin:0 auto;padding:0 2.5rem;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
 @media(max-width:900px){.bc-inner{grid-template-columns:1fr;gap:2.5rem;padding:0 1.5rem}}
-.bc-info{transform:translateX(-90px);opacity:0;will-change:transform,opacity}
+.bc-info{transform:translateX(-90px);opacity:0;}
 .bc-head-sub{font-size:.62rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:.4rem}
 .bc-head-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);color:var(--ink);letter-spacing:.01em;line-height:.92;margin-bottom:1rem;overflow:hidden}
 .bc-head-h2 .cl{overflow:hidden;display:block}
-.bc-head-h2 .cl span{display:block;transform:translateY(110%);will-change:transform}
+.bc-head-h2 .cl span{display:block;transform:translateY(110%);}
 .bc-desc{color:var(--muted);font-size:.9rem;line-height:1.8;margin-bottom:1.5rem;max-width:34rem}
 .bc-steps{display:flex;flex-direction:column}
-.bc-step{display:flex;align-items:flex-start;gap:1.1rem;padding-bottom:1.75rem;position:relative;transform:translateX(-40px);opacity:0;will-change:transform,opacity}
+.bc-step{display:flex;align-items:flex-start;gap:1.1rem;padding-bottom:1.75rem;position:relative;transform:translateX(-40px);opacity:0;}
 .bc-step:not(:last-child)::after{content:'';position:absolute;left:1.1rem;top:2.5rem;width:1px;height:calc(100% - .5rem);background:linear-gradient(to bottom,hsl(209,53%,36%,.25),transparent)}
 .bc-step-num{width:2.25rem;height:2.25rem;background:var(--navy-dk);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.72rem;font-weight:800;color:white;z-index:1;position:relative}
 .bc-step-title{font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:.2rem;margin-top:.35rem}
 .bc-step-desc{font-size:.8rem;color:var(--muted);line-height:1.7}
-
-/* contact card */
-.bc-card{background:var(--navy-dk);border-radius:1.5rem;padding:2.75rem;position:relative;overflow:hidden;box-shadow:0 32px 64px -12px hsl(209,53%,22%,.4);transform:translateX(90px);opacity:0;will-change:transform,opacity}
+.bc-card{background:var(--navy-dk);border-radius:1.5rem;padding:2.75rem;position:relative;overflow:hidden;box-shadow:0 32px 64px -12px hsl(209,53%,22%,.4);transform:translateX(90px);opacity:0;}
 .bc-card::before{content:'';position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04)}
 .bc-card::after{content:'';position:absolute;bottom:-60px;left:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.03)}
 .bc-card-ey{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.9rem;display:flex;align-items:center;gap:.4rem}
 .bc-card-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3vw,2.75rem);color:white;line-height:.92;margin-bottom:.9rem;letter-spacing:.01em}
 .bc-card-title span{color:hsl(348,83%,70%)}
-.bc-card-desc{font-size:.83rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:1.75rem;font-weight:400}
+.bc-card-desc{font-size:.83rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:1.75rem;}
 .bc-card-pill{display:flex;align-items:center;gap:.75rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:.75rem;padding:.9rem 1.1rem;margin-bottom:1.5rem;position:relative;z-index:1}
 .bc-card-pill-icon{width:2.25rem;height:2.25rem;background:var(--red);border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .bc-card-pill-label{font-size:.65rem;color:rgba(255,255,255,.4);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.1rem}
@@ -220,9 +279,7 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
 .bc-card-btn:hover{background:var(--red);color:white;transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.2)}
 .bc-card-note{margin-top:1.1rem;display:flex;align-items:center;gap:.4rem;font-size:.68rem;color:rgba(255,255,255,.3);position:relative;z-index:1;justify-content:center}
 
-/* ══════════════════════════════════════
-   FOOTER
-══════════════════════════════════════ */
+/* ── FOOTER ── */
 .ft{position:relative;overflow:hidden;font-family:'Montserrat',sans-serif}
 .ft-bg{position:absolute;inset:-8%;background-image:url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=2000');background-position:center;background-size:cover;will-change:transform}
 .ft-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(6,10,20,.97),rgba(18,28,48,.93))}
@@ -251,16 +308,14 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
 .ft-links a:hover{color:var(--red)}
 .ft-accent{position:absolute;bottom:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:.4}
 
-/* ══════════════════════════════════════
-   MODAL
-══════════════════════════════════════ */
+/* ── MODAL ── */
 .modal-bd{position:fixed;inset:0;z-index:2000;background:rgba(8,13,24,.75);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .35s}
 .modal-bd.visible{opacity:1;pointer-events:all}
 .modal{background:white;border-radius:1.25rem;width:100%;max-width:520px;overflow:hidden;box-shadow:0 40px 80px -20px rgba(0,0,0,.4);transform:translateY(30px) scale(.96);transition:transform .45s cubic-bezier(.34,1.28,.64,1)}
 .modal-bd.visible .modal{transform:translateY(0) scale(1)}
 .modal-bar{height:5px;background:linear-gradient(90deg,var(--red),var(--blue))}
 .modal-head{padding:2rem 2rem 1.25rem;display:flex;align-items:flex-start;gap:1.25rem}
-.modal-mono{width:3.75rem;height:3.75rem;border-radius:.875rem;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;font-weight:400;color:white;flex-shrink:0}
+.modal-mono{width:3.75rem;height:3.75rem;border-radius:.875rem;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:white;flex-shrink:0}
 .modal-meta{flex:1;min-width:0}
 .modal-name{font-size:1.1rem;font-weight:800;color:var(--blue);margin-bottom:.3rem;letter-spacing:-.02em}
 .modal-cat{display:inline-flex;align-items:center;gap:.35rem;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.22rem .7rem;border-radius:9999px}
@@ -273,8 +328,6 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
 .modal-tag{font-size:.68rem;font-weight:600;padding:.25rem .7rem;border-radius:9999px;border:1.5px solid hsl(215,16%,90%);color:var(--muted)}
 .modal-cta{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:.9rem;background:var(--blue);color:white;border:none;border-radius:.625rem;font-family:'Montserrat',sans-serif;font-size:.875rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .25s;box-shadow:0 4px 14px hsl(209,53%,36%,.28)}
 .modal-cta:hover{background:var(--red);box-shadow:0 6px 20px hsl(348,83%,47%,.32);transform:translateY(-2px)}
-
-@media(max-width:580px){body{cursor:auto}}
 </style>
 </head>
 <body>
@@ -282,7 +335,7 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
 <div id="prog"></div>
 
 <!-- NAVBAR -->
-<nav class="nav" id="nav">
+<nav class="nav" id="nav" data-theme="dark">
   <div class="nav-inner">
     <a href="index.html" class="logo">
       <img src="logo6.jpg" alt="AJ" class="logo-icon" style="object-fit:contain;padding:0;background:transparent;width:2.5rem;height:2.5rem;">
@@ -324,7 +377,7 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
   </div>
 </nav>
 
-<!-- ═══════════ HERO ══════════════════════════════════════════ -->
+<!-- HERO -->
 <section id="hero">
   <div class="h-bg" id="hBg"></div>
   <div class="h-ov"></div><div class="h-gr"></div>
@@ -332,10 +385,8 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
   <div class="h-ring h-ring-1" id="hr1"></div>
   <div class="h-ring h-ring-2" id="hr2"></div>
   <div class="h-ring h-ring-3" id="hr3"></div>
-  <div class="h-acc h-acc-1"></div>
-  <div class="h-acc h-acc-2"></div>
-  <div class="h-acc h-acc-3"></div>
-  <div class="h-acc h-acc-4"></div>
+  <div class="h-acc h-acc-1"></div><div class="h-acc h-acc-2"></div>
+  <div class="h-acc h-acc-3"></div><div class="h-acc h-acc-4"></div>
   <div class="h-dot h-dot-1" id="hd1"></div>
   <div class="h-dot h-dot-2" id="hd2"></div>
   <div class="h-dot h-dot-3" id="hd3"></div>
@@ -361,73 +412,51 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
   </div>
 </section>
 
-<!-- ═══════════ PINNED PARTNERS GRID  (400vh) ══════════════ -->
+<!-- PARTNERS GRID -->
 <div id="pin-partners">
   <div class="pt-sticky">
     <div class="pt-bg-word" id="ptBgW">PARCEIROS</div>
     <div class="pt-inner">
-      <div class="pt-head">
+      <div class="pt-left">
         <span class="pt-head-sub" id="ptSub">Nossos Parceiros</span>
-        <div class="pt-head-h2" id="ptH2">INSTITUIÇÕES QUE<br>CONSTROEM A JUSTIÇA CONOSCO</div>
-        <div class="pt-head-line" id="ptLine"></div>
-      </div>
-      <div class="pt-filter" id="ptFilter">
-        <button class="filter-btn active" data-filter="all">Todos</button>
-        <button class="filter-btn" data-filter="juridico">Escritórios</button>
-        <button class="filter-btn" data-filter="educacao">Associações</button>
+        <h2 class="pt-headline" id="ptHead">
+          <strong>Instituições que</strong>
+          constroem a justiça conosco
+        </h2>
+        <p class="pt-subdesc" id="ptDesc">Escritórios e associações unidos pelo compromisso com o acesso à justiça e o impacto social.</p>
+        <div class="pt-index-line" id="ptIndexLine"></div>
+        <div class="pt-filter" id="ptFilter">
+          <button class="filter-btn active" data-filter="all">Todos</button>
+          <button class="filter-btn" data-filter="juridico">Escritórios</button>
+          <button class="filter-btn" data-filter="educacao">Associações</button>
+        </div>
       </div>
       <div class="pt-grid" id="ptGrid"></div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════ PINNED WHY  (300vh) ══════════════════════════ -->
+<!-- WHY — EDITORIAL LIST -->
 <div id="pin-why">
   <div class="wy-sticky">
     <div class="wy-bg-word" id="wyBgW">BENEFÍCIOS</div>
     <div class="wy-grid-bg"></div>
     <div class="wy-inner">
-      <div class="wy-head">
+      <div class="wy-left">
         <span class="wy-head-sub" id="wySub">Por que Ser Parceiro</span>
-        <div class="wy-head-h2" id="wyH2">BENEFÍCIOS DE FAZER<br>PARTE DA REDE</div>
+        <h2 class="wy-headline" id="wyHead">
+          <strong>Benefícios de</strong>
+          fazer parte da rede
+        </h2>
+        <p class="wy-subdesc" id="wyDesc">Associe-se a uma iniciativa com décadas de história e impacto social reconhecido.</p>
+        <div class="wy-index-line" id="wyIndexLine"></div>
       </div>
-      <div class="wy-grid">
-        <div class="wy-card" id="wyc0">
-          <div class="wy-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div class="wy-title">Credibilidade Institucional</div>
-          <div class="wy-desc">Associe-se a uma das mais tradicionais assistências judiciárias do Brasil, com décadas de atuação reconhecida.</div>
-        </div>
-        <div class="wy-card" id="wyc1">
-          <div class="wy-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-          <div class="wy-title">Visibilidade e Alcance</div>
-          <div class="wy-desc">Sua instituição ganha visibilidade perante a comunidade acadêmica, jurídica e a sociedade civil paulistana.</div>
-        </div>
-        <div class="wy-card" id="wyc2">
-          <div class="wy-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-          <div class="wy-title">Impacto Social Real</div>
-          <div class="wy-desc">Contribua diretamente para o acesso à justiça de populações vulneráveis e gere impacto social mensurável.</div>
-        </div>
-        <div class="wy-card" id="wyc3">
-          <div class="wy-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-          <div class="wy-title">Capacitação Conjunta</div>
-          <div class="wy-desc">Desenvolva ações conjuntas de formação, eventos e publicações de relevância acadêmica e jurídica.</div>
-        </div>
-        <div class="wy-card" id="wyc4">
-          <div class="wy-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-          <div class="wy-title">Acesso a Recursos</div>
-          <div class="wy-desc">Oportunidades de editais e projetos compartilhados com apoio institucional da Mackenzie.</div>
-        </div>
-        <div class="wy-card" id="wyc5">
-          <div class="wy-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          <div class="wy-title">Crescimento em Rede</div>
-          <div class="wy-desc">Faça parte de uma rede colaborativa com reuniões periódicas e projetos integrados de impacto.</div>
-        </div>
-      </div>
+      <div class="wy-list" id="wyList"></div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════ PINNED BECOME  (300vh) ════════════════════════ -->
+<!-- BECOME -->
 <div id="pin-become">
   <div class="bc-sticky">
     <div class="bc-bg-word" id="bcBgW">PARCERIA</div>
@@ -442,24 +471,15 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
         <div class="bc-steps">
           <div class="bc-step" id="bcs0">
             <div class="bc-step-num">01</div>
-            <div>
-              <div class="bc-step-title">Envie um e-mail de apresentação</div>
-              <div class="bc-step-desc">Conte quem é sua instituição, sua área de atuação e como imagina a parceria conosco.</div>
-            </div>
+            <div><div class="bc-step-title">Envie um e-mail de apresentação</div><div class="bc-step-desc">Conte quem é sua instituição, sua área de atuação e como imagina a parceria conosco.</div></div>
           </div>
           <div class="bc-step" id="bcs1">
             <div class="bc-step-num">02</div>
-            <div>
-              <div class="bc-step-title">Conversa de alinhamento</div>
-              <div class="bc-step-desc">Nossa coordenação entrará em contato para entender objetivos e verificar sinergia.</div>
-            </div>
+            <div><div class="bc-step-title">Conversa de alinhamento</div><div class="bc-step-desc">Nossa coordenação entrará em contato para entender objetivos e verificar sinergia.</div></div>
           </div>
           <div class="bc-step" id="bcs2">
             <div class="bc-step-num">03</div>
-            <div style="padding-bottom:0">
-              <div class="bc-step-title">Formalização da parceria</div>
-              <div class="bc-step-desc">Com os termos definidos, assinamos o convênio e iniciamos as ações conjuntas.</div>
-            </div>
+            <div style="padding-bottom:0"><div class="bc-step-title">Formalização da parceria</div><div class="bc-step-desc">Com os termos definidos, assinamos o convênio e iniciamos as ações conjuntas.</div></div>
           </div>
         </div>
       </div>
@@ -471,9 +491,7 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
         <div class="bc-card-title">Fale com nossa<br><span>coordenação</span></div>
         <div class="bc-card-desc">Respondemos propostas de parceria em até 3 dias úteis. Apresente sua instituição diretamente — sem intermediários.</div>
         <div class="bc-card-pill">
-          <div class="bc-card-pill-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
+          <div class="bc-card-pill-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
           <div style="flex:1;min-width:0">
             <div class="bc-card-pill-label">E-mail institucional</div>
             <div class="bc-card-pill-addr">parcerias@ajjoaomendes.com</div>
@@ -496,8 +514,8 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
   </div>
 </div>
 
-<!-- ═══════════ FOOTER ══════════════════════════════════════ -->
-<footer class="ft">
+<!-- FOOTER -->
+<footer class="ft" id="footer">
   <div class="ft-bg" id="ftBg"></div>
   <div class="ft-ov"></div>
   <div class="ft-inner">
@@ -572,37 +590,43 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-/* ── LENIS ───────────────────────────────── */
 const lenis = new Lenis({duration:1.18, easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add(t => lenis.raf(t*1000));
 gsap.ticker.lagSmoothing(0);
 
-/* ── PROGRESS ────────────────────────────── */
 gsap.to('#prog', {scaleX:1, ease:'none', scrollTrigger:{scrub:.35, start:'top top', end:'bottom bottom'}});
 
-/* ── NAVBAR ──────────────────────────────── */
+/* ── NAVBAR ── */
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('s', window.scrollY > 20));
+const sectionThemes = [
+  {id:'hero',         theme:'dark'},
+  {id:'pin-partners', theme:'light'},
+  {id:'pin-why',      theme:'blue'},
+  {id:'pin-become',   theme:'light'},
+  {id:'footer',       theme:'dark'},
+];
+let currentTheme = 'dark';
+function setNavTheme(t){if(t===currentTheme)return;currentTheme=t;nav.dataset.theme=t;}
+const visibleSections = new Map();
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{visibleSections.set(e.target.id,e.isIntersecting?e.intersectionRatio:0);});
+  let chosen='dark';
+  for(const{id,theme}of sectionThemes){if((visibleSections.get(id)||0)>0){chosen=theme;break;}}
+  setNavTheme(chosen);
+},{rootMargin:'-1px 0px -80% 0px',threshold:[0,0.01,0.5,1]});
+sectionThemes.forEach(({id})=>{const el=document.getElementById(id);if(el)observer.observe(el);});
 
-/* ── MOBILE MENU ─────────────────────────── */
-const mmBtn = document.getElementById('mmBtn'), mm = document.getElementById('mm');
-const mi = document.getElementById('mIcon'), ci = document.getElementById('cIcon');
-mmBtn.addEventListener('click', () => {
-  const o = mm.classList.toggle('open');
-  mi.style.display = o ? 'none' : 'block';
-  ci.style.display = o ? 'block' : 'none';
-});
-document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', () => {
-  mm.classList.remove('open'); mi.style.display='block'; ci.style.display='none';
-}));
+/* ── MOBILE MENU ── */
+const mmBtn=document.getElementById('mmBtn'),mm=document.getElementById('mm');
+const mi=document.getElementById('mIcon'),ci=document.getElementById('cIcon');
+mmBtn.addEventListener('click',()=>{const o=mm.classList.toggle('open');mi.style.display=o?'none':'block';ci.style.display=o?'block':'none';});
+document.querySelectorAll('.mob-link').forEach(l=>l.addEventListener('click',()=>{mm.classList.remove('open');mi.style.display='block';ci.style.display='none';}));
+document.getElementById('ftYear').textContent=new Date().getFullYear();
 
-/* ── FOOTER YEAR ─────────────────────────── */
-document.getElementById('ftYear').textContent = new Date().getFullYear();
-
-/* ════════════════════════════════════
-   PARTNERS DATA
-════════════════════════════════════ */
+/* ══════════════════════
+   DATA
+══════════════════════ */
 const PARTNERS = [
   {id:1,name:"Fachini Advogados",short:"Fachini",initial:"F",category:"juridico",categoryLabel:"Escritório",url:"https://share.google/kN6fCpsTWNOVVnIs6",desc:"Escritório parceiro da AJ João Mendes comprometido com a excelência na prestação de serviços jurídicos. Apoia a assistência judiciária promovendo acesso à justiça e suporte técnico especializado à nossa equipe e aos clientes atendidos.",tags:["Advocacia","Parceiro","São Paulo"]},
   {id:2,name:"Alumni Direito Mackenzie",short:"Alumni",initial:"A",category:"educacao",categoryLabel:"Associação",url:"https://www.instagram.com/alumnidireitomackenzie",desc:"Associação de ex-alunos do curso de Direito da Universidade Presbiteriana Mackenzie. Conecta egressos, estudantes e profissionais do mercado jurídico, fortalecendo a rede de apoio, mentoria e desenvolvimento profissional da AJ João Mendes.",tags:["Ex-alunos","Mackenzie","Direito","Rede"]},
@@ -613,190 +637,182 @@ const PARTNERS = [
 ];
 
 const CAT = {
-  juridico:{bg:"rgba(192,19,47,.1)",color:"hsl(348,83%,47%)",dot:"hsl(348,83%,47%)"},
-  educacao:{bg:"rgba(42,100,150,.1)",color:"hsl(209,53%,36%)",dot:"hsl(209,53%,36%)"}
+  juridico:{bg:"hsl(348,83%,47%)",light:"rgba(192,19,47,.1)",color:"hsl(348,83%,47%)"},
+  educacao:{bg:"hsl(209,53%,36%)",light:"rgba(42,100,150,.1)",color:"hsl(209,53%,36%)"}
 };
 
 let activeFilter = 'all';
 
-function renderPartners() {
+function renderPartners(){
   const grid = document.getElementById('ptGrid');
-  grid.innerHTML = '';
-  const list = activeFilter === 'all' ? PARTNERS : PARTNERS.filter(p => p.category === activeFilter);
-  list.forEach((p, i) => {
+  grid.innerHTML='';
+  const list = activeFilter==='all' ? PARTNERS : PARTNERS.filter(p=>p.category===activeFilter);
+  list.forEach((p,i)=>{
     const c = CAT[p.category];
     const card = document.createElement('div');
-    card.className = 'pt-card';
-    card.innerHTML = `
-      <div class="pt-card-dot" style="background:${c.dot}"></div>
-      <div class="pt-card-mono" style="background:${c.color}">${p.initial}</div>
-      <div class="pt-card-label">${p.short}</div>`;
-    card.addEventListener('click', () => openModal(p));
-    card.addEventListener('mousemove', e => {
-      const r = card.getBoundingClientRect(), cx = r.left+r.width/2, cy = r.top+r.height/2;
-      gsap.to(card, {rotationY:(e.clientX-cx)/(r.width/2)*6, rotationX:-(e.clientY-cy)/(r.height/2)*6, transformPerspective:800, duration:.4, ease:'power2.out'});
+    card.className='pt-card';
+    card.innerHTML=`
+      <div class="pt-card-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="pt-card-initial" style="color:${c.color}">${p.initial}</div>
+      <div class="pt-card-name" style="color:${c.color}">${p.short}</div>
+      <div class="pt-card-tag">${p.categoryLabel}</div>
+      <div class="pt-reveal" style="background:${c.bg}">
+        <div class="pt-reveal-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </div>
+        <div class="pt-reveal-name">${p.short}</div>
+        <div class="pt-reveal-cat">${p.categoryLabel}</div>
+        <div class="pt-reveal-desc">${p.desc}</div>
+      </div>`;
+    card.addEventListener('click',()=>openModal(p));
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+      gsap.to(card,{rotationY:(e.clientX-cx)/(r.width/2)*5,rotationX:-(e.clientY-cy)/(r.height/2)*5,transformPerspective:800,duration:.4,ease:'power2.out'});
     });
-    card.addEventListener('mouseleave', () => gsap.to(card, {rotationY:0, rotationX:0, duration:.55, ease:'elastic.out(1,.65)'}));
+    card.addEventListener('mouseleave',()=>gsap.to(card,{rotationY:0,rotationX:0,duration:.55,ease:'elastic.out(1,.65)'}));
     grid.appendChild(card);
-    // Staggered entrance animation
-    gsap.fromTo(card, {y:60, opacity:0}, {y:0, opacity:1, duration:.7, delay:.04+i*.08, ease:'power3.out'});
+    gsap.fromTo(card,{y:50,opacity:0},{y:0,opacity:1,duration:.65,delay:.04+i*.07,ease:'power3.out'});
   });
 }
 
-document.getElementById('ptFilter').addEventListener('click', e => {
-  const btn = e.target.closest('.filter-btn');
-  if(!btn) return;
-  activeFilter = btn.dataset.filter;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+document.getElementById('ptFilter').addEventListener('click',e=>{
+  const btn=e.target.closest('.filter-btn');if(!btn)return;
+  activeFilter=btn.dataset.filter;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   renderPartners();
 });
 
-/* ════════════════════════════════════
-   MODAL
-════════════════════════════════════ */
-function openModal(p) {
-  const c = CAT[p.category];
-  document.getElementById('modalMono').textContent = p.initial;
-  document.getElementById('modalMono').style.background = c.color;
-  document.getElementById('modalName').textContent = p.name;
-  const cat = document.getElementById('modalCat');
-  cat.textContent = p.categoryLabel; cat.style.background = c.bg; cat.style.color = c.color;
-  document.getElementById('modalDesc').textContent = p.desc;
-  document.getElementById('modalTags').innerHTML = p.tags.map(t=>`<span class="modal-tag">${t}</span>`).join('');
-  document.getElementById('modalCta').href = p.url;
+/* ── MODAL ── */
+function openModal(p){
+  const c=CAT[p.category];
+  document.getElementById('modalMono').textContent=p.initial;
+  document.getElementById('modalMono').style.background=c.bg;
+  document.getElementById('modalName').textContent=p.name;
+  const cat=document.getElementById('modalCat');
+  cat.textContent=p.categoryLabel;cat.style.background=c.light;cat.style.color=c.color;
+  document.getElementById('modalDesc').textContent=p.desc;
+  document.getElementById('modalTags').innerHTML=p.tags.map(t=>`<span class="modal-tag">${t}</span>`).join('');
+  document.getElementById('modalCta').href=p.url;
   document.getElementById('modal').classList.add('visible');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
+window.closeModal=function(){document.getElementById('modal').classList.remove('visible');document.body.style.overflow='';};
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
-window.closeModal = function() {
-  document.getElementById('modal').classList.remove('visible');
-  document.body.style.overflow = '';
-};
+/* ══════════════════════
+   WHY BENEFITS DATA
+══════════════════════ */
+const BENEFITS = [
+  {n:"Credibilidade Institucional", d:"Associe-se a uma das mais tradicionais assistências judiciárias do Brasil, com décadas de atuação reconhecida."},
+  {n:"Visibilidade e Alcance",      d:"Sua instituição ganha visibilidade perante a comunidade acadêmica, jurídica e a sociedade civil paulistana."},
+  {n:"Impacto Social Real",         d:"Contribua diretamente para o acesso à justiça de populações vulneráveis e gere impacto social mensurável."},
+  {n:"Capacitação Conjunta",        d:"Desenvolva ações conjuntas de formação, eventos e publicações de relevância acadêmica e jurídica."},
+  {n:"Acesso a Recursos",           d:"Oportunidades de editais e projetos compartilhados com apoio institucional da Mackenzie."},
+  {n:"Crescimento em Rede",         d:"Faça parte de uma rede colaborativa com reuniões periódicas e projetos integrados de impacto."},
+];
 
-document.getElementById('modal').addEventListener('click', e => { if(e.target===document.getElementById('modal')) closeModal(); });
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+const wyList=document.getElementById('wyList');
+BENEFITS.forEach((b,i)=>{
+  const num=String(i+1).padStart(2,'0');
+  const el=document.createElement('div');
+  el.className='wy-item';
+  el.id='wyi'+i;
+  el.innerHTML=`
+    <span class="wy-num">${num}</span>
+    <div class="wy-body">
+      <div class="wy-name">${b.n}</div>
+      <div class="wy-detail">${b.d}</div>
+    </div>
+    <div class="wy-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </div>`;
+  wyList.appendChild(el);
+});
 
-/* ════════════════════════════════════
-   HERO ENTRANCE
-════════════════════════════════════ */
-const heroIn = gsap.timeline({defaults:{ease:'power4.out'}});
+/* ══════════════════════
+   HERO
+══════════════════════ */
+const heroIn=gsap.timeline({defaults:{ease:'power4.out'}});
 heroIn
-  .to('#hEye',              {opacity:1, y:0, duration:.9}, 0)
-  .to('.h-acc-1,.h-acc-2',  {scaleY:1, duration:1.4, stagger:.18}, '.1')
-  .to('.h-acc-3,.h-acc-4',  {scaleX:1, duration:1.2, stagger:.12}, '.3')
-  .to('#hH1 .hl span',      {y:0, duration:1.5, stagger:.12, ease:'expo.out'}, '.2')
-  .to('#hDesc',              {opacity:1, y:0, duration:1.1}, '.75')
-  .to('#hBtns',              {opacity:1, y:0, duration:.95}, '.9')
-  .to('#scue',               {opacity:1, duration:.9}, '1.1')
-  .to('#hr1', {rotation:360, duration:55, ease:'none', repeat:-1}, 0)
-  .to('#hr2', {rotation:-360, duration:80, ease:'none', repeat:-1}, 0)
-  .to('#hr3', {rotation:180, duration:110, ease:'none', repeat:-1}, 0)
-  .to(['#hd1','#hd2','#hd3'], {opacity:1, scale:1, duration:.6, stagger:.2, ease:'back.out(2)'}, '.6');
+  .to('#hEye',{opacity:1,y:0,duration:.9},0)
+  .to('.h-acc-1,.h-acc-2',{scaleY:1,duration:1.4,stagger:.18},'.1')
+  .to('.h-acc-3,.h-acc-4',{scaleX:1,duration:1.2,stagger:.12},'.3')
+  .to('#hH1 .hl span',{y:0,duration:1.5,stagger:.12,ease:'expo.out'},'.2')
+  .to('#hDesc',{opacity:1,y:0,duration:1.1},'.75')
+  .to('#hBtns',{opacity:1,y:0,duration:.95},'.9')
+  .to('#scue',{opacity:1,duration:.9},'1.1')
+  .to('#hr1',{rotation:360,duration:55,ease:'none',repeat:-1},0)
+  .to('#hr2',{rotation:-360,duration:80,ease:'none',repeat:-1},0)
+  .to('#hr3',{rotation:180,duration:110,ease:'none',repeat:-1},0)
+  .to(['#hd1','#hd2','#hd3'],{opacity:1,scale:1,duration:.6,stagger:.2,ease:'back.out(2)'},'.6');
+gsap.to('#scfill',{yPercent:200,duration:1.5,ease:'power1.inOut',repeat:-1,repeatDelay:.25});
+gsap.timeline({scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:1.7}})
+  .to('#hEye',{y:-140,opacity:0,ease:'power2.in'},0)
+  .to('#hH1 .hl:nth-child(1) span',{y:'-140%',x:'-10vw',ease:'power2.in'},0)
+  .to('#hH1 .hl:nth-child(2) span',{y:'-90%',x:'12vw',ease:'power2.in'},0)
+  .to('#hH1 .hl:nth-child(3) span',{y:'-60%',x:'-7vw',ease:'power2.in'},0)
+  .to('#hDesc',{y:-80,opacity:0},0).to('#hBtns',{y:-55,opacity:0},0)
+  .to('#hr1',{scale:2.8,opacity:0},0).to('#hr2',{scale:.25,opacity:0},0).to('#hr3',{scale:1.9,opacity:0},0)
+  .to('.h-acc-1,.h-acc-2',{scaleY:0},0).to('.h-acc-3,.h-acc-4',{scaleX:0},0)
+  .to('#hGrid',{scale:1.35,opacity:0},0).to('#hBg',{yPercent:32},0).to('#scue',{opacity:0,y:40},0)
+  .to('#hd1',{x:'-20vw',opacity:0},0).to('#hd2',{x:'18vw',opacity:0},0).to('#hd3',{y:'-15vh',opacity:0},0);
 
-gsap.to('#scfill', {yPercent:200, duration:1.5, ease:'power1.inOut', repeat:-1, repeatDelay:.25});
-
-/* HERO SCRUB */
-gsap.timeline({scrollTrigger:{trigger:'#hero', start:'top top', end:'bottom top', scrub:1.7}})
-  .to('#hEye',  {y:-140, opacity:0, ease:'power2.in'}, 0)
-  .to('#hH1 .hl:nth-child(1) span', {y:'-140%', x:'-10vw', ease:'power2.in'}, 0)
-  .to('#hH1 .hl:nth-child(2) span', {y:'-90%',  x:'12vw',  ease:'power2.in'}, 0)
-  .to('#hH1 .hl:nth-child(3) span', {y:'-60%',  x:'-7vw',  ease:'power2.in'}, 0)
-  .to('#hDesc', {y:-80, opacity:0, ease:'power2.in'}, 0)
-  .to('#hBtns', {y:-55, opacity:0, ease:'power2.in'}, 0)
-  .to('#hr1', {scale:2.8, opacity:0}, 0)
-  .to('#hr2', {scale:.25, opacity:0}, 0)
-  .to('#hr3', {scale:1.9, opacity:0}, 0)
-  .to('.h-acc-1,.h-acc-2', {scaleY:0}, 0)
-  .to('.h-acc-3,.h-acc-4', {scaleX:0}, 0)
-  .to('#hGrid', {scale:1.35, opacity:0}, 0)
-  .to('#hBg',   {yPercent:32}, 0)
-  .to('#scue',  {opacity:0, y:40}, 0)
-  .to('#hd1', {x:'-20vw', opacity:0}, 0)
-  .to('#hd2', {x:'18vw', opacity:0}, 0)
-  .to('#hd3', {y:'-15vh', opacity:0}, 0);
-
-/* ════════════════════════════════════
-   PINNED PARTNERS GRID
-════════════════════════════════════ */
-const ptTl = gsap.timeline({
-  scrollTrigger:{trigger:'#pin-partners', start:'top top', end:'bottom bottom', scrub:1.2, pin:'.pt-sticky', anticipatePin:1}
-});
+/* ── PARTNERS PIN ── */
+const ptTl=gsap.timeline({scrollTrigger:{trigger:'#pin-partners',start:'top top',end:'bottom bottom',scrub:1.2,pin:'.pt-sticky',anticipatePin:1}});
 ptTl
-  .to('#ptBgW',  {opacity:1, x:-50, ease:'none'}, 0)
-  .to('#ptSub',  {y:0, opacity:1, ease:'power2.out'}, .04)
-  .to('#ptH2',   {y:0, opacity:1, ease:'expo.out'}, .1)
-  .to('#ptLine', {width:'120px', opacity:1, ease:'power3.out'}, .17)
-  .to('#ptFilter',{y:0, opacity:1, ease:'power3.out'}, .24)
-  .to('#ptBgW',  {x:-100, ease:'none'}, .8);
+  .to('#ptBgW',{opacity:1,x:-50,ease:'none'},0)
+  .to('#ptSub',{y:0,opacity:1,ease:'power2.out'},.04)
+  .to('#ptHead',{opacity:1,y:0,ease:'expo.out'},.1)
+  .to('#ptDesc',{opacity:1,y:0,ease:'power2.out'},.18)
+  .to('#ptIndexLine',{width:'80px',opacity:.4,ease:'power3.out'},.24)
+  .to('#ptFilter',{opacity:1,y:0,ease:'power3.out'},.3)
+  .to('#ptBgW',{x:-100,ease:'none'},.85);
 
-// Render partners on enter
-ScrollTrigger.create({
-  trigger:'#pin-partners', start:'top 85%', once:true,
-  onEnter: renderPartners
-});
+ScrollTrigger.create({trigger:'#pin-partners',start:'top 85%',once:true,onEnter:renderPartners});
 
-/* ════════════════════════════════════
-   PINNED WHY
-════════════════════════════════════ */
-const wyTl = gsap.timeline({
-  scrollTrigger:{trigger:'#pin-why', start:'top top', end:'bottom bottom', scrub:1.2, pin:'.wy-sticky', anticipatePin:1}
-});
+/* ── WHY PIN ── */
+const wyTl=gsap.timeline({scrollTrigger:{trigger:'#pin-why',start:'top top',end:'bottom bottom',scrub:1.2,pin:'.wy-sticky',anticipatePin:1}});
 wyTl
-  .to('#wyBgW', {opacity:1, y:-30, ease:'none'}, 0)
-  .to('#wySub', {y:0, opacity:1, ease:'power2.out'}, .04)
-  .to('#wyH2',  {y:0, opacity:1, ease:'expo.out'}, .1)
-  .to('#wyc0',  {y:0, opacity:1, ease:'power3.out'}, .18)
-  .to('#wyc1',  {y:0, opacity:1, ease:'power3.out'}, .26)
-  .to('#wyc2',  {y:0, opacity:1, ease:'power3.out'}, .34)
-  .to('#wyc3',  {y:0, opacity:1, ease:'power3.out'}, .42)
-  .to('#wyc4',  {y:0, opacity:1, ease:'power3.out'}, .50)
-  .to('#wyc5',  {y:0, opacity:1, ease:'power3.out'}, .58)
-  .to('#wyBgW', {y:-70, ease:'none'}, .7);
+  .to('#wyBgW',{opacity:1,y:-30,ease:'none'},0)
+  .to('#wySub',{opacity:1,y:0,ease:'power2.out'},.04)
+  .to('#wyHead',{opacity:1,y:0,ease:'expo.out'},.1)
+  .to('#wyDesc',{opacity:1,y:0,ease:'power2.out'},.18)
+  .to('#wyIndexLine',{width:'80px',opacity:.4,ease:'power3.out'},.24);
+BENEFITS.forEach((_,i)=>{wyTl.to('#wyi'+i,{opacity:1,x:0,ease:'power3.out'},.3+i*.07);});
+wyTl.to('#wyBgW',{y:-70,ease:'none'},.88);
 
-/* ════════════════════════════════════
-   PINNED BECOME
-════════════════════════════════════ */
-const bcTl = gsap.timeline({
-  scrollTrigger:{trigger:'#pin-become', start:'top top', end:'bottom bottom', scrub:1.3, pin:'.bc-sticky', anticipatePin:1}
-});
+/* ── BECOME PIN ── */
+const bcTl=gsap.timeline({scrollTrigger:{trigger:'#pin-become',start:'top top',end:'bottom bottom',scrub:1.3,pin:'.bc-sticky',anticipatePin:1}});
 bcTl
-  .to('#bcBgW',  {opacity:1, y:-40, ease:'none'}, 0)
-  .to('#bcInfo', {x:0, opacity:1, ease:'power3.out'}, .05)
-  .to('.bc-head-h2 .cl:nth-child(1) span', {y:0, ease:'expo.out'}, .12)
-  .to('.bc-head-h2 .cl:nth-child(2) span', {y:0, ease:'expo.out'}, .22)
-  .to('#bcs0',   {x:0, opacity:1, ease:'power3.out'}, .32)
-  .to('#bcs1',   {x:0, opacity:1, ease:'power3.out'}, .42)
-  .to('#bcs2',   {x:0, opacity:1, ease:'power3.out'}, .52)
-  .to('#bcCard', {x:0, opacity:1, ease:'power3.out'}, .1)
-  .to('#bcBgW',  {y:-90, ease:'none'}, .75);
+  .to('#bcBgW',{opacity:1,y:-40,ease:'none'},0)
+  .to('#bcInfo',{x:0,opacity:1,ease:'power3.out'},.05)
+  .to('.bc-head-h2 .cl:nth-child(1) span',{y:0,ease:'expo.out'},.12)
+  .to('.bc-head-h2 .cl:nth-child(2) span',{y:0,ease:'expo.out'},.22)
+  .to('#bcs0',{x:0,opacity:1,ease:'power3.out'},.32)
+  .to('#bcs1',{x:0,opacity:1,ease:'power3.out'},.42)
+  .to('#bcs2',{x:0,opacity:1,ease:'power3.out'},.52)
+  .to('#bcCard',{x:0,opacity:1,ease:'power3.out'},.1)
+  .to('#bcBgW',{y:-90,ease:'none'},.75);
 
-/* ════════════════════════════════════
-   FOOTER
-════════════════════════════════════ */
-gsap.to('#ftBg', {
-  yPercent:20, ease:'none',
-  scrollTrigger:{trigger:'.ft', start:'top bottom', end:'bottom bottom', scrub:true}
-});
-gsap.from(['#ftBrand','#ftCol1','#ftCol2'], {
-  y:55, opacity:0, duration:1, stagger:.15, ease:'power3.out',
-  scrollTrigger:{trigger:'.ft', start:'top 85%', toggleActions:'play none none none'}
-});
+/* ── FOOTER ── */
+gsap.to('#ftBg',{yPercent:20,ease:'none',scrollTrigger:{trigger:'.ft',start:'top bottom',end:'bottom bottom',scrub:true}});
+gsap.from(['#ftBrand','#ftCol1','#ftCol2'],{y:55,opacity:0,duration:1,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'.ft',start:'top 85%',toggleActions:'play none none none'}});
 
-/* ════════════════════════════════════
-   COPY EMAIL
-════════════════════════════════════ */
-window.copyEmail = function() {
-  navigator.clipboard.writeText('parcerias@ajjoaomendes.com').then(() => {
-    const btn = document.getElementById('copyBtn');
-    const label = document.getElementById('copyLabel');
-    const icon = document.getElementById('copyIcon');
-    btn.classList.add('ok'); label.textContent = 'Copiado!';
-    icon.innerHTML = '<path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
-    setTimeout(() => {
-      btn.classList.remove('ok'); label.textContent = 'Copiar';
-      icon.innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>';
-    }, 2200);
+/* ── COPY EMAIL ── */
+window.copyEmail=function(){
+  navigator.clipboard.writeText('parcerias@ajjoaomendes.com').then(()=>{
+    const btn=document.getElementById('copyBtn'),label=document.getElementById('copyLabel'),icon=document.getElementById('copyIcon');
+    btn.classList.add('ok');label.textContent='Copiado!';
+    icon.innerHTML='<path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+    setTimeout(()=>{btn.classList.remove('ok');label.textContent='Copiar';icon.innerHTML='<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>';},2200);
   });
 };
 </script>
