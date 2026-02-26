@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,7 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<title>Área de Doação — AJ João Mendes</title>
+<title>Parceiros — AJ João Mendes</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -27,74 +24,79 @@
   --light:hsl(210,40%,96%);
   --navy-dk:hsl(209,53%,22%);
   --nav-h:64px;
+  --black:#09090b;
+  --off:#f5f4f2;
 }
 html{overflow-x:hidden;scroll-behavior:auto}
 body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--dark)}
-::-webkit-scrollbar-thumb{background:hsl(348,83%,47%,.5);border-radius:3px}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:0}
+#prog{position:fixed;top:0;left:0;height:2px;background:var(--red);z-index:10000;transform-origin:left;transform:scaleX(0)}
 
-/* ── PROGRESS ─────────────────────────── */
-#prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--red),var(--blue));z-index:10000;transform-origin:left;transform:scaleX(0)}
-
-/* ══════════════════════════════════════
-   NAVBAR
-══════════════════════════════════════ */
-.nav{position:fixed;width:100%;z-index:1000;transition:all .4s cubic-bezier(.4,0,.2,1)}
-.nav:not(.s){background:transparent;backdrop-filter:none;border-bottom:1px solid transparent;padding:1rem 0;}
-.nav.s{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.07);padding:.25rem 0;}
+/* ── NAVBAR ── */
+.nav{position:fixed;width:100%;z-index:1000;transition:background .55s cubic-bezier(.4,0,.2,1),backdrop-filter .55s,border-color .55s,padding .4s;padding:1rem 0;border-bottom:1px solid transparent;}
+.nav[data-theme="dark"]{background:transparent;border-color:transparent;padding:1rem 0;}
+.nav[data-theme="light"]{background:rgba(255,255,255,.97);border-color:rgba(0,0,0,.08);padding:.25rem 0;}
+.nav[data-theme="blue"]{background:hsl(209,53%,28%,.97);border-color:rgba(255,255,255,.08);padding:.25rem 0;}
+.nav[data-theme="dark"] .la,.nav[data-theme="dark"] .le{color:rgba(255,255,255,.92)}
+.nav[data-theme="dark"] .lh{color:var(--red)}
+.nav[data-theme="dark"] .ldot{opacity:0;transform:scale(0)}
+.nav[data-theme="light"] .la{color:var(--ink)}
+.nav[data-theme="light"] .le{color:hsl(222,47%,30%);max-width:0;opacity:0;margin:0}
+.nav[data-theme="light"] .ls{width:0;opacity:0}
+.nav[data-theme="light"] .lh{color:var(--red)}
+.nav[data-theme="light"] .ldot{opacity:1;margin:0 3px 3px;transform:scale(1)}
+.nav[data-theme="blue"] .la,.nav[data-theme="blue"] .le{color:rgba(255,255,255,.9)}
+.nav[data-theme="blue"] .lh{color:hsl(0,85%,72%)}
+.nav[data-theme="blue"] .le{max-width:0;opacity:0;margin:0}
+.nav[data-theme="blue"] .ls{width:0;opacity:0}
+.nav[data-theme="blue"] .ldot{opacity:1;margin:0 3px 3px;transform:scale(1);background:hsl(0,85%,72%)}
+.nav[data-theme="dark"] .nav-link{color:rgba(255,255,255,.88)}
+.nav[data-theme="dark"] .nav-link:hover,.nav[data-theme="dark"] .nav-link.active{color:var(--red)}
+.nav[data-theme="light"] .nav-link{color:hsl(222,47%,25%)}
+.nav[data-theme="light"] .nav-link:hover,.nav[data-theme="light"] .nav-link.active{color:var(--red)}
+.nav[data-theme="blue"] .nav-link{color:rgba(255,255,255,.8)}
+.nav[data-theme="blue"] .nav-link:hover,.nav[data-theme="blue"] .nav-link.active{color:rgba(255,255,255,1)}
+.nav[data-theme="dark"] .mob-btn{color:rgba(255,255,255,.9)}
+.nav[data-theme="light"] .mob-btn{color:var(--ink)}
+.nav[data-theme="blue"] .mob-btn{color:rgba(255,255,255,.9)}
+.la,.le,.ls,.ldot{transition:color .45s,font-size .4s,max-width .55s cubic-bezier(.4,0,.2,1),opacity .45s cubic-bezier(.4,0,.2,1),margin .45s cubic-bezier(.4,0,.2,1),transform .4s,background .4s}
 .nav-inner{display:flex;justify-content:space-between;align-items:center;height:var(--nav-h);max-width:1280px;margin:0 auto;padding:0 2rem}
 .logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;transition:transform .3s}
 .logo:hover{transform:scale(1.03)}
-.logo-icon{width:2.5rem;height:2.5rem;background:var(--red);border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.logo-icon{width:2.5rem;height:2.5rem;border-radius:.5rem;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .logo-tw{overflow:hidden;display:flex;align-items:baseline}
-.la{font-weight:800;font-size:1.25rem;letter-spacing:.04em;white-space:nowrap;color:rgba(255,255,255,.95);transition:color .4s,font-size .4s}
-.le{display:inline-block;overflow:hidden;white-space:nowrap;font-weight:700;font-size:1.05rem;letter-spacing:-.01em;color:rgba(255,255,255,.85);transition:max-width .55s cubic-bezier(.4,0,.2,1),opacity .45s cubic-bezier(.4,0,.2,1),margin .45s cubic-bezier(.4,0,.2,1),color .4s}
-.nav:not(.s) .le{max-width:400px;opacity:1}
-.nav.s .le{max-width:0;opacity:0;margin:0}
-.ls{display:inline-block;overflow:hidden;transition:width .45s cubic-bezier(.4,0,.2,1),opacity .35s}
-.nav:not(.s) .ls{width:.35rem;opacity:1}
-.nav.s .ls{width:0;opacity:0}
-.nav.s .la{font-size:1.35rem;color:var(--ink)}
-.nav.s .le{color:hsl(222,47%,30%)}
-.ldot{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--red);margin:0;transition:opacity .35s,transform .4s,margin .45s;transform-origin:center}
-.nav:not(.s) .ldot{opacity:0;transform:scale(0)}
-.nav.s .ldot{opacity:1;margin:0 3px 3px;transform:scale(1)}
+.la{font-weight:800;font-size:1.25rem;letter-spacing:.04em;white-space:nowrap}
+.le{display:inline-block;overflow:hidden;white-space:nowrap;font-weight:700;font-size:1.05rem;letter-spacing:-.01em}
+.ls{display:inline-block;overflow:hidden}
+.ldot{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--red);transform-origin:center}
 .lh{color:var(--red)}
-@media(max-width:767px){.la{font-size:.78rem!important}.le{font-size:.78rem!important}.nav.s .la{font-size:.95rem!important}.logo-icon{width:2rem;height:2rem}.logo{gap:.35rem}}
+@media(max-width:767px){.la{font-size:.78rem!important}.le{font-size:.78rem!important}.logo-icon{width:2rem;height:2rem}.logo{gap:.35rem}}
 .nav-links{display:none;align-items:center;gap:2rem}
 @media(min-width:768px){.nav-links{display:flex}}
-.nav-link{font-size:.875rem;font-weight:600;text-decoration:none;color:rgba(255,255,255,.88);transition:color .3s;position:relative}
+.nav-link{font-size:.875rem;font-weight:600;text-decoration:none;transition:color .3s;position:relative}
 .nav-link::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s}
-.nav-link:hover{color:var(--red)}
-.nav-link:hover::after{transform:scaleX(1)}
-.nav.s .nav-link{color:hsl(222,47%,25%)}
-.nav.s .nav-link:hover{color:var(--red)}
+.nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}
 .btn{padding:.75rem 1.5rem;border-radius:9999px;font-weight:700;transition:all .3s;border:none;display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;font-family:inherit;font-size:.875rem;cursor:pointer}
-.btn-r{background:var(--red);color:white;box-shadow:0 8px 20px hsl(348,83%,47%,.3)}
-.btn-r:hover{background:hsl(348,83%,40%);transform:translateY(-2px);box-shadow:0 16px 30px hsl(348,83%,47%,.4)}
-.mob-btn{display:block;padding:.5rem;background:none;border:none;color:rgba(255,255,255,.9)}
-.nav.s .mob-btn{color:var(--ink)}
+.btn-r{background:var(--red);color:white;box-shadow:none}
+.btn-r:hover{background:hsl(348,83%,40%);transform:translateY(-2px)}
+.btn-o{border:1.5px solid rgba(255,255,255,.2);background:transparent;color:var(--white)}
+.btn-o:hover{background:rgba(255,255,255,.06);transform:translateY(-2px)}
+.mob-btn{display:block;padding:.5rem;background:none;border:none;transition:color .4s;cursor:pointer}
 @media(min-width:768px){.mob-btn{display:none}}
-.mob-menu{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.07);overflow:hidden;max-height:0;opacity:0;transition:all .3s}
+.mob-menu{background:rgba(255,255,255,.97);border-bottom:1px solid rgba(0,0,0,.07);overflow:hidden;max-height:0;opacity:0;transition:all .3s}
 .mob-menu.open{max-height:500px;opacity:1}
 .mob-menu-content{padding:1rem 2rem;display:flex;flex-direction:column;gap:.5rem}
 .mob-link{display:block;padding:.75rem 1rem;color:hsl(222,47%,30%);font-weight:500;text-decoration:none;border-radius:.5rem;transition:all .3s}
-.mob-link:hover{background:hsl(348,83%,47%,.08);color:var(--red)}
+.mob-link:hover,.mob-link.active{background:hsl(348,83%,47%,.08);color:var(--red)}
 
-/* ── SHARED ───────────────────────────── */
-.icon{width:1.5rem;height:1.5rem;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
-.sec-sub{color:var(--red);font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.2em;display:block;margin-bottom:.75rem}
-.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3.5vw,3rem);color:var(--blue);letter-spacing:.02em;line-height:1;margin-bottom:1rem}
-
-/* ══════════════════════════════════════
-   HERO
-══════════════════════════════════════ */
+/* ── HERO ── */
 #hero{height:100vh;min-height:700px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--dark)}
-.h-bg{position:absolute;inset:-8%;background-image:url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=2000');background-position:center;background-size:cover;will-change:transform}
-.h-ov{position:absolute;inset:0;background:hsl(209,53%,18%,.88);mix-blend-mode:multiply}
+.h-bg{position:absolute;inset:-8%;background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=2000');background-position:center;background-size:cover;will-change:transform}
+.h-ov{position:absolute;inset:0;background:hsl(209,53%,18%,.86);mix-blend-mode:multiply}
 .h-gr{position:absolute;inset:0;background:linear-gradient(to top,hsl(209,53%,10%) 0%,transparent 55%)}
-.h-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:88px 88px;pointer-events:none;will-change:transform,opacity}
+.h-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:88px 88px;pointer-events:none;}
 .h-ring{position:absolute;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:1}
 .h-ring-1{width:480px;height:480px;border:1px solid rgba(255,255,255,.05)}
 .h-ring-2{width:820px;height:820px;border:1px solid rgba(220,38,38,.05)}
@@ -109,176 +111,284 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
 .h-dot-2{width:4px;height:4px;top:62%;right:20%;opacity:0;background:hsl(209,70%,65%)}
 .h-dot-3{width:6px;height:6px;background:var(--red);top:44%;right:14%;opacity:0}
 .h-content{position:relative;z-index:10;text-align:center;padding:8rem 2rem 6rem;color:white;max-width:1060px}
-.h-eyebrow{display:inline-flex;align-items:center;gap:.75rem;padding:.3rem 1rem;border-radius:9999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-bottom:2rem;backdrop-filter:blur(8px);opacity:0;transform:translateY(22px)}
-.h-eyebrow::before{content:'';display:block;width:1.5rem;height:1px;background:var(--red)}
-.h-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,12rem);line-height:.87;letter-spacing:-.01em;color:white;overflow:hidden}
+.h-eyebrow{display:inline-flex;align-items:center;gap:.75rem;padding:.3rem 1rem;border-radius:9999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-bottom:2rem;opacity:0;transform:translateY(22px)}
+.h-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,13vw,13rem);line-height:.87;letter-spacing:-.01em;color:white;overflow:hidden}
 .h-h1 .hl{overflow:hidden;display:block}
 .h-h1 .hl span{display:block;transform:translateY(110%);will-change:transform}
 .h-h1 .hl.serif{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:.38em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.58);letter-spacing:.04em}
-.h-desc{font-size:clamp(.88rem,1.7vw,1.1rem);color:rgba(255,255,255,.48);margin:2rem auto 0;max-width:44rem;line-height:1.9;opacity:0;transform:translateY(22px);will-change:transform,opacity}
-.h-btns{display:flex;flex-direction:column;gap:1rem;justify-content:center;margin-top:2.5rem;opacity:0;transform:translateY(22px);will-change:transform,opacity}
+.h-desc{font-size:clamp(.88rem,1.7vw,1.1rem);color:rgba(255,255,255,.48);margin:2rem auto 0;max-width:44rem;line-height:1.9;opacity:0;transform:translateY(22px);}
+.h-btns{display:flex;flex-direction:column;gap:1rem;justify-content:center;margin-top:2.5rem;opacity:0;transform:translateY(22px);}
 @media(min-width:620px){.h-btns{flex-direction:row}}
-.btn-o{border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);color:var(--white);backdrop-filter:blur(8px)}
-.btn-o:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
-.h-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem 3rem;margin-top:4rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.08);opacity:0;transform:translateY(22px);will-change:transform,opacity;max-width:500px;margin-left:auto;margin-right:auto}
-@media(min-width:640px){.h-stats{display:flex;flex-wrap:wrap;gap:3rem;justify-content:center;max-width:none}}
-.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;font-weight:900;color:white;letter-spacing:-.04em;line-height:1;margin-bottom:.3rem}
-.stat-num span{color:var(--red)}
-.stat-label{font-size:.65rem;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase}
-.scue{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.65rem;z-index:10;opacity:0}
-.scue span{font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.28)}
-.scue-track{width:1px;height:58px;background:rgba(255,255,255,.1);position:relative;overflow:hidden}
-.scue-fill{position:absolute;top:-100%;left:0;width:100%;height:100%;background:linear-gradient(to bottom,var(--red),transparent)}
 
-/* ══════════════════════════════════════
-   PINNED TYPE SWITCHER  (200vh)
-══════════════════════════════════════ */
-#pin-type{height:200vh;position:relative}
-.ty-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--light);display:flex;align-items:center;justify-content:center;padding-top:80px;padding-bottom:80px}
-.ty-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(12rem,28vw,26rem);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.65);bottom:-8%;left:-2%;pointer-events:none;user-select:none;white-space:nowrap;opacity:0;letter-spacing:.02em}
-.ty-inner{max-width:1200px;width:100%;padding:0 2.5rem;text-align:center}
-.ty-sub{font-size:.62rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red);transform:translateY(28px);opacity:0;display:block;margin-bottom:.5rem}
-.ty-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4.5rem);color:var(--ink);letter-spacing:.01em;line-height:.92;transform:translateY(60px);opacity:0;margin-bottom:2.5rem}
-.ty-line{height:2px;width:0;background:linear-gradient(90deg,var(--red),var(--blue));border-radius:9999px;margin:0 auto .6rem;opacity:0}
-.ty-switcher{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;transform:translateY(50px);opacity:0}
-.ty-btn{display:flex;flex-direction:column;align-items:center;gap:.6rem;padding:2rem 2.5rem;border-radius:1rem;background:white;border:1.5px solid rgba(0,0,0,.07);font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:all .35s cubic-bezier(.4,0,.2,1);box-shadow:0 4px 16px rgba(0,0,0,.06);position:relative;overflow:hidden;min-width:160px;}
-.ty-btn::before{content:'';position:absolute;inset:0;background:var(--navy-dk);transform:scaleY(0);transform-origin:bottom;transition:transform .4s cubic-bezier(.4,0,.2,1);z-index:0}
-.ty-btn.active::before,.ty-btn:hover::before{transform:scaleY(1)}
-.ty-btn svg,.ty-btn span{position:relative;z-index:1;transition:color .4s}
-.ty-btn svg{width:2rem;height:2rem;stroke:var(--blue);transition:stroke .4s,transform .4s}
-.ty-btn span{font-size:.72rem}
-.ty-btn.active{border-color:var(--navy-dk)}
-.ty-btn.active svg,.ty-btn:hover svg{stroke:var(--red);transform:scale(1.1)}
-.ty-btn.active span,.ty-btn:hover span{color:white}
-.ty-btn-bar{position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--red),var(--blue));transform:scaleX(0);transform-origin:left;transition:transform .35s;z-index:2}
-.ty-btn.active .ty-btn-bar,.ty-btn:hover .ty-btn-bar{transform:scaleX(1)}
+/* ═══════════════════════
+   FASE 1 — OVERVIEW
+═══════════════════════ */
+#pt-overview{background:var(--white);position:relative;height:500vh}
+.pto-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--white)}
+.pto-topbar{position:absolute;top:0;left:0;right:0;height:72px;display:flex;align-items:flex-end;padding:0 5vw 1.1rem;border-bottom:1px solid rgba(0,0,0,.06);z-index:5}
+.pto-topbar-label{font-size:.52rem;font-weight:700;letter-spacing:.38em;text-transform:uppercase;color:rgba(0,0,0,.25)}
+.pto-topbar-count{margin-left:auto;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.18em;color:rgba(0,0,0,.15)}
+.pto-topbar-count span{color:var(--red)}
+.pto-headline{position:absolute;left:5vw;top:50%;transform:translateY(-50%);z-index:2;pointer-events:none}
+.pto-headline-main{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,10vw,9rem);line-height:.86;letter-spacing:.01em;color:var(--ink);display:block}
+.pto-headline-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(1rem,2.2vw,1.7rem);color:var(--muted);display:block;margin-top:.6rem;letter-spacing:.04em}
 
-/* ══════════════════════════════════════
-   PINNED DONATE SECTION  (350vh)
-══════════════════════════════════════ */
-#pin-donate{height:350vh;position:relative}
-.dn-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:#fafaf8;display:flex;align-items:center;padding-top:80px;padding-bottom:80px}
-.dn-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(10rem,22vw,20rem);color:transparent;-webkit-text-stroke:1px rgba(0,0,0,.04);right:-3%;bottom:-8%;pointer-events:none;user-select:none;white-space:nowrap;opacity:0;letter-spacing:.02em}
-.dn-inner{max-width:1280px;margin:0 auto;padding:0 2.5rem;width:100%}
-.dn-panels{position:relative;width:100%}
-.dn-panel{display:none;grid-template-columns:1fr 1.1fr;gap:4rem;align-items:center}
-.dn-panel.active{display:grid}
-@media(max-width:900px){.dn-panel.active{grid-template-columns:1fr;gap:2rem}}
-.dn-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:1rem}
-.dn-tag::before{content:'';width:1.5rem;height:1px;background:var(--red)}
-.dn-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:400;color:var(--ink);letter-spacing:.01em;line-height:.92;margin-bottom:1rem;opacity:0;transform:translateY(50px)}
-.dn-desc{font-size:.9rem;line-height:1.85;color:var(--muted);margin-bottom:1.5rem;max-width:34rem;opacity:0;transform:translateY(30px)}
-.impact-list{display:flex;flex-direction:column;gap:.65rem}
-.impact-item{display:flex;align-items:flex-start;gap:.75rem;padding:.9rem 1rem;border:1.5px solid rgba(0,0,0,.06);border-radius:.625rem;background:white;transition:all .25s;opacity:0;transform:translateX(-30px)}
-.impact-item:hover{border-color:hsl(348,83%,47%,.3);box-shadow:0 4px 16px rgba(0,0,0,.07)}
-.impact-dot{width:.45rem;height:.45rem;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:.35rem}
-.impact-text{font-size:.84rem;font-weight:600;color:var(--ink);line-height:1.4}
-.impact-sub{font-size:.73rem;color:var(--muted);margin-top:.2rem;font-weight:400;line-height:1.5}
-.ac-card{background:white;border-radius:1.25rem;overflow:hidden;box-shadow:0 20px 60px -10px rgba(0,0,0,.14);border:1px solid rgba(0,0,0,.05);opacity:0;transform:translateX(60px)}
-.ac-bar{height:4px;background:linear-gradient(90deg,var(--red),var(--blue))}
-.ac-inner{padding:2.25rem}
-.ac-header{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:1.5rem}
-.ac-icon{width:3rem;height:3rem;border-radius:.75rem;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.ac-title{font-size:1rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;line-height:1.3}
-.ac-sub{font-size:.75rem;color:var(--muted);margin-top:.2rem;font-weight:500}
-.amount-pills{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1.25rem}
-.pill{padding:.75rem .5rem;border-radius:.5rem;border:1.5px solid hsl(215,16%,90%);background:#f9fafb;text-align:center;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem;color:var(--muted);transition:all .25s}
-.pill:hover{border-color:var(--blue);color:var(--blue)}
-.pill.selected{border-color:var(--red);background:hsl(348,83%,47%,.06);color:var(--red)}
-.pill-other{grid-column:span 3;font-weight:500;font-size:.78rem}
-.field{margin-bottom:1rem}
-.field label{display:block;font-size:.73rem;font-weight:600;color:var(--ink);margin-bottom:.3rem;letter-spacing:.02em}
-.field input,.field textarea{width:100%;padding:.78rem 1rem;border:1.5px solid hsl(215,16%,90%);border-radius:.5rem;font-family:'Montserrat',sans-serif;font-size:.875rem;color:var(--ink);background:#f9fafb;transition:border-color .2s,box-shadow .2s,background .2s;outline:none;resize:vertical}
-.field input:focus,.field textarea:focus{border-color:var(--blue);background:white;box-shadow:0 0 0 3px hsl(209,53%,36%,.1)}
-.field input::placeholder,.field textarea::placeholder{color:#c0c8d4}
-.ch-divider{display:flex;align-items:center;gap:.75rem;margin:1.25rem 0 1rem;color:var(--muted);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-.ch-divider::before,.ch-divider::after{content:'';flex:1;height:1px;background:hsl(215,16%,90%)}
-.ch-btns{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
-@media(max-width:479px){.ch-btns{grid-template-columns:1fr}}
-.ch-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.9rem .75rem;border-radius:.625rem;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.03em;text-decoration:none;transition:all .28s;border:none;cursor:pointer;white-space:nowrap}
-.ch-btn--wa{background:#25D366;color:white}
-.ch-btn--wa:hover{background:#1ebe5c;transform:translateY(-2px)}
-.ch-btn--mail{background:var(--navy-dk);color:white}
-.ch-btn--mail:hover{background:var(--red);transform:translateY(-2px)}
-.ch-arr{margin-left:auto;opacity:.7;flex-shrink:0}
-.cis{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin-top:1.1rem;padding-top:1rem;border-top:1px solid hsl(215,16%,90%)}
-.cis-item{display:flex;align-items:center;gap:.4rem;font-size:.7rem;color:var(--muted);font-weight:500}
-.cis-item span{word-break:break-all}
-.mini-steps{display:flex;flex-direction:column;gap:0}
-.mini-step{display:flex;align-items:flex-start;gap:.9rem;padding:.9rem 0;border-bottom:1px solid hsl(215,16%,90%)}
-.mini-step:last-child{border-bottom:none}
-.mini-step-num{width:1.6rem;height:1.6rem;border-radius:50%;flex-shrink:0;background:var(--navy-dk);color:white;font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:.05rem}
-.mini-step-text{font-size:.82rem;color:var(--ink);line-height:1.6;font-weight:500}
-.profile-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem}
-.ptag{padding:.3rem .7rem;border-radius:9999px;background:#f3f4f6;border:1px solid hsl(215,16%,90%);font-size:.67rem;font-weight:600;color:var(--muted);letter-spacing:.02em}
-.response-badge{display:inline-flex;align-items:center;gap:.45rem;margin-top:1rem;padding:.6rem .9rem;background:hsl(209,53%,36%,.06);border:1px solid hsl(209,53%,36%,.15);border-radius:.5rem;font-size:.72rem;color:var(--blue);font-weight:500;flex-wrap:wrap}
-.response-badge strong{font-weight:700;color:var(--navy-dk)}
+/* ── Grade com hierarquia ──
+   3 colunas, col 1 mais larga.
+   Card 0 ocupa 2 linhas (destaque).
+   Cards 1-5 preenchem normalmente. */
+.pto-grid{
+  position:absolute;right:0;top:72px;bottom:0;
+  width:62vw;
+  display:grid;
+  grid-template-columns:1.9fr 1fr 1fr;
+  grid-template-rows:repeat(2,1fr);
+  gap:2px;
+  background:rgba(0,0,0,.04);
+  overflow:hidden;
+}
+@media(max-width:900px){.pto-grid{width:100%;top:auto;bottom:0;height:55vh;grid-template-columns:repeat(3,1fr)}}
 
-/* ══════════════════════════════════════
-   PINNED HOW  (250vh)
-══════════════════════════════════════ */
-#pin-how{height:250vh;position:relative}
-.hw-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--navy-dk);display:flex;align-items:center;padding-top:80px;padding-bottom:80px}
-.hw-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(12rem,28vw,26rem);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.04);bottom:-8%;right:-3%;pointer-events:none;user-select:none;white-space:nowrap;opacity:0;letter-spacing:.02em}
-.hw-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:88px 88px;pointer-events:none}
-.hw-inner{max-width:1280px;margin:0 auto;padding:0 2.5rem;width:100%}
-.hw-head{margin-bottom:3rem}
-.hw-head-sub{font-size:.62rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:.5rem;transform:translateY(28px);opacity:0}
-.hw-head-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4.5rem);color:white;letter-spacing:.01em;line-height:.92;transform:translateY(60px);opacity:0}
-.hw-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-@media(max-width:900px){.hw-steps{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:580px){.hw-steps{grid-template-columns:1fr}}
-.hw-step{padding:1.75rem 1.5rem;border-right:1px solid rgba(255,255,255,.07);position:relative;transform:translateY(70px);opacity:0;will-change:transform,opacity}
-.hw-step:last-child{border-right:none}
-@media(max-width:900px){.hw-step{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}}
-.hw-step-num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;font-weight:900;line-height:1;color:rgba(255,255,255,.07);letter-spacing:-.06em;margin-bottom:.75rem}
-.hw-step-icon{width:2.5rem;height:2.5rem;border:1px solid rgba(255,255,255,.15);border-radius:.5rem;display:flex;align-items:center;justify-content:center;margin-bottom:.9rem}
-.hw-step-title{font-size:.88rem;font-weight:700;color:white;margin-bottom:.45rem}
-.hw-step-desc{font-size:.78rem;line-height:1.75;color:rgba(255,255,255,.45);font-weight:400}
+.pto-card{position:relative;overflow:hidden;cursor:pointer;background:var(--white)}
 
-/* ══════════════════════════════════════
-   PINNED QUOTE STRIP  (150vh)  ← MUDANÇA
-══════════════════════════════════════ */
-#pin-quote{height:150vh;position:relative}
-.quote-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--red);display:flex;align-items:center}
-.quote-inner{max-width:1280px;margin:0 auto;padding:0 2.5rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;width:100%}
-@media(min-width:768px){.quote-inner{flex-direction:row;text-align:left;gap:3rem}}
-.quote-mark{font-family:'Cormorant Garamond',serif;font-size:clamp(7rem,14vw,13rem);line-height:.7;font-weight:600;color:rgba(255,255,255,.15);flex-shrink:0;font-style:italic;opacity:0;transform:translateX(-60px);will-change:transform,opacity}
-.quote-body{opacity:0;transform:translateY(40px);will-change:transform,opacity}
-.quote-text{font-size:clamp(1rem,2.5vw,1.75rem);font-weight:700;line-height:1.55;color:white;letter-spacing:-.02em;font-style:italic}
-.quote-source{font-size:.7rem;color:rgba(255,255,255,.6);margin-top:.75rem;letter-spacing:.14em;text-transform:uppercase;font-style:normal;font-weight:600}
+/* Primeiro card ocupa as 2 linhas — card de destaque */
+.pto-card:first-child{grid-row:1/3}
 
-/* ══════════════════════════════════════
-   PINNED FAQ  (300vh)
-══════════════════════════════════════ */
-#pin-faq{height:300vh;position:relative}
-.fq-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--light);display:flex;align-items:center;padding-top:80px;padding-bottom:80px}
-.fq-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(10rem,24vw,22rem);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.7);right:-3%;top:50%;transform:translateY(-50%);pointer-events:none;user-select:none;white-space:nowrap;opacity:0;letter-spacing:.02em}
-.fq-inner{max-width:1280px;margin:0 auto;padding:0 2.5rem;width:100%}
-.fq-head{margin-bottom:2.5rem}
-.fq-head-sub{font-size:.62rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:.5rem;transform:translateY(28px);opacity:0}
-.fq-head-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4rem);color:var(--ink);letter-spacing:.01em;line-height:.92;transform:translateY(60px);opacity:0}
-.fq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 4rem}
-@media(max-width:768px){.fq-grid{grid-template-columns:1fr}}
-.faq-item{border-top:1px solid hsl(215,16%,88%);padding:1.15rem 0;cursor:pointer;transform:translateY(40px);opacity:0;will-change:transform,opacity}
-.faq-item:last-child{border-bottom:1px solid hsl(215,16%,88%)}
-.faq-q{font-size:.875rem;font-weight:700;color:var(--ink);display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;line-height:1.5;transition:color .2s}
-.faq-q:hover{color:var(--red)}
-.faq-icon{flex-shrink:0;transition:transform .35s;margin-top:2px}
-.faq-item.open .faq-icon{transform:rotate(45deg)}
-.faq-a{font-size:.83rem;line-height:1.85;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1),padding .3s}
-.faq-item.open .faq-a{max-height:250px;padding-top:.85rem}
+/* Faixa de cor sutil por card para diferenciar sem imagem */
+.pto-card:nth-child(1){background:hsl(222,20%,98%)}
+.pto-card:nth-child(2){background:hsl(348,30%,98%)}
+.pto-card:nth-child(3){background:hsl(209,25%,97%)}
+.pto-card:nth-child(4){background:hsl(0,0%,99%)}
+.pto-card:nth-child(5){background:hsl(348,20%,98%)}
+.pto-card:nth-child(6){background:hsl(209,18%,97%)}
 
-/* ══════════════════════════════════════
-   FOOTER
-══════════════════════════════════════ */
+.pto-card-img{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.12);opacity:0;transition:transform .7s cubic-bezier(.4,0,.2,1);filter:grayscale(20%) contrast(1.02)}
+.pto-card:hover .pto-card-img{transform:scale(1.06)}
+.pto-card-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,.1) 60%,transparent 100%);opacity:0;transition:opacity .4s}
+.pto-card:hover .pto-card-ov{opacity:1}
+.pto-card-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem;z-index:2}
+
+/* Número: no card de destaque é maior e mais visível */
+.pto-card-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2rem,4vw,3.5rem);
+  line-height:1;letter-spacing:.04em;
+  color:rgba(0,0,0,.06);
+  position:absolute;top:.8rem;right:1rem;
+  transition:color .4s,opacity .4s;
+}
+.pto-card:first-child .pto-card-num{
+  font-size:clamp(5rem,10vw,9rem);
+  color:rgba(0,0,0,.04);
+  top:auto;bottom:1.2rem;right:1.2rem;
+  line-height:.9;
+}
+.pto-card:hover .pto-card-num{color:rgba(255,255,255,.2)}
+
+.pto-card-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(.95rem,1.6vw,1.4rem);letter-spacing:.04em;color:var(--ink);line-height:1.05;margin-bottom:.2rem;transition:color .3s;opacity:0;transform:translateY(6px)}
+/* Nome maior no card de destaque */
+.pto-card:first-child .pto-card-name{font-size:clamp(1.4rem,2.4vw,2.2rem)}
+.pto-card:hover .pto-card-name{color:white}
+
+.pto-card-cat{font-size:.5rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);transition:color .3s;opacity:0;transform:translateY(6px)}
+.pto-card:hover .pto-card-cat{color:rgba(255,255,255,.6)}
+
+/* Linha vermelha na base — mais espessa no card de destaque */
+.pto-card-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.pto-card:first-child .pto-card-line{height:3px}
+.pto-card:hover .pto-card-line{transform:scaleX(1)}
+
+/* Indicador "destaque" no primeiro card */
+.pto-card-badge{
+  display:none;
+  position:absolute;top:1rem;left:1rem;
+  font-size:.45rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--red);padding:.25rem .6rem;
+  border:1px solid rgba(var(--red),.3);
+  background:rgba(255,255,255,.9);
+  z-index:3;
+  opacity:0;
+  transform:translateY(-4px);
+  transition:opacity .3s,transform .3s;
+}
+.pto-card:first-child .pto-card-badge{display:block}
+.pto-card:first-child:hover .pto-card-badge{opacity:1;transform:translateY(0)}
+
+.pto-scroll-hint{position:absolute;bottom:2rem;left:5vw;display:flex;align-items:center;gap:.9rem;opacity:0;z-index:5}
+.pto-scroll-hint span{font-size:.5rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(0,0,0,.25)}
+.pto-sh-line{width:48px;height:1px;background:rgba(0,0,0,.12);position:relative;overflow:hidden}
+.pto-sh-fill{position:absolute;left:-100%;top:0;width:100%;height:100%;background:var(--red);animation:shf 1.8s ease-in-out infinite}
+@keyframes shf{0%{left:-100%}100%{left:200%}}
+
+/* ═══════════════════════════════════
+   FASE 2 — STICKY POR PARCEIRO
+   Com alternância de layout
+═══════════════════════════════════ */
+#pt-hscroll{background:var(--white);position:relative}
+.pth-block{height:280vh;position:relative}
+.pth-panel{
+  position:sticky;top:0;height:100vh;overflow:hidden;background:var(--white);
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid rgba(0,0,0,.055);
+}
+/* Painel invertido: imagens à esquerda, texto à direita */
+.pth-panel.reversed{grid-template-columns:1fr 1fr}
+@media(max-width:900px){.pth-panel{grid-template-columns:1fr}.pth-panel.reversed{grid-template-columns:1fr}}
+
+.pth-panel-prog{position:absolute;top:0;left:0;right:0;height:2px;background:rgba(0,0,0,.05);z-index:10}
+.pth-panel-prog-fill{height:100%;background:var(--red);width:0%;transform-origin:left}
+
+/* ── Coluna de texto ── */
+.pth-left{
+  padding:5.5rem 5vw 3.5rem 5vw;
+  display:flex;flex-direction:column;justify-content:space-between;
+  border-right:1px solid rgba(0,0,0,.055);
+  position:relative;overflow:hidden;
+  order:1; /* padrão */
+}
+/* No painel invertido, texto vai para a direita (order 2) */
+.pth-panel.reversed .pth-left{
+  order:2;
+  border-right:none;
+  border-left:1px solid rgba(0,0,0,.055);
+}
+
+.pth-left-bar{position:absolute;left:0;top:5.5rem;bottom:3.5rem;width:2px;background:var(--red);transform-origin:top;transform:scaleY(0)}
+/* No painel invertido, barra fica na direita */
+.pth-panel.reversed .pth-left-bar{left:auto;right:0}
+
+.pth-kicker{display:flex;align-items:center;gap:.7rem;font-size:.52rem;font-weight:700;letter-spacing:.36em;text-transform:uppercase;color:var(--red);margin-bottom:.7rem;opacity:0;transform:translateY(10px)}
+.pth-kicker-idx{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.1em;color:rgba(0,0,0,.15)}
+.pth-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,5.5vw,5.5rem);line-height:.86;letter-spacing:.01em;color:var(--ink);margin-bottom:1.8rem}
+.pth-name .nl{overflow:hidden;display:block}
+.pth-name .nl span{display:block;transform:translateY(105%)}
+.pth-hr{width:0;height:1px;background:rgba(0,0,0,.1);margin-bottom:1.5rem}
+.pth-desc{font-size:.875rem;color:var(--muted);line-height:1.9;max-width:30rem;opacity:0;transform:translateY(12px);margin-bottom:0}
+.pth-tags{display:flex;gap:.4rem;flex-wrap:wrap;opacity:0;transform:translateY(8px);margin-bottom:1.5rem}
+.pth-tag{font-size:.52rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:.22rem .65rem;border:1px solid rgba(0,0,0,.1)}
+.pth-cta{display:inline-flex;align-items:center;gap:.7rem;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding-bottom:.28rem;border-bottom:1px solid rgba(0,0,0,.18);transition:color .2s,border-color .2s;opacity:0;transform:translateY(8px);align-self:flex-start}
+.pth-cta:hover{color:var(--red);border-color:var(--red)}
+.pth-cta svg{transition:transform .22s}
+.pth-cta:hover svg{transform:translateX(5px)}
+.pth-panel-counter{position:absolute;bottom:2.5rem;left:5vw;display:flex;align-items:center;gap:.8rem;opacity:0}
+.pth-panel.reversed .pth-panel-counter{left:auto;right:5vw}
+.pth-panel-counter-cur{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.1em;color:var(--ink)}
+.pth-panel-counter-sep{width:24px;height:1px;background:rgba(0,0,0,.15)}
+.pth-panel-counter-tot{font-family:'Bebas Neue',sans-serif;font-size:.8rem;letter-spacing:.1em;color:rgba(0,0,0,.25)}
+
+/* ── Coluna de imagens ──
+   Tons ligeiramente diferentes por parceiro via classes */
+.pth-right{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:4rem 4vw;position:relative;gap:.6rem;overflow:hidden;
+  order:2; /* padrão */
+}
+/* No painel invertido, imagens vão para a esquerda (order 1) */
+.pth-panel.reversed .pth-right{order:1}
+
+/* Tons alternados para diferenciar visualmente */
+.pth-right.tone-0{background:hsl(210,18%,97%)}
+.pth-right.tone-1{background:hsl(222,22%,96%)}
+.pth-right.tone-2{background:hsl(210,14%,96%)}
+.pth-right.tone-3{background:hsl(348,18%,97%)}
+.pth-right.tone-4{background:hsl(215,20%,96%)}
+.pth-right.tone-5{background:hsl(210,10%,96%)}
+
+.pth-right-num{position:absolute;right:3vw;bottom:1.5rem;font-family:'Bebas Neue',sans-serif;font-size:clamp(7rem,18vw,15rem);line-height:1;color:rgba(0,0,0,.03);letter-spacing:-.03em;pointer-events:none;user-select:none}
+.pth-panel.reversed .pth-right-num{right:auto;left:3vw}
+
+.pth-img-grid{display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:1fr 1fr;gap:.55rem;height:64vh;max-height:500px;opacity:0;transform:translateX(24px)}
+/* No painel invertido, grid de imagens entra da esquerda */
+.pth-panel.reversed .pth-img-grid{transform:translateX(-24px)}
+
+.pth-img-cell{overflow:hidden;position:relative}
+.pth-img-cell:first-child{grid-row:1/3}
+.pth-img-inn{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.07);transition:transform .65s cubic-bezier(.4,0,.2,1);filter:grayscale(10%)}
+.pth-img-cell:hover .pth-img-inn{transform:scale(1.01)}
+.pth-img-cap{position:absolute;bottom:0;left:0;right:0;padding:.75rem .9rem;background:linear-gradient(to top,rgba(0,0,0,.5),transparent);font-size:.5rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.65);opacity:0;transform:translateY(4px)}
+
+/* nav dots lateral */
+.pt-nav-dots{position:fixed;right:1.4rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.5rem;z-index:800;opacity:0;transition:opacity .35s}
+.pt-nav-dots.vis{opacity:1}
+.pt-nav-dot{width:5px;height:5px;border-radius:50%;background:rgba(0,0,0,.14);border:1px solid rgba(0,0,0,.1);cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1)}
+.pt-nav-dot.active{background:var(--red);border-color:var(--red);transform:scale(1.5)}
+
+.sec-divider{height:1px;background:rgba(0,0,0,.06)}
+
+/* ── WHY ── */
+#pin-why{height:300vh;position:relative;scroll-margin-top:4.5rem}
+.wy-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--navy-dk);display:flex;align-items:center;padding-top:40px;padding-bottom:40px}
+.wy-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(10rem,24vw,22rem);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.04);right:-4%;bottom:-10%;pointer-events:none;user-select:none;white-space:nowrap;opacity:0;letter-spacing:.03em}
+.wy-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:88px 88px;pointer-events:none}
+.wy-inner{max-width:1280px;margin:0 auto;padding:0 5vw;width:100%;display:grid;grid-template-columns:1fr 1.8fr;gap:5rem;align-items:start}
+@media(max-width:900px){.wy-inner{grid-template-columns:1fr;gap:2rem;padding:0 2rem}}
+.wy-left{padding-top:2rem}
+.wy-head-sub{font-size:.62rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:1.1rem;opacity:0;transform:translateY(18px)}
+.wy-headline{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(2.6rem,4.5vw,3.8rem);color:white;line-height:1.08;margin-bottom:1.2rem;opacity:0;transform:translateY(30px)}
+.wy-headline strong{font-weight:600;font-style:normal;font-family:'Bebas Neue',sans-serif;font-size:1.15em;color:hsl(348,83%,70%);display:block;letter-spacing:.03em}
+.wy-subdesc{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.9;max-width:260px;opacity:0;transform:translateY(18px)}
+.wy-index-line{margin-top:1.8rem;height:1px;background:linear-gradient(90deg,hsl(348,83%,47%),transparent);width:0;opacity:0}
+.wy-list{display:flex;flex-direction:column;position:relative}
+.wy-list::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:rgba(255,255,255,.1)}
+.wy-item{display:grid;grid-template-columns:3.5rem 1fr auto;align-items:center;gap:1.5rem;padding:1.3rem 0 1.3rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.07);position:relative;overflow:hidden;cursor:default;opacity:0;transform:translateX(60px);transition:background .4s}
+.wy-item::before{content:'';position:absolute;left:0;top:0;width:2px;height:100%;background:hsl(348,83%,60%);transform:scaleY(0);transform-origin:bottom;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.wy-item:hover::before{transform:scaleY(1)}
+.wy-item:hover{background:rgba(255,255,255,.04)}
+.wy-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.3rem,2.2vw,1.85rem);color:rgba(255,255,255,.15);letter-spacing:.04em;transition:color .35s;line-height:1}
+.wy-item:hover .wy-num{color:hsl(348,83%,60%)}
+.wy-body{min-width:0}
+.wy-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(1rem,1.8vw,1.4rem);letter-spacing:.04em;color:white;line-height:1;margin-bottom:.28rem;transition:color .3s}
+.wy-item:hover .wy-name{color:hsl(0,85%,75%)}
+.wy-detail{font-size:.72rem;color:rgba(255,255,255,.38);line-height:1.6;max-height:0;overflow:hidden;opacity:0;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .4s}
+.wy-item:hover .wy-detail{max-height:5rem;opacity:1}
+.wy-arrow{width:1.8rem;height:1.8rem;border-radius:50%;border:1.5px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .35s}
+.wy-arrow svg{width:.8rem;height:.8rem;stroke:rgba(255,255,255,.3);transition:stroke .3s,transform .35s}
+.wy-item:hover .wy-arrow{background:hsl(348,83%,47%);border-color:hsl(348,83%,47%);transform:rotate(-45deg) scale(1.08)}
+.wy-item:hover .wy-arrow svg{stroke:white}
+
+/* ── BECOME ── */
+#pin-become{height:300vh;position:relative;scroll-margin-top:4.5rem}
+.bc-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--light);display:flex;align-items:center;padding-top:80px;padding-bottom:80px}
+.bc-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(10rem,22vw,20rem);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.7);right:-4%;top:50%;transform:translateY(-50%);pointer-events:none;user-select:none;white-space:nowrap;opacity:0;letter-spacing:.03em}
+.bc-inner{max-width:1280px;margin:0 auto;padding:0 2.5rem;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+@media(max-width:900px){.bc-inner{grid-template-columns:1fr;gap:2.5rem;padding:0 1.5rem}}
+.bc-info{transform:translateX(-90px);opacity:0}
+.bc-head-sub{font-size:.62rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:.4rem}
+.bc-head-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);color:var(--ink);letter-spacing:.01em;line-height:.92;margin-bottom:1rem;overflow:hidden}
+.bc-head-h2 .cl{overflow:hidden;display:block}
+.bc-head-h2 .cl span{display:block;transform:translateY(110%)}
+.bc-desc{color:var(--muted);font-size:.9rem;line-height:1.8;margin-bottom:1.5rem;max-width:34rem}
+.bc-steps{display:flex;flex-direction:column}
+.bc-step{display:flex;align-items:flex-start;gap:1.1rem;padding-bottom:1.75rem;position:relative;transform:translateX(-40px);opacity:0}
+.bc-step:not(:last-child)::after{content:'';position:absolute;left:1.1rem;top:2.5rem;width:1px;height:calc(100% - .5rem);background:linear-gradient(to bottom,hsl(209,53%,36%,.25),transparent)}
+.bc-step-num{width:2.25rem;height:2.25rem;background:var(--navy-dk);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.72rem;font-weight:800;color:white;z-index:1;position:relative}
+.bc-step-title{font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:.2rem;margin-top:.35rem}
+.bc-step-desc{font-size:.8rem;color:var(--muted);line-height:1.7}
+.bc-card{background:var(--navy-dk);border-radius:1.5rem;padding:2.75rem;position:relative;overflow:hidden;box-shadow:0 32px 64px -12px hsl(209,53%,22%,.4);transform:translateX(90px);opacity:0}
+.bc-card::before{content:'';position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04)}
+.bc-card::after{content:'';position:absolute;bottom:-60px;left:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.03)}
+.bc-card-ey{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.9rem;display:flex;align-items:center;gap:.4rem}
+.bc-card-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3vw,2.75rem);color:white;line-height:.92;margin-bottom:.9rem;letter-spacing:.01em}
+.bc-card-title span{color:hsl(348,83%,70%)}
+.bc-card-desc{font-size:.83rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:1.75rem}
+.bc-card-pill{display:flex;align-items:center;gap:.75rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:.75rem;padding:.9rem 1.1rem;margin-bottom:1.5rem;position:relative;z-index:1}
+.bc-card-pill-icon{width:2.25rem;height:2.25rem;background:var(--red);border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bc-card-pill-label{font-size:.65rem;color:rgba(255,255,255,.4);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.1rem}
+.bc-card-pill-addr{font-size:.83rem;color:white;font-weight:700}
+.bc-copy-btn{background:rgba(255,255,255,.1);border:none;border-radius:.375rem;padding:.4rem .6rem;color:rgba(255,255,255,.5);cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:600;display:flex;align-items:center;gap:.3rem;white-space:nowrap}
+.bc-copy-btn:hover{background:rgba(255,255,255,.2);color:white}
+.bc-copy-btn.ok{background:rgba(255,255,255,.2);color:#86efac}
+.bc-card-btn{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:1rem;background:white;color:var(--navy-dk);border:none;border-radius:.75rem;font-family:'Montserrat',sans-serif;font-size:.875rem;font-weight:800;cursor:pointer;text-decoration:none;transition:all .25s;box-shadow:none;position:relative;z-index:1}
+.bc-card-btn:hover{background:var(--red);color:white;transform:translateY(-3px)}
+.bc-card-note{margin-top:1.1rem;display:flex;align-items:center;gap:.4rem;font-size:.68rem;color:rgba(255,255,255,.3);position:relative;z-index:1;justify-content:center}
+
+/* ── FOOTER ── */
 .ft{position:relative;overflow:hidden;font-family:'Montserrat',sans-serif}
+.ft-bg{position:absolute;inset:-8%;background-image:url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=2000');background-position:center;background-size:cover;will-change:transform}
 .ft-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(6,10,20,.97),rgba(18,28,48,.93))}
-.ft-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:88px 88px;pointer-events:none}
-.ft-inner{position:relative;z-index:1;padding:5rem 0 3rem;max-width:1280px;margin:0 auto}
-.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:4rem;padding:0 2rem}
-@media(max-width:900px){.ft-grid{grid-template-columns:1fr 1fr;padding:0 1.5rem;gap:2rem}}
-@media(max-width:580px){.ft-grid{grid-template-columns:1fr;padding:0 1.5rem}}
+.ft-inner{position:relative;z-index:1;padding:5.5rem 0 3rem;max-width:1280px;margin:0 auto}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:4rem;padding:0 2rem}
+@media(max-width:768px){.ft-grid{grid-template-columns:1fr;padding:0 1.5rem}}
 .ft-brand h3{font-size:1.5rem;font-weight:700;color:white;margin-bottom:.2rem}
 .ft-brand .sub{font-size:.68rem;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.4rem;display:block}
 .ft-brand .desc{font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.85;max-width:320px;margin-bottom:1.4rem}
@@ -300,9 +410,6 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
 .ft-links a{font-size:.78rem;color:rgba(255,255,255,.22);text-decoration:none;transition:color .3s}
 .ft-links a:hover{color:var(--red)}
 .ft-accent{position:absolute;bottom:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:.4}
-
-.icon{width:1.5rem;height:1.5rem;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
-@media(max-width:580px){body{cursor:auto}}
 </style>
 </head>
 <body>
@@ -310,10 +417,10 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
 <div id="prog"></div>
 
 <!-- NAVBAR -->
-<nav class="nav" id="nav">
+<nav class="nav" id="nav" data-theme="dark">
   <div class="nav-inner">
     <a href="index.html" class="logo">
-      <img src="logo6.jpg" alt="AJ" class="logo-icon" style="object-fit:contain;padding:0;background:transparent;border-radius:.5rem;width:2.5rem;height:2.5rem;">
+      <img src="logo6.jpg" alt="AJ" class="logo-icon" style="object-fit:contain;padding:0;background:transparent;width:2.5rem;height:2.5rem;">
       <div class="logo-tw">
         <span class="la">A</span><span class="le">ssistência</span><span class="ls">&nbsp;</span>
         <span class="la lh">J</span><span class="le">udiciária</span><span class="ls">&nbsp;</span>
@@ -326,15 +433,17 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
       <a href="index.html" class="nav-link">Início</a>
       <a href="index.html#pin-about" class="nav-link">Sobre</a>
       <a href="index.html#pin-services" class="nav-link">Serviços</a>
+      <a href="index.html#pin-projects" class="nav-link">Projetos</a>
+      <a href="parceiros.html" class="nav-link active">Parceiros</a>
       <a href="index.html#pin-contact" class="nav-link">Contato</a>
-      <a href="doe.html" class="btn btn-r" style="cursor:pointer">
+      <a href="doe.html" class="btn btn-r">
         <svg style="width:.9rem;height:.9rem;fill:white;stroke:none" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
         Doe Agora
       </a>
     </div>
     <button class="mob-btn" id="mmBtn">
-      <svg class="icon" id="mIcon" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      <svg class="icon" id="cIcon" viewBox="0 0 24 24" style="display:none;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <svg width="22" height="22" id="mIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg width="22" height="22" id="cIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
   <div class="mob-menu" id="mm">
@@ -342,8 +451,10 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
       <a href="index.html" class="mob-link">Início</a>
       <a href="index.html#pin-about" class="mob-link">Sobre</a>
       <a href="index.html#pin-services" class="mob-link">Serviços</a>
+      <a href="index.html#pin-projects" class="mob-link">Projetos</a>
+      <a href="parceiros.html" class="mob-link active">Parceiros</a>
       <a href="index.html#pin-contact" class="mob-link">Contato</a>
-      <a href="doe.html" class="mob-link" style="color:var(--red);font-weight:700;">♥ Área de Doação</a>
+      <a href="doe.html" class="mob-link" style="color:var(--red);font-weight:700;">♥ Doe Agora</a>
     </div>
   </div>
 </nav>
@@ -356,310 +467,131 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
   <div class="h-ring h-ring-1" id="hr1"></div>
   <div class="h-ring h-ring-2" id="hr2"></div>
   <div class="h-ring h-ring-3" id="hr3"></div>
-  <div class="h-acc h-acc-1"></div>
-  <div class="h-acc h-acc-2"></div>
-  <div class="h-acc h-acc-3"></div>
-  <div class="h-acc h-acc-4"></div>
+  <div class="h-acc h-acc-1"></div><div class="h-acc h-acc-2"></div>
+  <div class="h-acc h-acc-3"></div><div class="h-acc h-acc-4"></div>
   <div class="h-dot h-dot-1" id="hd1"></div>
   <div class="h-dot h-dot-2" id="hd2"></div>
   <div class="h-dot h-dot-3" id="hd3"></div>
   <div class="h-content" id="hC">
-    <span class="h-eyebrow" id="hEye">Área de Doação</span>
+    <span class="h-eyebrow" id="hEye">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Rede de Parceiros
+    </span>
     <h1 class="h-h1" id="hH1">
-      <span class="hl"><span>SUA</span></span>
-      <span class="hl"><span>CONTRIBUIÇÃO</span></span>
-      <span class="hl serif"><span>transforma vidas.</span></span>
+      <span class="hl"><span>JUNTOS</span></span>
+      <span class="hl"><span>PELA</span></span>
+      <span class="hl serif"><span>Justiça Social.</span></span>
     </h1>
-    <p class="h-desc" id="hDesc">Cada doação — seja financeira, de livros ou de conhecimento — fortalece o acesso à justiça para quem mais precisa. Escolha como quer fazer a diferença.</p>
+    <p class="h-desc" id="hDesc">Escritórios, associações e instituições que compartilham o compromisso com o acesso à justiça e o desenvolvimento da sociedade.</p>
     <div class="h-btns" id="hBtns">
-      <button class="btn btn-r" style="height:3.5rem;padding:0 2.2rem;font-size:1.05rem;" onclick="lenis.scrollTo(document.getElementById('pin-type'),{offset:0,duration:1.2})">
-        <svg style="width:1rem;height:1rem;fill:white;stroke:none" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-        Quero Contribuir
-      </button>
-      <button class="btn btn-o" style="height:3.5rem;padding:0 2.2rem;font-size:1.05rem;" onclick="window.location.href='index.html#pin-about'">Conheça o Projeto</button>
+      <button class="btn btn-r" style="height:3.5rem;padding:0 2.2rem;font-size:1.05rem;" onclick="lenis.scrollTo(document.getElementById('pt-overview'),{offset:0,duration:1.2})">Conhecer Parceiros</button>
+      <button class="btn btn-o" style="height:3.5rem;padding:0 2.2rem;font-size:1.05rem;" onclick="lenis.scrollTo(document.getElementById('pin-become'),{offset:0,duration:1.2})">Seja um Parceiro</button>
     </div>
-    <div class="h-stats" id="hStats">
-      <div><div class="stat-num">12<span>k+</span></div><div class="stat-label">Atendimentos</div></div>
-      <div><div class="stat-num">65<span>+</span></div><div class="stat-label">Anos de História</div></div>
-      <div><div class="stat-num">200<span>+</span></div><div class="stat-label">Voluntários</div></div>
-      <div><div class="stat-num">6<span>+</span></div><div class="stat-label">Áreas de Atuação</div></div>
-    </div>
-  </div>
-  <div class="scue" id="scue">
-    <div class="scue-track"><div class="scue-fill" id="scfill"></div></div>
-    <span>Scroll</span>
   </div>
 </section>
 
-<!-- PINNED TYPE SWITCHER -->
-<div id="pin-type">
-  <div class="ty-sticky">
-    <div class="ty-bg-word" id="tyBgW">DOAÇÃO</div>
-    <div class="ty-inner">
-      <span class="ty-sub" id="tySub">Como Contribuir</span>
-      <div class="ty-h2" id="tyH2">ESCOLHA SUA FORMA<br>DE FAZER A DIFERENÇA</div>
-      <div class="ty-line" id="tyLine"></div>
-      <div class="ty-switcher" id="tySwitcher">
-        <button class="ty-btn active" id="tb-0" onclick="switchType(0)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-          <span>Financeiro</span>
-          <div class="ty-btn-bar"></div>
-        </button>
-        <button class="ty-btn" id="tb-1" onclick="switchType(1)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-          <span>Livros</span>
-          <div class="ty-btn-bar"></div>
-        </button>
-        <button class="ty-btn" id="tb-2" onclick="switchType(2)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          <span>Voluntariado</span>
-          <div class="ty-btn-bar"></div>
-        </button>
-      </div>
+<!-- FASE 1: OVERVIEW -->
+<div id="pt-overview">
+  <div class="pto-sticky" id="ptoSticky">
+    <div class="pto-topbar">
+      <span class="pto-topbar-label">Rede de Parceiros — AJ João Mendes</span>
+      <span class="pto-topbar-count" id="ptoCount"><span>00</span> / 06</span>
+    </div>
+    <div class="pto-headline" id="ptoHeadline">
+      <span class="pto-headline-main">NOSSOS<br>PARCEIROS</span>
+      <span class="pto-headline-sub">instituições que constroem<br>a justiça conosco</span>
+    </div>
+    <div class="pto-grid" id="ptoGrid"></div>
+    <div class="pto-scroll-hint" id="ptoHint">
+      <div class="pto-sh-line"><div class="pto-sh-fill"></div></div>
+      <span>Role para explorar</span>
     </div>
   </div>
 </div>
 
-<!-- PINNED DONATE -->
-<div id="pin-donate">
-  <div class="dn-sticky">
-    <div class="dn-bg-word" id="dnBgW">IMPACTO</div>
-    <div class="dn-inner">
-      <div class="dn-panels" id="dnPanels">
+<!-- FASE 2: STICKY POR PARCEIRO -->
+<div id="pt-hscroll">
+  <div class="pt-nav-dots" id="ptNavDots"></div>
+  <div id="ptBlocks"></div>
+</div>
 
-        <div class="dn-panel active" id="dn-panel-0">
-          <div class="dn-info" id="dnInfo0">
-            <p class="dn-tag">Doação Financeira</p>
-            <h2 class="dn-title" id="dnTitle0">INVISTA NO<br>ACESSO À JUSTIÇA</h2>
-            <p class="dn-desc" id="dnDesc0">Seus recursos financiam consultas jurídicas gratuitas, materiais de trabalho e projetos comunitários que alcançam populações em situação de vulnerabilidade.</p>
-            <div class="impact-list" id="dnImpact0">
-              <div class="impact-item"><div class="impact-dot"></div><div><div class="impact-text">R$ 50 — Cobre uma consulta jurídica completa</div><div class="impact-sub">Orientação profissional para um cidadão em situação de vulnerabilidade</div></div></div>
-              <div class="impact-item"><div class="impact-dot"></div><div><div class="impact-text">R$ 120 — Financia materiais para 1 semana de atendimentos</div><div class="impact-sub">Impressão de petições, certidões e documentações essenciais</div></div></div>
-              <div class="impact-item"><div class="impact-dot"></div><div><div class="impact-text">R$ 300 — Apoia um projeto social por um mês inteiro</div><div class="impact-sub">Workshops de cidadania, orientação financeira e saúde comunitária</div></div></div>
-            </div>
-          </div>
-          <div class="ac-card" id="dnCard0">
-            <div class="ac-bar"></div>
-            <div class="ac-inner">
-              <div class="ac-header">
-                <div class="ac-icon" style="background:hsl(142,60%,40%,.1)">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="hsl(142,60%,35%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-                </div>
-                <div><div class="ac-title">Escolha o valor e entre em contato</div><div class="ac-sub">Selecione um valor e use o canal de sua preferência</div></div>
-              </div>
-              <div class="amount-pills">
-                <button class="pill" onclick="selectPill(this,'R$ 50')">R$ 50</button>
-                <button class="pill" onclick="selectPill(this,'R$ 100')">R$ 100</button>
-                <button class="pill" onclick="selectPill(this,'R$ 200')">R$ 200</button>
-                <button class="pill" onclick="selectPill(this,'R$ 300')">R$ 300</button>
-                <button class="pill" onclick="selectPill(this,'R$ 500')">R$ 500</button>
-                <button class="pill pill-other" onclick="selectPill(this,'outro')">Outro valor</button>
-              </div>
-              <div class="field" id="custom-amount-field" style="display:none">
-                <label>Valor personalizado (R$)</label>
-                <input type="number" id="custom-amount" placeholder="Digite o valor desejado" min="1" oninput="updateFinLinks()">
-              </div>
-              <div class="ch-divider"><span>Como prefere falar conosco?</span></div>
-              <div class="ch-btns">
-                <a id="fin-wa" href="#" target="_blank" class="ch-btn ch-btn--wa" onclick="return openFinWa()">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  WhatsApp
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="ch-arr"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-                <a id="fin-mail" href="#" class="ch-btn ch-btn--mail" onclick="return openFinMail()">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  E-mail
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="ch-arr"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-              </div>
-              <div class="cis">
-                <div class="cis-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><span>(11) 2114-8000</span></div>
-                <div class="cis-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>parcerias@ajjoaomendes.com</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
+<div class="sec-divider"></div>
 
-        <div class="dn-panel" id="dn-panel-1">
-          <div class="dn-info" id="dnInfo1">
-            <p class="dn-tag">Doação de Livros</p>
-            <h2 class="dn-title" id="dnTitle1">CONHECIMENTO<br>QUE LIBERTA</h2>
-            <p class="dn-desc" id="dnDesc1">Livros jurídicos, acadêmicos ou educacionais ampliam o repertório dos nossos estagiários e beneficiários. Doe obras que ainda têm muito a oferecer.</p>
-            <div class="impact-list" id="dnImpact1">
-              <div class="impact-item"><div class="impact-dot"></div><div><div class="impact-text">Livros jurídicos e de legislação</div><div class="impact-sub">Códigos, manuais, doutrinas e jurisprudências são especialmente úteis</div></div></div>
-              <div class="impact-item"><div class="impact-dot"></div><div><div class="impact-text">Material acadêmico geral</div><div class="impact-sub">Obras das áreas de ciências humanas, sociais e de saúde</div></div></div>
-              <div class="impact-item"><div class="impact-dot"></div><div><div class="impact-text">Livros infantis e educativos</div><div class="impact-sub">Para os programas de acompanhamento familiar e projetos com crianças</div></div></div>
-            </div>
-          </div>
-          <div class="ac-card" id="dnCard1">
-            <div class="ac-bar"></div>
-            <div class="ac-inner">
-              <div class="ac-header">
-                <div class="ac-icon" style="background:hsl(209,53%,36%,.1)">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-                </div>
-                <div><div class="ac-title">Como funciona a doação</div><div class="ac-sub">Entre em contato e combinamos os detalhes juntos</div></div>
-              </div>
-              <div class="mini-steps">
-                <div class="mini-step"><div class="mini-step-num">1</div><div class="mini-step-text">Fale conosco pelo WhatsApp ou e-mail informando o tipo e a quantidade de livros</div></div>
-                <div class="mini-step"><div class="mini-step-num">2</div><div class="mini-step-text">Nossa equipe confirma o recebimento e combina a forma de entrega mais conveniente para você</div></div>
-                <div class="mini-step"><div class="mini-step-num">3</div><div class="mini-step-text">Os livros são catalogados e direcionados para os programas e estagiários que mais precisam</div></div>
-              </div>
-              <div class="ch-divider"><span>Escolha como entrar em contato</span></div>
-              <div class="ch-btns">
-                <a href="https://wa.me/5511952254127?text=Ol%C3%A1%2C+gostaria+de+fazer+uma+doa%C3%A7%C3%A3o+de+livros+para+a+AJ+Jo%C3%A3o+Mendes." target="_blank" class="ch-btn ch-btn--wa">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  WhatsApp
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="ch-arr"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-                <a href="mailto:ajjoaomendes@mackenzie.br?subject=Doa%C3%A7%C3%A3o%20de%20Livros%20%E2%80%94%20AJ%20Jo%C3%A3o%20Mendes" class="ch-btn ch-btn--mail">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  E-mail
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="ch-arr"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-              </div>
-              <div class="cis">
-                <div class="cis-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Rua da Consolação, 930 — Consolação, SP</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="dn-panel" id="dn-panel-2">
-          <div class="dn-info" id="dnInfo2">
-            <p class="dn-tag">Voluntariado Profissional</p>
-            <h2 class="dn-title" id="dnTitle2">COMPARTILHE<br>SEU CONHECIMENTO</h2>
-            <p class="dn-desc" id="dnDesc2">Profissionais de diversas áreas podem oferecer aulas, palestras, mentorias ou atendimentos voluntários. Seu tempo e expertise têm um impacto imenso na nossa comunidade.</p>
-            <div class="impact-list" id="dnImpact2">
-              <div class="impact-item"><div class="impact-dot"></div><div><div class="impact-text">Advogados e juristas</div><div class="impact-sub">Palestras, supervisão de estagiários, atendimentos e orientação de casos</div></div></div>
-              <div class="impact-item"><div class="impact-dot"></div><div><div class="impact-text">Psicólogos e assistentes sociais</div><div class="impact-sub">Suporte emocional, triagem e acompanhamento de famílias atendidas</div></div></div>
-              <div class="impact-item"><div class="impact-dot"></div><div><div class="impact-text">Educadores, médicos e outros especialistas</div><div class="impact-sub">Oficinas temáticas, aulas sobre cidadania, saúde, finanças e outros</div></div></div>
-            </div>
-          </div>
-          <div class="ac-card" id="dnCard2">
-            <div class="ac-bar"></div>
-            <div class="ac-inner">
-              <div class="ac-header">
-                <div class="ac-icon" style="background:hsl(348,83%,47%,.08)">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-                </div>
-                <div><div class="ac-title">Vamos conversar sobre sua proposta</div><div class="ac-sub">Respondemos em até 48 horas úteis</div></div>
-              </div>
-              <div class="profile-tags">
-                <span class="ptag">Advogado</span><span class="ptag">Psicólogo</span><span class="ptag">Educador</span>
-                <span class="ptag">Médico</span><span class="ptag">Assistente Social</span><span class="ptag">Contador</span><span class="ptag">+ outros</span>
-              </div>
-              <div class="ch-divider"><span>Como prefere nos contatar?</span></div>
-              <div class="ch-btns">
-                <a href="https://wa.me/5511952254127?text=Ol%C3%A1%2C+sou+profissional+e+gostaria+de+me+cadastrar+como+volunt%C3%A1rio+na+AJ+Jo%C3%A3o+Mendes." target="_blank" class="ch-btn ch-btn--wa">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  WhatsApp
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="ch-arr"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-                <a href="mailto:ajjoaomendes@mackenzie.br?subject=Cadastro%20de%20Volunt%C3%A1rio" class="ch-btn ch-btn--mail">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  E-mail
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="ch-arr"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-              </div>
-              <div class="response-badge">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                Resposta em até <strong>48 horas úteis</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-
+<!-- WHY -->
+<div id="pin-why">
+  <div class="wy-sticky">
+    <div class="wy-bg-word" id="wyBgW">BENEFÍCIOS</div>
+    <div class="wy-grid-bg"></div>
+    <div class="wy-inner">
+      <div class="wy-left">
+        <span class="wy-head-sub" id="wySub">Por que Ser Parceiro</span>
+        <h2 class="wy-headline" id="wyHead"><strong>Benefícios de</strong>fazer parte da rede</h2>
+        <p class="wy-subdesc" id="wyDesc">Associe-se a uma iniciativa com décadas de história e impacto social reconhecido.</p>
+        <div class="wy-index-line" id="wyIndexLine"></div>
       </div>
+      <div class="wy-list" id="wyList"></div>
     </div>
   </div>
 </div>
 
-<!-- PINNED HOW -->
-<div id="pin-how">
-  <div class="hw-sticky">
-    <div class="hw-bg-word" id="hwBgW">COMO FUNCIONA</div>
-    <div class="hw-grid-bg"></div>
-    <div class="hw-inner">
-      <div class="hw-head">
-        <span class="hw-head-sub" id="hwSub">Como funciona</span>
-        <div class="hw-head-h2" id="hwH2">SIMPLES, TRANSPARENTE<br>E DE ALTO IMPACTO.</div>
-      </div>
-      <div class="hw-steps">
-        <div class="hw-step" id="hws0">
-          <div class="hw-step-num">01</div>
-          <div class="hw-step-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M3 7h3l2-3h8l2 3h3a1 1 0 011 1v11a1 1 0 01-1 1H3a1 1 0 01-1-1V8a1 1 0 011-1z"/></svg></div>
-          <div class="hw-step-title">Escolha como contribuir</div>
-          <div class="hw-step-desc">Selecione entre doação financeira, livros ou voluntariado profissional — o que fizer mais sentido para você.</div>
-        </div>
-        <div class="hw-step" id="hws1">
-          <div class="hw-step-num">02</div>
-          <div class="hw-step-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
-          <div class="hw-step-title">Entre em contato diretamente</div>
-          <div class="hw-step-desc">Use o WhatsApp ou e-mail — a mensagem já chega pré-formatada com o tipo de contribuição que você escolheu.</div>
-        </div>
-        <div class="hw-step" id="hws2">
-          <div class="hw-step-num">03</div>
-          <div class="hw-step-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-          <div class="hw-step-title">Nossa equipe alinha os detalhes</div>
-          <div class="hw-step-desc">Respondemos em até 48 horas para combinar valores, logística de entrega ou formato de atuação do voluntário.</div>
-        </div>
-        <div class="hw-step" id="hws3">
-          <div class="hw-step-num">04</div>
-          <div class="hw-step-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
-          <div class="hw-step-title">Sua contribuição gera impacto real</div>
-          <div class="hw-step-desc">Cada doação é direcionada diretamente para os atendimentos, projetos sociais e capacitação da comunidade.</div>
+<!-- BECOME -->
+<div id="pin-become">
+  <div class="bc-sticky">
+    <div class="bc-bg-word" id="bcBgW">PARCERIA</div>
+    <div class="bc-inner">
+      <div class="bc-info" id="bcInfo">
+        <span class="bc-head-sub">Seja um Parceiro</span>
+        <h2 class="bc-head-h2">
+          <span class="cl"><span>CONSTRUA ALGO</span></span>
+          <span class="cl"><span>MAIOR CONOSCO</span></span>
+        </h2>
+        <p class="bc-desc">Sua instituição compartilha do compromisso com a justiça social? O processo é direto — apresente-se por e-mail e nossa coordenação entrará em contato.</p>
+        <div class="bc-steps">
+          <div class="bc-step" id="bcs0"><div class="bc-step-num">01</div><div><div class="bc-step-title">Envie um e-mail de apresentação</div><div class="bc-step-desc">Conte quem é sua instituição, sua área de atuação e como imagina a parceria conosco.</div></div></div>
+          <div class="bc-step" id="bcs1"><div class="bc-step-num">02</div><div><div class="bc-step-title">Conversa de alinhamento</div><div class="bc-step-desc">Nossa coordenação entrará em contato para entender objetivos e verificar sinergia.</div></div></div>
+          <div class="bc-step" id="bcs2"><div class="bc-step-num">03</div><div style="padding-bottom:0"><div class="bc-step-title">Formalização da parceria</div><div class="bc-step-desc">Com os termos definidos, assinamos o convênio e iniciamos as ações conjuntas.</div></div></div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ PINNED QUOTE STRIP  (150vh) ═══════════════ -->
-<div id="pin-quote">
-  <div class="quote-sticky">
-    <div class="quote-inner">
-      <div class="quote-mark" id="qMark">"</div>
-      <div class="quote-body" id="qBody">
-        <p class="quote-text">A justiça não pode ser um privilégio de quem pode pagar por ela. Cada doação é um passo em direção a uma sociedade mais igualitária.</p>
-        <p class="quote-source">— Equipe AJ João Mendes · Mackenzie</p>
+      <div class="bc-card" id="bcCard">
+        <div class="bc-card-ey"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Contato Direto</div>
+        <div class="bc-card-title">Fale com nossa<br><span>coordenação</span></div>
+        <div class="bc-card-desc">Respondemos propostas de parceria em até 3 dias úteis. Apresente sua instituição diretamente — sem intermediários.</div>
+        <div class="bc-card-pill">
+          <div class="bc-card-pill-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div style="flex:1;min-width:0"><div class="bc-card-pill-label">E-mail institucional</div><div class="bc-card-pill-addr">parcerias@ajjoaomendes.com</div></div>
+          <button class="bc-copy-btn" id="copyBtn" onclick="copyEmail()">
+            <svg id="copyIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            <span id="copyLabel">Copiar</span>
+          </button>
+        </div>
+        <a class="bc-card-btn" href="mailto:parcerias@ajjoaomendes.com?subject=Proposta%20de%20Parceria">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Enviar proposta agora
+        </a>
+        <div class="bc-card-note"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Sigilo profissional absoluto em todas as comunicações</div>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- PINNED FAQ -->
-<div id="pin-faq">
-  <div class="fq-sticky">
-    <div class="fq-bg-word" id="fqBgW">FAQ</div>
-    <div class="fq-inner">
-      <div class="fq-head">
-        <span class="fq-head-sub" id="fqSub">Perguntas Frequentes</span>
-        <div class="fq-head-h2" id="fqH2">TIRE SUAS DÚVIDAS</div>
-      </div>
-      <div class="fq-grid" id="faqGrid"></div>
     </div>
   </div>
 </div>
 
 <!-- FOOTER -->
-<footer class="ft">
+<footer class="ft" id="footer">
+  <div class="ft-bg" id="ftBg"></div>
   <div class="ft-ov"></div>
-  <div class="ft-grid-bg"></div>
   <div class="ft-inner">
     <div class="ft-grid">
-      <div class="ft-brand">
+      <div class="ft-brand" id="ftBrand">
         <h3>AJ João Mendes</h3>
         <span class="sub">Assistência Judiciária — Mackenzie</span>
         <p class="desc">Promovendo justiça social e excelência jurídica desde 1959. Uma iniciativa da Universidade Presbiteriana Mackenzie para garantir acesso à justiça para todos.</p>
         <div class="ft-socials">
-          <a href="#" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-          <a href="#" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-          <a href="#" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
         </div>
       </div>
-      <div class="ft-col">
-        <h4>Navegação</h4>
+      <div class="ft-col" id="ftCol1">
+        <h4>Links Rápidos</h4>
         <ul>
           <li><a href="index.html">Início</a></li>
           <li><a href="index.html#pin-about">Sobre Nós</a></li>
@@ -668,18 +600,10 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
           <li><a href="index.html#pin-contact">Contato</a></li>
         </ul>
       </div>
-      <div class="ft-col">
-        <h4>Doações</h4>
-        <ul>
-          <li><a href="#" onclick="switchType(0)">Doação Financeira</a></li>
-          <li><a href="#" onclick="switchType(1)">Doação de Livros</a></li>
-          <li><a href="#" onclick="switchType(2)">Seja Voluntário</a></li>
-        </ul>
-      </div>
-      <div class="ft-col">
+      <div class="ft-col" id="ftCol2">
         <h4>Contato</h4>
         <ul class="ft-contacts">
-          <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:2px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Rua da Consolação, 930<br>Consolação — SP, 01302-907</span></li>
+          <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:2px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Rua da Consolação, 930 — Consolação, SP</span></li>
           <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><span>(11) 2114-8000</span></li>
           <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>ajjoaomendes@mackenzie.br</span></li>
         </ul>
@@ -687,11 +611,7 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
     </div>
     <div class="ft-bottom">
       <p class="ft-copy">&copy; <span id="ftYear"></span> AJ João Mendes. Todos os direitos reservados.</p>
-      <div class="ft-links">
-        <a href="#">Política de Privacidade</a>
-        <span style="color:rgba(255,255,255,.1)">•</span>
-        <a href="#">Termos de Uso</a>
-      </div>
+      <div class="ft-links"><a href="#">Política de Privacidade</a><span style="color:rgba(255,255,255,.1)">•</span><a href="#">Termos de Uso</a></div>
     </div>
   </div>
   <div class="ft-accent"></div>
@@ -699,209 +619,319 @@ body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-ser
 
 <script>
 gsap.registerPlugin(ScrollTrigger);
-
 const lenis = new Lenis({duration:1.18,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});
-lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add(t => lenis.raf(t * 1000));
+lenis.on('scroll',ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
 gsap.ticker.lagSmoothing(0);
+gsap.to('#prog',{scaleX:1,ease:'none',scrollTrigger:{scrub:.3,start:'top top',end:'bottom bottom'}});
 
-gsap.to('#prog', {scaleX:1, ease:'none', scrollTrigger:{scrub:.35, start:'top top', end:'bottom bottom'}});
+/* navbar */
+const nav=document.getElementById('nav');
+const sectionThemes=[
+  {id:'hero',theme:'dark'},
+  {id:'pt-overview',theme:'light'},
+  {id:'pt-hscroll',theme:'light'},
+  {id:'pin-why',theme:'blue'},
+  {id:'pin-become',theme:'light'},
+  {id:'footer',theme:'dark'},
+];
+let curTheme='dark';
+function setNavTheme(t){if(t===curTheme)return;curTheme=t;nav.dataset.theme=t;}
+const visSec=new Map();
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{visSec.set(e.target.id,e.isIntersecting?e.intersectionRatio:0);});
+  let chosen='dark';
+  for(const{id,theme}of sectionThemes){if((visSec.get(id)||0)>0){chosen=theme;break;}}
+  setNavTheme(chosen);
+},{rootMargin:'-1px 0px -80% 0px',threshold:[0,0.01,0.5,1]});
+sectionThemes.forEach(({id})=>{const el=document.getElementById(id);if(el)obs.observe(el);});
 
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('s', window.scrollY > 20));
+const mmBtn=document.getElementById('mmBtn'),mm=document.getElementById('mm');
+const mi=document.getElementById('mIcon'),ci=document.getElementById('cIcon');
+mmBtn.addEventListener('click',()=>{const o=mm.classList.toggle('open');mi.style.display=o?'none':'block';ci.style.display=o?'block':'none';});
+document.querySelectorAll('.mob-link').forEach(l=>l.addEventListener('click',()=>{mm.classList.remove('open');mi.style.display='block';ci.style.display='none';}));
+document.getElementById('ftYear').textContent=new Date().getFullYear();
 
-const mmBtn = document.getElementById('mmBtn'), mm = document.getElementById('mm');
-const mi = document.getElementById('mIcon'), ci = document.getElementById('cIcon');
-mmBtn.addEventListener('click', () => {
-  const o = mm.classList.toggle('open');
-  mi.style.display = o ? 'none' : 'block';
-  ci.style.display = o ? 'block' : 'none';
-});
-document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', () => {
-  mm.classList.remove('open'); mi.style.display = 'block'; ci.style.display = 'none';
-}));
-
-document.getElementById('ftYear').textContent = new Date().getFullYear();
-
-/* HERO */
-const heroIn = gsap.timeline({defaults:{ease:'power4.out'}});
-heroIn
-  .to('#hEye',         {opacity:1, y:0, duration:.9}, 0)
-  .to('.h-acc-1,.h-acc-2', {scaleY:1, duration:1.4, stagger:.18}, '.1')
-  .to('.h-acc-3,.h-acc-4', {scaleX:1, duration:1.2, stagger:.12}, '.3')
-  .to('#hH1 .hl span', {y:0, duration:1.5, stagger:.12, ease:'expo.out'}, '.2')
-  .to('#hDesc',        {opacity:1, y:0, duration:1.1}, '.75')
-  .to('#hBtns',        {opacity:1, y:0, duration:.95}, '.9')
-  .to('#hStats',       {opacity:1, y:0, duration:.95}, '1.0')
-  .to('#scue',         {opacity:1, duration:.9}, '1.1')
-  .to('#hr1', {rotation:360, duration:55, ease:'none', repeat:-1}, 0)
-  .to('#hr2', {rotation:-360, duration:80, ease:'none', repeat:-1}, 0)
-  .to('#hr3', {rotation:180, duration:110, ease:'none', repeat:-1}, 0)
-  .to(['#hd1','#hd2','#hd3'], {opacity:1, scale:1, duration:.6, stagger:.2, ease:'back.out(2)'}, '.6');
-
-gsap.to('#scfill', {yPercent:200, duration:1.5, ease:'power1.inOut', repeat:-1, repeatDelay:.25});
-
-gsap.timeline({scrollTrigger:{trigger:'#hero', start:'top top', end:'bottom top', scrub:1.7}})
-  .to('#hEye',  {y:-120, opacity:0, ease:'power2.in'}, 0)
-  .to('#hH1 .hl:nth-child(1) span', {y:'-140%', x:'-10vw', ease:'power2.in'}, 0)
-  .to('#hH1 .hl:nth-child(2) span', {y:'-90%',  x:'12vw',  ease:'power2.in'}, 0)
-  .to('#hH1 .hl:nth-child(3) span', {y:'-60%',  x:'-7vw',  ease:'power2.in'}, 0)
-  .to('#hDesc',  {y:-80, opacity:0, ease:'power2.in'}, 0)
-  .to('#hBtns',  {y:-55, opacity:0, ease:'power2.in'}, 0)
-  .to('#hStats', {y:-40, opacity:0, ease:'power2.in'}, 0)
-  .to('#hr1', {scale:2.8, opacity:0}, 0)
-  .to('#hr2', {scale:.25, opacity:0}, 0)
-  .to('#hr3', {scale:1.9, opacity:0}, 0)
-  .to('.h-acc-1,.h-acc-2', {scaleY:0}, 0)
-  .to('.h-acc-3,.h-acc-4', {scaleX:0}, 0)
-  .to('#hGrid', {scale:1.35, opacity:0}, 0)
-  .to('#hBg',   {yPercent:32}, 0)
-  .to('#scue',  {opacity:0, y:40}, 0)
-  .to('#hd1', {x:'-20vw', opacity:0}, 0)
-  .to('#hd2', {x:'18vw', opacity:0}, 0)
-  .to('#hd3', {y:'-15vh', opacity:0}, 0);
-
-/* PINNED TYPE */
-const tyTl = gsap.timeline({
-  scrollTrigger:{trigger:'#pin-type', start:'top top', end:'bottom bottom', scrub:1.2, pin:'.ty-sticky', anticipatePin:1}
-});
-tyTl
-  .to('#tyBgW',     {opacity:1, x:50, ease:'none'}, 0)
-  .to('#tySub',     {y:0, opacity:1, ease:'power2.out'}, .05)
-  .to('#tyH2',      {y:0, opacity:1, ease:'expo.out'}, .12)
-  .to('#tyLine',    {width:'120px', opacity:1, ease:'power3.out'}, .2)
-  .to('#tySwitcher',{y:0, opacity:1, ease:'power3.out'}, .28)
-  .to('#tyBgW',     {x:90, ease:'none'}, .7);
-
-/* PINNED DONATE */
-const dnTl = gsap.timeline({
-  scrollTrigger:{trigger:'#pin-donate', start:'top top', end:'bottom bottom', scrub:1.2, pin:'.dn-sticky', anticipatePin:1}
-});
-dnTl
-  .to('#dnBgW', {opacity:1, y:-30, ease:'none'}, 0)
-  .to('#dnBgW', {y:-80, ease:'none'}, .8);
-
-ScrollTrigger.create({
-  trigger:'#pin-donate', start:'top 85%', once:true,
-  onEnter: () => animateDnPanel(activePanelIdx)
-});
-
-function animateDnPanel(idx) {
-  const prefix = `#dn-panel-${idx}`;
-  gsap.fromTo(`${prefix} .dn-title`,   {y:50,opacity:0}, {y:0,opacity:1,duration:.9,ease:'expo.out'});
-  gsap.fromTo(`${prefix} .dn-desc`,    {y:30,opacity:0}, {y:0,opacity:1,duration:.8,delay:.1,ease:'power3.out'});
-  gsap.fromTo(`${prefix} .impact-item`,{x:-30,opacity:0},{x:0,opacity:1,duration:.7,stagger:.1,delay:.2,ease:'power3.out'});
-  gsap.fromTo(`${prefix} .ac-card`,    {x:60,opacity:0}, {x:0,opacity:1,duration:1,delay:.15,ease:'power3.out'});
-}
-
-/* PINNED HOW */
-const hwTl = gsap.timeline({
-  scrollTrigger:{trigger:'#pin-how', start:'top top', end:'bottom bottom', scrub:1.2, pin:'.hw-sticky', anticipatePin:1}
-});
-hwTl
-  .to('#hwBgW', {opacity:1, y:-30, ease:'none'}, 0)
-  .to('#hwSub', {y:0, opacity:1, ease:'power2.out'}, .04)
-  .to('#hwH2',  {y:0, opacity:1, ease:'expo.out'}, .1)
-  .to('#hws0',  {y:0, opacity:1, ease:'power3.out'}, .18)
-  .to('#hws1',  {y:0, opacity:1, ease:'power3.out'}, .28)
-  .to('#hws2',  {y:0, opacity:1, ease:'power3.out'}, .38)
-  .to('#hws3',  {y:0, opacity:1, ease:'power3.out'}, .48)
-  .to('#hwBgW', {y:-70, ease:'none'}, .6);
-
-/* ════════════════════════════════════
-   PINNED QUOTE  ← ÚNICO BLOCO NOVO
-════════════════════════════════════ */
-const qTl = gsap.timeline({
-  scrollTrigger:{trigger:'#pin-quote', start:'top top', end:'bottom bottom', scrub:1.3, pin:'.quote-sticky', anticipatePin:1}
-});
-qTl
-  .to('#qMark', {opacity:1, x:0, ease:'power3.out'}, .05)
-  .to('#qBody', {opacity:1, y:0, ease:'power3.out'}, .18);
-
-/* PINNED FAQ */
-const faqs = [
-  {q:'Minha doação financeira é dedutível do Imposto de Renda?', a:'A AJ João Mendes é uma iniciativa universitária sem fins lucrativos. Embora não seja uma entidade qualificada como OS ou OSCIP para fins de dedução fiscal automática, emitimos comprovantes de todas as doações para as finalidades legais cabíveis.'},
-  {q:'Em que condição os livros doados precisam estar?', a:'Aceitamos livros em bom estado de conservação — sem páginas rasgadas, rasuras extensas ou danos que comprometam a leitura. Edições desatualizadas de legislação ainda podem ser úteis como material histórico e de estudo.'},
-  {q:'Como funciona o voluntariado profissional na prática?', a:'Após o cadastro, nossa equipe analisa seu perfil e entra em contato para alinhar a melhor forma de atuação — seja uma palestra, mentoria com estagiários, atendimento pontual ou um projeto contínuo.'},
-  {q:'Posso fazer uma doação recorrente?', a:'Sim! Selecione a frequência desejada no contato via WhatsApp ou e-mail. Nossa equipe orientará sobre as formas de pagamento disponíveis e a periodicidade mais conveniente para você.'},
-  {q:'Onde os livros doados devem ser entregues?', a:'Os livros podem ser entregues diretamente na Universidade Presbiteriana Mackenzie (Rua da Consolação, 930 — Consolação, SP) ou podemos combinar a retirada conforme sua disponibilidade.'},
-  {q:'Quanto tempo leva para a equipe entrar em contato após meu cadastro de voluntário?', a:'Nossa equipe realiza o primeiro contato em até 48 horas úteis após o recebimento do cadastro. Em períodos de maior volume, pode levar até 3 dias úteis.'},
+/* ══ DATA ══ */
+const PARTNERS=[
+  {id:1,name:"Fachini Advogados",initial:"F",categoryLabel:"Escritório",
+   url:"https://share.google/kN6fCpsTWNOVVnIs6",
+   imgs:["https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=900","https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=600","https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=600"],
+   desc:"Escritório parceiro comprometido com a excelência na prestação de serviços jurídicos. Apoia a assistência judiciária promovendo acesso à justiça e suporte técnico especializado à nossa equipe e aos clientes atendidos.",
+   tags:["Advocacia","São Paulo","Parceiro Estratégico"]},
+  {id:2,name:"Alumni Direito Mackenzie",initial:"A",categoryLabel:"Associação",
+   url:"https://www.instagram.com/alumnidireitomackenzie",
+   imgs:["https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=900","https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=600","https://images.unsplash.com/photo-1560439514-4e9645039924?auto=format&fit=crop&q=80&w=600"],
+   desc:"Associação de ex-alunos do curso de Direito da Universidade Presbiteriana Mackenzie. Conecta egressos, estudantes e profissionais, fortalecendo a rede de apoio, mentoria e desenvolvimento profissional.",
+   tags:["Ex-alunos","Mackenzie","Rede Profissional"]},
+  {id:3,name:"GS Law",initial:"GS",categoryLabel:"Escritório",
+   url:"https://share.google/UBewxvqu439f6b72g",
+   imgs:["https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?auto=format&fit=crop&q=80&w=900","https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600","https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=600"],
+   desc:"Escritório jurídico comprometido com soluções estratégicas e de alto impacto. A parceria reforça a capacidade de atendimento e a qualidade técnica nas orientações prestadas à comunidade.",
+   tags:["Advocacia","Estratégia","Impacto Social"]},
+  {id:4,name:"Pellegrina Advogados",initial:"P",categoryLabel:"Escritório",
+   url:"https://share.google/ranBZd8jVYnONBo9D",
+   imgs:["https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=900","https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=600","https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=600"],
+   desc:"Escritório com atuação dedicada e especializada, contribuindo para o fortalecimento da assistência jurídica gratuita. A parceria amplia o alcance dos serviços prestados às populações vulneráveis.",
+   tags:["Advocacia","Assistência","Acesso à Justiça"]},
+  {id:5,name:"Boscatti Advogados",initial:"B",categoryLabel:"Escritório",
+   url:"https://share.google/PHd7ZXdmMHdT6sAT7",
+   imgs:["https://images.unsplash.com/photo-1568992687947-868a62a9f521?auto=format&fit=crop&q=80&w=900","https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?auto=format&fit=crop&q=80&w=600","https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=600"],
+   desc:"Escritório com trajetória de compromisso ético e técnico. Apoia as atividades por meio de suporte especializado, orientação aos estagiários e colaboração em casos de maior complexidade.",
+   tags:["Advocacia","Ética","Formação Jurídica"]},
+  {id:6,name:"Canovae Advogados",initial:"C",categoryLabel:"Escritório",
+   url:"https://share.google/77R5WF7DnS7VSLkOW",
+   imgs:["https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=900","https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=600","https://images.unsplash.com/photo-1560439514-4e9645039924?auto=format&fit=crop&q=80&w=600"],
+   desc:"Escritório que integra a rede de suporte jurídico. Contribui com expertise técnica e engajamento com a causa do acesso à justiça, reforçando o compromisso coletivo com a cidadania e os direitos sociais.",
+   tags:["Advocacia","Cidadania","Direitos Sociais"]},
 ];
 
-const faqGrid = document.getElementById('faqGrid');
-faqs.forEach((f, i) => {
-  const el = document.createElement('div');
-  el.className = 'faq-item';
-  el.innerHTML = `<div class="faq-q">${f.q}<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">${f.a}</div>`;
-  el.querySelector('.faq-q').addEventListener('click', () => el.classList.toggle('open'));
-  faqGrid.appendChild(el);
+/* ══ FASE 1 — OVERVIEW BLOOM ══ */
+const ptoGrid = document.getElementById('ptoGrid');
+const ptoCount = document.getElementById('ptoCount').querySelector('span');
+
+PARTNERS.forEach((p, i) => {
+  const card = document.createElement('div');
+  card.className = 'pto-card';
+  card.id = 'ptoCard' + i;
+  card.innerHTML = `
+    <div class="pto-card-img" id="ptoImg${i}" style="background-image:url('${p.imgs[0]}')"></div>
+    <div class="pto-card-ov"></div>
+    <div class="pto-card-content">
+      <div class="pto-card-num" id="ptoNum${i}">${String(i+1).padStart(2,'0')}</div>
+      <div class="pto-card-badge">Parceiro Principal</div>
+      <div>
+        <div class="pto-card-name" id="ptoCName${i}">${p.name}</div>
+        <div class="pto-card-cat" id="ptoCCat${i}">${p.categoryLabel}</div>
+      </div>
+    </div>
+    <div class="pto-card-line"></div>`;
+  card.addEventListener('click', () => {
+    const block = document.getElementById('pthBlock'+i);
+    if(block) lenis.scrollTo(block, {offset:0, duration:1.3});
+  });
+  ptoGrid.appendChild(card);
 });
 
-const fqTl = gsap.timeline({
-  scrollTrigger:{trigger:'#pin-faq', start:'top top', end:'bottom bottom', scrub:1.1, pin:'.fq-sticky', anticipatePin:1}
-});
-fqTl
-  .to('#fqBgW', {opacity:1, x:-40, ease:'none'}, 0)
-  .to('#fqSub', {y:0, opacity:1, ease:'power2.out'}, .04)
-  .to('#fqH2',  {y:0, opacity:1, ease:'expo.out'}, .1);
-document.querySelectorAll('.faq-item').forEach((item, i) => {
-  fqTl.to(item, {y:0, opacity:1, ease:'power3.out'}, .18 + i * .07);
-});
-fqTl.to('#fqBgW', {x:-90, ease:'none'}, .75);
-
-/* FOOTER */
-gsap.from('.ft-brand, .ft-col', {
-  y:55, opacity:0, duration:1, stagger:.15, ease:'power3.out',
-  scrollTrigger:{trigger:'.ft', start:'top 85%', toggleActions:'play none none none'}
+const ovTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: '#pt-overview',
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: 1.2,
+    pin: '.pto-sticky',
+    anticipatePin: 1,
+    onUpdate: self => {
+      const idx = Math.min(Math.floor(self.progress * PARTNERS.length * 1.1), PARTNERS.length);
+      ptoCount.textContent = String(Math.min(idx, PARTNERS.length)).padStart(2,'0');
+    }
+  }
 });
 
-/* SWITCHER */
-let activePanelIdx = 0;
-window.switchType = function(idx) {
-  if(idx === activePanelIdx) return;
-  const oldPanel = document.getElementById(`dn-panel-${activePanelIdx}`);
-  gsap.to(oldPanel, {opacity:0, y:20, duration:.3, ease:'power2.in', onComplete:() => {
-    oldPanel.style.display = 'none';
-    oldPanel.style.opacity = '';
-    oldPanel.style.transform = '';
-    activePanelIdx = idx;
-    [0,1,2].forEach(i => document.getElementById(`tb-${i}`).classList.toggle('active', i === idx));
-    const newPanel = document.getElementById(`dn-panel-${idx}`);
-    newPanel.style.display = 'grid';
-    gsap.fromTo(newPanel, {opacity:0, y:20}, {opacity:1, y:0, duration:.5, ease:'power3.out'});
-    animateDnPanel(idx);
-    lenis.scrollTo(document.getElementById('pin-donate'), {offset:0, duration:.9});
-  }});
+ovTl.fromTo('#ptoHeadline', {opacity:0, x:-40}, {opacity:1, x:0, ease:'power3.out', duration:.14}, 0);
+PARTNERS.forEach((_, i) => {
+  const t = 0.04 + i * 0.07;
+  ovTl.fromTo(`#ptoImg${i}`,{opacity:0,scale:1.22},{opacity:1,scale:1.12,ease:'power2.out',duration:.18},t);
+  ovTl.fromTo(`#ptoCName${i}`,{opacity:0,y:8},{opacity:1,y:0,ease:'power2.out',duration:.12},t+.06);
+  ovTl.fromTo(`#ptoCCat${i}`,{opacity:0,y:6},{opacity:1,y:0,ease:'power2.out',duration:.1},t+.09);
+});
+ovTl.fromTo('#ptoHint',{opacity:0},{opacity:1,duration:.08},.38);
+ovTl.to('#ptoHeadline',{opacity:0,x:-60,ease:'power2.in',duration:.12},.70);
+ovTl.to('#ptoHint',{opacity:0,duration:.06},.76);
+ovTl.to('#ptoGrid',{scale:1.04,opacity:0,ease:'power2.in',duration:.14},.80);
+
+/* ══ FASE 2 — STICKY POR PARCEIRO COM ALTERNÂNCIA ══ */
+const ptBlocks = document.getElementById('ptBlocks');
+const ptNavDots = document.getElementById('ptNavDots');
+
+PARTNERS.forEach((p, i) => {
+  /* dot */
+  const dot = document.createElement('div');
+  dot.className = 'pt-nav-dot' + (i===0?' active':'');
+  dot.title = p.name;
+  dot.addEventListener('click', () => {
+    lenis.scrollTo(document.getElementById('pthBlock'+i), {offset:0, duration:1.2});
+  });
+  ptNavDots.appendChild(dot);
+
+  /* alternância: ímpares ficam invertidos */
+  const isReversed = i % 2 === 1;
+
+  const block = document.createElement('div');
+  block.className = 'pth-block';
+  block.id = 'pthBlock' + i;
+
+  const nameWords = p.name.split(' ').map(w=>`<span class="nl"><span>${w}</span></span>`).join('');
+
+  /* Coluna de texto */
+  const leftCol = `
+    <div class="pth-left" id="pthLeft${i}">
+      <div class="pth-left-bar" id="pthBar${i}"></div>
+      <div>
+        <div class="pth-kicker" id="pthKick${i}">
+          <span class="pth-kicker-idx">${String(i+1).padStart(2,'0')}</span>
+          ${p.categoryLabel}
+        </div>
+        <div class="pth-name" id="pthName${i}">${nameWords}</div>
+        <div class="pth-hr" id="pthHr${i}"></div>
+        <p class="pth-desc" id="pthDesc${i}">${p.desc}</p>
+      </div>
+      <div>
+        <div class="pth-tags" id="pthTags${i}">
+          ${p.tags.map(t=>`<span class="pth-tag">${t}</span>`).join('')}
+        </div>
+        <a href="${p.url}" target="_blank" rel="noopener" class="pth-cta" id="pthCta${i}">
+          Conhecer o parceiro
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="pth-panel-counter" id="pthCounter${i}">
+        <span class="pth-panel-counter-cur">${String(i+1).padStart(2,'0')}</span>
+        <span class="pth-panel-counter-sep"></span>
+        <span class="pth-panel-counter-tot">${String(PARTNERS.length).padStart(2,'0')}</span>
+      </div>
+    </div>`;
+
+  /* Coluna de imagens */
+  const rightCol = `
+    <div class="pth-right tone-${i}" id="pthRight${i}">
+      <div class="pth-right-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="pth-img-grid" id="pthImgGrid${i}">
+        <div class="pth-img-cell">
+          <div class="pth-img-inn" style="background-image:url('${p.imgs[0]}')"></div>
+          <div class="pth-img-cap" id="pthCap${i}">${p.name} — ${p.categoryLabel}</div>
+        </div>
+        <div class="pth-img-cell">
+          <div class="pth-img-inn" style="background-image:url('${p.imgs[1]}')"></div>
+        </div>
+        <div class="pth-img-cell">
+          <div class="pth-img-inn" style="background-image:url('${p.imgs[2]}')"></div>
+        </div>
+      </div>
+    </div>`;
+
+  block.innerHTML = `
+    <div class="pth-panel${isReversed?' reversed':''}" id="pthPanel${i}">
+      <div class="pth-panel-prog"><div class="pth-panel-prog-fill" id="pthProg${i}"></div></div>
+      ${isReversed ? rightCol + leftCol : leftCol + rightCol}
+    </div>`;
+
+  ptBlocks.appendChild(block);
+});
+
+/* ScrollTrigger por parceiro */
+PARTNERS.forEach((_, i) => {
+  const isReversed = i % 2 === 1;
+  /* direção de entrada das imagens muda conforme alternância */
+  const imgEnterX = isReversed ? -36 : 36;
+  const textEnterX = isReversed ? 20 : -20;
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#pthBlock' + i,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 1.1,
+      pin: '#pthPanel' + i,
+      anticipatePin: 1,
+      onEnter: () => {
+        document.querySelectorAll('.pt-nav-dot').forEach((d,di) => d.classList.toggle('active', di===i));
+        ptNavDots.classList.add('vis');
+      },
+      onEnterBack: () => {
+        document.querySelectorAll('.pt-nav-dot').forEach((d,di) => d.classList.toggle('active', di===i));
+      },
+      onLeaveBack: () => {
+        if(i===0) ptNavDots.classList.remove('vis');
+      },
+      onUpdate: self => {
+        document.getElementById('pthProg'+i).style.width = (self.progress*100)+'%';
+      }
+    }
+  });
+
+  tl.fromTo(`#pthBar${i}`,{scaleY:0},{scaleY:1,ease:'power3.out',duration:.2},0.02);
+  tl.fromTo(`#pthKick${i}`,{opacity:0,y:12},{opacity:1,y:0,ease:'power2.out',duration:.14},0.05);
+  const nameSpans = document.querySelectorAll(`#pthName${i} .nl span`);
+  tl.fromTo(nameSpans,{yPercent:106},{yPercent:0,ease:'expo.out',duration:.2,stagger:.012},0.09);
+  tl.fromTo(`#pthHr${i}`,{width:0},{width:'100%',ease:'power3.out',duration:.16},0.22);
+  tl.fromTo(`#pthDesc${i}`,{opacity:0,y:14},{opacity:1,y:0,ease:'power2.out',duration:.16},0.27);
+  tl.fromTo(`#pthTags${i}`,{opacity:0,y:8},{opacity:1,y:0,ease:'power2.out',duration:.12},0.36);
+  tl.fromTo(`#pthCta${i}`,{opacity:0,y:8},{opacity:1,y:0,ease:'power2.out',duration:.12},0.42);
+  tl.fromTo(`#pthCounter${i}`,{opacity:0},{opacity:1,ease:'none',duration:.1},0.48);
+
+  /* imagens entram do lado correto */
+  tl.fromTo(`#pthImgGrid${i}`,{opacity:0,x:imgEnterX},{opacity:1,x:0,ease:'power3.out',duration:.2},0.06);
+  const inns = document.querySelectorAll(`#pthImgGrid${i} .pth-img-inn`);
+  tl.fromTo(inns,{scale:1.1},{scale:1,ease:'power2.out',duration:.25,stagger:.04},0.08);
+  tl.fromTo(`#pthCap${i}`,{opacity:0,y:5},{opacity:1,y:0,ease:'power2.out',duration:.1},0.38);
+
+  /* saída: texto levanta */
+  tl.to(`#pthLeft${i}`,{y:-18,opacity:.5,ease:'power1.in',duration:.15},0.83);
+  tl.to(`#pthImgGrid${i}`,{y:-10,ease:'power1.in',duration:.15},0.86);
+});
+
+/* ══ HERO ══ */
+const heroIn=gsap.timeline({defaults:{ease:'power4.out'}});
+heroIn
+  .to('#hEye',{opacity:1,y:0,duration:.9},0)
+  .to('.h-acc-1,.h-acc-2',{scaleY:1,duration:1.4,stagger:.18},'.1')
+  .to('.h-acc-3,.h-acc-4',{scaleX:1,duration:1.2,stagger:.12},'.3')
+  .to('#hH1 .hl span',{y:0,duration:1.5,stagger:.12,ease:'expo.out'},'.2')
+  .to('#hDesc',{opacity:1,y:0,duration:1.1},'.75')
+  .to('#hBtns',{opacity:1,y:0,duration:.95},'.9')
+  .to('#hr1',{rotation:360,duration:55,ease:'none',repeat:-1},0)
+  .to('#hr2',{rotation:-360,duration:80,ease:'none',repeat:-1},0)
+  .to('#hr3',{rotation:180,duration:110,ease:'none',repeat:-1},0)
+  .to(['#hd1','#hd2','#hd3'],{opacity:1,scale:1,duration:.6,stagger:.2,ease:'back.out(2)'},'.6');
+gsap.timeline({scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:1.7}})
+  .to('#hEye',{y:-140,opacity:0},0)
+  .to('#hH1 .hl:nth-child(1) span',{y:'-140%',x:'-10vw'},0)
+  .to('#hH1 .hl:nth-child(2) span',{y:'-90%',x:'12vw'},0)
+  .to('#hH1 .hl:nth-child(3) span',{y:'-60%',x:'-7vw'},0)
+  .to('#hDesc',{y:-80,opacity:0},0).to('#hBtns',{y:-55,opacity:0},0)
+  .to('#hr1',{scale:2.8,opacity:0},0).to('#hr2',{scale:.25,opacity:0},0).to('#hr3',{scale:1.9,opacity:0},0)
+  .to('.h-acc-1,.h-acc-2',{scaleY:0},0).to('.h-acc-3,.h-acc-4',{scaleX:0},0)
+  .to('#hGrid',{scale:1.35,opacity:0},0).to('#hBg',{yPercent:32},0)
+  .to('#hd1',{x:'-20vw',opacity:0},0).to('#hd2',{x:'18vw',opacity:0},0).to('#hd3',{y:'-15vh',opacity:0},0);
+
+/* ══ WHY ══ */
+const BENEFITS=[
+  {n:"Credibilidade Institucional",d:"Associe-se a uma das mais tradicionais assistências judiciárias do Brasil, com décadas de atuação reconhecida."},
+  {n:"Visibilidade e Alcance",d:"Sua instituição ganha visibilidade perante a comunidade acadêmica, jurídica e a sociedade civil paulistana."},
+  {n:"Impacto Social Real",d:"Contribua diretamente para o acesso à justiça de populações vulneráveis e gere impacto social mensurável."},
+  {n:"Capacitação Conjunta",d:"Desenvolva ações conjuntas de formação, eventos e publicações de relevância acadêmica e jurídica."},
+  {n:"Acesso a Recursos",d:"Oportunidades de editais e projetos compartilhados com apoio institucional da Mackenzie."},
+  {n:"Crescimento em Rede",d:"Faça parte de uma rede colaborativa com reuniões periódicas e projetos integrados de impacto."},
+];
+const wyList=document.getElementById('wyList');
+BENEFITS.forEach((b,i)=>{
+  const el=document.createElement('div');el.className='wy-item';el.id='wyi'+i;
+  el.innerHTML=`<span class="wy-num">${String(i+1).padStart(2,'0')}</span><div class="wy-body"><div class="wy-name">${b.n}</div><div class="wy-detail">${b.d}</div></div><div class="wy-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>`;
+  wyList.appendChild(el);
+});
+const wyTl=gsap.timeline({scrollTrigger:{trigger:'#pin-why',start:'top top',end:'bottom bottom',scrub:1.2,pin:'.wy-sticky',anticipatePin:1}});
+wyTl.to('#wyBgW',{opacity:1,y:-30,ease:'none'},0).to('#wySub',{opacity:1,y:0},.04).to('#wyHead',{opacity:1,y:0},.1).to('#wyDesc',{opacity:1,y:0},.18).to('#wyIndexLine',{width:'80px',opacity:.4},.24);
+BENEFITS.forEach((_,i)=>{wyTl.to('#wyi'+i,{opacity:1,x:0,ease:'power3.out'},.3+i*.07);});
+wyTl.to('#wyBgW',{y:-70},.88);
+
+/* ══ BECOME ══ */
+const bcTl=gsap.timeline({scrollTrigger:{trigger:'#pin-become',start:'top top',end:'bottom bottom',scrub:1.3,pin:'.bc-sticky',anticipatePin:1}});
+bcTl.to('#bcBgW',{opacity:1,y:-40,ease:'none'},0).to('#bcInfo',{x:0,opacity:1,ease:'power3.out'},.05).to('.bc-head-h2 .cl:nth-child(1) span',{y:0,ease:'expo.out'},.12).to('.bc-head-h2 .cl:nth-child(2) span',{y:0,ease:'expo.out'},.22).to('#bcs0',{x:0,opacity:1},.32).to('#bcs1',{x:0,opacity:1},.42).to('#bcs2',{x:0,opacity:1},.52).to('#bcCard',{x:0,opacity:1},.1).to('#bcBgW',{y:-90},.75);
+
+/* ══ FOOTER ══ */
+gsap.to('#ftBg',{yPercent:20,ease:'none',scrollTrigger:{trigger:'.ft',start:'top bottom',end:'bottom bottom',scrub:true}});
+gsap.from(['#ftBrand','#ftCol1','#ftCol2'],{y:55,opacity:0,duration:1,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'.ft',start:'top 85%',toggleActions:'play none none none'}});
+
+/* copy email */
+window.copyEmail=function(){
+  navigator.clipboard.writeText('parcerias@ajjoaomendes.com').then(()=>{
+    const btn=document.getElementById('copyBtn'),label=document.getElementById('copyLabel'),icon=document.getElementById('copyIcon');
+    btn.classList.add('ok');label.textContent='Copiado!';
+    icon.innerHTML='<path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+    setTimeout(()=>{btn.classList.remove('ok');label.textContent='Copiar';icon.innerHTML='<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>';},2200);
+  });
 };
-
-/* PILLS */
-let selectedAmount = '';
-window.selectPill = function(el, val) {
-  document.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
-  el.classList.add('selected');
-  const customField = document.getElementById('custom-amount-field');
-  customField.style.display = (val === 'outro') ? 'block' : 'none';
-  selectedAmount = (val !== 'outro') ? val : '';
-  if(val !== 'outro') updateFinLinks();
-};
-
-function updateFinLinks() {
-  const custom = document.getElementById('custom-amount');
-  const amount = selectedAmount || (custom && custom.value ? 'R$ ' + custom.value : '');
-  const waText = amount
-    ? `Olá, gostaria de fazer uma doação financeira de ${amount} para a AJ João Mendes. Como prosseguir?`
-    : `Olá, gostaria de fazer uma doação financeira para a AJ João Mendes. Podem me orientar sobre os valores e formas de pagamento?`;
-  const mailBody = amount
-    ? `Olá,\n\nGostaria de realizar uma doação financeira no valor de ${amount}.\n\nPoderia me orientar sobre as formas de pagamento disponíveis?\n\nObrigado!`
-    : `Olá,\n\nGostaria de realizar uma doação financeira à AJ João Mendes.\n\nPoderia me orientar sobre os valores e formas de pagamento?\n\nObrigado!`;
-  const wa = document.getElementById('fin-wa');
-  const mail = document.getElementById('fin-mail');
-  if(wa)   wa.href   = `https://wa.me/5511952254127?text=${encodeURIComponent(waText)}`;
-  if(mail) mail.href = `mailto:ajjoaomendes@mackenzie.br?subject=${encodeURIComponent('Doação Financeira — AJ João Mendes')}&body=${encodeURIComponent(mailBody)}`;
-}
-window.openFinWa = function() { updateFinLinks(); window.open(document.getElementById('fin-wa').href, '_blank'); return false; };
-window.openFinMail = function() { updateFinLinks(); window.location.href = document.getElementById('fin-mail').href; return false; };
-updateFinLinks();
 </script>
 </body>
 </html>
